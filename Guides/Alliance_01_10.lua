@@ -1,8 +1,8 @@
 local _, F = ...
 local D = F.GuideDraft
--- Independently authored draft circuits. Facts live in AllianceQuestData.lua.
+-- Independently authored route circuits. Facts live in AllianceQuestData.lua.
 -- No hard-coded objective counts: live Forever progress determines completion.
-local g = D:New("alliance-dun-morogh-01-10", "Dun Morogh 1-10 (Draft)", "Dun Morogh", {"Dwarf", "Gnome"})
+local g = D:New("alliance-dun-morogh-01-10", "Dun Morogh 1-10", "Dun Morogh", {"Dwarf", "Gnome"})
 D:Group(g,"outfitters-pickup","Coldridge: start at Sten Stoutarm","pickup",{179},nil,
     "Approximate beta route. Take nearby offered side quests; use Next/Skip if an offer changed. Counts come from your live log.")
 D:Group(g,"outfitters-hunt","Hunt the wolves near the starting camp","objective",{179})
@@ -31,6 +31,7 @@ D:Group(g,"coldridge-exit-pickup","Take Senir's Observations and nearby hot-drin
 D:Group(g,"anvilmar-return","Return Felix's belongings on the way through Anvilmar","turnin",{3361},{3364})
 D:Note(g,"mug-option","Optional: Bring Back the Mug",
     "If Nori's delivery led to Bring Back the Mug, return it only while still nearby. Avoid a separate long return after leaving Coldridge.")
+g.steps[#g.steps].optional=true
 g.steps[#g.steps].alongside = {D:Task("pickup",3365,true), D:Task("turnin",3365,true)}
 D:Group(g,"pass-mail","Hand Senir's Observations to Mountaineer Thalos","turnin",{282})
 D:Group(g,"pass-pickup","Take the onward report and supplies","pickup",{420},{2160})
@@ -64,14 +65,20 @@ D:Group(g,"ranch-return","Return the pelts at Amberstill","turnin",{95212},{314}
     "Optional gear detour: Protecting the Herd offers green equipment, including a usable hammer. Attempt the elite only with suitable help; skip it when the extra time/risk is high.")
 D:Note(g,"vagash-gear-option","Optional: Amberstill green equipment",
     "If Protecting the Herd is accepted and you have suitable help, complete it while here. Compare the usable reward with equipped gear. Next continues when this detour is not worthwhile.")
+g.steps[#g.steps].optional=true
+g.steps[#g.steps].optionalBenefit='gear'
+g.steps[#g.steps].gearQuestIDs={314}
 g.steps[#g.steps].alongside = {D:Task("objective",314,true), D:Task("turnin",314,true)}
 D:Note(g,"pilot-gear-option","Optional eastern-road weapon upgrade",
     "If you are still levelling near the north-pass road, The Lost Pilot (419) leads to A Pilot's Revenge (417), which offers green dagger/hammer choices. Compare them with your class and current weapon before taking that detour.")
+g.steps[#g.steps].optional=true
+g.steps[#g.steps].optionalBenefit='gear'
+g.steps[#g.steps].gearQuestIDs={417}
 g.steps[#g.steps].alongside = {D:Task("pickup",419,true), D:Task("turnin",419,true),
     D:Task("pickup",417,true), D:Task("objective",417,true), D:Task("turnin",417,true)}
 D:Finish(g,"dun-morogh","The next region is normally Loch Modan.")
 
-g = D:New("alliance-elwynn-01-10", "Elwynn Forest 1-10 (Draft)", "Elwynn Forest", {"Human"})
+g = D:New("alliance-elwynn-01-10", "Elwynn Forest 1-10", "Elwynn Forest", {"Human"})
 D:Group(g,"northshire-intro","Northshire: speak to Deputy Willem","pickup",{783})
 D:Group(g,"northshire-mcbride","Deliver A Threat Within inside the abbey","turnin",{783})
 D:Group(g,"northshire-pickup","Take kobolds and nearby wolves","pickup",{7,33})
@@ -123,7 +130,7 @@ D:Note(g,"hogger-gear-option","Optional: Hogger group reward",
 g.steps[#g.steps].alongside = {D:Task("objective",176,true), D:Task("turnin",176,true)}
 D:Finish(g,"elwynn","The next region is normally Westfall.")
 
-g = D:New("alliance-teldrassil-01-10", "Teldrassil 1-10 (Draft)", "Teldrassil", {"NightElf"})
+g = D:New("alliance-teldrassil-01-10", "Teldrassil 1-10", "Teldrassil", {"NightElf"})
 D:Group(g,"shadowglen-pickup","Shadowglen: take nearby wildlife quests","pickup",{456,458})
 D:Group(g,"woodland-intro","Speak to Tarindrella","turnin",{458})
 D:Group(g,"shadowglen-followup","Take The Woodland Protector follow-up","pickup",{459})
@@ -171,7 +178,7 @@ g.steps[#g.steps].alongside = {D:Task("objective",932,true), D:Task("turnin",932
     D:Task("objective",2499,true), D:Task("turnin",2499,true)}
 D:Finish(g,"teldrassil","The next region is normally Darkshore.")
 
-g = D:New("alliance-zephras-01-10", "Zephras Isle 1-10 (Draft)", "Zephras Isle", {"High Order Skyborne"})
+g = D:New("alliance-zephras-01-10", "Zephras Isle 1-10", "Zephras Isle", {"High Order Skyborne"})
 g.revision = 2
 D:Group(g,"coming-of-age","Thendal Grove: begin Coming of Age","pickup",{92460})
 D:Group(g,"rorian-intro","Speak to Rorian the Dayseeker","turnin",{92460})
@@ -220,7 +227,7 @@ D:Group(g,"valanaar-intro-pickup","Take the Alliance introduction to Valanaar","
 D:Group(g,"valanaar-arrive","Deliver To Valanaar","turnin",{92701},{92550})
 D:Trainer(g,"valanaar-class","Valanaar: class training and supplies","Zephras Isle",.662,.766,10)
 D:Note(g,"zephras-exit-choice","Level 10 island exit choice",
-    "If already 10, finish your class milestone and check Alliance transport. You can select a mainland 10-20 draft, or Zephras 10-14 / Exit Choice to continue the later story. Staying until 14 is optional; review nearby quests again around 12. If transport is story-gated, finish its required chain first. Next continues the opening island circuit.")
+    "If already 10, finish your class milestone and check Alliance transport. You can select a mainland 10-20 guide, or Zephras 10-14 / Exit Choice to continue the later story. Staying until 14 is optional; review nearby quests again around 12. If transport is story-gated, finish its required chain first. Next continues the opening island circuit.")
 D:Group(g,"valanaar-pickup","Take the nearby Alliance scholar introduction","pickup",{92699,92727},{93949})
 D:Group(g,"magister-visit","Speak to the Supreme Magister","turnin",{92699})
 D:Group(g,"windfield-pickup","Take Blood Tithe on the westbound road","pickup",{92679})

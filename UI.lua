@@ -16,7 +16,7 @@ U.buttonHelp = {
     Previous = "Review the previous step. Auto returns to your current quest progress.",
     Next = "Browse the next step. This does not mark the current step complete.",
     Skip = "Skip this step. Auto remembers explicitly skipped steps.",
-    ["From.."] = "Start again from the selected step. Clears skips and manual confirmations for this step and all later steps. Earlier progress and live quest completion are kept. Next, Skip or Auto resumes automation.",
+    From = "Start again from the selected step. Later skips become To do, but are remembered: choosing a starting point beyond them restores Skipped. Clears later manual confirmations. Live quest completion is kept. Next, Skip or Auto resumes automation.",
     Auto = "Return to the first unfinished, unskipped step using your live quest progress.",
     ["Show / Hide"] = "Show or hide the quest window. The arrow and targets remain independent.",
     Options = "Open addon settings, including font size.",
@@ -85,7 +85,7 @@ end
 function U:Button(parent, title, width, anchor, x, y, callback)
     local b = F.Frame("Button", nil, parent, "UIPanelButtonTemplate")
     b:SetSize(width, 22); b:SetPoint(anchor, x, y); b:SetText(title); b:SetScript("OnClick", callback)
-    F.Tooltips:Text(b, title, self.buttonHelp[title] or ("Select this guide. Each guide remembers its own progress."))
+    F.Tooltips:Text(b, title, self.buttonHelp[title] or ("Select this guide. Each guide remembers its own progress."), true)
     return b
 end
 function U:Create()
@@ -105,7 +105,7 @@ function U:Create()
     self.header = header
     -- Bronze framed title bar, with a large circular portrait overlapping its edge.
     local addonIcon = header:CreateTexture(nil, "ARTWORK")
-    addonIcon:SetSize(52,52); addonIcon:SetPoint("TOPLEFT",-10,6); addonIcon:SetTexture(F.icon)
+    addonIcon:SetSize(52,52); addonIcon:SetPoint("TOPLEFT",-22,6); addonIcon:SetTexture(F.icon)
     self.addonIcon=addonIcon
     self.addonTitle = self:Text(header, "GameFontNormal", "TOPLEFT", 48, -12, 140)
     self.addonTitle:SetText("Forever Rested")
@@ -124,11 +124,37 @@ function U:Create()
     close:SetScript("OnClick", function()
         self:Toggle()
     end)
-    F.Tooltips:Text(close, "Hide quest window", "Hide the guide window. Use /fg or the minimap icon to show it again.")
+    F.Tooltips:Text(close, "Hide quest window", "Hide the guide window. Use /fg or the minimap icon to show it again.", true)
     F.Arrow:Create()
     F.Tracker:Create(f)
+    local search = F.Frame("EditBox", nil, f, "InputBoxTemplate")
+    self.searchBox = search
+    search:SetAutoFocus(false); search:SetMaxLetters(120)
+    search:SetFontObject("GameFontHighlightSmall")
+    local hint = search:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+    self.searchHint = hint
+    hint:SetPoint("LEFT", search, "LEFT", 2, 0)
+    hint:SetJustifyH("LEFT"); hint:SetWordWrap(false)
+    hint:SetTextColor(1, 1, 1, .45)
+    hint:SetText("Search quests, gear, critical, status...")
+    local function updateHint(box)
+        hint:SetShown(not self.searchFocused and (box:GetText() or "") == "")
+    end
+    search:SetScript("OnEditFocusGained", function(box) self.searchFocused = true; updateHint(box) end)
+    search:SetScript("OnEditFocusLost", function(box) self.searchFocused = false; updateHint(box) end)
+    search:SetScript("OnTextChanged", function(box)
+        updateHint(box)
+        F.Tracker:SetSearch(box:GetText())
+    end)
+    search:SetScript("OnEnterPressed", function(box) box:ClearFocus() end)
+    search:SetScript("OnEscapePressed", function(box) box:SetText(""); box:ClearFocus() end)
+    F.Tooltips:Text(search, "Search guide", "Search by step number, quest, NPC or note. Filter by key/critical, gear, money, optional, skipped, in progress, to do, completed, ready, current or next. Combine words, such as gear to do. Escape clears the search. Click a result to inspect it.")
+    self.searchClear = self:Button(f, "Clear", 52, "TOPRIGHT", -16, -40, function()
+        search:SetText(""); search:ClearFocus()
+    end)
+    F.Tooltips:Text(self.searchClear, "Clear search", "Show all guide steps again.")
     self.footerButtons = {
-        self:Button(f, "From..", 80, "BOTTOMLEFT", 16, 10, function() F.GuideEngine:ResetFrom() end),
+        self:Button(f, "From", 80, "BOTTOMLEFT", 16, 10, function() F.GuideEngine:ResetFrom() end),
         self:Button(f, "Previous", 108, "BOTTOMLEFT", 102, 10, function() F.GuideEngine:Move(-1) end),
         self:Button(f, "Next", 80, "BOTTOMLEFT", 216, 10, function() F.GuideEngine:Move(1) end),
         self:Button(f, "Skip", 80, "BOTTOMLEFT", 302, 10, function() F.GuideEngine:Move(1, true) end),
@@ -139,18 +165,45 @@ function U:Create()
     self.debugFrame = debug; self.debugText = self:Text(debug, "GameFontHighlightSmall", "TOPLEFT", 9, -9, 380)
     self.debugText:SetHeight(130); debug:Hide()
     local grip = CreateFrame("Button", nil, f)
-    self.resizeGrip = grip; grip:SetSize(18, 18); grip:SetPoint("BOTTOMRIGHT", -4, 4)
+    self.resizeGrip = grip; grip:SetSize(22, 22); grip:SetPoint("BOTTOMRIGHT", -4, 4)
     F.Tooltips:Text(grip, "Resize quest window", "Drag this corner to resize the window. Width, height and position are saved.")
-    self:Text(grip, "GameFontNormal", "CENTER", 0, 0, 18):SetText("//")
+    -- Southeast chevron, with a bronze outline and gold inset.
+    for _, corner in ipairs({{16, 5}}) do
+        for _, segment in ipairs({{corner[1]-7, corner[2], corner[1], corner[2]},
+            {corner[1], corner[2]+7, corner[1], corner[2]}}) do
+            local outline = grip:CreateLine(nil, "ARTWORK")
+            outline:SetThickness(4); outline:SetColorTexture(.16, .09, .025, 1)
+            outline:SetStartPoint("BOTTOMLEFT", segment[1], segment[2])
+            outline:SetEndPoint("BOTTOMLEFT", segment[3], segment[4])
+            local gold = grip:CreateLine(nil, "OVERLAY")
+            gold:SetThickness(2); gold:SetColorTexture(.92, .69, .25, 1)
+            gold:SetStartPoint("BOTTOMLEFT", segment[1], segment[2])
+            gold:SetEndPoint("BOTTOMLEFT", segment[3], segment[4])
+        end
+    end
     grip:SetScript("OnMouseDown", function(_, button)
-        if button == "LeftButton" then f:StartSizing("BOTTOMRIGHT") end
+        if button == "LeftButton" then self.resizing = true; f:StartSizing("BOTTOMRIGHT") end
     end)
     grip:SetScript("OnMouseUp", function()
-        f:StopMovingOrSizing(); self:SaveWindowGeometry()
+        f:StopMovingOrSizing()
+        self.resizing, self.pendingSize, self.resizeElapsed = nil, nil, 0
+        self:Layout(f:GetWidth(), f:GetHeight()); self:SaveWindowGeometry()
     end)
-    f:SetScript("OnSizeChanged", function(_, w, h) self:Layout(w, h) end)
+    f:SetScript("OnSizeChanged", function(_, w, h)
+        if self.resizing then self.pendingSize = {width=w, height=h}
+        else self:Layout(w, h) end
+    end)
+    f:SetScript("OnUpdate", function(_, dt) self:ResizeTick(dt) end)
     self:Layout(width, height)
     if F.db.hidden then f:Hide() end
+end
+function U:ResizeTick(dt)
+    if not self.pendingSize then return end
+    self.resizeElapsed = (self.resizeElapsed or 0) + dt
+    if self.resizeElapsed < .05 then return end
+    local size = self.pendingSize
+    self.pendingSize, self.resizeElapsed = nil, 0
+    self:Layout(size.width, size.height)
 end
 function U:SaveWindowGeometry()
     local width, height = self.frame:GetWidth(), self.frame:GetHeight()
@@ -160,11 +213,12 @@ function U:SaveWindowGeometry()
 end
 function U:Layout(width, height)
     if not F.Tracker.frame then return end
-    -- Keep normal widths when they fit; compact only as the window narrows.
-    -- Reserve the right corner for the resize grip and keep every full label.
-    local compact = math.max(0, math.min(1, (550 - width) / 150))
-    local buttonWidth, previousWidth = 80 - 28 * compact, 108 - 28 * compact
-    local gap, buttonX = 6 - 2 * compact, 16
+    -- Use the minimum-window button widths at every size.
+    -- Keep the footer left aligned with small, fixed gaps.
+    local buttonWidth = (400 - 16 - 28 - 4 * 6 - 28) / 5
+    local previousWidth = buttonWidth + 28
+    local gap = 6
+    local buttonX = 16
     for index, button in ipairs(self.footerButtons or {}) do
         local size = index == 2 and previousWidth or buttonWidth
         button:ClearAllPoints(); button:SetPoint("BOTTOMLEFT", self.frame, "BOTTOMLEFT", buttonX, 10)
@@ -192,12 +246,18 @@ function U:Layout(width, height)
     self.headerTitle:SetPoint("TOPLEFT", secondLine and 12 or titleLeft, secondLine and -titleHeight or 0)
     self.headerTitle:SetSize(secondLine and headerWidth - 24 or math.min(guideWidth+2,headerWidth-titleLeft-rightSpace), titleHeight)
     self.headerTitle:SetJustifyV("MIDDLE")
+    local searchTop = fontSize + 14
+    self.searchBox:ClearAllPoints(); self.searchBox:SetPoint("TOPLEFT", F.Tracker.frame, "TOPLEFT", 16, -searchTop)
+    self.searchBox:SetSize(width - 100, 30)
+    self.searchHint:SetWidth(width - 108)
+    self.searchClear:ClearAllPoints(); self.searchClear:SetPoint("TOPRIGHT", F.Tracker.frame, "TOPRIGHT", -8, -searchTop - 4)
+    F.Tracker.contentTop = searchTop + 36
     local trackerTop = 10
     F.Tracker.frame:ClearAllPoints(); F.Tracker.frame:SetPoint("TOPLEFT", 8, -trackerTop)
-    -- End the list just above the bottom buttons.
+    -- Search sits below the column headings; rows end above the bottom buttons.
     F.Tracker.frame:SetSize(width - 16, math.max(100, height - trackerTop - 36))
     F.Tracker.scrollbar:ClearAllPoints()
-    F.Tracker.scrollbar:SetPoint("TOPRIGHT", -2, -(fontSize + 36))
+    F.Tracker.scrollbar:SetPoint("TOPRIGHT", -2, -F.Tracker.contentTop - 10)
     F.Tracker.scrollbar:SetPoint("BOTTOMRIGHT", -2, 16)
     local badgeSize = self:RowIconSize()
     F.Tracker.rowHeight = math.max(38, badgeSize + 8)
@@ -232,7 +292,8 @@ function U:Layout(width, height)
         row.status:ClearAllPoints(); row.status:SetPoint("CENTER",row.statusButton,"CENTER",0,0)
         row.statusSymbol:SetSize(badgeSize, badgeSize)
     end
-    F.Tracker:Refresh()
+    if self.resizing and F.Tracker.entries then F.Tracker:Render()
+    else F.Tracker:Refresh() end
 end
 function U:SetFontSize(size)
     F.db.fontSize = math.max(11, math.min(20, math.floor(size)))
@@ -275,8 +336,8 @@ function U:ToggleOptions()
     self.options:SetShown(not self.options:IsShown())
 end
 function U:Toggle()
-    if F.Combat() then F.Print("Window visibility is locked during combat."); return end
     local visible = not self.frame:IsShown()
+    if visible and F.Combat() then F.Print("The guide window cannot be opened during combat."); return end
     self.frame:SetShown(visible); F.db.hidden = not visible; self:Debug()
     if F.StepPins then F.StepPins:Update() end
 end
@@ -320,7 +381,7 @@ end
 function U:ActionIcon(kind, size)
     local icon=({pickup="AvailableQuestIcon",turnin="ActiveQuestIcon",talk="GossipGossipIcon",trainer="GossipGossipIcon"})[kind]
     size = size or F.db.fontSize or 12
-    return icon and ("|TInterface\\GossipFrame\\"..icon..":"..size..":"..size.."|t ") or ""
+    return icon and ("|Hforeverrestedicon:"..kind.."|h|TInterface\\GossipFrame\\"..icon..":"..size..":"..size.."|t|h ") or ""
 end
 function U:ActionTitle(task, iconSize)
     if task.tasks and #task.tasks==1 then task=task.tasks[1] end
@@ -347,8 +408,55 @@ function U:ActionTitle(task, iconSize)
     return self:ActionIcon(task.type,iconSize)..(task.text or title)
 end
 function U:CriticalIcon(size)
-    size = size or F.db.fontSize or 12
-    return "|TInterface\\DialogFrame\\UI-Dialog-Icon-Alert:"..size..":"..size..":0:0|t "
+    return self:PriorityIcon('Critical',size)
+end
+function U:PriorityIcon(kind,size)
+    size = size or math.floor(self:RowIconSize() * .7 + .5)
+    if kind=='Gear' then
+        -- PlayerAttackIcon uses the top-right cell of the state-icon sheet.
+        return "|Hforeverrestedicon:"..kind.."|h|TInterface\\CharacterFrame\\UI-StateIcon:"..size..":"..size..":0:0:64:64:32:64:0:31|t|h "
+    end
+    return "|Hforeverrestedicon:"..kind.."|h|TInterface\\AddOns\\ForeverRested\\Media\\Priority"..kind..".tga:"..size..":"..size..":0:0|t|h "
+end
+function U:TaskPriority(task)
+    if task.critical or F.QuestPolicy and F.QuestPolicy:Critical(task) then return 'Critical' end
+    local benefit=task.optionalBenefit
+    if benefit=='money' then return 'Money' end
+    local id=F.GuideEngine:Resolve(task)
+    if F.GearRewards:QuestUseful(id) then return 'Gear' end
+    for _,questID in ipairs(task.gearQuestIDs or {}) do
+        if F.GearRewards:QuestUseful(questID) then return 'Gear' end
+    end
+    local data=F.GuideEngine:Metadata(id) or {}
+    if (data.rewardMoney or 0)>0 then return 'Money' end
+    return nil
+end
+function U:StepPriority(step,index)
+    if step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index] then return 'Critical' end
+    local priority=self:TaskPriority(step)
+    for _,task in ipairs(F.GuideEngine:Tasks(step)) do
+        local kind=self:TaskPriority(task)
+        if kind=='Critical' then return kind end
+        priority=priority or kind
+    end
+    return priority
+end
+function U:StepMarkers(step,index)
+    local result,seen={},{}
+    local primary=self:StepPriority(step,index)
+    if primary then result[#result+1]={kind=primary}; seen[primary]=true end
+    -- Side actions remain visible while browsing collapsed rows. activeOnly
+    -- controls quest tracking, not whether a suggested detour has a marker.
+    for _,task in ipairs(step.alongside or {}) do
+        local id=F.GuideEngine:Resolve(task)
+        if F.QuestPolicy:Eligible(id,task) then
+            local kind=self:TaskPriority(task)
+            if kind and not seen[kind] then
+                result[#result+1]={kind=kind,alongside=true}; seen[kind]=true
+            end
+        end
+    end
+    return result
 end
 function U:ActionBody(task)
     local id,q=F.GuideEngine:Resolve(task)
@@ -384,8 +492,12 @@ function U:Refresh()
     F.GuideEngine:Current()
     self.headerTitle:SetText(F.Guide.title)
     F.db.view = "steps"
-    if self.lastGuide ~= F.Guide then F.GuideEngine.selectedStep = nil end
-    if self.lastGuide ~= F.Guide or (self.lastStep ~= F.db.step and not F.GuideEngine.selectedStep) then
+    if self.lastGuide ~= F.Guide then
+        F.GuideEngine.selectedStep = nil
+        self.searchBox:SetText("")
+        F.Tracker:SetSearch("")
+    end
+    if not F.Tracker.searchQuery and (self.lastGuide ~= F.Guide or (self.lastStep ~= F.db.step and not F.GuideEngine.selectedStep)) then
         F.Tracker.topOffset = nil
         F.Tracker.offset = math.max(0, F.db.step - 1)
     end

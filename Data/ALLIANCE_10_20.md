@@ -1,4 +1,4 @@
-# Alliance 10–20 drafts and Zephras exit choice
+# Alliance 10–20 guides and Zephras exit choice
 
 Use `/reload`, then the minimap book or `/fg guides`. Browse **Levels 10–20**:
 
@@ -43,7 +43,7 @@ python tools/compare_zephras.py
 
 The reference now contains 554 selected records. 90 use zone-list summaries because individual pages were unavailable during this build: those records explicitly lack locations and reward stats. Native quest waypoints and live counts remain usable; the addon does not fabricate fallback coordinates. Summary records show sourced listed XP, not build-verified XP.
 
-Use the refresh workflow in [ALLIANCE_DRAFTS.md](ALLIANCE_DRAFTS.md). `-UseCache` rebuilds available cached pages and summaries without network requests. A normal refresh tries individual pages and stops on a failed fetch, leaving the loaded reference unchanged. Newly available individual pages replace summaries on a later rebuild. Route ordering remains authored separately.
+Use the refresh workflow in [ALLIANCE_GUIDES.md](ALLIANCE_GUIDES.md). `-UseCache` rebuilds available cached pages and summaries without network requests. A normal refresh tries individual pages and stops on a failed fetch, leaving the loaded reference unchanged. Newly available individual pages replace summaries on a later rebuild. Route ordering remains authored separately.
 
 Sources: public Forever [Westfall](https://www.wowhead.com/forever/quests/eastern-kingdoms/westfall), [Loch Modan](https://www.wowhead.com/forever/quests/eastern-kingdoms/loch-modan), [Darkshore](https://www.wowhead.com/forever/quests/kalimdor/darkshore), [Redridge](https://www.wowhead.com/forever/quests/eastern-kingdoms/redridge-mountains), [Zephras](https://www.wowhead.com/forever/zone=16593/zephras-isle) lists and individual cached quest/item records. Chain ordering was cross-checked against QuestieDB's raw quest fields and authored Forever corrections at `cac1eff815923f896d082764d023cf812454a023`; no QuestieDB payload or runtime dependency was bundled.
 

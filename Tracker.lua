@@ -1,6 +1,65 @@
 local _, F = ...
 local T = {offset = 0}
 F.Tracker = T
+function T:SetSearch(text)
+    local query = (text or ""):lower():match("^%s*(.-)%s*$")
+    query = query ~= "" and query or nil
+    if query == self.searchQuery then return end
+    if not self.searchQuery then self.beforeSearchOffset = self.offset end
+    self.searchQuery = query
+    self.topOffset = nil
+    self.offset = query and 0 or (self.beforeSearchOffset or 0)
+    self:Refresh()
+end
+function T:MatchesSearch(step, index, state, statusLabel)
+    if not self.searchQuery then return true end
+    -- Numeric queries refer to the original step number, even in a filtered list.
+    if self.searchQuery:match("^%d+$") then return index == tonumber(self.searchQuery) end
+    local parts = {tostring(index)}
+    local function add(value)
+        if type(value) == "string" then parts[#parts + 1] = value end
+    end
+    state = state or F.GuideEngine:StepState(index)
+    add(statusLabel)
+    local statusTerms = {
+        complete = "done complete completed finished",
+        skipped = "skipped skip",
+        failed = "failed failure",
+        ongoing = "in progress ongoing active",
+        ready = "in progress ready ready to turn in",
+        waiting = "not started waiting",
+        notready = "in progress objectives pending",
+    }
+    add(statusTerms[state])
+    if state ~= "complete" and state ~= "skipped" then add("to do todo remaining unfinished pending") end
+    if index == F.db.step then add("current") end
+    if step.optional then add("optional") end
+    local priorityTerms = {
+        Critical = "key critical key/critical required",
+        Gear = "gear equipment reward",
+        Money = "money gold reward",
+    }
+    for _, marker in ipairs(F.UI:StepMarkers(step, index)) do add(priorityTerms[marker.kind]) end
+    local function taskText(task)
+        if task.questID or task.slot then add("quest quests") end
+        if task.optional then add("optional") end
+        add(task.text); add(task.note); add(task.npc); add(task.mob)
+        add(F.UI:ActionTitle(task)); add(F.UI:ActionBody(task))
+        local id, quest = F.GuideEngine:Resolve(task)
+        local data = F.GuideEngine:Metadata(id)
+        add(quest and quest.title); add(data and data.title)
+        for _, point in ipairs(data and data.locations or {}) do add(point.name) end
+    end
+    taskText(step)
+    for _, task in ipairs(step.tasks or {}) do taskText(task) end
+    for _, task in ipairs(step.alongside or {}) do taskText(task) end
+    if step.classAdvice then add(F.GuideDraft:Advice()) end
+    local haystack = table.concat(parts, " "):gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", ""):gsub("|T.-|t", ""):lower()
+    for word in self.searchQuery:gmatch("%S+") do
+        if not haystack:find(word, 1, true) then return false end
+    end
+    return true
+end
 T.statusIcons = {Done = "Done", Current = "Current", Next = "Next", ["Not started"] = "NotStarted",
     ["In progress"] = "InProgress", Skipped = "Skipped", Failed = "Failed"}
 T.statusSymbols = {Current = ">", Next = "▶", ["Not started"] = "",
@@ -9,11 +68,15 @@ T.statusColors = {Current={.08,.38,.8},Next={.52,.12,.75},
     ["Not started"]={.35,.35,.33},Done={.08,.6,.22},
     ["In progress"]={.85,.54,.04},Skipped={.85,.3,.06},Failed={.75,.07,.08}}
 function T:ScrollTo(offset)
+    local target = math.max(0, math.min(self.maxOffset or 0, math.floor(offset + .5)))
+    if target == self.offset and not self.topOffset then return end
     self.topOffset = nil
-    self.offset = math.max(0, math.min(self.maxOffset or 0, math.floor(offset + .5)))
-    self:Refresh()
+    self.offset = target
+    self:Render()
 end
 function T:ShowCurrentAtTop()
+    if self.searchQuery and F.UI.searchBox then F.UI.searchBox:SetText("") end
+    self:SetSearch("")
     self.topOffset = math.max(0, F.db.step - 1)
     self.offset = self.topOffset
     self:Refresh()
@@ -41,8 +104,15 @@ function T:Create(parent)
     scrollbar:SetScript("OnMouseWheel", function(_, delta) self:ScrollTo(self.offset - delta) end)
     self.scrollUp = scrollbar.ScrollUpButton or _G[scrollbar:GetName() .. "ScrollUpButton"]
     self.scrollDown = scrollbar.ScrollDownButton or _G[scrollbar:GetName() .. "ScrollDownButton"]
-    if self.scrollUp then self.scrollUp:SetScript("OnClick", function() self:ScrollTo(self.offset - 1) end) end
-    if self.scrollDown then self.scrollDown:SetScript("OnClick", function() self:ScrollTo(self.offset + 1) end) end
+    if self.scrollUp then
+        self.scrollUp:SetScript("OnClick", function() self:ScrollTo(self.offset - 1) end)
+        F.Tooltips:Text(self.scrollUp, "Scroll up", "Show earlier guide steps.")
+    end
+    if self.scrollDown then
+        self.scrollDown:SetScript("OnClick", function() self:ScrollTo(self.offset + 1) end)
+        F.Tooltips:Text(self.scrollDown, "Scroll down", "Show later guide steps.")
+    end
+    F.Tooltips:Text(scrollbar, "Scroll guide", "Drag to browse guide steps, or use the mouse wheel.")
     local track = scrollbar:CreateTexture(nil, "BACKGROUND")
     track:SetAllPoints(); track:SetColorTexture(0, 0, 0, .4)
     scrollbar:Hide()
@@ -81,6 +151,31 @@ function T:Create(parent)
         row.text:ClearAllPoints(); row.text:SetPoint("CENTER", row.stepBadge, "CENTER", 0, 0)
         row.text:SetJustifyH("CENTER"); row.text:SetJustifyV("MIDDLE")
         row.body = F.UI:Text(row, "GameFontNormalSmall", "TOPLEFT", 150, -10, 198)
+        row:SetHyperlinksEnabled(true)
+        row:SetScript("OnHyperlinkEnter", function(owner, link)
+            local kind = link and link:match("^foreverrestedicon:(%a+)$")
+            local meanings = {
+                Critical={"Key / Critical", "Required for guide progression or a quest chain. Catch-up keeps this step; Skip can bypass it manually."},
+                Gear={"Equipment reward", "This quest can reward equipment that improves your character's current gear."},
+                Money={"Money reward", "This quest offers a money reward."},
+                pickup={"Accept quest", "Accept this quest from its quest giver."},
+                turnin={"Turn in quest", "Return to the quest giver to turn in this quest after completing its objectives."},
+                talk={"Talk", "Speak to this NPC."},
+                trainer={"Trainer", "Visit this trainer to learn available skills."},
+            }
+            local help = meanings[kind]
+            if not help or not GameTooltip then return end
+            F.Tooltips:Cancel()
+            F.Tooltips.shownOwner = owner
+            GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
+            GameTooltip:SetText(help[1], 236/255, 187/255, 49/255)
+            GameTooltip:AddLine(help[2], 1, 1, 1, true)
+            GameTooltip:Show()
+        end)
+        row:SetScript("OnHyperlinkLeave", function(owner) F.Tooltips:Cancel(owner) end)
+        row:SetScript("OnHyperlinkClick", function(owner)
+            if owner.stepIndex then F.GuideEngine:SelectStep(owner.stepIndex) end
+        end)
         row.statusButton = CreateFrame("Button", nil, row)
         row.status = row.statusButton:CreateTexture(nil, "ARTWORK")
         row.status:SetPoint("CENTER")
@@ -120,10 +215,26 @@ function T:Create(parent)
                 local step = F.Guide.steps[r.stepIndex]
                 GameTooltip:SetOwner(r, "ANCHOR_RIGHT"); GameTooltip:SetText("Step " .. r.stepIndex, 1, .82, 0)
                 GameTooltip:AddLine(step.text, 1, 1, 1, true)
+                GameTooltip:AddLine("Click to view this step. From restarts the guide here.", .8, .8, .8, true)
+                local action = step.tasks and #step.tasks == 1 and step.tasks[1] or step
+                local actionHelp = {pickup="Yellow !: accept this quest from its quest giver.",
+                    turnin="Yellow ?: turn in this quest when its objectives are complete.",
+                    talk="Speech icon: talk to this NPC.", trainer="Speech icon: visit this trainer."}
+                if actionHelp[action.type] then GameTooltip:AddLine(actionHelp[action.type],1,1,1,true) end
                 local reason=step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[r.stepIndex]
-                if reason or step.critical then
-                    GameTooltip:AddLine("Critical: "..(reason or "Required quest"),1,.65,.1,true)
+                local priority=F.UI:StepPriority(step,r.stepIndex)
+                if priority=='Critical' then
+                    GameTooltip:AddLine("Key / Critical quest icon: "..(reason or "Required for guide progression or a quest chain"),236/255,187/255,49/255,true)
                     GameTooltip:AddLine("Catch-up keeps this step. Use Skip to bypass it manually.",1,1,1,true)
+                elseif priority then
+                    local label=({Gear='Gear icon: this quest can reward useful equipment for your character.',Money='Money icon: this quest offers a money reward.'})[priority]
+                    GameTooltip:AddLine(label,.4,.75,1,true)
+                end
+                for _,marker in ipairs(F.UI:StepMarkers(step,r.stepIndex)) do
+                    if marker.alongside then
+                        local label=({Critical='Key / Critical quest icon: required for guide progression or a quest chain.',Gear='Gear icon: useful equipment reward.',Money='Money icon: money reward.'})[marker.kind]
+                        GameTooltip:AddLine("Alongside: "..label,.65,.75,1,true)
+                    end
                 end
                 if step.note then GameTooltip:AddLine(step.note,1,1,.5,true) end
                 if step.classAdvice then GameTooltip:AddLine(F.GuideDraft:Advice(),1,1,.5,true) end
@@ -176,16 +287,18 @@ function T:Refresh()
         local label=done and "Done" or state=="skipped" and "Skipped" or state=="failed" and "Failed" or index==F.db.step and "Current" or index==nextIndex and "Next" or (state=="ongoing" or state=="ready") and "In progress" or "Not started"
         local heading = color..index.."|r"
         local text = F.UI:ActionTitle(step,iconSize)
-        local reason=step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index]
-        local critical=reason or step.critical
-        for _,task in ipairs(F.GuideEngine:Tasks(step)) do
-            if F.QuestPolicy:Critical(task) then critical=true end
+        local markers=''
+        for _,marker in ipairs(F.UI:StepMarkers(step,index)) do
+            markers=markers..F.UI:PriorityIcon(marker.kind,iconSize)
         end
-        if critical then text=F.UI:CriticalIcon(iconSize)..text end
+        if markers~='' then text=text..' '..markers end
         if index ~= viewedStep then text = color .. text .. "|r" end
         if index==F.db.step or index==viewedStep then
             for _,task in ipairs(F.GuideEngine:Tasks(step)) do
-                if step.tasks and #step.tasks>1 then text=text.."\n  "..F.UI:ActionTitle(task,iconSize) end
+                if step.tasks and #step.tasks>1 then
+                    local priority=F.UI:TaskPriority(task)
+                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..(priority and ' '..F.UI:PriorityIcon(priority,iconSize) or "")
+                end
                 local body=F.UI:ActionBody(task)
                 if body~="" then text=text.."\n  "..body end
             end
@@ -196,15 +309,20 @@ function T:Refresh()
                 if F.GuideEngine:Applies(task) and F.GuideEngine:TaskState(task)~="complete" then
                     alongside=alongside+1
                     if alongside == 1 then text=text.."\n\n|cffffd100Alongside this step:|r" end
-                    text=text.."\n  "..(F.QuestPolicy:Critical(task) and F.UI:CriticalIcon(iconSize) or "")..F.UI:ActionTitle(task,iconSize)
+                    local priority=F.UI:TaskPriority(task)
+                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..(priority and ' '..F.UI:PriorityIcon(priority,iconSize) or "")
                     local body=F.UI:ActionBody(task)
                     if body~="" then text=text.."\n    "..body end
                 end
             end
         end
-        entries[#entries + 1] = {stepIndex = index, heading = heading, text = text, statusLabel = label}
+        if self:MatchesSearch(step, index, state, label) then
+            entries[#entries + 1] = {stepIndex = index, heading = heading, text = text, statusLabel = label}
+        end
     end
     self.headers.Step:SetText("Step")
+    self.headers.Quest:SetText(self.searchQuery and
+        ("Quests - " .. #entries .. " / " .. #F.Guide.steps .. " matched") or "Quests")
     self.progressCounts = {done=completed, skipped=skipped, remaining=#F.Guide.steps-completed-skipped}
     self.headers.Status:SetText("Status " .. (completed + skipped) .. " / " .. #F.Guide.steps)
     -- Assign stripes before slicing, keeping each step's shade stable while scrolling.
@@ -215,7 +333,7 @@ function T:Refresh()
             entry.alternate = questRow % 2 == 0
         end
     end
-    local used,available=(F.db.fontSize or 12)+18,math.max(100,(self.frame:GetHeight() or 328)-8)
+    local used,available=self.contentTop or (F.db.fontSize or 12)+18,math.max(100,(self.frame:GetHeight() or 328)-8)
     -- Measure the full list so the final scroll position fills the last page.
     local probe = self.rows[1].body
     for _, entry in ipairs(entries) do
@@ -225,6 +343,16 @@ function T:Refresh()
         entry.height = math.min(math.max(self.rowHeight or 52,
             F.Number(measured) and measured + 20 or (lines + 1) * ((F.db.fontSize or 12) + 2) + 20), available - used)
     end
+    -- Quest, search and layout refreshes rebuild the list. Scrolling only
+    -- repaints the row pool, without rescanning quests or measuring the list.
+    self.entries = entries
+    self:Render()
+end
+function T:Render()
+    if not self.entries then self:Refresh(); return end
+    local entries = self.entries
+    local viewedStep = F.GuideEngine.selectedStep or F.db.step
+    local used,available=self.contentTop or (F.db.fontSize or 12)+18,math.max(100,(self.frame:GetHeight() or 328)-8)
     local tailHeight, tailCount, firstLastPage = 0, 0, #entries + 1
     for index = #entries, 1, -1 do
         if tailHeight + entries[index].height > available - used or tailCount >= #self.rows then break end

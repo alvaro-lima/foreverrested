@@ -28,13 +28,15 @@ function T:Attach(frame, render, immediate)
     frame:SetScript("OnLeave", function(owner) self:Cancel(owner) end)
     if frame.HookScript then frame:HookScript("OnHide", function(owner) self:Cancel(owner) end) end
 end
-function T:Text(frame, title, body)
+function T:Text(frame, title, body, immediate)
+    -- Keep immediate behavior when a button's help text is replaced later.
+    if immediate ~= nil then frame.foreverTooltipImmediate = immediate end
     self:Attach(frame, function(owner)
         if not GameTooltip then return end
         GameTooltip:SetOwner(owner, "ANCHOR_RIGHT"); GameTooltip:SetText(title, 1, .82, 0)
         if body then GameTooltip:AddLine(body, 1, 1, 1, true) end
         GameTooltip:Show()
-    end)
+    end, frame.foreverTooltipImmediate == true)
 end
 function T:Tick(dt)
     local pending = self.pending

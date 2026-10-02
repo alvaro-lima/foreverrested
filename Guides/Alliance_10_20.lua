@@ -29,7 +29,7 @@ local function redridge(g,prefix)
     g.steps[#g.steps].alongside={D:Task("objective",116,true),D:Task("turnin",116,true),D:Task("pickup",20,true),D:Task("objective",20,true),D:Task("turnin",20,true)}
 end
 
-local g=D:New("alliance-westfall-10-20","Westfall / Redridge 10-20 (Draft)","Westfall",{"Human","High Order Skyborne"},10,20)
+local g=D:New("alliance-westfall-10-20","Westfall / Redridge 10-20","Westfall",{"Human","High Order Skyborne"},10,20)
 entry(g,"Enter Westfall from Elwynn or the available Alliance transport route.")
 D:Group(g,"furlbrow-pickup","Furlbrow farm: collect road errands","pickup",{36},{64,151,184,98021})
 D:Group(g,"saldean-arrive","Deliver Westfall Stew at Saldean's farm","turnin",{36},{98021})
@@ -52,9 +52,9 @@ cycle(g,"defias-traitor","Escort the Defias traitor",{155},nil,"Start only when 
 D:Note(g,"westfall-optional","Optional coastal rewards and dungeon work","Keep coastal hunts for a shared beach circuit. Captain Sander's treasure starts from a dropped map; do not farm it solely for a low-value reward. The Deadmines finale is group content and does not block this route.")
 g.steps[#g.steps].alongside={D:Task("pickup",152,true),D:Task("objective",152,true),D:Task("turnin",152,true),D:Task("pickup",104,true),D:Task("objective",104,true),D:Task("turnin",104,true)}
 redridge(g,"westfall-redridge")
-D:Finish(g,"westfall","At 20, choose your next regional route when available; the 20-30 drafts are not installed.")
+D:Finish(g,"westfall","At 20, choose your next regional route when available; the 20-30 guides are not installed.")
 
-g=D:New("alliance-loch-modan-10-20","Loch Modan / Redridge 10-20 (Draft)","Loch Modan",{"Dwarf","Gnome","High Order Skyborne"},10,20)
+g=D:New("alliance-loch-modan-10-20","Loch Modan / Redridge 10-20","Loch Modan",{"Dwarf","Gnome","High Order Skyborne"},10,20)
 entry(g,"Enter Loch Modan through the Dun Morogh pass.")
 cycle(g,"south-troggs","South gate: first trogg orders",{224},{86585,912})
 D:Group(g,"thelsamar-pickup","Thelsamar: collect overlapping wildlife objectives","pickup",{418,416},{1338,86585})
@@ -78,9 +78,9 @@ D:ClassStop(g,"loch-city","Use your flight point for Ironforge training. Pair ac
 D:Note(g,"loch-gear","Optional lodge rewards and escorts","Vyrin's Revenge is gated behind the timed hunts and asks for a dangerous named bear. Do it with help if its usable reward is valuable; skip repeated deaths. Protecting the Shipment is optional escort work.")
 g.steps[#g.steps].alongside={D:Task("pickup",271,true),D:Task("objective",271,true),D:Task("turnin",271,true),D:Task("pickup",531,true),D:Task("turnin",531,true),D:Task("pickup",309,true),D:Task("objective",309,true),D:Task("turnin",309,true)}
 redridge(g,"loch-redridge")
-D:Finish(g,"loch","At 20, choose your next regional route when available; the 20-30 drafts are not installed.")
+D:Finish(g,"loch","At 20, choose your next regional route when available; the 20-30 guides are not installed.")
 
-g=D:New("alliance-darkshore-10-20","Darkshore 10-20 (Draft)","Darkshore",{"Night Elf","High Order Skyborne"},10,20)
+g=D:New("alliance-darkshore-10-20","Darkshore 10-20","Darkshore",{"Night Elf","High Order Skyborne"},10,20)
 entry(g,"Arrive in Auberdine from the available Alliance route.")
 D:Group(g,"auberdine-pickup","Auberdine: coastal work and first introductions","pickup",{983,954,2118,984},{3524,963,1141})
 D:Group(g,"south-coast","South beach: crawlers and accepted remains","objective",{983},{3524,1141})
@@ -129,4 +129,4 @@ D:Group(g,"mathystra-loop","Northern ruins: collect the relics","objective",{951
 D:Group(g,"mathystra-return","Return the relics to Onu","turnin",{951},{986,993})
 D:Note(g,"darkshore-optional","Optional final hunts, gear and escorts","Murkdeep and difficult furbolg leaders are optional group/reward detours. The lost-master chain continues only after its earlier objectives. Take a nearby escort when safe; avoid waiting for it solely to fill the route.")
 g.steps[#g.steps].alongside={D:Task("pickup",2139,true),D:Task("objective",2139,true),D:Task("turnin",2139,true),D:Task("pickup",4740,true),D:Task("objective",4740,true),D:Task("turnin",4740,true),D:Task("pickup",5321,true),D:Task("objective",5321,true),D:Task("turnin",5321,true)}
-D:Finish(g,"darkshore","At 20, choose your next regional route when available; the 20-30 drafts are not installed.")
+D:Finish(g,"darkshore","At 20, choose your next regional route when available; the 20-30 guides are not installed.")

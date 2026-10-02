@@ -1,7 +1,7 @@
 ## Interface: 16001
 ## Title: Forever Rested
 ## IconTexture: Interface\AddOns\ForeverRested\Media\GuideIcon-dark-bold-hq
-## Notes: Native-styled leveling guides. Alliance 1-20 beta drafts; Horde guides planned.
+## Notes: Native-styled leveling guides. Alliance 1-20; Horde guides planned.
 ## Author: Alvaro
 ## Version: 0.4.0
 ## X-Curse-Project-ID: 1722752
@@ -18,7 +18,6 @@ Data/ClassicQuestPolicy.lua
 Data/ForeverUnlockFacts.lua
 Data/ForeverQuestPolicy.lua
 GuideDraft.lua
-Guides/GnomeDwarf_01_10.lua
 Guides/Alliance_01_10.lua
 Guides/Alliance_10_20.lua
 Guides/Zephras_10_14.lua
@@ -32,6 +31,7 @@ StepPins.lua
 StepPins.xml
 Arrow.lua
 Tracker.lua
+GearRewards.lua
 UI.lua
 SecureTarget.lua
 Minimap.lua

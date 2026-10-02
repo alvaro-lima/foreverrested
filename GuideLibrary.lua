@@ -74,7 +74,7 @@ function L:SaveCurrent()
     local current = guide.steps[F.db.step]
     local saved = {step = F.db.step, stepID = current and current.id, revision = guide.revision,
         bindings = F.db.bindings, skipped = F.db.skipped, skippedIDs = skippedIDs, confirmedSteps = F.db.confirmedSteps,
-        manualSkippedSteps = F.db.manualSkippedSteps}
+        manualSkippedSteps = F.db.manualSkippedSteps, skipHistory = F.db.skipHistory, restartStepID = F.db.restartStepID}
     F.db.guides[F.db.guideID] = saved
     F.db.stepID, F.db.guideRevision, F.db.skippedIDs = saved.stepID, saved.revision, skippedIDs
 end
@@ -97,6 +97,16 @@ function L:ApplyState(guide, saved)
     F.db.step = math.max(1, math.min(#guide.steps, math.floor(index)))
     F.db.bindings, F.db.skipped = saved.bindings or {}, skipped
     F.db.confirmedSteps = confirmed
+    F.db.skipHistory = {}
+    F.db.restartStepID = nil
+    for _, step in ipairs(guide.steps) do
+        if saved.skipHistory and (saved.skipHistory[step.id] or saved.skipHistory[step.legacyGroupID]) then
+            F.db.skipHistory[step.id] = true
+        end
+        if step.id == saved.restartStepID or step.legacyGroupID == saved.restartStepID and saved.restartStepID then
+            F.db.restartStepID = step.id
+        end
+    end
     F.db.manualSkippedSteps = {}
     for stepID,value in pairs(saved.manualSkippedSteps or {}) do
         if value then F.db.manualSkippedSteps[stepID] = true end
@@ -128,16 +138,14 @@ end
 function L:Initialize()
     F.db.guides = type(F.db.guides) == "table" and F.db.guides or {}
     if not self.guides[F.db.guideID] then
-        -- Keep the old test-guide position available when upgrading.
-        F.db.guides["gnome-dwarf-slice-v1"] = {step = F.db.step, bindings = F.db.bindings, skipped = F.db.skipped}
-        F.db.guideID = self:Recommended() or "gnome-dwarf-concurrent-v1"
-        F.db.step, F.db.skipped = 1, {}
+        F.db.guideID = self:Recommended() or "alliance-dun-morogh-01-10"
+        F.db.step, F.db.skipped, F.db.bindings = 1, {}, {}
         F.db.stepID, F.db.guideRevision, F.db.skippedIDs, F.db.confirmedSteps = nil, nil, nil, {}
     end
     F.Guide = self.guides[F.db.guideID]
     self:ApplyState(F.Guide, {step = F.db.step, stepID = F.db.stepID, revision = F.db.guideRevision,
         bindings = F.db.bindings, skipped = F.db.skipped, skippedIDs = F.db.skippedIDs, confirmedSteps = F.db.confirmedSteps,
-        manualSkippedSteps = F.db.manualSkippedSteps})
+        manualSkippedSteps = F.db.manualSkippedSteps, skipHistory = F.db.skipHistory, restartStepID = F.db.restartStepID})
 end
 function L:Select(id)
     if not self.guides[id] then return end

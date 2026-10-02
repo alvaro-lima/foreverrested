@@ -1,4 +1,4 @@
-# Alliance 1–10 beta drafts
+# Alliance 1–10 beta guides
 
 Use `/reload`, then left-click the minimap book or run `/fg guides`. Four routes are installed:
 
@@ -9,13 +9,13 @@ Use `/reload`, then left-click the minimap book or run `/fg guides`. Four routes
 | Teldrassil | Shadowglen → Dolanaar → nearby lake, timberling and barrow circuits |
 | Zephras Isle | Alliance High Order opening → Shendar → western circuit → Valanaar and Windfield |
 
-These are independently authored, rough routes using nearby objectives and batched turn-ins. They are not measured fastest routes. The existing sequential and concurrent test guides remain separate. Real routes use explicit quest IDs and never bind arbitrary quests from your log.
+These are independently authored, rough routes using nearby objectives and batched turn-ins. They are not measured fastest routes. Real routes use explicit quest IDs and never bind arbitrary quests from your log.
 
 ## Classes and progress
 
 Class advice covers Warrior, Paladin, Hunter, Rogue, Priest, Mage, Warlock, Druid and Shaman. Nearby sourced class quests appear at trainer checkpoints only when class/race restrictions permit. This does not imply every class can use every race or starting zone. Only take quests actually offered by your trainer. Full class quest chains and beta availability still need in-game verification.
 
-Required tasks complete from the live quest log; optional alongside tasks do not block a step. Live objective counts take precedence over historical counts. A ready quest still needs its turn-in. **Next confirms manual trainer/note checkpoints**, saved separately for each guide. Back browses, Skip explicitly skips, and Auto returns to the first unfinished, unskipped step. The level-10 checkpoint completes from the player's level. [10–20 drafts and the optional Zephras continuation](ALLIANCE_10_20.md) are now available.
+Required tasks complete from the live quest log; optional alongside tasks do not block a step. Live objective counts take precedence over historical counts. A ready quest still needs its turn-in. **Next confirms manual trainer/note checkpoints**, saved separately for each guide. Back browses, Skip explicitly skips, and Auto returns to the first unfinished, unskipped step. The level-10 checkpoint completes from the player's level. [10–20 guides and the optional Zephras continuation](ALLIANCE_10_20.md) are now available.
 
 ## XP, rewards and navigation
 
@@ -23,7 +23,7 @@ Pickup/turn-in entries show current-build observed reward XP at the same player 
 
 Native client quest waypoints take priority. Public representative NPC/drop locations supply approximate fallback destinations and loot-source target names. They do not describe walkable paths or moving creatures. Established map IDs are checked against native map names; Zephras resolves its native map at runtime instead of using an invented ID. Missing map support hides navigation safely.
 
-Beta prerequisites, availability, coordinates, XP and rewards may change. If a mandatory quest is not offered, check its preceding turn-in and level first, then use Skip where appropriate and report the quest/step ID with `/fg debug`. Drafts have not yet been walked in-game.
+Beta prerequisites, availability, coordinates, XP and rewards may change. If a mandatory quest is not offered, check its preceding turn-in and level first, then use Skip where appropriate and report the quest/step ID with `/fg debug`. Routes have not yet been walked in-game.
 
 ## Refresh public references
 

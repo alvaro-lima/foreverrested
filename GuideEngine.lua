@@ -219,6 +219,8 @@ function E:AdvanceSafe()
 end
 function E:CatchUpOnLoad()
     if not self.catchUpPending then return end
+    -- An explicit From choice takes precedence over automatic level catch-up.
+    if F.db.restartStepID then self.catchUpPending = nil; return end
     local level = F.Call(UnitLevel, "player")
     -- Login may load saved variables before the player's level is available.
     if not F.Number(level) or level < 1 then return end
@@ -303,12 +305,17 @@ function E:ResetFrom(index)
         F.Print("Choose a step between 1 and " .. #F.Guide.steps .. ".")
         return
     end
-    for position = index, #F.Guide.steps do
-        F.db.skipped[position] = nil
-        local step = F.Guide.steps[position]
-        if F.db.manualSkippedSteps then F.db.manualSkippedSteps[step.id] = nil end
-        if F.db.confirmedSteps then F.db.confirmedSteps[step.id] = nil end
+    F.db.skipHistory = F.db.skipHistory or {}
+    -- Preserve skips independently of the currently chosen starting point.
+    for position, step in ipairs(F.Guide.steps) do
+        if F.db.skipped[position] then F.db.skipHistory[step.id] = true end
     end
+    for position, step in ipairs(F.Guide.steps) do
+        F.db.skipped[position] = position < index and F.db.skipHistory[step.id] or nil
+        if position >= index and F.db.confirmedSteps then F.db.confirmedSteps[step.id] = nil end
+    end
+    F.db.restartStepID = F.Guide.steps[index].id
+    self.catchUpPending = nil
     F.db.step = index
     self.selectedStep = nil
     -- Keep the chosen starting point visible even if live quests are complete.
@@ -320,6 +327,7 @@ function E:Reset()
     F.db.step, F.db.bindings, F.db.skipped = 1, {}, {}
     F.db.confirmedSteps = {}
     F.db.manualSkippedSteps = {}
+    F.db.skipHistory, F.db.restartStepID = {}, nil
     self.manualHold = nil
     self.selectedStep = nil
     F.Refresh()

@@ -84,6 +84,7 @@ toc = (root / "ForeverRested.toc").read_text()
 files = [line.strip() for line in toc.splitlines() if line.strip().endswith(".lua")]
 for name in files:
     lua.execute("assert(loadstring(...))('ForeverRested', F)", (root / name).read_text())
+lua.execute("assert(loadstring(...))('ForeverRested', F)", (root / 'tests/fixtures/GnomeDwarf_01_10.lua').read_text())
 lua.execute(r'''
 F.LoadDatabase(); F.UI:Create(); F.SecureTarget:Create(); F.Minimap:Create()
 F.GuideLibrary:Select('gnome-dwarf-slice-v1'); F.Refresh()
@@ -106,9 +107,15 @@ F.db.skipped={}
 F.GuideEngine:ResumeAuto()
 assert(F.db.step==2)
 combat=true
+F.UI:Toggle()
+assert(not F.UI.frame:IsShown() and F.db.hidden, 'combat permits closing the guide window')
+F.UI:Toggle()
+assert(not F.UI.frame:IsShown() and F.db.hidden, 'combat blocks reopening the guide window')
 F.SecureTarget:Update('Other Mob')
 assert(F.SecureTarget.current=='Frostmane Troll Whelp' and F.SecureTarget.pending)
 combat=false
+F.UI:Toggle()
+assert(F.UI.frame:IsShown() and not F.db.hidden, 'guide window can reopen after combat')
 F.SecureTarget:UpdateTasks(F.SecureTarget.desiredTargets)
 assert(F.SecureTarget.current=='Other Mob')
 F.SecureTarget:Update('Bad\n/attack')

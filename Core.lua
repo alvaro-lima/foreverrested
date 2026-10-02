@@ -1,6 +1,6 @@
 local addon, F = ...
 F.name = addon
-F.icon = "Interface\\AddOns\\" .. addon .. "\\Media\\GuideIcon-dark-bold-hq"
+F.icon = "Interface\\AddOns\\" .. addon .. "\\Media\\GuideIcon-title-64"
 F.minimapIcon = "Interface\\AddOns\\" .. addon .. "\\Media\\GuideIcon-face"
 ForeverRested = F
 function F.Call(fn, ...)

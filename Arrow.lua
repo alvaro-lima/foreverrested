@@ -13,6 +13,7 @@ function F.Arrow:Create()
         f:ClearAllPoints(); f:SetPoint("CENTER", UIParent, "CENTER", p.x, p.y)
     end
     f:SetMovable(true); f:SetClampedToScreen(true); f:EnableMouse(true)
+    F.Tooltips:Text(f, "Navigation arrow", "Points toward the current destination. The number below shows distance in yards. Drag with the left mouse button to move the arrow.")
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", function() f:StartMoving() end)
     f:SetScript("OnDragStop", function()

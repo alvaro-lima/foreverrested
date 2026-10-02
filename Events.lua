@@ -15,7 +15,8 @@ frame:SetScript("OnEvent", function(_, event, ...)
         if ... ~= addon then return end
         local events = {"PLAYER_LOGIN", "PLAYER_ENTERING_WORLD", "QUEST_LOG_UPDATE", "QUEST_ACCEPTED",
             "QUEST_TURNED_IN", "QUEST_REMOVED", "QUEST_POI_UPDATE", "ZONE_CHANGED_NEW_AREA", "PLAYER_REGEN_ENABLED", "PLAYER_LOGOUT", "PLAYER_TARGET_CHANGED",
-            "QUEST_DETAIL", "QUEST_COMPLETE", "QUEST_PROGRESS", "GOSSIP_SHOW", "QUEST_GREETING", "PLAYER_LEVEL_UP"}
+            "QUEST_DETAIL", "QUEST_COMPLETE", "QUEST_PROGRESS", "GOSSIP_SHOW", "QUEST_GREETING", "PLAYER_LEVEL_UP",
+            "GET_ITEM_INFO_RECEIVED", "PLAYER_EQUIPMENT_CHANGED", "SKILL_LINES_CHANGED"}
         for _, name in ipairs(events) do
             if not C_EventUtils or not C_EventUtils.IsEventValid or F.Call(C_EventUtils.IsEventValid, name) then
                 F.Call(frame.RegisterEvent, frame, name)

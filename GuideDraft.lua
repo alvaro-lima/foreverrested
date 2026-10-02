@@ -68,7 +68,7 @@ function D:Finish(guide, key, continuation)
         text = "Reach level " .. target .. " before leaving this section", note = "Finish nearby active quests or fight suitable mobs along your route. This checkpoint completes automatically at the indicated level."}
     local hub = guide.lastTrainer
     if hub then self:Trainer(guide, key .. "-class" .. target, "Level " .. target .. " class checkpoint", hub.zone, hub.x, hub.y, target) end
-    self:Note(guide, key .. "-finish", guide.minLevel .. "-" .. target .. " draft finished", continuation .. " Finish useful active quests before leaving; choose your next section from the minimap book.")
+    self:Note(guide, key .. "-finish", guide.minLevel .. "-" .. target .. " guide finished", continuation .. " Finish useful active quests before leaving; choose your next section from the minimap book.")
     F.GuideLibrary:Register(guide)
 end
 function D:Checkpoint(guide, key, target, note)

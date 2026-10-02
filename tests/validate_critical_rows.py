@@ -25,7 +25,7 @@ for _,row in ipairs(F.Tracker.rows) do
   local text=row.body.text
   assert(not text:find('Kept during catch-up',1,true))
   if s.recovery then
-   assert(text:find('UI-Dialog-Icon-Alert:',1,true))
+   assert(text:find('PriorityCritical.tga:',1,true))
    assert(not text:find('Review Forever class unlocks',1,true))
    assert(not text:find('Required during catch-up',1,true))
    assert(not s.tasks,'each recovered action must have its own numbered row')
@@ -49,7 +49,23 @@ F.db.completed[94373]=nil
 F.Guide.steps={{id='authored-earth',type='pickup',questID=94373}}
 F.db.step=1; E.selectedStep=nil; E.catchUpReasons={}; F.db.skipped={}
 F.Tracker:Refresh()
-assert(F.Tracker.rows[1].body.text:find('UI-Dialog-Icon-Alert:',1,true))
+assert(F.Tracker.rows[1].body.text:find('PriorityCritical.tga:',1,true))
 assert(F.QuestPolicy:Critical(F.Guide.steps[1]))
+for _,size in ipairs({10,20,30}) do
+ assert(F.UI:PriorityIcon('Money',size):find(':'..size..':'..size..':',1,true))
+ assert(F.UI:ActionIcon('pickup',size):find(':'..size..':'..size,1,true))
+ assert(F.UI:PriorityIcon('Gear',size):find('UI-StateIcon:'..size..':'..size..':0:0:64:64:32:64:0:31',1,true))
+end
+assert(F.UI:TaskPriority({optional=true,optionalBenefit='gear'})==nil)
+assert(F.UI:TaskPriority({optional=true,optionalBenefit='money'})=='Money')
+assert(F.UI:TaskPriority({optional=true})==nil)
+assert(F.UI:TaskPriority({optional=true,critical=true,optionalBenefit='gear'})=='Critical')
+assert(F.UI:TaskPriority({type='note'})==nil)
+assert(F.UI:StepPriority({tasks={{type='note'},{optional=true,optionalBenefit='money'}}})=='Money')
+assert(F.UI:TaskPriority({optionalBenefit='gear'})==nil)
+local title=F.UI:ActionTitle(F.Guide.steps[1],20)
+local body=F.Tracker.rows[1].body.text
+assert(body:find(title,1,true)<body:find('PriorityCritical.tga:',1,true),'marker must follow title')
+assert(F.UI:StepPriority({tasks={{optional=true,optionalBenefit='gear'}}})==nil)
 ''')
 print("PASS: individual critical rows, warning icon, compact text, persistent manual skip and reset")

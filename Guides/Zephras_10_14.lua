@@ -1,6 +1,6 @@
 local _, F = ...
 local D = F.GuideDraft
-local g=D:New("alliance-zephras-10-14","Zephras 10-14 / Exit Choice (Draft)","Zephras Isle",{"High Order Skyborne"},10,20)
+local g=D:New("alliance-zephras-10-14","Zephras 10-14 / Exit Choice","Zephras Isle",{"High Order Skyborne"},10,20)
 g.targetLevel=14
 g.description="Optional island continuation with exit reviews at 10 and 12; no measured fastest exit level yet."
 local function cycle(key,label,ids,side,note)
@@ -9,7 +9,7 @@ local function cycle(key,label,ids,side,note)
     D:Group(g,key.."-return",label..": return","turnin",ids,side,note)
 end
 D:ClassStop(g,"entry-class","Finish your level-10 class unlock and training. This optional continuation assumes the opening island story is done. Auto recognizes completed quests. Follow-up availability is beta-dependent; check preceding hand-ins before using Skip.")
-D:Note(g,"exit-at10","Exit review: level 10","Leave now if Alliance transport is available, your class milestone is done, and the remaining island tasks are long or contested. Select a mainland 10-20 guide from the minimap. Otherwise Next continues the island draft. Do not assume leaving early is possible until you check the dockmaster/story gate.")
+D:Note(g,"exit-at10","Exit review: level 10","Leave now if Alliance transport is available, your class milestone is done, and the remaining island tasks are long or contested. Select a mainland 10-20 guide from the minimap. Otherwise Next continues the island guide. Do not assume leaving early is possible until you check the dockmaster/story gate.")
 cycle("fillion-intro","Fillion's Mission",{99260})
 cycle("catching-wind","Catching Wind",{92840},{94896,94897,98512},"Batch accepted local hunts before returning. Do not start distant refugee or assassin detours simply because they are available.")
 cycle("vengeance","Avenged Tenfold",{92834},nil,"This is a follow-up to Catching Wind. Group or Skip if the named enemy is too difficult.")
@@ -40,7 +40,7 @@ D:Group(g,"hermit-loop","Optional hermit/refugee circuit","objective",{}, {93160
 g.steps[#g.steps].confirmOnNext=true
 D:Group(g,"hermit-return","Batch accepted optional hand-ins","turnin",{}, {93160,93172,94485,94486,94487,94896,94897},"Turn in ready quests before leaving; Next continues.")
 g.steps[#g.steps].confirmOnNext=true
-D:Note(g,"exit-at14","Exit review: level 14 is optional","Do not grind to 14 solely to finish this draft. Leave once nearby rewards stop paying for the time. Choose Westfall / Redridge, Loch Modan / Redridge or Darkshore 10-20; Auto resumes at uncompleted steps, and Skip bypasses unwanted lower-level chains. Already accepted quest chains can still be useful at 12-14.")
+D:Note(g,"exit-at14","Exit review: level 14 is optional","Do not grind to 14 solely to finish this guide. Leave once nearby rewards stop paying for the time. Choose Westfall / Redridge, Loch Modan / Redridge or Darkshore 10-20; Auto resumes at uncompleted steps, and Skip bypasses unwanted lower-level chains. Already accepted quest chains can still be useful at 12-14.")
 D:Group(g,"onward-pickup","Take the Alliance onward introduction if offered","pickup",{}, {94946},"The Magical City of Dalaran follows What Comes Next. Confirm the actual transport destination and requirements with the dockmaster. Next confirms your departure decision.")
 g.steps[#g.steps].confirmOnNext=true
 D:Note(g,"finish","Island continuation finished","Choose a mainland 10-20 guide using the minimap book. Check actual Alliance transport availability; the addon never boards or travels automatically.")
