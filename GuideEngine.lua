@@ -40,6 +40,26 @@ function E:Current()
 end
 function E:Done(step, id, q)
     if not self:Applies(step) then return true end
+    -- The completed unlock proves its earlier stages were finished, even if
+    -- the beta client no longer reports every replaced breadcrumb flag.
+    if step.unlockTerminal and F.QuestPolicy:Satisfied(step.unlockTerminal) then return true end
+    if step.travelQuestID then
+        if F.QuestLog:TurnedIn(step.travelQuestID) then return true end
+        local quest=F.QuestLog.byID[step.travelQuestID]
+        if step.travelAction=='objective' and quest and quest.complete then return true end
+        local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
+        local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
+        if info then
+            for index=step.travelLeg,#step.travelZones do
+                if info.name==step.travelZones[index] then
+                    if not step.travelFinal then return true end
+                    local x,y=F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition,map,'player'))
+                    if F.Number(x) and F.Number(y) and F.Number(step.travelX) and F.Number(step.travelY)
+                        and (x-step.travelX)^2+(y-step.travelY)^2<=.015^2 then return true end
+                end
+            end
+        end
+    end
     -- Confirming a trainer visit is not evidence of completing its unlocks.
     if F.QuestPolicy and step.confirmOnNext then
         for _, task in ipairs(step.alongside or {}) do
@@ -253,6 +273,19 @@ function E:CatchUpOnLoad()
     end
     self.catchUpReasons = F.QuestPolicy and F.QuestPolicy:ProtectedSteps(boundary) or {}
     if F.QuestPolicy then boundary, self.catchUpReasons = F.QuestPolicy:InsertRecovery(boundary, self.catchUpReasons) end
+    if F.Travel and F.Guide.faction then
+        -- Recovery quests can also introduce journeys. Preserve protection and
+        -- the section boundary by stable ID when inserting their travel rows.
+        local boundaryStep=F.Guide.steps[boundary]
+        local reasons={}
+        for index,step in ipairs(F.Guide.steps) do reasons[step.id]=self.catchUpReasons[index] end
+        F.Travel:EnsureSteps(F.Guide,true)
+        self.catchUpReasons={}
+        for index,step in ipairs(F.Guide.steps) do
+            self.catchUpReasons[index]=reasons[step.id] or step.travelQuestID and step.criticalReason or nil
+            if boundaryStep and step.id==boundaryStep.id then boundary=index end
+        end
+    end
     for index, step in ipairs(F.Guide.steps) do
         -- Check every quest, including optional and later actions, against the
         -- character's completion history before deciding what to skip.

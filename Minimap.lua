@@ -33,7 +33,8 @@ function M:Create()
     self.guideNotice = F.UI:Text(menu, "GameFontHighlightSmall", "TOPLEFT", 12, -139, 282)
     self:RefreshGuides()
     F.UI:Button(menu, "Show / Hide", 92, "BOTTOMLEFT", 12, 40, function() F.UI:Toggle(); menu:Hide() end)
-    F.UI:Button(menu, "Auto", 84, "BOTTOMLEFT", 110, 40, function() F.GuideEngine:ResumeAuto(); menu:Hide() end)
+    self.lockButton = F.UI:Button(menu, "Lock", 84, "BOTTOMLEFT", 110, 40, function() F.UI:TogglePositionLock() end)
+    self:RefreshLockButton()
     F.UI:Button(menu, "Close", 92, "BOTTOMLEFT", 200, 40, function() menu:Hide() end)
     F.UI:Button(menu, "Options", 92, "BOTTOMLEFT", 12, 12, function() F.UI:ToggleOptions(); menu:Hide() end)
     F.UI:Button(menu, "Refresh", 84, "BOTTOMLEFT", 110, 12, function() F.Refresh(); menu:Hide(); F.Print("Live quest data refreshed. /fg data exports this build's observations.") end)
@@ -84,6 +85,12 @@ function M:Create()
         end
     end)
 end
+function M:RefreshLockButton()
+    if not self.lockButton then return end
+    local label = F.db.positionsLocked and "Unlock" or "Lock"
+    self.lockButton:SetText(label)
+    F.Tooltips:Text(self.lockButton, label, F.UI.buttonHelp[label], true)
+end
 function M:RefreshGuides()
     local bracket = F.GuideLibrary.brackets[self.bracketIndex]
     self.bracketLabel:SetText("Levels " .. bracket.min .. "-" .. bracket.max)
@@ -98,7 +105,7 @@ function M:RefreshGuides()
     self.menu:SetHeight(266 + math.max(0, #ids - 2) * 27)
     self.guideNotice:ClearAllPoints()
     self.guideNotice:SetPoint("TOPLEFT", self.menu, "TOPLEFT", 12, -139 - math.max(0, #ids - 2) * 27)
-    self.guideNotice:SetText(#ids > 0 and "Alliance beta drafts. Class quests adapt to your character; Zephras has an optional 10-14 extension."
+    self.guideNotice:SetText(#ids > 0 and "Alliance 1-30 guides. Class quests adapt to your character; Zephras has an optional 10-14 extension."
         or "No route available yet for this level bracket.")
 end
 function M:ToggleMenu()

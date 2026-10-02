@@ -17,6 +17,8 @@ CLASSES = {1: "WARRIOR", 2: "PALADIN", 4: "HUNTER", 8: "ROGUE", 16: "PRIEST", 64
 ZONES = {1: "Dun Morogh", 12: "Elwynn Forest", 38: "Loch Modan", 40: "Westfall", 44: "Redridge Mountains", 85: "Tirisfal Glades", 141: "Teldrassil", 148: "Darkshore", 215: "Mulgore", 14: "Durotar", 17: "The Barrens", 331: "Ashenvale", 406: "Stonetalon Mountains", 493: "Moonglade", 1519: "Stormwind City", 1537: "Ironforge", 1657: "Darnassus"}
 
 
+ZONES.update({10: "Duskwood", 11: "Wetlands", 130: "Silverpine Forest", 267: "Hillsbrad Foothills"})
+
 def parse_literals(body, lua):
     tokens = re.sub(r'''"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*' ''', "", body, flags=re.X)
     tokens = re.sub(r"\b(return|nil|true|false)\b", "", tokens)
@@ -130,6 +132,9 @@ def build(quest_path, npc_path, fixes_path):
     reference = json.loads((ROOT / "Data/alliance-reference.json").read_text())
     manifest = json.loads((ROOT / "Data/classic-unlocks.json").read_text())
     seeds = set(map(int, reference["quests"]))
+    supplement = ROOT / "Data/alliance-20-30-reference.json"
+    if supplement.exists():
+        seeds.update(map(int, json.loads(supplement.read_text(encoding="utf-8"))["quests"]))
     for unlock in manifest["unlocks"]:
         seeds.update(unlock["terminals"])
     # Include the full Alliance class-quest inventory by 20 for audit coverage,

@@ -42,12 +42,77 @@ function P:Satisfied(id)
     end
     return false
 end
-function P:Critical(task)
+function P:Key(task)
     local id=F.GuideEngine:Resolve(task)
-    if id and F.db.manualSkippedSteps and F.db.manualSkippedSteps['catchup:'..id..':turnin'] then return false end
     local record=self:Record(id)
     return (task.critical or record.critical or self.requiredQuests and self.requiredQuests[id])
         and self:Eligible(id,task) or false
+end
+function P:Critical(task)
+    local id=F.GuideEngine:Resolve(task)
+    if id and F.db.manualSkippedSteps and F.db.manualSkippedSteps['catchup:'..id..':turnin'] then return false end
+    return self:Key(task)
+end
+function P:EnsureUnlockSteps(guide)
+    if guide.status == 'test' or not guide.faction then return end
+    local steps = guide.authoredSteps or guide.steps
+    local existing, seen, visiting, additionsSteps = {}, {}, {}, {}
+    for _, step in ipairs(steps) do
+        for _, task in ipairs(step.tasks or {step}) do
+            local id = F.GuideEngine:Resolve(task)
+            if id then existing[id..':'..task.type] = task end
+        end
+    end
+    local function choose(ids)
+        for _, id in ipairs(ids or {}) do
+            if self.forever[id] ~= false and self:Eligible(id) and self:Satisfied(id) then return id end
+        end
+        for _, id in ipairs(ids or {}) do
+            if self.forever[id] ~= false and self:Eligible(id) then return id end
+        end
+    end
+    local function add(id, reason, terminal)
+        if not id or seen[id] or visiting[id] then return end
+        if not self:Eligible(id) then return end
+        local record = self:Record(id)
+        local facts = F.GuideEngine:Metadata(id)
+        if not facts or not facts.title then return end
+        visiting[id] = true
+        for _, prior in ipairs(record.prerequisites or {}) do add(prior, reason, terminal) end
+        add(choose(record.prerequisitesAny), reason, terminal)
+        visiting[id], seen[id] = nil, true
+        for _, kind in ipairs({'pickup','objective','turnin'}) do
+            local task = existing[id..':'..kind]
+            if task then task.critical, task.criticalReason, task.unlockChain, task.unlockTerminal = true, reason, true, terminal
+            else
+                task = {id='class-unlock:'..id..':'..kind, type=kind, questID=id,
+                    critical=true, criticalReason=reason, unlockChain=true,
+                    text=facts.title, classes=record.classes, requiredRaces=record.requiredRaces,
+                    minLevel=record.minLevel, note=facts.routeNote, unlockTerminal=terminal}
+                additionsSteps[#additionsSteps+1] = task
+                existing[id..':'..kind] = task
+            end
+        end
+    end
+    local unlocks, keys = {}, {}
+    for _, unlock in ipairs(self.unlocks) do
+        keys[unlock.key] = true
+        local override = self.foreverUnlocks[unlock.key]
+        unlocks[#unlocks+1] = override == nil and unlock or override
+    end
+    local additions = {}
+    for key in pairs(self.foreverUnlocks) do if not keys[key] then additions[#additions+1] = key end end
+    table.sort(additions)
+    for _, key in ipairs(additions) do unlocks[#unlocks+1] = self.foreverUnlocks[key] end
+    for _, unlock in ipairs(unlocks) do
+        if type(unlock)=='table' and self:UnlockApplies(unlock) then
+            local terminal=choose(unlock.terminals)
+            add(terminal, unlock.reason, terminal)
+        end
+    end
+    -- Class detours appear after the entry action, before the regional circuit.
+    for index, step in ipairs(additionsSteps) do table.insert(steps, math.min(index+1,#steps+1), step) end
+    if guide.authoredSteps then guide.steps = steps end
 end
 function P:PrepareGuide()
     local guide,skipped=F.Guide,{}
@@ -178,6 +243,12 @@ end
 function P:InsertRecovery(boundary,protected)
     if F.Guide.status=='test' then return boundary,protected end
     local prefix,reasons,skipped={},{},{}
+    local authoredUnlocks = {}
+    for _, step in ipairs(F.Guide.steps) do
+        if step.unlockChain and step.questID then
+            authoredUnlocks[step.questID..":"..step.type] = true
+        end
+    end
     if #self.issues>0 then
         prefix[1]={id='catchup:review',type='note',critical=true,confirmOnNext=true,
             text='Review quest prerequisites',note=table.concat(self.issues,'; ')..'. Check these before continuing; Next acknowledges this review.'}
@@ -186,10 +257,12 @@ function P:InsertRecovery(boundary,protected)
     for _,id in ipairs(self.requiredOrder or {}) do
         local record=self:Record(id)
         for _,kind in ipairs(self.activeParents[id] and {'pickup'} or {'pickup','objective','turnin'}) do
+            if not authoredUnlocks[id..":"..kind] then
             prefix[#prefix+1]={id='catchup:'..id..':'..kind,type=kind,questID=id,
                 critical=true,criticalReason=self.requiredQuests[id],recovery=true,
                 text=(kind=='objective' and 'Complete ' or '')..((F.GuideEngine:Metadata(id) or record).title or ('Quest '..id))}
             reasons[#prefix]=self.requiredQuests[id]
+            end
         end
     end
     local count=#prefix

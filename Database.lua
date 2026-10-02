@@ -14,6 +14,8 @@ function F.LoadDatabase()
         d.fontDefault12 = true
     end
     d.arrowSize = F.Number(d.arrowSize) and math.max(24, math.min(96, math.floor(d.arrowSize))) or 48
+    d.mapStepLimit = F.Number(d.mapStepLimit) and math.max(1, math.min(100, math.floor(d.mapStepLimit))) or 10
+    d.positionsLocked = d.positionsLocked == true
     F.GuideLibrary:Initialize()
     F.QuestData:Initialize()
 end

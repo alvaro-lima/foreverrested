@@ -256,24 +256,14 @@ function P:UpdateAreaPins()
     end
     local px,py = F.XY(playerPos)
     local keepWorld,keepMini = {},{}
-    -- Keep the current destination and a short preview of nearby upcoming quests.
-    local allowed = {[F.db.step] = true}
-    local upcoming = 0
-    for index = F.db.step + 1, #F.Guide.steps do
-        if self:ShouldShow(index) then
-            for _,task in ipairs(F.GuideEngine:Tasks(F.Guide.steps[index],true)) do
-                local id = F.GuideEngine:Resolve(task)
-                local zone = self:TaskLocation(task)
-                if id and F.GuideEngine:TaskState(task)~="complete" and zone
-                    and (zone==viewedMap or zone==playerMap) then
-                    allowed[index] = true
-                    upcoming = upcoming + 1
-                    break
-                end
-            end
-        end
-        if upcoming >= 5 then break end
-    end
+    -- Bound the preview by guide order, even when nearby quests are far ahead.
+    local limit = F.db.mapStepLimit or 10
+    local destination = self:DestinationStep()
+    local last = math.min(#F.Guide.steps, F.db.step + limit - 1)
+    -- A selected destination retains its marker and uses one preview slot.
+    if destination < F.db.step or destination > last then last = last - 1 end
+    local allowed = {[destination] = true}
+    for index = F.db.step, last do allowed[index] = true end
     local seen,positions = {},{}
     local activeKey = self:TaskKey(F.Navigation.waypointTask)
     if activeKey then seen[activeKey] = true end

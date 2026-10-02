@@ -80,6 +80,8 @@ function L:SaveCurrent()
 end
 function L:ApplyState(guide, saved)
     saved = saved or {}
+    if F.QuestPolicy then F.QuestPolicy:EnsureUnlockSteps(guide) end
+    if F.Travel and guide.faction then F.Travel:EnsureSteps(guide) end
     local index, skipped, confirmed = nil, {}, {}
     for position, step in ipairs(guide.steps) do
         if step.id == saved.stepID or not index and step.legacyGroupID == saved.stepID then index = position end
@@ -94,6 +96,17 @@ function L:ApplyState(guide, saved)
         end
     end
     if not revised and not saved.skippedIDs then skipped = saved.skipped or {} end
+    if index and not saved.restartStepID then
+        local action=guide.steps[index]
+        local task=action and action.tasks and #action.tasks==1 and action.tasks[1] or action
+        local questID=task and F.GuideEngine:Resolve(task)
+        while index>1 do
+            local travel=guide.steps[index-1]
+            if not questID or travel.travelQuestID~=questID or travel.travelAction~=task.type then break end
+            if saved.confirmedSteps and saved.confirmedSteps[travel.id] or skipped[index-1] then break end
+            index=index-1
+        end
+    end
     F.db.step = math.max(1, math.min(#guide.steps, math.floor(index)))
     F.db.bindings, F.db.skipped = saved.bindings or {}, skipped
     F.db.confirmedSteps = confirmed
@@ -128,6 +141,10 @@ function L:Recommended()
         if candidate then return candidate end
     end
     local _, race = F.Call(UnitRace, "player")
+    if level >= 20 then
+        return ({Human="alliance-duskwood-20-30", Dwarf="alliance-wetlands-20-30", Gnome="alliance-wetlands-20-30",
+            NightElf="alliance-ashenvale-20-30", Skyborne="alliance-duskwood-20-30"})[race]
+    end
     if level >= 10 then
         return ({Human="alliance-westfall-10-20", Dwarf="alliance-loch-modan-10-20", Gnome="alliance-loch-modan-10-20",
             NightElf="alliance-darkshore-10-20", Skyborne="alliance-zephras-10-14"})[race]

@@ -12,10 +12,10 @@ function F.Arrow:Create()
     if type(p) == "table" and F.Number(p.x) and F.Number(p.y) then
         f:ClearAllPoints(); f:SetPoint("CENTER", UIParent, "CENTER", p.x, p.y)
     end
-    f:SetMovable(true); f:SetClampedToScreen(true); f:EnableMouse(true)
+    f:SetMovable(not F.db.positionsLocked); f:SetClampedToScreen(true); f:EnableMouse(true)
     F.Tooltips:Text(f, "Navigation arrow", "Points toward the current destination. The number below shows distance in yards. Drag with the left mouse button to move the arrow.")
     f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function() f:StartMoving() end)
+    f:SetScript("OnDragStart", function() if not F.db.positionsLocked then f:StartMoving() end end)
     f:SetScript("OnDragStop", function()
         f:StopMovingOrSizing()
         local x, y = f:GetCenter(); local ux, uy = UIParent:GetCenter()

@@ -15,12 +15,12 @@ F.GuideLibrary:Select('alliance-dun-morogh-01-10')
 T:SetSearch(''); T.offset=0; T.topOffset=nil; T:Refresh()
 assert(#T.entries>60 and T.maxOffset>10)
 local entries,counts=T.entries,T.progressCounts
-local state,markers,useful=E.StepState,F.UI.StepMarkers,F.GearRewards.QuestUseful
+local state,markers,useful=E.StepState,F.UI.StepMarkers,F.GearRewards.QuestGear
 local probe=T.rows[1].body
 local measure=probe.GetStringHeight
 local function unexpected() error('scrolling must not rebuild or measure the guide') end
 E.StepState=unexpected; F.UI.StepMarkers=unexpected
-F.GearRewards.QuestUseful=unexpected; probe.GetStringHeight=unexpected
+F.GearRewards.QuestGear=unexpected; probe.GetStringHeight=unexpected
 for offset=1,10 do
  T:ScrollTo(offset)
  assert(T.offset==offset and T.rows[1].stepIndex==entries[offset+1].stepIndex)
@@ -30,7 +30,7 @@ assert(T.rows[T.visibleRows].stepIndex==entries[#entries].stepIndex,'last page i
 for offset=10,0,-1 do T:ScrollTo(offset) end
 assert(T.entries==entries and T.progressCounts==counts)
 E.StepState=state; F.UI.StepMarkers=markers
-F.GearRewards.QuestUseful=useful; probe.GetStringHeight=measure
+F.GearRewards.QuestGear=useful; probe.GetStringHeight=measure
 T:Refresh()
 assert(T.entries~=entries,'live refresh rebuilds cached content')
 T:SetSearch('trainer')

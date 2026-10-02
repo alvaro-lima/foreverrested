@@ -8,7 +8,7 @@ local function initialize()
     if F.Combat() then F.pendingInit = true; return end
     if F.UI.frame then return end
     F.UI:Create(); F.SecureTarget:Create(); F.Minimap:Create(); F.Refresh()
-    F.Print("Alliance leveling drafts ready. Minimap or /fg guides chooses a route. /fg debug shows diagnostics.")
+    F.Print("Alliance 1-30 guides ready. Minimap or /fg guides chooses a route. /fg debug shows diagnostics.")
 end
 frame:SetScript("OnEvent", function(_, event, ...)
     if event == "ADDON_LOADED" then
@@ -30,6 +30,7 @@ frame:SetScript("OnEvent", function(_, event, ...)
         if F.db and F.UI.frame then F.SecureTarget:UpdateTasks(F.SecureTarget.desiredTargets); dirty = true end
     end
     if not F.db then return end
+    if event == "PLAYER_LEVEL_UP" then F.GuideEngine.unlockRefreshPending = true end
     if event == "QUEST_DETAIL" or event == "QUEST_COMPLETE" or event == "QUEST_PROGRESS" then
         F.QuestData:ObserveDialogue(); F.AutoQuest:Handle(event); return
     end

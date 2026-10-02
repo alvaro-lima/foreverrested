@@ -35,7 +35,19 @@ end
 function F.Refresh()
     if not F.db then return end
     F.QuestLog:Refresh()
+    local selectedUnlockView
+    if F.GuideEngine.unlockRefreshPending and F.Guide and F.db.guideID then
+        F.GuideEngine.unlockRefreshPending = nil
+        selectedUnlockView = F.GuideEngine.selectedStep and F.Guide.steps[F.GuideEngine.selectedStep]
+        F.GuideLibrary:SaveCurrent()
+        F.GuideLibrary:ApplyState(F.Guide, F.db.guides[F.db.guideID])
+    end
     F.GuideEngine:CatchUpOnLoad()
+    if selectedUnlockView then
+        for index, step in ipairs(F.Guide.steps) do
+            if step.id == selectedUnlockView.id then F.GuideEngine.selectedStep = index; break end
+        end
+    end
     F.GuideEngine:AdvanceSafe()
     if F.UI.frame then F.UI:Refresh() end
 end

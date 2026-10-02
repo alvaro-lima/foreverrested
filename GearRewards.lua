@@ -54,7 +54,7 @@ function G:Score(item,class)
  end
  return score
 end
-function G:Useful(reward)
+function G:Useful(reward, rewardMarker)
  local _,class=F.Call(UnitClass,'player')
  local level=F.Call(UnitLevel,'player') or 1
  if not weights[class] then return false end
@@ -73,7 +73,10 @@ function G:Useful(reward)
  -- Let the live client enforce learned proficiencies and Forever changes.
  if F.Call(api('IsUsableItem'),reward.itemID)~=true then return false end
  local candidate=self:Score(item,class)
- if not candidate or candidate<=0 or not slots[item.equip] or not GetInventoryItemLink then return false end
+ if not candidate or candidate<=0 or not slots[item.equip] then return false end
+ -- Reward markers describe the quest, even after its reward is equipped.
+ if rewardMarker then return true end
+ if not GetInventoryItemLink then return false end
  for _,slot in ipairs(slots[item.equip]) do
   local link=F.Call(GetInventoryItemLink,'player',slot)
   local current=0
@@ -95,5 +98,22 @@ end
 function G:QuestUseful(id)
  local data=F.GuideEngine:Metadata(id) or {}
  for _,reward in ipairs(data.rewards or {}) do if self:Useful(reward) then return true end end
+ return false
+end
+function G:QuestGear(id)
+ local data=F.GuideEngine:Metadata(id) or {}
+ -- Describe the reward even before its level requirement is met.
+ local rewardSlots = {[1]=true,[2]=true,[3]=true,[5]=true,[6]=true,[7]=true,
+  [8]=true,[9]=true,[10]=true,[11]=true,[12]=true,[13]=true,[14]=true,
+  [15]=true,[16]=true,[17]=true,[19]=true,[20]=true,[21]=true,[22]=true,
+  [23]=true,[25]=true,[26]=true,[28]=true}
+ for _,reward in ipairs(data.rewards or {}) do
+  local item = self:Info(reward.itemID,reward)
+  local quality = item and item.quality or reward.quality
+  if quality and quality >= 2 then
+   if item and slots[item.equip] then return true end
+   if rewardSlots[reward.stats and reward.stats.slotbak] then return true end
+  end
+ end
  return false
 end

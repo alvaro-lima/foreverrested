@@ -22,10 +22,10 @@ C_QuestLog={
  IsQuestFlaggedCompleted=function(id) return history[id] or false end,
 }
 ''')
-files = ['Core.lua','GuideLibrary.lua','Guides/AllianceQuestData.lua','Data/ClassicQuestPolicy.lua',
+files = ['Core.lua','GuideLibrary.lua','Guides/AllianceQuestData.lua','Guides/Alliance_20_30_QuestData.lua','Data/ClassicQuestPolicy.lua',
          'Data/ForeverUnlockFacts.lua','Data/ForeverQuestPolicy.lua',
-         'GuideDraft.lua','Guides/GnomeDwarf_01_10.lua','Guides/Alliance_01_10.lua',
-         'Guides/Alliance_10_20.lua','Guides/Zephras_10_14.lua','QuestLog.lua',
+         'GuideDraft.lua','Travel.lua','tests/fixtures/GnomeDwarf_01_10.lua','Guides/Alliance_01_10.lua',
+         'Guides/Alliance_10_20.lua','Guides/Alliance_20_30.lua','Guides/Zephras_10_14.lua','QuestLog.lua',
          'GuideEngine.lua','QuestPolicy.lua','AutoQuest.lua','Database.lua']
 for name in files:
     lua.execute("assert(loadstring(...))('ForeverRested', F)", (root/name).read_text(encoding='utf-8'))
@@ -170,7 +170,8 @@ for i,s in ipairs(F.Guide.steps) do
  if s.recovery and s.id~=skippedID then assert(not F.db.skipped[i],'critical actions cannot be auto-skipped') end
 end
 E:ResetFrom(position(skippedID))
-assert(not F.db.manualSkippedSteps[skippedID] and not F.db.skipped[position(skippedID)])
+assert(F.db.manualSkippedSteps[skippedID] and not F.db.skipped[position(skippedID)],
+ 'From clears the visible skip while retaining its saved history')
 -- The screenshot's shaman case has concrete Earth/Fire actions, no generic
 -- protected class paragraph; completed Earth unlocks leave just the Fire chain.
 P.forever=F.ForeverQuestPolicy.records; P.foreverUnlocks=F.ForeverQuestPolicy.unlocks

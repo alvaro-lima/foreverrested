@@ -18,6 +18,8 @@ U.buttonHelp = {
     Skip = "Skip this step. Auto remembers explicitly skipped steps.",
     From = "Start again from the selected step. Later skips become To do, but are remembered: choosing a starting point beyond them restores Skipped. Clears later manual confirmations. Live quest completion is kept. Next, Skip or Auto resumes automation.",
     Auto = "Return to the first unfinished, unskipped step using your live quest progress.",
+    Lock = "Lock the guide window and navigation arrow in place. Prevents dragging and window resizing.",
+    Unlock = "Unlock the guide window and navigation arrow so you can drag them and resize the window.",
     ["Show / Hide"] = "Show or hide the quest window. The arrow and targets remain independent.",
     Options = "Open addon settings, including font size.",
     ["-"] = "Decrease addon text size by one. This setting is saved for this character.",
@@ -93,7 +95,7 @@ function U:Create()
     local width = type(size) == "table" and F.Number(size.width) and math.max(400, math.min(900, size.width)) or 400
     local height = type(size) == "table" and F.Number(size.height) and math.max(520, math.min(1000, size.height)) or 742
     local f = self:Panel(UIParent, width, height, "outer")
-    self.frame = f; f:SetClampedToScreen(true); f:SetMovable(true); f:EnableMouse(true)
+    self.frame = f; f:SetClampedToScreen(true); f:SetMovable(not F.db.positionsLocked); f:EnableMouse(true)
     f:SetResizable(true)
     if f.SetResizeBounds then f:SetResizeBounds(400, 520, 900, 1000)
     elseif f.SetMinResize then f:SetMinResize(400, 520); if f.SetMaxResize then f:SetMaxResize(900, 1000) end end
@@ -110,7 +112,7 @@ function U:Create()
     self.addonTitle = self:Text(header, "GameFontNormal", "TOPLEFT", 48, -12, 140)
     self.addonTitle:SetText("Forever Rested")
     header:EnableMouse(true); header:RegisterForDrag("LeftButton")
-    header:SetScript("OnDragStart", function() if not F.Combat() then f:StartMoving() end end)
+    header:SetScript("OnDragStart", function() if not F.db.positionsLocked and not F.Combat() then f:StartMoving() end end)
     header:SetScript("OnDragStop", function()
         f:StopMovingOrSizing()
         local x, y = f:GetCenter(); local ux, uy = UIParent:GetCenter()
@@ -142,13 +144,21 @@ function U:Create()
     end
     search:SetScript("OnEditFocusGained", function(box) self.searchFocused = true; updateHint(box) end)
     search:SetScript("OnEditFocusLost", function(box) self.searchFocused = false; updateHint(box) end)
+    -- Clicking the world or another control does not automatically blur an EditBox.
+    search:RegisterEvent("GLOBAL_MOUSE_DOWN")
+    search:SetScript("OnEvent", function(box, event)
+        if event == "GLOBAL_MOUSE_DOWN" and box:HasFocus() and not box:IsMouseOver() then
+            box:ClearFocus()
+        end
+    end)
+    search:SetScript("OnHide", function(box) box:ClearFocus() end)
     search:SetScript("OnTextChanged", function(box)
         updateHint(box)
         F.Tracker:SetSearch(box:GetText())
     end)
     search:SetScript("OnEnterPressed", function(box) box:ClearFocus() end)
     search:SetScript("OnEscapePressed", function(box) box:SetText(""); box:ClearFocus() end)
-    F.Tooltips:Text(search, "Search guide", "Search by step number, quest, NPC or note. Filter by key/critical, gear, money, optional, skipped, in progress, to do, completed, ready, current or next. Combine words, such as gear to do. Escape clears the search. Click a result to inspect it.")
+    F.Tooltips:Text(search, "Search guide", "Search by step number, quest ID, quest name, NPC or note. Filter by key/critical, gear, money, optional, skipped, in progress, to do, completed, ready, current or next. Combine words, such as gear to do. Escape clears the search. Click a result to inspect it.")
     self.searchClear = self:Button(f, "Clear", 52, "TOPRIGHT", -16, -40, function()
         search:SetText(""); search:ClearFocus()
     end)
@@ -182,7 +192,7 @@ function U:Create()
         end
     end
     grip:SetScript("OnMouseDown", function(_, button)
-        if button == "LeftButton" then self.resizing = true; f:StartSizing("BOTTOMRIGHT") end
+        if button == "LeftButton" and not F.db.positionsLocked then self.resizing = true; f:StartSizing("BOTTOMRIGHT") end
     end)
     grip:SetScript("OnMouseUp", function()
         f:StopMovingOrSizing()
@@ -230,21 +240,36 @@ function U:Layout(width, height)
     local titleHeight = math.max(44, fontSize + 24)
     local nameWidth = F.Call(self.addonTitle.GetStringWidth, self.addonTitle) or fontSize * 8
     self.addonTitle:SetWidth(nameWidth + 2)
+    -- Measure against a fresh width, not a previous guide's clipped title box.
+    self.headerTitle:SetWidth(headerWidth)
     self.headerTitle:SetText(F.Guide.title)
-    -- Use the full space after the addon name, reserving only the close button.
+    -- Center on the header when possible; shift only enough to avoid overlap.
     local guideLeft = nameWidth + 60
     local rightSpace = 36
-    local guideWidth = F.Call(self.headerTitle.GetStringWidth, self.headerTitle) or 0
-    local secondLine = guideWidth > headerWidth - guideLeft - rightSpace
-    local titleLeft = math.max(guideLeft,(headerWidth-guideWidth)/2)
-    self.header:SetSize(headerWidth, secondLine and titleHeight * 2 or titleHeight)
+    local guideWidth = F.Call(self.headerTitle.GetUnboundedStringWidth, self.headerTitle)
+        or F.Call(self.headerTitle.GetStringWidth, self.headerTitle) or 0
+    local titleWidth = guideWidth + 8
+    local minimumWidth = math.max(400, math.ceil(guideLeft + titleWidth + rightSpace))
+    local maximumWidth = math.max(900, minimumWidth)
+    if self.frame.SetResizeBounds then self.frame:SetResizeBounds(minimumWidth, 520, maximumWidth, 1000)
+    elseif self.frame.SetMinResize then
+        self.frame:SetMinResize(minimumWidth, 520)
+        if self.frame.SetMaxResize then self.frame:SetMaxResize(maximumWidth, 1000) end
+    end
+    if width < minimumWidth then
+        width, headerWidth = minimumWidth, minimumWidth
+        self.frame:SetWidth(minimumWidth)
+    end
+    self.header:SetSize(headerWidth, titleHeight)
     self.addonTitle:ClearAllPoints()
     self.addonTitle:SetPoint("TOPLEFT",48,0)
     self.addonTitle:SetHeight(titleHeight)
     self.addonTitle:SetJustifyV("MIDDLE")
+    local titleCenter = math.max(guideLeft + titleWidth / 2,
+        math.min(headerWidth / 2, headerWidth - rightSpace - titleWidth / 2))
     self.headerTitle:ClearAllPoints()
-    self.headerTitle:SetPoint("TOPLEFT", secondLine and 12 or titleLeft, secondLine and -titleHeight or 0)
-    self.headerTitle:SetSize(secondLine and headerWidth - 24 or math.min(guideWidth+2,headerWidth-titleLeft-rightSpace), titleHeight)
+    self.headerTitle:SetPoint("TOP", self.header, "TOP", titleCenter - headerWidth / 2, 0)
+    self.headerTitle:SetSize(titleWidth, titleHeight)
     self.headerTitle:SetJustifyV("MIDDLE")
     local searchTop = fontSize + 14
     self.searchBox:ClearAllPoints(); self.searchBox:SetPoint("TOPLEFT", F.Tracker.frame, "TOPLEFT", 16, -searchTop)
@@ -305,21 +330,38 @@ function U:SetFontSize(size)
     self:Refresh()
     if self.optionsLabel then self.optionsLabel:SetText("Font size: " .. F.db.fontSize) end
 end
+function U:TogglePositionLock()
+    F.db.positionsLocked = not F.db.positionsLocked
+    if F.db.positionsLocked then
+        self.frame:StopMovingOrSizing()
+        self.resizing, self.pendingSize, self.resizeElapsed = nil, nil, 0
+        self:SaveWindowGeometry()
+        F.Arrow.frame:StopMovingOrSizing()
+    end
+    self.frame:SetMovable(not F.db.positionsLocked)
+    F.Arrow.frame:SetMovable(not F.db.positionsLocked)
+    F.Minimap:RefreshLockButton()
+end
+function U:SetMapStepLimit(limit)
+    F.db.mapStepLimit = math.max(1, math.min(100, math.floor(limit)))
+    if self.mapStepLimitLabel then self.mapStepLimitLabel:SetText("Map step limit: " .. F.db.mapStepLimit) end
+    if F.StepPins then F.StepPins:Update() end
+end
 function U:ToggleOptions()
     if not self.options then
-        local panel = self:Panel(UIParent, 300, 236)
+        local panel = self:Panel(UIParent, 300, 316)
         self.options = panel; panel:SetFrameStrata("DIALOG"); panel:SetClampedToScreen(true)
         panel:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
         local optionsIcon = panel:CreateTexture(nil, "ARTWORK")
         optionsIcon:SetSize(22,22); optionsIcon:SetPoint("TOPLEFT",10,-7); optionsIcon:SetTexture(F.minimapIcon)
         self:Text(panel, "GameFontNormal", "TOPLEFT", 38, -12, 244):SetText("Forever Rested Options")
         self.optionsLabel = self:Text(panel, "GameFontHighlight", "TOPLEFT", 12, -46, 270)
-        self:Button(panel, "-", 46, "BOTTOMLEFT", 12, 137, function() self:SetFontSize(F.db.fontSize - 1) end)
-        self:Button(panel, "+", 46, "BOTTOMLEFT", 64, 137, function() self:SetFontSize(F.db.fontSize + 1) end)
-        self:Button(panel, "Default", 94, "BOTTOMLEFT", 116, 137, function() self:SetFontSize(12) end)
+        self:Button(panel, "-", 46, "BOTTOMLEFT", 12, 217, function() self:SetFontSize(F.db.fontSize - 1) end)
+        self:Button(panel, "+", 46, "BOTTOMLEFT", 64, 217, function() self:SetFontSize(F.db.fontSize + 1) end)
+        self:Button(panel, "Default", 94, "BOTTOMLEFT", 116, 217, function() self:SetFontSize(12) end)
         self.arrowSizeLabel = self:Text(panel, "GameFontHighlight", "TOPLEFT", 12, -126, 270)
         local function arrowButton(title, width, x, size, help)
-            local button = self:Button(panel, title, width, "BOTTOMLEFT", x, 57, function()
+            local button = self:Button(panel, title, width, "BOTTOMLEFT", x, 137, function()
                 F.Arrow:SetSize(type(size) == "function" and size() or size)
                 self.arrowSizeLabel:SetText("Arrow size: " .. F.db.arrowSize .. " px")
             end)
@@ -328,11 +370,22 @@ function U:ToggleOptions()
         arrowButton("-", 46, 12, function() return F.db.arrowSize - 4 end, "Make the navigation arrow smaller. Minimum size: 24 px.")
         arrowButton("+", 46, 64, function() return F.db.arrowSize + 4 end, "Make the navigation arrow larger. Maximum size: 96 px.")
         arrowButton("Default", 94, 116, 48, "Restore the default arrow size of 48 px.")
+        self.mapStepLimitLabel = self:Text(panel, "GameFontHighlight", "TOPLEFT", 12, -206, 270)
+        local function mapLimitButton(title, width, x, value)
+            local button = self:Button(panel, title, width, "BOTTOMLEFT", x, 57, function()
+                self:SetMapStepLimit(type(value) == "function" and value() or value)
+            end)
+            F.Tooltips:Text(button, "Map step limit", "Limit numbered steps on the map and minimap, including the current destination. Range: 1-100. Default: 10.")
+        end
+        mapLimitButton("-", 46, 12, function() return F.db.mapStepLimit - 1 end)
+        mapLimitButton("+", 46, 64, function() return F.db.mapStepLimit + 1 end)
+        mapLimitButton("Default", 94, 116, 10)
         self:Button(panel, "Close", 92, "BOTTOMRIGHT", -12, 12, function() panel:Hide() end)
         panel:Hide()
     end
     self.optionsLabel:SetText("Font size: " .. F.db.fontSize)
     self.arrowSizeLabel:SetText("Arrow size: " .. F.db.arrowSize .. " px")
+    self.mapStepLimitLabel:SetText("Map step limit: " .. F.db.mapStepLimit)
     self.options:SetShown(not self.options:IsShown())
 end
 function U:Toggle()
@@ -412,24 +465,29 @@ function U:CriticalIcon(size)
 end
 function U:PriorityIcon(kind,size)
     size = size or math.floor(self:RowIconSize() * .7 + .5)
-    if kind=='Gear' then
-        -- PlayerAttackIcon uses the top-right cell of the state-icon sheet.
-        return "|Hforeverrestedicon:"..kind.."|h|TInterface\\CharacterFrame\\UI-StateIcon:"..size..":"..size..":0:0:64:64:32:64:0:31|t|h "
+    local offsetY = (kind == 'Gear' or kind == 'Money') and 1 or 0
+    return "|Hforeverrestedicon:"..kind.."|h|TInterface\\AddOns\\ForeverRested\\Media\\Priority"..kind..".tga:"..size..":"..size..":0:"..offsetY.."|t|h "
+end
+function U:TaskMarkers(task)
+    local result = {}
+    if task.critical or F.QuestPolicy and F.QuestPolicy:Key(task) then result[#result+1] = 'Critical' end
+    local id=F.GuideEngine:Resolve(task)
+    local gear = F.GearRewards:QuestGear(id)
+    for _,questID in ipairs(task.gearQuestIDs or {}) do
+        if F.GearRewards:QuestGear(questID) then gear = true end
     end
-    return "|Hforeverrestedicon:"..kind.."|h|TInterface\\AddOns\\ForeverRested\\Media\\Priority"..kind..".tga:"..size..":"..size..":0:0|t|h "
+    if gear then result[#result+1] = 'Gear' end
+    local data=F.GuideEngine:Metadata(id) or {}
+    if task.optionalBenefit == 'money' or (data.rewardMoney or 0)>0 then result[#result+1] = 'Money' end
+    return result
 end
 function U:TaskPriority(task)
-    if task.critical or F.QuestPolicy and F.QuestPolicy:Critical(task) then return 'Critical' end
-    local benefit=task.optionalBenefit
-    if benefit=='money' then return 'Money' end
-    local id=F.GuideEngine:Resolve(task)
-    if F.GearRewards:QuestUseful(id) then return 'Gear' end
-    for _,questID in ipairs(task.gearQuestIDs or {}) do
-        if F.GearRewards:QuestUseful(questID) then return 'Gear' end
-    end
-    local data=F.GuideEngine:Metadata(id) or {}
-    if (data.rewardMoney or 0)>0 then return 'Money' end
-    return nil
+    return self:TaskMarkers(task)[1]
+end
+function U:TaskMarkerIcons(task, size)
+    local icons = {}
+    for _,kind in ipairs(self:TaskMarkers(task)) do icons[#icons+1] = self:PriorityIcon(kind,size) end
+    return #icons > 0 and (' '..table.concat(icons)) or ''
 end
 function U:StepPriority(step,index)
     if step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index] then return 'Critical' end
@@ -443,18 +501,24 @@ function U:StepPriority(step,index)
 end
 function U:StepMarkers(step,index)
     local result,seen={},{}
-    local primary=self:StepPriority(step,index)
-    if primary then result[#result+1]={kind=primary}; seen[primary]=true end
+    local function add(kind, alongside)
+        if not seen[kind] then seen[kind] = {kind=kind,alongside=alongside} end
+    end
+    if step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index] then add('Critical') end
+    for _,kind in ipairs(self:TaskMarkers(step)) do add(kind) end
+    for _,task in ipairs(F.GuideEngine:Tasks(step)) do
+        for _,kind in ipairs(self:TaskMarkers(task)) do add(kind) end
+    end
     -- Side actions remain visible while browsing collapsed rows. activeOnly
     -- controls quest tracking, not whether a suggested detour has a marker.
     for _,task in ipairs(step.alongside or {}) do
         local id=F.GuideEngine:Resolve(task)
         if F.QuestPolicy:Eligible(id,task) then
-            local kind=self:TaskPriority(task)
-            if kind and not seen[kind] then
-                result[#result+1]={kind=kind,alongside=true}; seen[kind]=true
-            end
+            for _,kind in ipairs(self:TaskMarkers(task)) do add(kind,true) end
         end
+    end
+    for _,kind in ipairs({'Critical','Gear','Money'}) do
+        if seen[kind] then result[#result+1] = seen[kind] end
     end
     return result
 end
@@ -496,6 +560,7 @@ function U:Refresh()
         F.GuideEngine.selectedStep = nil
         self.searchBox:SetText("")
         F.Tracker:SetSearch("")
+        self:Layout(self.frame:GetWidth(), self.frame:GetHeight())
     end
     if not F.Tracker.searchQuery and (self.lastGuide ~= F.Guide or (self.lastStep ~= F.db.step and not F.GuideEngine.selectedStep)) then
         F.Tracker.topOffset = nil

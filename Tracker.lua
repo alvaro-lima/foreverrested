@@ -13,8 +13,18 @@ function T:SetSearch(text)
 end
 function T:MatchesSearch(step, index, state, statusLabel)
     if not self.searchQuery then return true end
-    -- Numeric queries refer to the original step number, even in a filtered list.
-    if self.searchQuery:match("^%d+$") then return index == tonumber(self.searchQuery) end
+    -- Match exact quest IDs as well as the original step number.
+    if self.searchQuery:match("^%d+$") then
+        local number = tonumber(self.searchQuery)
+        if index == number or F.GuideEngine:Resolve(step) == number then return true end
+        for _, task in ipairs(step.tasks or {}) do
+            if F.GuideEngine:Resolve(task) == number then return true end
+        end
+        for _, task in ipairs(step.alongside or {}) do
+            if F.GuideEngine:Resolve(task) == number then return true end
+        end
+        return false
+    end
     local parts = {tostring(index)}
     local function add(value)
         if type(value) == "string" then parts[#parts + 1] = value end
@@ -46,6 +56,7 @@ function T:MatchesSearch(step, index, state, statusLabel)
         add(task.text); add(task.note); add(task.npc); add(task.mob)
         add(F.UI:ActionTitle(task)); add(F.UI:ActionBody(task))
         local id, quest = F.GuideEngine:Resolve(task)
+        if id then add(tostring(id)) end
         local data = F.GuideEngine:Metadata(id)
         add(quest and quest.title); add(data and data.title)
         for _, point in ipairs(data and data.locations or {}) do add(point.name) end
@@ -130,9 +141,15 @@ function T:Create(parent)
         local counts = self.progressCounts or {done=0, skipped=0, remaining=0}
         GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
         GameTooltip:SetText("Guide progress", 1, .82, 0)
-        GameTooltip:AddLine(counts.done .. " done", 1, 1, 1)
         GameTooltip:AddLine(counts.skipped .. " skipped", 1, 1, 1)
         GameTooltip:AddLine(counts.remaining .. " remaining", 1, 1, 1)
+        GameTooltip:AddLine(counts.done .. " done", 1, 1, 1)
+        local critical = self.criticalCounts or {done=0, skipped=0, remaining=0, total=0}
+        GameTooltip:AddLine(" ")
+        GameTooltip:AddLine("Critical quests: " .. critical.total, 1, .82, 0)
+        GameTooltip:AddLine(critical.skipped .. " skipped", 1, 1, 1)
+        GameTooltip:AddLine(critical.remaining .. " remaining", 1, 1, 1)
+        GameTooltip:AddLine(critical.done .. " done", 1, 1, 1)
         GameTooltip:Show()
     end, true)
     -- Reuse a small row pool; the current step expands to show live objectives.
@@ -156,7 +173,7 @@ function T:Create(parent)
             local kind = link and link:match("^foreverrestedicon:(%a+)$")
             local meanings = {
                 Critical={"Key / Critical", "Required for guide progression or a quest chain. Catch-up keeps this step; Skip can bypass it manually."},
-                Gear={"Equipment reward", "This quest can reward equipment that improves your character's current gear."},
+                Gear={"Equipment reward", "This quest offers uncommon or better equipment. Check its level, class requirements and stats before choosing a reward."},
                 Money={"Money reward", "This quest offers a money reward."},
                 pickup={"Accept quest", "Accept this quest from its quest giver."},
                 turnin={"Turn in quest", "Return to the quest giver to turn in this quest after completing its objectives."},
@@ -222,18 +239,11 @@ function T:Create(parent)
                     talk="Speech icon: talk to this NPC.", trainer="Speech icon: visit this trainer."}
                 if actionHelp[action.type] then GameTooltip:AddLine(actionHelp[action.type],1,1,1,true) end
                 local reason=step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[r.stepIndex]
-                local priority=F.UI:StepPriority(step,r.stepIndex)
-                if priority=='Critical' then
-                    GameTooltip:AddLine("Key / Critical quest icon: "..(reason or "Required for guide progression or a quest chain"),236/255,187/255,49/255,true)
-                    GameTooltip:AddLine("Catch-up keeps this step. Use Skip to bypass it manually.",1,1,1,true)
-                elseif priority then
-                    local label=({Gear='Gear icon: this quest can reward useful equipment for your character.',Money='Money icon: this quest offers a money reward.'})[priority]
-                    GameTooltip:AddLine(label,.4,.75,1,true)
-                end
                 for _,marker in ipairs(F.UI:StepMarkers(step,r.stepIndex)) do
-                    if marker.alongside then
-                        local label=({Critical='Key / Critical quest icon: required for guide progression or a quest chain.',Gear='Gear icon: useful equipment reward.',Money='Money icon: money reward.'})[marker.kind]
-                        GameTooltip:AddLine("Alongside: "..label,.65,.75,1,true)
+                    local label=({Critical='Key / Critical quest: '..(reason or 'required for guide progression or a quest chain.'),Gear='Uncommon or better equipment reward.',Money='Money reward.'})[marker.kind]
+                    GameTooltip:AddLine((marker.alongside and "Alongside: " or "")..label,236/255,187/255,49/255,true)
+                    if marker.kind == 'Critical' then
+                        GameTooltip:AddLine("Catch-up keeps this step. Use Skip to bypass it manually.",1,1,1,true)
                     end
                 end
                 if step.note then GameTooltip:AddLine(step.note,1,1,.5,true) end
@@ -274,6 +284,7 @@ function T:Create(parent)
 end
 function T:Refresh()
     local entries = {}
+    local criticalQuests = {}
     local completed, skipped = 0, 0
     local iconSize = math.floor(F.UI:RowIconSize() * .7 + .5)
     local nextIndex=F.GuideEngine:NextRelevantIndex()
@@ -283,6 +294,19 @@ function T:Refresh()
         local done = state == "complete"
         if done then completed = completed + 1 end
         if state == "skipped" then skipped = skipped + 1 end
+        -- Count unique quests, rather than their accept/objective/turn-in rows.
+        for _, task in ipairs(step.tasks or {step}) do
+            local id = F.GuideEngine:Resolve(task)
+            local record = id and F.QuestPolicy:Record(id) or {}
+            if id and (task.critical or step.criticalReason or record.critical
+                or F.QuestPolicy.requiredQuests and F.QuestPolicy.requiredQuests[id])
+                and F.QuestPolicy:Eligible(id, task) then
+                local quest = criticalQuests[id] or {allSkipped=true}
+                if state ~= "skipped" then quest.allSkipped = false end
+                if task.type == "turnin" and state == "skipped" then quest.turninSkipped = true end
+                criticalQuests[id] = quest
+            end
+        end
         local color = index == viewedStep and "|cffffec80" or "|cffbfb59a"
         local label=done and "Done" or state=="skipped" and "Skipped" or state=="failed" and "Failed" or index==F.db.step and "Current" or index==nextIndex and "Next" or (state=="ongoing" or state=="ready") and "In progress" or "Not started"
         local heading = color..index.."|r"
@@ -296,8 +320,7 @@ function T:Refresh()
         if index==F.db.step or index==viewedStep then
             for _,task in ipairs(F.GuideEngine:Tasks(step)) do
                 if step.tasks and #step.tasks>1 then
-                    local priority=F.UI:TaskPriority(task)
-                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..(priority and ' '..F.UI:PriorityIcon(priority,iconSize) or "")
+                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..F.UI:TaskMarkerIcons(task,iconSize)
                 end
                 local body=F.UI:ActionBody(task)
                 if body~="" then text=text.."\n  "..body end
@@ -309,8 +332,7 @@ function T:Refresh()
                 if F.GuideEngine:Applies(task) and F.GuideEngine:TaskState(task)~="complete" then
                     alongside=alongside+1
                     if alongside == 1 then text=text.."\n\n|cffffd100Alongside this step:|r" end
-                    local priority=F.UI:TaskPriority(task)
-                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..(priority and ' '..F.UI:PriorityIcon(priority,iconSize) or "")
+                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..F.UI:TaskMarkerIcons(task,iconSize)
                     local body=F.UI:ActionBody(task)
                     if body~="" then text=text.."\n    "..body end
                 end
@@ -324,6 +346,39 @@ function T:Refresh()
     self.headers.Quest:SetText(self.searchQuery and
         ("Quests - " .. #entries .. " / " .. #F.Guide.steps .. " matched") or "Quests")
     self.progressCounts = {done=completed, skipped=skipped, remaining=#F.Guide.steps-completed-skipped}
+    -- Completed class unlocks no longer need recovery rows, but still belong
+    -- in the character's critical progress for this guide.
+    local policy, seenUnlocks = F.QuestPolicy, {}
+    local function completedChain(id, visited)
+        if visited[id] then return end
+        visited[id] = true
+        local quest = criticalQuests[id] or {}
+        quest.unlockCompleted = true
+        criticalQuests[id] = quest
+        for _, prior in ipairs(policy:Record(id).prerequisites or {}) do completedChain(prior, visited) end
+    end
+    local function countUnlock(unlock)
+        if type(unlock) ~= "table" or not policy:UnlockApplies(unlock) then return end
+        for _, id in ipairs(unlock.terminals or {}) do
+            if policy:Satisfied(id) then completedChain(id, {}); return end
+        end
+    end
+    for _, unlock in ipairs(policy.unlocks) do
+        seenUnlocks[unlock.key] = true
+        local override = policy.foreverUnlocks[unlock.key]
+        countUnlock(override == nil and unlock or override)
+    end
+    for key, unlock in pairs(policy.foreverUnlocks) do
+        if not seenUnlocks[key] then countUnlock(unlock) end
+    end
+    local critical = {done=0, skipped=0, remaining=0, total=0}
+    for id, quest in pairs(criticalQuests) do
+        critical.total = critical.total + 1
+        if quest.unlockCompleted or F.QuestPolicy:Satisfied(id) then critical.done = critical.done + 1
+        elseif quest.allSkipped or quest.turninSkipped then critical.skipped = critical.skipped + 1
+        else critical.remaining = critical.remaining + 1 end
+    end
+    self.criticalCounts = critical
     self.headers.Status:SetText("Status " .. (completed + skipped) .. " / " .. #F.Guide.steps)
     -- Assign stripes before slicing, keeping each step's shade stable while scrolling.
     local questRow = 0

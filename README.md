@@ -1,77 +1,118 @@
 # Forever Rested
 
-Forever Rested is a lightweight leveling guide addon for WoW Forever, with step-by-step quest routes, progress tracking, a navigation arrow, and a familiar native WoW interface. The project is intended for both Alliance and Horde players.
+Forever Rested is a leveling guide addon for **WoW Forever**, with step-by-step quest routes, live progress tracking, a navigation arrow, and a native WoW-style interface. It has no external addon dependencies.
 
-**Beta coverage:** Alliance level 1–20 guides are currently available and require in-game validation. Horde guides are planned and are not yet included.
+**Beta:** Alliance level 1–30 routes are included, with an optional Zephras Isle 10–14 continuation. Routes still need in-game validation; quest availability, prerequisites, rewards, and coordinates may change between beta builds. Horde guides are planned but are not included.
 
-Features include class and race filtering, map markers, saved guide progress per character, movable and resizable windows, and optional quest acceptance and turn-in automation. Hold Shift during quest interactions to pause automation; multiple reward choices remain manual. Important class unlocks and recorded prerequisites are protected from automatic catch-up skipping.
+[Source](https://github.com/alvaro-lima/foreverrested) · [Report an issue](https://github.com/alvaro-lima/foreverrested/issues)
 
-[Source and issues](https://github.com/alvaro-lima/foreverrested) · CurseForge project ID: **1722752**
+## Installation
 
-Installed folder and TOC are named **ForeverRested**, so WoW can discover the addon. Interface 16001 matches the neighboring Forever addons. No dependencies.
+1. Download or clone this repository.
+2. Place the addon files in your WoW Forever client's `Interface/AddOns/ForeverRested` folder. Rename the downloaded repository folder to **ForeverRested** if necessary.
+3. Check that `ForeverRested.toc` is directly inside that folder, rather than inside another nested folder.
+4. Enable **Forever Rested** in the AddOns menu at character selection, then log in. Use `/reload` after updating an existing installation.
 
-Four playable **Alliance 1–10 guides** cover Dun Morogh, Elwynn Forest, Teldrassil and Zephras Isle, with class/race filtering, nearby quest clusters, batched turn-ins and optional reward detours. These rough beta routes still need in-game acceptance. See [route controls, sources and refresh instructions](Data/ALLIANCE_GUIDES.md).
+The included TOC targets **Interface 16001**. Compatibility with other WoW clients is not verified. Progress and settings are saved per character in `ForeverRestedDB`; each guide retains its own progress.
 
-The **10–20** menu now includes Westfall / Redridge, Loch Modan / Redridge and Darkshore, plus an optional **Zephras 10–14 / Exit Choice** continuation. See [section controls and the Zephras time comparison](Data/ALLIANCE_10_20.md). Exit reviews at 10 and 12 are manual choices; staying until 14 is optional.
+## Included guides
 
-## In-game validation
+| Levels | Routes |
+| --- | --- |
+| 1–10 | Dun Morogh, Elwynn Forest, Teldrassil, Zephras Isle |
+| 10–20 | Westfall / Redridge, Loch Modan / Redridge, Darkshore |
+| 10–14 | Optional Zephras Isle continuation with exit-choice checkpoints |
+| 20–30 | Duskwood / Redridge, Wetlands, Ashenvale / Stonetalon |
 
-Loading a guide checks all its quest IDs against your character's completion history. Completed actions show as done, including actions previously skipped. For characters above the guide's starting level, reached level checkpoints and then the first quest at your level determine where to resume; unfinished earlier steps show as skipped. Routes without intermediate checkpoints use quest levels as an approximate starting point. Reset from here remains available to revisit skipped content.
+Guides filter applicable tasks by class and race. This does not imply that every class can use every starting zone. Routes are independently authored beta routes; their leveling speed has not been measured.
 
-Catch-up preserves essential class unlocks and recorded prerequisites of retained quests. Critical actions have individual numbered steps with a warning icon; hover for the reason. Catch-up cannot skip them automatically, but the Skip button can, and manual skips persist across guide reloads. From makes skipped actions at or beyond the chosen starting point available again, while remembering their skip history. The baseline covers 21 Vanilla Alliance unlock milestones by level 20, with separate Forever overrides including the sourced shaman Earth and Fire chains. See [quest protection and update rules](Data/QUEST_POLICY.md) for coverage and updates.
+See the [Alliance 1–10 guide notes](Data/ALLIANCE_GUIDES.md) and [Alliance 10–20 / Zephras notes](Data/ALLIANCE_10_20.md) for route details and sources.
 
-1. Enable Forever Rested at character selection, log in, and `/reload` after changes.
-2. `/fg` toggles the tracker. Drag its title bar to move it, or drag the **//** grip at the bottom right to resize it. Width, height and position save per character. Content reflows and the number of visible rows changes with height; scrolling remains available in smaller windows.
-3. Left-click the round compass icon on the minimap to show or hide the guide window. Right-click opens the full guide and options menu; drag moves the icon around the minimap. `/fg guides` opens the guide chooser. Choose an Alliance guide. Each guide saves its own position, skips and manual checkpoint confirmations.
-4. Accept up to three quests. The concurrent test groups tasks into a step, with optional objectives in a separate **Do alongside this step** section. All required tasks must finish before a group advances; optional side tasks do not block it. A later group requires whole quests to be ready before turn-in. Abandoning a quest does not count as turning it in.
-5. The **Steps** tab lists the guide sequence; click a row to inspect it, then use Auto to return to live progress. The **Quests** tab shows the active quest log. Scroll with the mousewheel, click zone headings to collapse, and hover rows to read full details. Alternating rows use one faint brown tint over the normal window background.
-6. The independent movable **Active Targets** panel shows up to eight unique unfinished kill targets from both current and alongside tasks, using WoW's native raid marker icons in this order: **Skull, Cross, Square, Moon, Triangle, Diamond, Circle, Star**. Left-click an icon to select the creature and apply that marker. A sole leopard target uses Skull. Each click uses a secure macro: clear the old target, target the exact creature name, then execute the client's native marker command only for an existing, hostile, living target. Repeated clicks keep the marker. Marking follows normal party/raid permissions, and does not happen automatically on kills or manual target changes. If marking support is unavailable, buttons still target. A red **X** appears while the matching creature name is selected. Hover for the name and progress. Drag the background or right-drag a button out of combat to move the panel. During combat the configured target list stays fixed, with updates applied afterward. Buttons never attack.
-6. Navigation prefers native quest waypoints. For **Never Saddle on Quality**, `Guides/TargetData.lua` maps the Pristine Leopard Pelt objective to **Elder Snow Leopard** and provides an approximate Dun Morogh hunting area at **76.4, 61.4**, validated against this client's map information. The arrow uses that area if the client does not supply a waypoint; its distance label says **hunting area**. It does not track individual moving creatures. Left-drag the arrow to move it independently; its position is saved per character. The arrow hides when destination, position, facing, or world-map conversion is unavailable. Coordinates use normalized values (0-1).
-7. Back holds a manually selected step. Next and Skip move forward and resume automation. Auto or `/fg auto` checks the guide from the beginning and returns to the first unfinished, unskipped step using live quest state, even after browsing all the way to the end. Next confirms manual trainer/note checkpoints; it does not fake quest completion. Skip is remembered explicitly.
-8. `/fg debug` shows IDs, positions, distance, objective and quest state, and queued secure target updates.
+See [Alliance 20–30 guide notes](Data/ALLIANCE_20_30.md) for the new regional circuits and Shaman Water Totem coverage.
 
-The arrow is a separate, borderless widget with only yards underneath. Left-drag it anywhere; its position saves per character, and it continues updating when the quest window is hidden. The targets panel is independent too.
+## Getting started
 
-Options includes an Arrow size control with minus, plus, and Default buttons. Size changes immediately in 4 px increments from 24 to 96 px (default 48 px), and saves per character.
+- Run `/fg guides` or right-click the minimap compass to choose a guide.
+- Run `/fg` or left-click the minimap compass to show or hide the tracker.
+- Drag the tracker title bar to move it, and its bottom-right grip to resize it. The navigation arrow and target icons can be moved independently.
+- Use the **Steps** tab to browse the route and the **Quests** tab to view your active quest log. Click a step to inspect it; **Auto** returns to live progress.
+- Open `/fg options` to adjust text size, arrow size, and the map step limit (default 10, range 1-100). Position and size settings save per character.
 
-Open **Options** from the minimap guide menu, or use `/fg options`, to decrease/increase the text size (11-20), or restore the default 14. The setting saves per character and updates without reloading. Native button-template fonts retain their Blizzard styling.
+### Progress and controls
 
-Guide controls, guide choices and close buttons show help immediately on hover. Other delayed help appears after **three continuous seconds** of hovering. Leaving or hiding the control cancels its tooltip; moving to another control starts a new delay where applicable. The tooltip timer sleeps when idle.
+Quest actions advance from live quest state. A quest that is ready to turn in is not complete until it has been rewarded. Required tasks block progression; **Do alongside** tasks are optional and can be completed while working on the current step. Trainer and note checkpoints require manual confirmation with **Next**.
 
-Task and step status distinguish **ONGOING**, **READY TO TURN IN**, **COMPLETE**, **NOT STARTED**, **SKIPPED** and **FAILED**. Native checkbox icons show completed tasks. A ready-to-turn-in quest does not count as rewarded. The installed RestedXP `GuideWindow.lua` and `QuestLog.lua` were inspected for their task-level completion, required-task aggregation, alongside/sticky work and checkbox display. The implementation here remains independent; no RestedXP source, guide content or texture assets are bundled.
+**Back** browses earlier steps. **Next** moves forward and resumes automatic progress. **Skip** records an explicit skip. **Auto** returns to the first unfinished, unskipped step.
 
-To revisit skipped steps or restart from an earlier point, click that step in the list and click **From**. Skips from that step onward become available again, but their history is remembered. For example, with steps 15 and 18 skipped, From 1 makes them To do; From 20 restores both to Skipped. The boundary applies independently of current progress and persists per guide across reloads. From clears later manual checkpoint confirmations, preserves quest bindings, and holds the chosen step until Next, Skip or Auto resumes automation. Completed quests still use live quest state. You can also use `/fg reset 25` to start from step 25; `/fg reset` performs a full guide reset and clears remembered skips.
+Loading a guide reconciles completed quests and can catch up to your character's level. Essential class unlocks and recorded prerequisites are protected from automatic catch-up skipping, though you can skip them manually. See [quest protection rules](Data/QUEST_POLICY.md) for coverage.
 
-Commands: `/fg`, `/fg next`, `/fg back`, `/fg skip`, `/fg reset [step number]`, `/fg debug`, `/fg auto`, `/fg guides`, `/fg options`, `/fg refresh`, `/fg data`.
+To revisit earlier content, select a step and click **From**, or use `/fg reset <step>`. This reopens skips from that point onward and clears later manual checkpoint confirmations while retaining skip history. `/fg reset` resets the guide and clears remembered skips. Completed quests still reflect live quest state.
 
-Use the search box below the column headings to filter steps by quest name, NPC, notes or an exact step number. Multiple words must all match; results keep their original step numbers. Click a result to inspect it. **Clear** or Escape restores the full list and your previous scroll position. Auto clears search and returns to current progress.
+The step search supports quest names, NPCs, notes, exact step numbers, priorities such as `critical` or `gear`, and statuses such as `skipped` or `ready`. Combine terms, for example `gear to do`. **Clear** or Escape restores the full list.
 
-Search also recognizes priority markers (**key**, **critical**, **gear**, **money**) and statuses (**skipped**, **in progress**, **to do**, **completed**, **ready**, **current**, **next**, **not started**, **failed**). Combine terms such as `gear to do` or `critical skipped`. Priority searches include alongside markers; `to do` includes unfinished steps and excludes completed or skipped steps.
+### Navigation and targets
 
-Published guides now expand each required quest action into its own numbered step: accept, complete objectives, and turn in. Nearby quests remain in **Do alongside** and can be finished together; Auto recognizes that progress when reaching their actions. Old grouped positions/skips migrate to the corresponding actions. Trainer and manual notes remain checkpoints.
+The arrow and numbered map/minimap markers show the current destination. Native quest waypoints take priority; sourced NPC locations or approximate hunting areas provide fallbacks where available. Missing map or position data can hide navigation. Coordinates identify destinations, not walkable paths.
 
-The round golden compass is the addon icon, tracker header icon and minimap button. The current destination has the same numbered compass marker on its zone map and minimap. World-map placement uses the client's zoom/pan canvas; the marker hides on unrelated maps. The minimap uses the native view radius, follows rotation and puts distant destinations at the edge as a direction marker. Missing coordinates or radius hide the affected marker. Pins have three-second tooltips and never replace user waypoints or quest tracking. Hover a destination marker for its step number, guide, quest status, live objective progress, NPC details, notes, coordinates and distance. Approximate and alongside destinations are identified in the tooltip; alongside markers use the destination action's step number when available.
+The movable target icons show unfinished kill targets from current and alongside tasks. Clicking an icon targets the named creature and attempts to apply its raid marker, subject to normal game permissions. Buttons do not attack. Changes to secure target buttons are deferred during combat.
 
-Ready turn-in actions can use sourced quest-giver locations even when native objective waypoints disappear. Active targets are now just movable marker icons: no surrounding frame, title, button border or selected-target X. They hide when empty; secure visibility/layout changes queued during combat apply after combat ends. Clicking an icon records the selected creature's GUID after its secure targeting macro. The arrow follows that creature only when native `UnitPosition` returns compatible, readable target/player coordinates; unavailable positions, death or changing targets restore the guide destination. Map markers continue to represent the guide step. No hidden positions, gameplay automation or protected actions are used by navigation.
+After clicking a target icon, the arrow can follow the selected creature when the client exposes compatible position data. Otherwise it uses the guide destination. Map markers continue to represent the guide step.
 
-The beta data foundation records bounded quest/reward observations stamped with the running client build. `/fg refresh` rescans live quests; `/fg data` opens a copy window for offline JSON refresh. Old-build observations are stale, and stable step IDs preserve guide progress through authored revisions. See `Data/README.md` for the import/change-report workflow. An offline estimator accepts explicit XP/time assumptions; automatic route optimization and equipment scoring remain pending.
+### Quest interactions
 
-## Implementation and limits
+When interacting with a quest giver, the addon can automatically accept and turn in matching quests from the selected guide's current step onward, including alongside tasks. Skipped and inapplicable tasks are excluded.
 
-Native `UIPanelButtonTemplate`, `UIPanelCloseButton`, Blizzard fonts and the rock background provide the compact brown/gold frame. The window prefers Blizzard's `SimplePanelTemplate` nine-slice metal border, with `InsetFrameTemplate` borders inside; layouts and their atlases are checked at runtime. A fully opaque dark base prevents scenery showing through the text. The title is centered on a dark brown bar. Missing layouts/templates use the installed-client tooltip border as a bronze-tinted fallback. Secure target creation fails closed if its template is unavailable. The bronze arrow asset is included; there are no external addon dependencies.
+**Hold Shift during quest interactions to pause this behavior.** Multiple reward choices and quests requiring gold remain manual.
 
-The independent arrow uses `Media/BronzeArrow.tga`, a transparent bronze beveled arrow matched to the user's screenshot. Both gold chevrons remain; only the smallest dark triangular fill at the bottom center is removed. Yards remain directly underneath with no box. The source and final built-in imagegen prompt are documented in `Media/ArrowSource.md`. If the addon texture fails to load, runtime-checked native player-arrow artwork is used, then a line compass as the final fallback.
+## Commands
 
-Text uses the client's native font face at 14 points. Rows have more space for objectives, and long current-step or alongside text can be scrolled with the mousewheel inside its panel. Loot sources are explicit data mappings, not guesses based on item names: see [the Forever item record](https://www.wowhead.com/forever/item=267414/pristine-leopard-pelt) and [the hunting-area reference](https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide). Other loot quests need their own source mappings before showing targets or fallback areas.
+| Command | Action |
+| --- | --- |
+| `/fg` | Toggle the tracker |
+| `/fg guides` | Open the guide menu |
+| `/fg options` | Open display options |
+| `/fg next` | Move forward / confirm a manual checkpoint |
+| `/fg back` | Browse the previous step |
+| `/fg skip` | Skip the current step |
+| `/fg auto` | Resume live guide progress |
+| `/fg reset [step]` | Reset the guide, or restart from a specified step |
+| `/fg debug` | Toggle diagnostics |
+| `/fg refresh` | Rescan live quest data |
+| `/fg data` | Open the observation export window |
 
-Quest API reads prefer `C_QuestLog` and fall back to legacy quest-log functions. Quest events are coalesced at 150 ms; navigation runs at 200 ms while visible. No protected game action is called by engine code. Window visibility/movement and protected target attributes are locked during combat. The debug frame is separate from the protected frame hierarchy.
+## Reporting bugs and contributing
 
-Arrow rotation samples player facing every rendered frame with a short, frame-rate-independent smoothing interval. Waypoint selection, map conversion and distance stay at 200 ms; turning does not trigger quest scans. Rotation follows the shortest arc across north, and the animation sleeps when the arrow is hidden.
+Please [open an issue](https://github.com/alvaro-lima/foreverrested/issues) with:
 
-Authored routes stay in `Guides/Alliance_01_10.lua`, sourced facts in `Guides/AllianceQuestData.lua`, and test fixtures in `tests/fixtures/GnomeDwarf_01_10.lua`. `GuideLibrary.lua` registers guides and preserves their state. A grouped step has required `tasks` and nonblocking `alongside` objectives. The arrow uses unfinished tasks, preferring native quest waypoints. Trainer and note checkpoints require manual confirmation; level checkpoints read the player's level. Source coordinates are approximate and full acquisition chains need beta validation.
+- Your client version/build and addon version from `ForeverRested.toc`.
+- Character faction, race, class, and level.
+- Guide name, step number, and quest ID where applicable.
+- What you expected, what happened, and steps to reproduce it.
+- Relevant Lua errors or `/fg debug` details; screenshots are helpful for interface problems.
 
-Client source/assets are packaged, not extracted in Interface. Compatibility evidence came from the installed Forever addons, with runtime capability checks. The supplied RestedXP screenshots guide the grouped-task and target-panel behavior. The addon keeps the requested native brown/gold Blizzard style. Exact visual fidelity and native behavior require in-game validation; mocked tests cannot establish those.
+For route corrections, include a source or in-game evidence for prerequisites, quest availability, coordinates, or rewards. Review exported data and screenshots before posting them publicly.
 
-`tests/validate.py` uses Python with `lupa.lua51` to compile the addon and exercise meaningful quest, combat and navigation cases. It is not loaded by WoW.
+Focused pull requests for fixes, route corrections, and documentation are welcome. Keep stable guide step IDs when their meaning has not changed so existing progress can migrate correctly. Separate authored routes from sourced facts, and record evidence for data changes.
 
-Quest interactions automatically accept and turn in matching pickup/turn-in quests from the current step onward in the selected guide, including alongside tasks. Skipped steps and inapplicable class/race tasks are excluded. Hold Shift while interacting to pause automation. Multiple reward choices remain manual, and quests requiring gold are left for manual confirmation. Automation runs when interacting with a quest giver, including gossip and quest greeting lists.
+## Development
+
+The addon is loaded through [ForeverRested.toc](ForeverRested.toc). Runtime code is Lua; scripts in `tools/` and `tests/` run offline and are not loaded by WoW.
+
+- `Guides/`: authored routes, quest references, and target mappings.
+- `GuideEngine.lua` / `GuideLibrary.lua`: progression and per-guide state.
+- `QuestLog.lua` / `QuestPolicy.lua`: live quest state and catch-up protection.
+- `Navigation.lua`, `Arrow.lua`, `StepPins.lua`: destinations and navigation displays.
+- `UI.lua`, `Tracker.lua`, `SecureTarget.lua`, `Minimap.lua`: interface and target controls.
+- `Data/`: quest catalogs, provenance, policy data, and workflow documentation.
+
+The validation scripts use **Python and `lupa` with Lua 5.1 support**. From the repository root:
+
+```sh
+python -m pip install lupa
+python tests/validate.py
+python tests/validate_guides.py
+```
+
+Additional `tests/validate_*.py` scripts cover specific behavior, including catch-up, resets, search, navigation, combat restrictions, and quest interactions. Run the checks relevant to your changes. Mocked tests do not establish in-game API behavior, visual layout, or route correctness; those require client testing.
+
+See the [quest data workflow](Data/README.md) for collecting and importing build-stamped observations, the [source audit](Data/SOURCE_AUDIT.md) for data provenance, and the [build checklist](BUILD_CHECKLIST.md) for release checks. Observation exports are local and copied manually through `/fg data`; the addon has no in-game network or filesystem updater. Automatic route optimization and equipment scoring are not implemented.

@@ -53,7 +53,14 @@ assert(G:Useful({itemID=4}),'mail becomes eligible at level40')
 F.AllianceQuestData[999001]={rewards={{itemID=2}}}
 assert(F.UI:TaskPriority({questID=999001})=='Gear')
 equipped[5]=2
-assert(F.UI:TaskPriority({questID=999001})==nil,'marker updates when gear is equipped')
+assert(F.UI:TaskPriority({questID=999001})=='Gear','reward marker remains when gear is equipped')
+F.db.completed[999001]=true
+F.db.manualSkippedSteps['catchup:999001:turnin']=true
+assert(F.UI:TaskPriority({questID=999001})=='Gear','completion and skipping retain gear marker')
+F.AllianceQuestData[999002]={rewardMoney=100}
+F.db.completed[999002]=true
+F.db.manualSkippedSteps['catchup:999002:turnin']=true
+assert(F.UI:TaskPriority({questID=999002})=='Money','completion and skipping retain money marker')
 assert(F.UI:TaskPriority({questID=999001,critical=true})=='Critical')
 ''')
-print('PASS: class compatibility, proficiency, levels, meaningful upgrades, unknown data and dynamic gear markers')
+print('PASS: class compatibility, proficiency, levels, upgrade scoring and persistent gear/money markers')

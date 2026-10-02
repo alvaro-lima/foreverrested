@@ -101,3 +101,7 @@ silently promote all equipment rewards into mandatory quests.
 Validation: `tests/validate_catch_up.py`, `tests/validate_critical_rows.py`,
 `tests/validate_reset_from.py` and `tests/validate_autoquest.py`. Visual appearance
 and actual quest availability still require an in-game check after `/reload`.
+
+## Alliance Water Totem, reviewed 2026-10-02
+
+The level-20 Dwarf Shaman chain 94495 -> 94497 -> 94499 -> 94500 -> 94501 -> 94502 -> 94503 -> 94505 is critical. Individual Forever pages list the ordered eight-stage series; 94505 rewards Water Totem. Sources: https://www.wowhead.com/forever/quest=94495/call-of-water and https://www.wowhead.com/forever/quest=94505/call-of-water. Quest 94503 places the manifestation in Westfall; shared NPC mapper coordinates pointing to Silverpine are excluded. Availability in the running Interface 16001 beta requires in-game validation.
