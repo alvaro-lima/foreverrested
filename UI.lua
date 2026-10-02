@@ -284,8 +284,9 @@ function U:Layout(width, height)
     F.Tracker.scrollbar:ClearAllPoints()
     F.Tracker.scrollbar:SetPoint("TOPRIGHT", -2, -F.Tracker.contentTop - 10)
     F.Tracker.scrollbar:SetPoint("BOTTOMRIGHT", -2, 16)
-    local badgeSize = self:RowIconSize()
-    F.Tracker.rowHeight = math.max(38, badgeSize + 8)
+    local rowIconSize = self:RowIconSize()
+    local badgeSize = rowIconSize * .9
+    F.Tracker.rowHeight = math.max(38, rowIconSize + 8)
     local headers = F.Tracker.headers
     headers.Step:SetText("Step")
     local headingWidth = F.Call(headers.Step.GetStringWidth, headers.Step)

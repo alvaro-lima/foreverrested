@@ -18,6 +18,12 @@ function N:ClientWaypoint(task,id)
     if cached then return unpack(cached) end
 end
 function N:TravelWaypoint(step)
+    local exit=F.Travel:WalkingExit(step)
+    if exit then return exit.mapID,exit.x,exit.y,'Road exit (approx.)',exit.name end
+    local flight=F.Travel:DepartureFlight(step)
+    if flight and valid(flight.mapID,flight.x,flight.y) then
+        return flight.mapID,flight.x,flight.y,'Flight master',flight.name
+    end
     local dock=F.Travel:DepartureDock(step)
     if dock then
         local map=self:ResolveAreaMap(dock)
@@ -38,9 +44,12 @@ function N:TravelWaypoint(step)
 end
 function N:Waypoint()
     self.source, self.label, self.waypointTask = nil, nil, nil
+    -- From holds a restart point even when live progress already completes it.
+    -- Keep that step navigable until the user resumes automation.
+    local held=F.GuideEngine.manualHold==true
     for _, step in ipairs(F.GuideEngine:Tasks(nil, true)) do
         local id, q = F.GuideEngine:Resolve(step)
-        if not F.GuideEngine:Done(step, id, q) then
+        if held or not F.GuideEngine:Done(step, id, q) then
             if step.travelQuestID then
                 local map,x,y,source,label=self:TravelWaypoint(step)
                 if map then
@@ -48,7 +57,7 @@ function N:Waypoint()
                     return map,x,y
                 end
             end
-            if id and not F.QuestLog:TurnedIn(id) then
+            if id and (held or not F.QuestLog:TurnedIn(id)) then
                 local map, x, y = self:ClientWaypoint(step,id)
                 if valid(map, x, y) then self.source, self.waypointTask = "Client waypoint", step; return map, x, y end
                 if step.type == "objective" and q then
@@ -64,7 +73,7 @@ function N:Waypoint()
                     end
                 end
                 local metadata = F.GuideEngine:Metadata(id)
-                if metadata and (step.type == "pickup" or q) then
+                if metadata and (held or step.type == "pickup" or q) then
                     local role = step.type == "pickup" and "start" or step.type == "turnin" and "end" or "requirement"
                     local point = self:ReferencePoint(metadata, role)
                     if point then
@@ -94,12 +103,17 @@ function N:Waypoint()
 end
 function N:ReferencePoint(metadata, role)
     local candidates = {}
+    local preferred={}
     for _, point in ipairs(metadata.locations) do
         if (point.role == role or role == "requirement" and point.role == "sourcerequirement")
             and F.Number(point.x) and F.Number(point.y) then
             candidates[#candidates + 1] = point
+            if F.Guide and F.Guide.faction=='Alliance' and F.AllianceZoneMaps and F.AllianceZoneMaps[point.zone] then
+                preferred[#preferred+1]=point
+            end
         end
     end
+    if #preferred>0 then candidates=preferred end
     local map = F.Call(C_Map and C_Map.GetBestMapForUnit, "player")
     local info = F.Call(C_Map and C_Map.GetMapInfo, map)
     local px, py = F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition, map, "player"))

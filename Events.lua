@@ -4,6 +4,8 @@ frame:RegisterEvent("ADDON_LOADED")
 local elapsed, questElapsed, dirty = 0, 0, false
 local function initialize()
     F.LoadDatabase()
+    F.Travel:ObserveFlightPaths()
+    F.Travel:PositionChanged()
     -- Secure frame creation is deferred until combat ends if login is unusual.
     if F.Combat() then F.pendingInit = true; return end
     if F.UI.frame then return end
@@ -16,7 +18,8 @@ frame:SetScript("OnEvent", function(_, event, ...)
         local events = {"PLAYER_LOGIN", "PLAYER_ENTERING_WORLD", "QUEST_LOG_UPDATE", "QUEST_ACCEPTED",
             "QUEST_TURNED_IN", "QUEST_REMOVED", "QUEST_POI_UPDATE", "ZONE_CHANGED_NEW_AREA", "PLAYER_REGEN_ENABLED", "PLAYER_LOGOUT", "PLAYER_TARGET_CHANGED",
             "QUEST_DETAIL", "QUEST_COMPLETE", "QUEST_PROGRESS", "GOSSIP_SHOW", "QUEST_GREETING", "PLAYER_LEVEL_UP",
-            "GET_ITEM_INFO_RECEIVED", "PLAYER_EQUIPMENT_CHANGED", "SKILL_LINES_CHANGED"}
+            "GET_ITEM_INFO_RECEIVED", "PLAYER_EQUIPMENT_CHANGED", "SKILL_LINES_CHANGED",
+            "TAXIMAP_OPENED", "TAXIMAP_CLOSED", "TAXI_NODE_STATUS_CHANGED", "NEW_TAXI_PATH"}
         for _, name in ipairs(events) do
             if not C_EventUtils or not C_EventUtils.IsEventValid or F.Call(C_EventUtils.IsEventValid, name) then
                 F.Call(frame.RegisterEvent, frame, name)
@@ -30,6 +33,17 @@ frame:SetScript("OnEvent", function(_, event, ...)
         if F.db and F.UI.frame then F.SecureTarget:UpdateTasks(F.SecureTarget.desiredTargets); dirty = true end
     end
     if not F.db then return end
+    if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" then
+        F.Travel:PositionChanged()
+    end
+    if event == "TAXIMAP_OPENED" or event == "TAXI_NODE_STATUS_CHANGED" then
+        F.Travel:ObserveFlightPaths(true)
+        if event == "TAXIMAP_OPENED" then F.Travel:FlightMapOpened() end
+    elseif event == "TAXIMAP_CLOSED" then
+        F.Travel.flightAttempts=nil
+    elseif event == "PLAYER_ENTERING_WORLD" or event == "NEW_TAXI_PATH" then
+        F.Travel:ObserveFlightPaths()
+    end
     if event == "PLAYER_LEVEL_UP" then F.GuideEngine.unlockRefreshPending = true end
     if event == "QUEST_DETAIL" or event == "QUEST_COMPLETE" or event == "QUEST_PROGRESS" then
         F.QuestData:ObserveDialogue(); F.AutoQuest:Handle(event); return
@@ -53,6 +67,7 @@ frame:SetScript("OnUpdate", function(_, dt)
     end
     if elapsed >= .2 then
         elapsed = 0
+        F.Travel:FlightMapTick()
         F.Travel:Tick()
         F.UI:NavigationTick()
     end

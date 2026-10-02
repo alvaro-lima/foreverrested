@@ -68,6 +68,10 @@ local count=#F.Guide.steps
 L:SaveCurrent();L:Select('alliance-wetlands-20-30')
 assert(#F.Guide.steps==count,'travel rows must not duplicate on reload')
 zone='Darkshore'; E:ResumeAuto()
+assert(current().flightPathTravel and current().text:find('Auberdine',1,true),
+ 'arrival keeps flight collection visible until manually confirmed')
+assert(not E:Done(current()),'zone arrival does not prove the flight path was learned')
+E:Move(1); E:ResumeAuto()
 assert(current().travelQuestID==94500 and current().text:find('Ashenvale',1,true))
 C_QuestLog.GetNextWaypoint=function(id) if id==94500 then return 1440,0.35,0.50 end end
 map,x,y=F.Navigation:Waypoint()
@@ -96,13 +100,35 @@ assert(F.Navigation.angle~=nil,'navigation recovers after boat loading without c
 C_Map.GetMapInfo=oldInfo
 zone='Ashenvale'; E:ResumeAuto()
 assert(current().travelQuestID==94500,'entering the zone alone does not prove arrival at Astranaar')
+local arrivalStep=current()
+C_Map.GetPlayerMapPosition=function() return {x=.386,y=.488} end
+E:ResetFrom(F.db.step)
+F.Navigation:Update();F.Arrow:Update()
+assert(F.Navigation.waypointTask==arrivalStep and F.Navigation.targetMap==1440,
+ 'From preserves the destination of the travel restart point')
+assert(F.Arrow.frame:IsShown(),'From must keep the travel arrow visible')
+C_Map.GetPlayerMapPosition=function() return nil end
+F.Travel:Tick()
+assert(current()==arrivalStep,'missing player position cannot confirm arrival')
+C_Map.GetPlayerMapPosition=function() return {x=.386,y=.488} end
+F.Travel:Tick()
+assert(current()==arrivalStep,'outside the travel arrival area must not advance')
+C_Map.GetPlayerMapPosition=function() return {x=.346,y=.488} end
+F.Navigation:Update();F.Arrow:Update()
+assert(F.Navigation.distance==0 and F.Arrow.frame:IsShown(),'reproduce zero yards after From')
+F.Travel:Tick()
+assert(not E.manualHold,'reaching the destination releases the From travel hold')
+assert(current().flightPathTravel and current().text:find('Astranaar',1,true))
 E:Move(1); E:ResumeAuto()
-assert(current().questID==94500 and current().type=='objective','arrival advances to water collection')
+assert(current().questID==94500 and current().type=='objective','wider arrival area advances to water collection without a quest event')
+C_Map.GetPlayerMapPosition=oldPosition
 filled=true;live[1].isComplete=true;objectives[94500][1].finished=true
 E:ResumeAuto()
 assert(current().travelQuestID==94500 and current().travelAction=='turnin')
 assert(current().note:find('Auberdine',1,true),'return route uses the harbor')
 zone='Darkshore';E:ResumeAuto()
+assert(current().flightPathTravel)
+E:Move(1);E:ResumeAuto()
 map,x,y=F.Navigation:Waypoint()
 assert(map and x==0.327 and y==0.437,'return boat travel points toward Auberdine boat dock')
 zone='Wetlands';E:ResumeAuto()
@@ -149,6 +175,76 @@ for _,step in ipairs(guide.steps) do
  if step.travelQuestID then assert(step.travelQuestID==999101);travels=travels+1 end
 end
 assert(travels==3,'generic outbound and return legs')
-F.Travel:EnsureSteps(guide);assert(#guide.steps==6,'regeneration remains stable')
+F.Travel:EnsureSteps(guide);assert(#guide.steps==6,'no collection detour without nearby flight master evidence')
+-- Discovery is client evidence, independent of manual step confirmation.
+F.db.knownFlightPaths={}
+local fp={flightPathStop='Thelsamar',confirmOnNext=true,id='fp-fixture'}
+assert(not E:Done(fp),'unknown flight path stays visible')
+C_TaxiMap={GetTaxiNodesForMap=function() return {
+ {name='Thelsamar, Loch Modan',faction=2,isUndiscovered=false},
+ {name='Astranaar, Ashenvale',faction=2,isUndiscovered=true},
+ {name='Auberdine, Darkshore',faction=2},
+ {name='Horde fixture',faction=1,isUndiscovered=false},
+} end}
+F.Travel:ObserveFlightPaths()
+assert(E:Done(fp),'discovered path automatically completes collection')
+assert(not F.Travel:KnowsFlightPath('Astranaar'),'undiscovered is not learned')
+assert(not F.Travel:KnowsFlightPath('Auberdine'),'missing discovery field is not evidence')
+assert(not F.Travel:KnowsFlightPath('Horde fixture'),'ignore opposing faction nodes')
+C_TaxiMap=nil
+NumTaxiNodes=function() return 3 end
+TaxiNodeName=function(i) return ({'Auberdine, Darkshore','Astranaar, Ashenvale','Menethil Harbor, Wetlands'})[i] end
+TaxiNodeGetType=function(i) return ({'CURRENT','REACHABLE','DISTANT'})[i] end
+F.Travel:ObserveFlightPaths(true)
+assert(F.Travel:KnowsFlightPath('Auberdine') and F.Travel:KnowsFlightPath('Astranaar'))
+assert(not F.Travel:KnowsFlightPath('Menethil Harbor'),'unreachable does not prove discovery')
+NumTaxiNodes,TaxiNodeName,TaxiNodeGetType=nil,nil,nil
+F.LoadDatabase()
+assert(F.Travel:KnowsFlightPath('Thelsamar'),'flight knowledge survives database reload')
+local flightStep={travelQuestID=999101,travelFrom='Ashenvale',travelTo='Darkshore',
+ travelFinal=true,travelAction='turnin',travelLeg=1,travelZones={'Darkshore'},
+ travelDestination={name='Auberdine harbor',zone='Darkshore',x=.327,y=.437},note='Walk the road'}
+assert(F.Travel:Note(flightStep):find('fly to Auberdine',1,true),'known paths replace road advice')
+F.db.knownFlightPaths.Auberdine=nil
+assert(F.Travel:Note(flightStep)=='Walk the road','unknown destination retains road fallback')
+F.db.knownFlightPaths.Auberdine=true
+F.db.knownFlightPaths['Menethil Harbor']=true
+assert(not F.Travel:FlightLeg({travelFrom='Darkshore',travelTo='Wetlands'}),
+ 'cross-continent travel still uses boats')
+F.db.flightPathLocations.Astranaar={mapID=1414,x=.45,y=.6,name='Astranaar, Ashenvale'}
+zone='Ashenvale'
+local fm,fx,fy=F.Navigation:TravelWaypoint(flightStep)
+assert(fm==1414 and fx==.45 and fy==.6,'flight arrow targets departure flight master')
+zone='Darkshore'
+assert(not F.Travel:DepartureFlight(flightStep),'arrival never points back to departure')
+F.db.knownFlightPaths.Ironforge=true
+local direct=F.Travel:Route('Ironforge','Loch Modan')
+assert(#direct==1 and direct[1].zone=='Loch Modan','known flight bypasses intermediate road zones')
+F.QuestLog.byID[999101]={complete=true}
+UnitOnTaxi=function() return true end
+assert(not E:Done(flightStep),'flying through the arrival zone does not complete travel')
+UnitOnTaxi=nil
+local itinerary={faction='Alliance',questData={[999201]={title='Boat and flight',locations={
+ {role='start',zone='Wetlands'},
+ {role='requirement',zone='Ashenvale',x=.346,y=.488,name='Astranaar'},
+}}},steps={{id='boat-flight',type='objective',questID=999201,critical=true}}}
+F.Guide=itinerary
+F.db.knownFlightPaths={Astranaar=true}
+F.Travel:EnsureSteps(itinerary)
+assert(#itinerary.steps==3,'boat then flight needs no separate collection rows')
+assert(itinerary.steps[1].note:find('boat',1,true),'Wetlands still requires boat')
+assert(F.Travel:Note(itinerary.steps[2]):find('fly to Astranaar',1,true))
+assert(F.Travel:Note(itinerary.steps[2]):find('learn its flight path',1,true),
+ 'learn departure path as part of boarding the flight')
+F.db.knownFlightPaths={Auberdine=true}
+F.Travel:EnsureSteps(itinerary)
+assert(#itinerary.steps==4 and itinerary.steps[3].flightPathStop=='Astranaar',
+ 'walking to Astranaar adds only the missing nearby flight path')
+assert(F.Travel:Note(itinerary.steps[2]):find('road',1,true),'missing destination requires walking')
+F.db.knownFlightPaths={Auberdine=true,Astranaar=true}
+F.Travel:EnsureSteps(itinerary)
+assert(#itinerary.steps==3,'known paths produce no learning stops')
+assert(not F.Travel:NearFlightStop({from='Darkshore',zone='Ashenvale'},
+ {zone='Ashenvale',x=.9,y=.9},true),'remote destination does not create a flight path detour')
 ''')
-print("PASS: generic key-quest travel, blue waterskin outbound/return boats, automatic arrival/completion bypasses and duplicate-free reloads.")
+print("PASS: travel checkpoints, stable reloads and automatic flight path discovery.")

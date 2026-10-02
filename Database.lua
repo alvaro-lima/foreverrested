@@ -8,6 +8,8 @@ function F.LoadDatabase()
     d.completed = type(d.completed) == "table" and d.completed or {}
     d.bindings = type(d.bindings) == "table" and d.bindings or {}
     d.skipped = type(d.skipped) == "table" and d.skipped or {}
+    d.knownFlightPaths = type(d.knownFlightPaths) == "table" and d.knownFlightPaths or {}
+    d.flightPathLocations = type(d.flightPathLocations) == "table" and d.flightPathLocations or {}
     d.fontSize = F.Number(d.fontSize) and math.max(11, math.min(20, math.floor(d.fontSize))) or 12
     if not d.fontDefault12 then
         if d.fontSize == 14 then d.fontSize = 12 end

@@ -40,6 +40,8 @@ function E:Current()
 end
 function E:Done(step, id, q)
     if not self:Applies(step) then return true end
+    if step.flightPathStop and F.Travel:KnowsFlightPath(step.flightPathStop) then return true end
+    if step.flightPathQuestID and F.QuestLog:TurnedIn(step.flightPathQuestID) then return true end
     -- The completed unlock proves its earlier stages were finished, even if
     -- the beta client no longer reports every replaced breadcrumb flag.
     if step.unlockTerminal and F.QuestPolicy:Satisfied(step.unlockTerminal) then return true end
@@ -50,15 +52,18 @@ function E:Done(step, id, q)
         -- Being in a return-route zone before doing the objective does not
         -- prove that the return journey has happened.
         if step.travelAction=='turnin' and not (quest and quest.complete) then return false end
+        if F.Call(UnitOnTaxi,'player')==true then return false end
         local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
         local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
         if info then
             for index=step.travelLeg,#step.travelZones do
                 if info.name==step.travelZones[index] then
                     if not step.travelFinal then return true end
-                    local x,y=F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition,map,'player'))
-                    if F.Number(x) and F.Number(y) and F.Number(step.travelX) and F.Number(step.travelY)
-                        and (x-step.travelX)^2+(y-step.travelY)^2<=.015^2 then return true end
+                    -- Arrival must match the arrow's live/cached/fallback destination.
+                    local targetMap,tx,ty=F.Navigation:TravelWaypoint(step)
+                    local x,y=F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition,targetMap,'player'))
+                    if targetMap and F.Number(x) and F.Number(y) and F.Number(tx) and F.Number(ty)
+                        and (x~=0 or y~=0) and (x-tx)^2+(y-ty)^2<=.03^2 then return true end
                 end
             end
         end

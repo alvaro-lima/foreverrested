@@ -246,7 +246,8 @@ function T:Create(parent)
                         GameTooltip:AddLine("Catch-up keeps this step. Use Skip to bypass it manually.",1,1,1,true)
                     end
                 end
-                if step.note then GameTooltip:AddLine(step.note,1,1,.5,true) end
+                local note=F.Travel:Note(step)
+                if note then GameTooltip:AddLine(note,1,1,.5,true) end
                 if step.classAdvice then GameTooltip:AddLine(F.GuideDraft:Advice(),1,1,.5,true) end
                 if step.type ~= "note" then
                     for _, task in ipairs(F.GuideEngine:Tasks(step)) do
@@ -325,7 +326,8 @@ function T:Refresh()
                 local body=F.UI:ActionBody(task)
                 if body~="" then text=text.."\n  "..body end
             end
-            if step.note then text=text.."\n|cffffff80"..step.note.."|r" end
+            local note=F.Travel:Note(step)
+            if note then text=text.."\n|cffffff80"..note.."|r" end
             if step.classAdvice then text=text.."\n|cffffff80"..F.GuideDraft:Advice().."|r" end
             local alongside=0
             for _,task in ipairs(step.alongside or {}) do
@@ -424,6 +426,10 @@ function T:Render()
     for i, row in ipairs(self.rows) do
         local entry = entries[self.offset + i]
         row.text:SetText(entry and entry.heading or "")
+        local face, _, flags = F.Call(row.text.GetFont, row.text)
+        local number = entry and entry.stepIndex
+        local size = (F.db.fontSize or 12) * (number and number >= 100 and .85 or 1)
+        if face then row.text:SetFont(face, size, flags or "") end
         row.body:SetText(entry and entry.text or "")
         row.status:SetTexture(entry and "Interface\\AddOns\\ForeverRested\\Media\\StepBadge.tga" or nil)
         local tint=entry and self.statusColors[entry.statusLabel]

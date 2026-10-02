@@ -14,6 +14,7 @@ function A:Allowed(id, kind)
     return false
 end
 function A:Gossip()
+    if F.Travel:OpenFlightGossip() then return end
     local api = C_GossipInfo
     if not api then return end
     for _, quest in ipairs(F.Call(api.GetActiveQuests) or {}) do
