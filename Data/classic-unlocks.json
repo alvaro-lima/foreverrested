@@ -1,0 +1,35 @@
+{
+  "scope": "Alliance Vanilla unlocks available by level 20",
+  "unlocks": [
+    {"key":"warrior-human-defense","class":"WARRIOR","races":1,"level":10,"terminals":[1665],"reason":"Defensive Stance, Taunt and Sunder Armor"},
+    {"key":"warrior-dwarf-gnome-defense","class":"WARRIOR","races":68,"level":10,"terminals":[1678],"reason":"Defensive Stance, Taunt and Sunder Armor"},
+    {"key":"warrior-nightelf-defense","class":"WARRIOR","races":8,"level":10,"terminals":[1683],"reason":"Defensive Stance, Taunt and Sunder Armor"},
+    {"key":"paladin-human-redemption","class":"PALADIN","races":1,"level":12,"terminals":[1788],"reason":"Redemption"},
+    {"key":"paladin-dwarf-redemption","class":"PALADIN","races":4,"level":12,"terminals":[1785],"reason":"Redemption"},
+    {"key":"paladin-sense-undead","class":"PALADIN","races":5,"level":20,"terminals":[1652],"reason":"Sense Undead"},
+    {"key":"hunter-dwarf-pets","class":"HUNTER","races":4,"level":10,"terminals":[6086],"reason":"Hunter pet training and care"},
+    {"key":"hunter-nightelf-pets","class":"HUNTER","races":8,"level":10,"terminals":[6103],"reason":"Hunter pet training and care"},
+    {"key":"druid-bear","class":"DRUID","races":8,"level":10,"terminals":[6001],"reason":"Bear Form"},
+    {"key":"druid-cure-poison","class":"DRUID","races":8,"level":14,"terminals":[6125],"reason":"Cure Poison"},
+    {"key":"druid-aquatic","class":"DRUID","races":8,"level":16,"terminals":[5061],"reason":"Aquatic Form"},
+    {"key":"warlock-human-imp","class":"WARLOCK","races":1,"level":1,"terminals":[1598],"reason":"Summon Imp"},
+    {"key":"warlock-gnome-imp","class":"WARLOCK","races":64,"level":1,"terminals":[1599],"reason":"Summon Imp"},
+    {"key":"warlock-voidwalker","class":"WARLOCK","races":65,"level":10,"terminals":[1689],"reason":"Summon Voidwalker"},
+    {"key":"warlock-succubus","class":"WARLOCK","races":65,"level":20,"terminals":[1739],"reason":"Summon Succubus"},
+    {"key":"rogue-poisons","class":"ROGUE","races":77,"level":20,"terminals":[2359],"reason":"Poisons and Thistle Tea recipe"},
+    {"key":"priest-desperate-prayer","class":"PRIEST","races":5,"level":10,"terminals":[5634,5635,5636,5637,5638,5639,5640],"reason":"Desperate Prayer"},
+    {"key":"priest-starshards","class":"PRIEST","races":8,"level":10,"terminals":[5627],"reason":"Starshards"},
+    {"key":"priest-fear-ward","class":"PRIEST","races":4,"level":20,"terminals":[5641,5645,5647],"reason":"Fear Ward"},
+    {"key":"priest-elunes-grace","class":"PRIEST","races":8,"level":20,"terminals":[5672,5673,5674,5675],"reason":"Elune's Grace"},
+    {"key":"priest-feedback","class":"PRIEST","races":1,"level":20,"terminals":[5676,5677],"reason":"Feedback"}
+  ],
+  "sources": [
+    "https://www.wowhead.com/classic/guide/warrior-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/paladin-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/hunter-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/druid-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/warlock-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/rogue-class-quests-classic-wow",
+    "https://www.wowhead.com/classic/guide/priest-class-quests-classic-wow"
+  ]
+}

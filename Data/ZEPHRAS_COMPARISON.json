@@ -1,0 +1,194 @@
+{
+  "assumptions": {
+    "schemaVersion": 1,
+    "description": "Illustrative solo comparison after the level-10 class milestone. Times, kill XP and mainland rate are assumptions, not measurements or XP-to-level thresholds.",
+    "evaluationXP": 30000,
+    "rewardFactor": 1,
+    "travelMinutes": {
+      "expected": 8,
+      "slow": 15
+    },
+    "mainlandXPPerMinute": {
+      "expected": 220,
+      "slow": 150
+    },
+    "clusters": [
+      {
+        "id": "first-cluster",
+        "title": "Fillion, wind, tower and cult investigation",
+        "questIDs": [
+          99260,
+          92840,
+          92834,
+          92860,
+          93320,
+          92642,
+          92645,
+          92880,
+          92881,
+          92643,
+          92644,
+          94568,
+          92640
+        ],
+        "activeMinutes": {
+          "expected": 35,
+          "slow": 60
+        },
+        "estimatedKills": 35,
+        "assumedXPPerKill": 60
+      },
+      {
+        "id": "later-cluster",
+        "title": "Battle finale plus offered hermit/refugee work",
+        "questIDs": [
+          93065,
+          92947,
+          93958,
+          93835,
+          94369,
+          93089,
+          93159,
+          93160,
+          93172,
+          94484,
+          94485,
+          94486,
+          94487,
+          94896,
+          94897
+        ],
+        "activeMinutes": {
+          "expected": 55,
+          "slow": 90
+        },
+        "estimatedKills": 55,
+        "assumedXPPerKill": 55
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "id": "first-cluster",
+      "title": "Fillion, wind, tower and cult investigation",
+      "questIDs": [
+        99260,
+        92840,
+        92834,
+        92860,
+        93320,
+        92642,
+        92645,
+        92880,
+        92881,
+        92643,
+        92644,
+        94568,
+        92640
+      ],
+      "activeMinutes": {
+        "expected": 35,
+        "slow": 60
+      },
+      "estimatedKills": 35,
+      "assumedXPPerKill": 60,
+      "rewardXP": 6340,
+      "killXP": 2100,
+      "totalXP": 8440
+    },
+    {
+      "id": "later-cluster",
+      "title": "Battle finale plus offered hermit/refugee work",
+      "questIDs": [
+        93065,
+        92947,
+        93958,
+        93835,
+        94369,
+        93089,
+        93159,
+        93160,
+        93172,
+        94484,
+        94485,
+        94486,
+        94487,
+        94896,
+        94897
+      ],
+      "activeMinutes": {
+        "expected": 55,
+        "slow": 90
+      },
+      "estimatedKills": 55,
+      "assumedXPPerKill": 55,
+      "rewardXP": 8465,
+      "killXP": 3025,
+      "totalXP": 11490
+    }
+  ],
+  "policies": [
+    {
+      "policy": "Leave now (level-10 review)",
+      "islandXP": 0,
+      "scenarios": {
+        "expected": {
+          "minutes": 144.36363636363637,
+          "islandMinutes": 0,
+          "mainlandMinutes": 136.36363636363637,
+          "travelMinutes": 8
+        },
+        "slow": {
+          "minutes": 215.0,
+          "islandMinutes": 0,
+          "mainlandMinutes": 200.0,
+          "travelMinutes": 15
+        }
+      }
+    },
+    {
+      "policy": "Leave after first cluster (level-12 review)",
+      "islandXP": 8440,
+      "scenarios": {
+        "expected": {
+          "minutes": 141.0,
+          "islandMinutes": 35,
+          "mainlandMinutes": 98.0,
+          "travelMinutes": 8
+        },
+        "slow": {
+          "minutes": 218.73333333333332,
+          "islandMinutes": 60,
+          "mainlandMinutes": 143.73333333333332,
+          "travelMinutes": 15
+        }
+      }
+    },
+    {
+      "policy": "Stay for later cluster (up-to-14 review)",
+      "islandXP": 19930,
+      "scenarios": {
+        "expected": {
+          "minutes": 143.77272727272728,
+          "islandMinutes": 90,
+          "mainlandMinutes": 45.77272727272727,
+          "travelMinutes": 8
+        },
+        "slow": {
+          "minutes": 232.13333333333333,
+          "islandMinutes": 150,
+          "mainlandMinutes": 67.13333333333334,
+          "travelMinutes": 15
+        }
+      }
+    }
+  ],
+  "limits": [
+    "No measured optimal exit level.",
+    "Reviews at 10/12/14 do not predict the level reached by a cluster.",
+    "Listed XP uses an explicit reward factor, not verified beta level scaling.",
+    "Kills, active times and mainland XP/minute are assumed; class, gear, competition and deaths change the result.",
+    "Transport must actually be available; its common cost is charged once in each policy.",
+    "Optional chain availability and equipment upgrades are not valued by this calculation."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "commit": "cac1eff815923f896d082764d023cf812454a023",
+  "rawZoneCounts": [
+    {
+      "zone": "Dun Morogh",
+      "raw_level_1_10": 26,
+      "raw_level_11_20": 4,
+      "with_XP_table_entry": 24,
+      "total": 30
+    },
+    {
+      "zone": "Elwynn Forest",
+      "raw_level_1_10": 35,
+      "raw_level_11_20": 1,
+      "with_XP_table_entry": 33,
+      "total": 36
+    },
+    {
+      "zone": "Teldrassil",
+      "raw_level_1_10": 24,
+      "raw_level_11_20": 9,
+      "with_XP_table_entry": 33,
+      "total": 33
+    },
+    {
+      "zone": "Zephras Isle",
+      "raw_level_1_10": 0,
+      "raw_level_11_20": 0,
+      "with_XP_table_entry": 0,
+      "total": 0
+    },
+    {
+      "zone": "Westfall",
+      "raw_level_1_10": 6,
+      "raw_level_11_20": 24,
+      "with_XP_table_entry": 29,
+      "total": 30
+    },
+    {
+      "zone": "Loch Modan",
+      "raw_level_1_10": 4,
+      "raw_level_11_20": 32,
+      "with_XP_table_entry": 36,
+      "total": 36
+    },
+    {
+      "zone": "Darkshore",
+      "raw_level_1_10": 5,
+      "raw_level_11_20": 59,
+      "with_XP_table_entry": 63,
+      "total": 64
+    },
+    {
+      "zone": "Redridge Mountains",
+      "raw_level_1_10": 0,
+      "raw_level_11_20": 21,
+      "with_XP_table_entry": 21,
+      "total": 21
+    }
+  ],
+  "additionalGeneratedLowLevelRecords": [
+    {
+      "zone": "Dun Morogh",
+      "count": 20,
+      "withXP": 0
+    },
+    {
+      "zone": "Elwynn Forest",
+      "count": 25,
+      "withXP": 0
+    },
+    {
+      "zone": "Teldrassil",
+      "count": 13,
+      "withXP": 0
+    },
+    {
+      "zone": "Zephras Isle",
+      "count": 109,
+      "withXP": 0
+    },
+    {
+      "zone": "Westfall",
+      "count": 18,
+      "withXP": 0
+    },
+    {
+      "zone": "Loch Modan",
+      "count": 5,
+      "withXP": 0
+    },
+    {
+      "zone": "Darkshore",
+      "count": 6,
+      "withXP": 0
+    },
+    {
+      "zone": "Redridge Mountains",
+      "count": 1,
+      "withXP": 0
+    }
+  ],
+  "limits": [
+    "Raw counts, not fully layered effective reads.",
+    "Quest levels 1-10 and 11-20; not minimum acceptance level.",
+    "Raw faction masks include Alliance or unrestricted quests; class, profession, dungeon and chain filters are not applied.",
+    "Generated additions may include either faction, especially Zephras.",
+    "XP presence is inherited support coverage, not live Forever XP verification."
+  ]
+}

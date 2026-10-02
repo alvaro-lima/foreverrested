@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "description": "Illustrative solo comparison after the level-10 class milestone. Times, kill XP and mainland rate are assumptions, not measurements or XP-to-level thresholds.",
+  "evaluationXP": 30000,
+  "rewardFactor": 1,
+  "travelMinutes": {"expected": 8, "slow": 15},
+  "mainlandXPPerMinute": {"expected": 220, "slow": 150},
+  "clusters": [
+    {
+      "id": "first-cluster",
+      "title": "Fillion, wind, tower and cult investigation",
+      "questIDs": [99260, 92840, 92834, 92860, 93320, 92642, 92645, 92880, 92881, 92643, 92644, 94568, 92640],
+      "activeMinutes": {"expected": 35, "slow": 60},
+      "estimatedKills": 35,
+      "assumedXPPerKill": 60
+    },
+    {
+      "id": "later-cluster",
+      "title": "Battle finale plus offered hermit/refugee work",
+      "questIDs": [93065, 92947, 93958, 93835, 94369, 93089, 93159, 93160, 93172, 94484, 94485, 94486, 94487, 94896, 94897],
+      "activeMinutes": {"expected": 55, "slow": 90},
+      "estimatedKills": 55,
+      "assumedXPPerKill": 55
+    }
+  ]
+}

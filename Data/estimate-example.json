@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "game": "forever",
+  "description": "Synthetic calculation example. These are not real quest IDs, rewards, times, or client build data.",
+  "profile": {
+    "class": "WARRIOR",
+    "level": 7,
+    "buildKey": "EXAMPLE-not-client-data",
+    "groupMode": "solo",
+    "movementYardsPerSecond": {"expected": 7, "slow": 5},
+    "mobs": {
+      "example-mob": {
+        "combatSeconds": {"expected": 15, "slow": 20},
+        "findLootRecoverySeconds": {"expected": 8, "slow": 12},
+        "xpPerKill": 50
+      }
+    }
+  },
+  "clusters": [
+    {
+      "id": "isolated",
+      "title": "Example: isolated quest",
+      "buildKey": "EXAMPLE-not-client-data",
+      "travel": [{"id": "long-round-trip", "seconds": {"expected": 890, "slow": 1190}}],
+      "quests": [{"questID": 900001, "reward": {"xp": 900, "playerLevel": 7}, "interactionSeconds": 10, "objectives": []}]
+    },
+    {
+      "id": "shared",
+      "title": "Example: three overlapping quests",
+      "buildKey": "EXAMPLE-not-client-data",
+      "travel": [{"id": "shared-round-trip", "seconds": {"expected": 420, "slow": 600}}],
+      "quests": [
+        {"questID": 900002, "reward": {"xp": 600, "playerLevel": 7}, "interactionSeconds": {"expected": 8, "slow": 12},
+          "objectives": [{"kind": "kill", "mob": "example-mob", "remaining": 8, "shareGroup": "same-hunting-session"}]},
+        {"questID": 900003, "reward": {"xp": 600, "playerLevel": 7}, "interactionSeconds": {"expected": 8, "slow": 12},
+          "objectives": [{"kind": "collect", "mob": "example-mob", "remaining": 6, "dropChance": {"expected": 0.5, "slow": 0.35}, "itemsPerDrop": 1, "shareGroup": "same-hunting-session"}]},
+        {"questID": 900004, "reward": {"xp": 600, "playerLevel": 7}, "interactionSeconds": {"expected": 8, "slow": 12},
+          "objectives": [{"kind": "kill", "mob": "example-mob", "remaining": 10, "shareGroup": "same-hunting-session"}]}
+      ]
+    }
+  ]
+}

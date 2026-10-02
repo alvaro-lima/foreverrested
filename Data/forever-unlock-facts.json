@@ -1,0 +1,285 @@
+{
+  "94465": {
+    "questID": 94465,
+    "title": "Call of Fire",
+    "level": 11,
+    "minLevel": 10,
+    "side": 1,
+    "requiredClasses": 64,
+    "classes": [
+      "SHAMAN"
+    ],
+    "requiredRaces": 4,
+    "listedXP": 660,
+    "locations": [
+      {
+        "areaID": 1,
+        "zone": "Dun Morogh",
+        "role": "start",
+        "name": "Bruegs Kindleborn",
+        "entityID": 257597,
+        "entityType": 1,
+        "x": 0.8759999999999999,
+        "y": 0.436,
+        "approximate": true
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "end",
+        "name": "Braldir Ashmantle",
+        "entityID": 257808,
+        "entityType": 1,
+        "x": 0.32,
+        "y": 0.66,
+        "approximate": true
+      }
+    ],
+    "rewards": [],
+    "source": "https://www.wowhead.com/forever/quest=94465",
+    "confidence": "sourced",
+    "xpScaling": {
+      "multiplier": 1,
+      "levels": {
+        "11": 660
+      }
+    },
+    "series": [
+      94449,
+      94466,
+      94467,
+      94468
+    ]
+  },
+  "94466": {
+    "questID": 94466,
+    "title": "Call of Fire",
+    "level": 14,
+    "minLevel": 10,
+    "side": 1,
+    "requiredClasses": 64,
+    "classes": [
+      "SHAMAN"
+    ],
+    "requiredRaces": 4,
+    "listedXP": 980,
+    "locations": [
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "start",
+        "name": "Braldir Ashmantle",
+        "entityID": 257808,
+        "entityType": 1,
+        "x": 0.32,
+        "y": 0.66,
+        "approximate": true
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "end",
+        "name": "Braldir Ashmantle",
+        "entityID": 257808,
+        "entityType": 1,
+        "x": 0.32,
+        "y": 0.66,
+        "approximate": true
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "sourcerequirement",
+        "name": "Stonesplinter Seer",
+        "entityID": 1166,
+        "entityType": 1,
+        "x": 0.34,
+        "y": 0.85,
+        "approximate": true,
+        "item": "Reagent Pouch"
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "sourcerequirement",
+        "name": "Tunnel Rat Geomancer",
+        "entityID": 1174,
+        "entityType": 1,
+        "x": 0.35,
+        "y": 0.23399999999999999,
+        "approximate": true,
+        "item": "Fire Tar"
+      }
+    ],
+    "rewards": [
+      {
+        "itemID": 6636,
+        "quantity": 1,
+        "kind": "guaranteed",
+        "name": "Fire Sapta",
+        "quality": 1,
+        "stats": {}
+      }
+    ],
+    "source": "https://www.wowhead.com/forever/quest=94466",
+    "confidence": "sourced",
+    "xpScaling": {
+      "multiplier": 1,
+      "levels": {
+        "14": 980
+      }
+    },
+    "series": [
+      94449,
+      94465,
+      94467,
+      94468
+    ]
+  },
+  "94467": {
+    "questID": 94467,
+    "title": "Call of Fire",
+    "level": 14,
+    "minLevel": 10,
+    "side": 1,
+    "requiredClasses": 64,
+    "classes": [
+      "SHAMAN"
+    ],
+    "requiredRaces": 4,
+    "listedXP": 1250,
+    "locations": [
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "start",
+        "name": "Braldir Ashmantle",
+        "entityID": 257808,
+        "entityType": 1,
+        "x": 0.32,
+        "y": 0.66,
+        "approximate": true
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "end",
+        "name": "Brazier of the Dormant Flame",
+        "entityID": 61934,
+        "entityType": 2,
+        "x": 0.319,
+        "y": 0.645,
+        "approximate": true
+      },
+      {
+        "areaID": 14,
+        "zone": "Durotar",
+        "role": "end",
+        "name": "Brazier of the Dormant Flame",
+        "entityID": 61934,
+        "entityType": 2,
+        "x": 0.389,
+        "y": 0.5820000000000001,
+        "approximate": true
+      }
+    ],
+    "rewards": [
+      {
+        "itemID": 6654,
+        "quantity": 1,
+        "kind": "guaranteed",
+        "name": "Torch of the Eternal Flame",
+        "quality": 1,
+        "stats": {
+          "slotbak": 23
+        }
+      }
+    ],
+    "source": "https://www.wowhead.com/forever/quest=94467",
+    "confidence": "sourced",
+    "xpScaling": {
+      "multiplier": 1,
+      "levels": {
+        "14": 1250
+      }
+    },
+    "series": [
+      94449,
+      94465,
+      94466,
+      94468
+    ]
+  },
+  "94468": {
+    "questID": 94468,
+    "title": "Call of Fire",
+    "level": 14,
+    "minLevel": 10,
+    "side": 1,
+    "requiredClasses": 64,
+    "classes": [
+      "SHAMAN"
+    ],
+    "requiredRaces": 4,
+    "listedXP": 1250,
+    "locations": [
+      {
+        "areaID": 14,
+        "zone": "Durotar",
+        "role": "start",
+        "name": "Brazier of the Dormant Flame",
+        "entityID": 61934,
+        "entityType": 2,
+        "x": 0.389,
+        "y": 0.5820000000000001,
+        "approximate": true
+      },
+      {
+        "areaID": 38,
+        "zone": "Loch Modan",
+        "role": "start",
+        "name": "Brazier of the Dormant Flame",
+        "entityID": 61934,
+        "entityType": 2,
+        "x": 0.319,
+        "y": 0.645,
+        "approximate": true
+      },
+      {
+        "areaID": 1,
+        "zone": "Dun Morogh",
+        "role": "end",
+        "name": "Bruegs Kindleborn",
+        "entityID": 257597,
+        "entityType": 1,
+        "x": 0.8759999999999999,
+        "y": 0.436,
+        "approximate": true
+      }
+    ],
+    "rewards": [
+      {
+        "itemID": 5176,
+        "quantity": 1,
+        "kind": "guaranteed",
+        "name": "Fire Totem",
+        "quality": 1,
+        "stats": {}
+      }
+    ],
+    "source": "https://www.wowhead.com/forever/quest=94468",
+    "confidence": "sourced",
+    "xpScaling": {
+      "multiplier": 1,
+      "levels": {
+        "14": 1250
+      }
+    },
+    "series": [
+      94449,
+      94465,
+      94466,
+      94467
+    ]
+  }
+}

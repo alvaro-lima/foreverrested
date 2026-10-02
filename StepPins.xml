@@ -1,0 +1,5 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Frame name="ForeverRestedMapPinTemplate" mixin="MapCanvasPinMixin,ForeverRestedMapPinMixin" virtual="true">
+        <Size x="32" y="32"/>
+    </Frame>
+</Ui>
