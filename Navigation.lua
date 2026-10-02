@@ -5,45 +5,51 @@ local function valid(map, x, y)
     return F.Number(map) and map > 0 and F.Number(x) and F.Number(y)
         and x >= 0 and x <= 1 and y >= 0 and y <= 1 and (x ~= 0 or y ~= 0)
 end
+-- Remember an observed client waypoint for this specific action. Loading
+-- screens can briefly remove the live POI without invalidating its destination.
+function N:ClientWaypoint(task,id)
+    self.clientPoints=self.clientPoints or {}
+    local quest=F.QuestLog.byID[id]
+    local key=tostring(F.Guide and F.Guide.id)..':'..tostring(task.id or id)..':'..
+        tostring(task.travelAction or task.type)..':'..tostring(quest and quest.complete==true)
+    local map,x,y=F.Call(C_QuestLog and C_QuestLog.GetNextWaypoint,id)
+    if valid(map,x,y) then self.clientPoints[key]={map,x,y};return map,x,y end
+    local cached=self.clientPoints[key]
+    if cached then return unpack(cached) end
+end
+function N:TravelWaypoint(step)
+    local dock=F.Travel:DepartureDock(step)
+    if dock then
+        local map=self:ResolveAreaMap(dock)
+        if valid(map,dock.x,dock.y) then return map,dock.x,dock.y,'Travel area (approx.)',dock.name end
+        return -- A missing dock map must not redirect to a different continent.
+    end
+    if step.travelFinal then
+        local map,x,y=self:ClientWaypoint(step,step.travelQuestID)
+        if valid(map,x,y) then return map,x,y,'Client waypoint' end
+        local data=F.GuideEngine:Metadata(step.travelQuestID)
+        local point=data and self:ReferencePoint(data,step.travelAction=='turnin' and 'end' or 'requirement')
+        map=point and self:ResolveAreaMap(point)
+        if point and valid(map,point.x,point.y) then return map,point.x,point.y,'Public area (approx.)',point.name end
+    end
+    local point=F.Travel:ArrivalArea(step)
+    local map=point and self:ResolveAreaMap(point)
+    if point and valid(map,point.x,point.y) then return map,point.x,point.y,'Travel area (approx.)',point.name end
+end
 function N:Waypoint()
     self.source, self.label, self.waypointTask = nil, nil, nil
     for _, step in ipairs(F.GuideEngine:Tasks(nil, true)) do
         local id, q = F.GuideEngine:Resolve(step)
         if not F.GuideEngine:Done(step, id, q) then
             if step.travelQuestID then
-                -- Aim at the departure harbor before a boat crossing, rather
-                -- than trying to draw a bearing across different continents.
-                local harbor
-                if step.travelFrom == 'Wetlands' and step.travelTo == 'Darkshore' then
-                    harbor = {zone='Wetlands',x=0.0832,y=0.5857,name='Menethil Harbor (Karl Boran area)'}
-                elseif step.travelFrom == 'Darkshore' and
-                    (step.travelTo == 'Wetlands' or step.travelTo == 'Teldrassil' or step.travelTo == 'Darnassus') then
-                    harbor = {zone='Darkshore',x=0.3677,y=0.4428,name='Auberdine harbor (Laird area)'}
-                end
-                if harbor then
-                    local map = self:ResolveAreaMap(harbor)
-                    if valid(map,harbor.x,harbor.y) then
-                        self.source,self.label,self.waypointTask='Travel area (approx.)',harbor.name,step
-                        return map,harbor.x,harbor.y
-                    end
-                end
-                if step.travelFinal then
-                    local map,x,y=F.Call(C_QuestLog and C_QuestLog.GetNextWaypoint,step.travelQuestID)
-                    if valid(map,x,y) then
-                        self.source,self.waypointTask='Client waypoint',step
-                        return map,x,y
-                    end
-                    local data=F.GuideEngine:Metadata(step.travelQuestID)
-                    local point=data and self:ReferencePoint(data,step.travelAction=='turnin' and 'end' or 'requirement')
-                    map=point and self:ResolveAreaMap(point)
-                    if point and valid(map,point.x,point.y) then
-                        self.source,self.label,self.waypointTask='Public area (approx.)',point.name,step
-                        return map,point.x,point.y
-                    end
+                local map,x,y,source,label=self:TravelWaypoint(step)
+                if map then
+                    self.source,self.label,self.waypointTask=source,label,step
+                    return map,x,y
                 end
             end
             if id and not F.QuestLog:TurnedIn(id) then
-                local map, x, y = F.Call(C_QuestLog and C_QuestLog.GetNextWaypoint, id)
+                local map, x, y = self:ClientWaypoint(step,id)
                 if valid(map, x, y) then self.source, self.waypointTask = "Client waypoint", step; return map, x, y end
                 if step.type == "objective" and q then
                     local record = F.GuideEngine:TargetRecord(q)
@@ -68,6 +74,14 @@ function N:Waypoint()
                             self.waypointTask = step
                             return map, point.x, point.y
                         end
+                    end
+                end
+                local area=step.type=='objective' and F.Travel:QuestArea(id)
+                if area then
+                    map=self:ResolveAreaMap(area)
+                    if valid(map,area.x,area.y) then
+                        self.source,self.label,self.waypointTask='Quest area (approx.)',area.name,step
+                        return map,area.x,area.y
                     end
                 end
             end

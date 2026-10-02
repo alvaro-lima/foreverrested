@@ -83,7 +83,7 @@ function F.Arrow:Update()
     local n, f = F.Navigation, self.frame
     if not f then return end
     local angle,distance=n.followAngle or n.angle,n.followDistance or n.distance
-    if angle == nil or not F.Number(distance) or (not self.texture and not self.lines) then
+    if F.db.hidden or angle == nil or not F.Number(distance) or (not self.texture and not self.lines) then
         self.displayAngle, self.lastYards = nil, nil
         f:Hide(); return
     end
@@ -100,6 +100,9 @@ function F.Arrow:Update()
     end
 end
 function F.Arrow:Animate(elapsed)
+    if F.db.hidden then
+        self.displayAngle = nil; self.frame:Hide(); return
+    end
     local n = F.Navigation
     local bearing,distance=n.followBearing or n.bearing,n.followDistance or n.distance
     if not F.Number(bearing) or not F.Number(distance) then

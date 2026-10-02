@@ -47,6 +47,9 @@ function E:Done(step, id, q)
         if F.QuestLog:TurnedIn(step.travelQuestID) then return true end
         local quest=F.QuestLog.byID[step.travelQuestID]
         if step.travelAction=='objective' and quest and quest.complete then return true end
+        -- Being in a return-route zone before doing the objective does not
+        -- prove that the return journey has happened.
+        if step.travelAction=='turnin' and not (quest and quest.complete) then return false end
         local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
         local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
         if info then

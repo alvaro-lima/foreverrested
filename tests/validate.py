@@ -256,9 +256,12 @@ assert(F.SecureTarget:MarkerCommand()==nil, 'unsupported native command fails cl
 SLASH_TARGET_MARKER1=previousAlias
 assert(F.Arrow.frame.parent==UIParent and F.SecureTarget.frame.parent==UIParent, 'navigation and targets are independent of the guide window')
 assert(F.Arrow.artSource:find('BronzeArrow.tga',1,true) and F.Arrow.texture, 'custom bronze arrow is selected before native fallback')
-F.UI.frame:Hide(); F.UI:NavigationTick()
-assert(F.Arrow.frame:IsShown() and F.Arrow.yards.text:match('yd$'), 'arrow remains active with tracker hidden and displays yards')
-F.UI.frame:Show()
+F.Minimap.button.scripts.OnClick(F.Minimap.button, 'LeftButton')
+assert(F.db.hidden and not F.UI.frame:IsShown() and not F.Arrow.frame:IsShown(), 'minimap toggle hides the guide and arrow immediately')
+F.UI:NavigationTick(); F.Arrow:Animate(1/60)
+assert(not F.Arrow.frame:IsShown(), 'navigation updates keep the arrow hidden')
+F.Minimap.button.scripts.OnClick(F.Minimap.button, 'LeftButton')
+assert(not F.db.hidden and F.UI.frame:IsShown() and F.Arrow.frame:IsShown() and F.Arrow.yards.text:match('yd$'), 'minimap toggle restores the guide and navigation arrow')
 function UnitName(unit) if unit=='target' then return 'Elder Snow Leopard' end end
 combat=true; F.SecureTarget:UpdateSelection()
 assert(rawget(F.SecureTarget.button,'selectedMark')==nil, 'target icon must not show a selected X')

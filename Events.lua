@@ -53,6 +53,7 @@ frame:SetScript("OnUpdate", function(_, dt)
     end
     if elapsed >= .2 then
         elapsed = 0
+        F.Travel:Tick()
         F.UI:NavigationTick()
     end
 end)

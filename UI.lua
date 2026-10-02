@@ -392,6 +392,7 @@ function U:Toggle()
     local visible = not self.frame:IsShown()
     if visible and F.Combat() then F.Print("The guide window cannot be opened during combat."); return end
     self.frame:SetShown(visible); F.db.hidden = not visible; self:Debug()
+    F.Arrow:Update()
     if F.StepPins then F.StepPins:Update() end
 end
 function U:TaskText(task)

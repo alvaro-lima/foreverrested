@@ -1,6 +1,78 @@
 local _, F = ...
 local T = {roads={}}
 F.Travel = T
+-- Dock positions: Wowhead Classic transportation guide. These remain
+-- approximate until verified against the Forever beta's transport changes.
+local menethil={zone='Wetlands',x=.047,y=.570,name='Menethil northern boat dock'}
+local auberdineSouth={zone='Darkshore',x=.327,y=.437,name='Auberdine southern boat dock'}
+local auberdineNorth={zone='Darkshore',x=.332,y=.402,name='Auberdine northern boat dock'}
+local ruttheran={zone='Teldrassil',x=.555,y=.930,name="Rut'theran boat dock"}
+T.docks={
+    Wetlands={Darkshore=menethil},
+    Darkshore={Wetlands=auberdineSouth,Teldrassil=auberdineNorth,Darnassus=auberdineNorth},
+    Teldrassil={Darkshore=ruttheran},Darnassus={Darkshore=ruttheran},
+}
+function T:DepartureDock(step)
+    local destinations=self.docks[step.travelFrom]
+    return destinations and destinations[step.travelTo]
+end
+function T:QuestArea(id)
+    -- Astranaar's western road entrance, sourced from Shindrell's location
+    -- in the installed quest reference. This guides arrival, not the exact
+    -- spot at which the waterskin can be filled.
+    if id==94500 then return {zone='Ashenvale',x=.346,y=.488,name='Astranaar arrival area; fill the waterskin in the lake'} end
+end
+function T:ArrivalArea(step)
+    if step.travelFinal and step.travelDestination and F.Number(step.travelDestination.x)
+        and F.Number(step.travelDestination.y) then return step.travelDestination end
+    if step.travelFrom=='Darkshore' and step.travelTo=='Ashenvale' then
+        return {zone='Ashenvale',x=.346,y=.488,name='Astranaar western arrival area'}
+    elseif step.travelFrom=='Ashenvale' and step.travelTo=='Darkshore' then
+        return {zone='Darkshore',x=.327,y=.437,name='Auberdine southern boat dock'}
+    end
+end
+function T:Tick()
+    local step=F.Guide and F.db and F.Guide.steps[F.db.step]
+    local dock=step and step.travelQuestID and self:DepartureDock(step)
+    if not dock or F.GuideEngine:Done(step) then self.motion=nil; return end
+    if step.travelAction=='turnin' then
+        local quest=F.QuestLog.byID[step.travelQuestID]
+        if not (quest and quest.complete) then self.motion=nil; return end
+    end
+    local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
+    local info=F.Call(C_Map and C_Map.GetMapInfo,map)
+    local x,y=F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition,map,'player'))
+    local speed=F.Call(GetUnitSpeed,'player')
+    if not info or info.name~=dock.zone or not F.Number(x) or not F.Number(y)
+        or not F.Number(speed) or F.Call(IsSwimming)==true or F.Call(IsFalling)==true
+        or F.Call(UnitOnTaxi,'player')==true or F.Call(UnitIsDeadOrGhost,'player')==true then
+        self.motion=nil; return
+    end
+    local instance,position
+    if CreateVector2D then
+        instance,position=F.Call(C_Map.GetWorldPosFromMapPos,map,CreateVector2D(x,y))
+    end
+    local wx,wy=F.XY(position)
+    if not F.Number(wx) or not F.Number(wy) then self.motion=nil; return end
+    local sample=self.motion
+    if not sample or sample.id~=step.id or sample.instance~=instance then
+        sample={id=step.id,instance=instance,count=0};self.motion=sample
+    end
+    if (x-dock.x)^2+(y-dock.y)^2<=.02^2 then sample.nearDock=true end
+    local distance=sample.x and math.sqrt((wx-sample.x)^2+(wy-sample.y)^2) or 0
+    -- Ordinary movement and swimming cannot confirm boarding. Require three
+    -- consecutive samples of passive world movement after visiting the dock.
+    if sample.nearDock and speed==0 and distance>.5 and distance<30 then
+        sample.count=sample.count+1
+    else sample.count=0 end
+    sample.x,sample.y=wx,wy
+    if sample.count>=3 then
+        F.db.confirmedSteps=F.db.confirmedSteps or {}
+        F.db.confirmedSteps[step.id]=true
+        self.motion=nil
+        F.Refresh()
+    end
+end
 local function road(a,b,outbound,inbound)
     T.roads[a]=T.roads[a] or {}; T.roads[b]=T.roads[b] or {}
     T.roads[a][b]=outbound; T.roads[b][a]=inbound
@@ -79,6 +151,7 @@ function T:EnsureSteps(guide, runtime)
                             confirmOnNext=true,travelQuestID=id,travelAction=task.type,
                             travelZones=zones,travelLeg=index,travelFinal=index==#legs,
                             travelFrom=leg.from,travelTo=leg.zone,
+                            travelDestination=destination,
                             travelX=destination.x,travelY=destination.y,classes=task.classes,minLevel=task.minLevel,
                             requiredRaces=task.requiredRaces,unlockTerminal=step.unlockTerminal or task.unlockTerminal}
                     end

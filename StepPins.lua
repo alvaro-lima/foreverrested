@@ -202,6 +202,7 @@ end
 function P:TaskLocation(task)
     local id,q = F.GuideEngine:Resolve(task)
     local location
+    if task.travelQuestID then return F.Navigation:TravelWaypoint(task) end
     if task.type == "objective" and q then
         local record = F.GuideEngine:TargetRecord(q)
         location = record and record.location
@@ -213,7 +214,7 @@ function P:TaskLocation(task)
             location = F.Navigation:ReferencePoint(data,role)
         end
     end
-    location = location or task
+    location = location or task.type=='objective' and id and F.Travel:QuestArea(id) or task
     local map = location.zone and F.Navigation:ResolveAreaMap(location) or location.mapID
     if F.Number(map) and F.Number(location.x) and F.Number(location.y)
         and location.x>=0 and location.x<=1 and location.y>=0 and location.y<=1 then
