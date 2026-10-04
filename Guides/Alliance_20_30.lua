@@ -184,5 +184,5 @@ delivery(g,"kayneth-intro","Report to Kayneth Stillwind",4581)
 cycle(g,"forsaken-disease","Eastern forests: investigate Forsaken diseases",{1011})
 cycle(g,"fallen-sky-lake","Fallen Sky Lake: recover the requested item",{1035},"Check the lake enemies and safe exit before entering. This follows the earlier Pelturas chain.")
 optional(g,"ashenvale-final-detours","Optional higher-level eastern camps",{1022,1012,1021,1031,1032},"Howling Vale, the insane druids and satyr branches are harder. Only take suitable offered quests; several targets are above this bracket and may require a group. These are not required to finish the regional circuit.")
-g.revision=2
+g.revision=3
 D:Finish(g,"ashenvale","At 30, choose your next regional route when available. Finish useful accepted branches first; 30-40 guides are not installed.")

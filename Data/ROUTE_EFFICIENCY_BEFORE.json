@@ -5403,6 +5403,42 @@
       },
       {
         "requiredRaces": 0,
+        "note": "Take suitable local quests actually offered. Gerenzo's Orders includes an escort; Further Instructions visits the Barrens. Check enemy levels before Charred Vale or Gerenzo fights, and avoid Horde towns.",
+        "legacyGroupID": "stonetalon-side-work",
+        "id": "stonetalon-side-work:pickup:1093",
+        "questID": 1093,
+        "minLevel": 16,
+        "text": "Accept Super Reaper 6000",
+        "type": "pickup",
+        "auditPrerequisites": {},
+        "auditPrerequisitesAny": {}
+      },
+      {
+        "requiredRaces": 0,
+        "note": "Take suitable local quests actually offered. Gerenzo's Orders includes an escort; Further Instructions visits the Barrens. Check enemy levels before Charred Vale or Gerenzo fights, and avoid Horde towns.",
+        "legacyGroupID": "stonetalon-side-work",
+        "id": "stonetalon-side-work:objective:1093",
+        "questID": 1093,
+        "minLevel": 16,
+        "text": "Complete Super Reaper 6000",
+        "type": "objective",
+        "auditPrerequisites": {},
+        "auditPrerequisitesAny": {}
+      },
+      {
+        "requiredRaces": 0,
+        "note": "Take suitable local quests actually offered. Gerenzo's Orders includes an escort; Further Instructions visits the Barrens. Check enemy levels before Charred Vale or Gerenzo fights, and avoid Horde towns.",
+        "legacyGroupID": "stonetalon-side-work",
+        "id": "stonetalon-side-work:turnin:1093",
+        "questID": 1093,
+        "minLevel": 16,
+        "text": "Turn in Super Reaper 6000",
+        "type": "turnin",
+        "auditPrerequisites": {},
+        "auditPrerequisitesAny": {}
+      },
+      {
+        "requiredRaces": 0,
         "type": "objective",
         "clusterText": "Stonetalon: collect pridewing venom sacs: objectives",
         "tasks": [

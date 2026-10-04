@@ -75,7 +75,7 @@ its objectives from the queue. Advice remains in the action tooltip.
 
 ## Required XP progression correction
 
-The introductory Ashenvale/Stonetalon chapter now includes Super Reaper 6000 as required local work and Aggressive Defense before optional city detours. Aggressive Defense keeps its stable action IDs and is removed from the next chapter; a level-23 safety check precedes its circuit. Required listed quest rewards increase from 19,155 to 22,755 XP, excluding optional and class-specific work. This does not guarantee the full level-24 requirement.
+The introductory Ashenvale/Stonetalon chapter includes Super Reaper 6000, Aggressive Defense, Raene's delivery to Shael'dryn, and Elemental Bracers as required local work. Distant city chains, escorts, Barrens work, and higher-level detours are no longer appended as optional actions at its exit. Retained actions keep their IDs. Required listed quest rewards total 25,535 XP, excluding optional and class-specific work. The level-23 safety check and live level-24 recovery remain; the quest rewards do not guarantee reaching 24.
 
 Mainland chapter bands describe quest circuits plus **Required XP recovery**, with actual level and live XP governing completion. Level-24 Ashenvale recovery uses Foulweald Warriors (23-24); earlier recovery retains Wrathtail Myrmidons (20-21). Final Ashenvale recovery uses Ghostpaw Alphas (27-28) instead of lower-level furbolgs. Optional XP is never assumed.
 

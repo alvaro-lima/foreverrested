@@ -14,7 +14,7 @@ Level bands describe quest circuits plus explicit required combat recovery. They
 | 27-28 Duskwood: worgen and the hermit | 7,050 | 1 |
 | 28-29 Wetlands: shipwrecks and final raptors | 7,100 | 1 |
 | 29-30 Duskwood: final patrols | 10,050 | 1 |
-| 20-24 Ashenvale / Stonetalon: introductions | 23,885 | 2 |
+| 20-24 Ashenvale / Stonetalon: introductions | 25,535 | 2 |
 | 24-27 Ashenvale: eastern camps | 4,550 | 1 |
 | 27-30 Ashenvale: cleansing and lake circuits | 19,850 | 1 |
 | 1-5 Coldridge Valley | 2,125 | 2 |
@@ -44,7 +44,7 @@ Level bands describe quest circuits plus explicit required combat recovery. They
 
 Super Reaper 6000 is required local work beside the Gaxim circuit. Aggressive Defense is scheduled in the introductory chapter after a level-23 safety check, with the same action IDs and no duplicate objectives in the next chapter.
 Level-24 recovery uses Foulweald Warriors (23–24); earlier recovery retains Wrathtail Myrmidons (20–21). Final Ashenvale recovery uses Ghostpaw Alphas (27–28) instead of level-24–25 furbolgs. City deliveries, escorts and higher-level detours remain optional.
-Required listed quest XP in the introductory chapter increases from 19,155 to 22,755. Combat and actual rewards still determine the remaining gap; this is not a promise that those two quests supply three-quarters of a level.
+The introductory chapter now includes the nearby Raene delivery and Elemental Bracers circuit, bringing its required listed reward XP to 25,535. The long city, Barrens, escort and high-level optional detours are no longer scheduled at its exit. This still leaves substantial XP recovery; the listed reward total cannot establish an exit level at 24.
 
 ## Limits
 

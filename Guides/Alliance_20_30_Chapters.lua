@@ -33,7 +33,7 @@ local function auditProgression(g)
   steps[#steps+1]=s
  end
  steps[#steps+1]=recovery(g,'xp-exit:'..g.id,g.maxLevel)
- g.steps=steps;g.revision=6
+ g.steps=steps;g.revision=(g.id=='alliance-kalimdor-20-24' or g.id=='alliance-kalimdor-24-27') and 7 or 6
 end
 -- Short visits built from our own sourced quest circuits, never third-party routes.
 local function append(g,source,startKey,endKey)
@@ -45,7 +45,7 @@ local function append(g,source,startKey,endKey)
         if active and step.id~='entry-class' and (step.type~='grind' or step.id=='ashenvale-before-foulweald')
             and not step.id:find('%-finish$') and not step.id:find('%-class30$')
             and not (g.id=='alliance-kalimdor-20-24' and
-             (key=='stonetalon-city-detours' or key=='stonetalon-side-work')) then
+             (key=='stonetalon-city-detours' or (key=='stonetalon-side-work' and step.questID~=1093))) then
             local copy={};for k,v in pairs(step) do copy[k]=v end
             if step.id=='ashenvale-before-foulweald' then
                 copy=recovery(g,step.id,23)

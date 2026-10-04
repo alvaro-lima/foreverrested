@@ -39,7 +39,7 @@ def main():
     lines += ['','## Ashenvale correction','',
         'Super Reaper 6000 is required local work beside the Gaxim circuit. Aggressive Defense is scheduled in the introductory chapter after a level-23 safety check, with the same action IDs and no duplicate objectives in the next chapter.',
         'Level-24 recovery uses Foulweald Warriors (23–24); earlier recovery retains Wrathtail Myrmidons (20–21). Final Ashenvale recovery uses Ghostpaw Alphas (27–28) instead of level-24–25 furbolgs. City deliveries, escorts and higher-level detours remain optional.',
-        'Required listed quest XP in the introductory chapter increases from 19,155 to 22,755. Combat and actual rewards still determine the remaining gap; this is not a promise that those two quests supply three-quarters of a level.','',
+        'The introductory chapter now includes the nearby Raene delivery and Elemental Bracers circuit, bringing its required listed reward XP to 25,535. The long city, Barrens, escort and high-level optional detours are no longer scheduled at its exit. This still leaves substantial XP recovery; the listed reward total cannot establish an exit level at 24.','',
         '## Limits','']+['- '+s for s in output['limits']]
     (ROOT/'Data/XP_PROGRESSION_AUDIT.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print('PASS:',len(rows),'chapters; required-only rewards, explicit recovery and flexible exits')

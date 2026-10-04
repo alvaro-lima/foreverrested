@@ -91,7 +91,7 @@ def main():
   if changed:orders[g['id']]=[s['id'] for s in steps]
   uncertain=sorted({s['questID'] for s in steps if s.get('questID') and not local.get(s['questID'])})
   reports.append({'guideID':g['id'],'title':g['title'],'changed':changed,'moves':moves,'incompleteLocalDependencyQuestIDs':uncertain,'before':[s['id'] for s in g['steps']],'after':[s['id'] for s in steps]})
- output={'chaptersReviewed':len(reports),'changedChapters':len(orders),'limits':['Hub and objective locations are approximate. No travel-time savings are claimed.','Unknown geography and dependency chains retain their authored order; remaining serial work is not automatically a defect.','Quests absent from installed QuestieDB are not reordered automatically. Zephras story stages still need stronger dependency evidence before further batching.','No objective changes chapter and no action IDs are removed.'],'chapters':reports}
+ output={'chaptersReviewed':len(reports),'changedChapters':len(orders),'limits':['Hub and objective locations are approximate. No travel-time savings are claimed.','Unknown geography and dependency chains retain their authored order; remaining serial work is not automatically a defect.','Quests absent from installed QuestieDB are not reordered automatically. Zephras story stages still need stronger dependency evidence before further batching.','The Ashenvale 20-24 revision removes optional detours from its playable chapter and moves two local quest circuits into it; retained actions keep their IDs. The route-order pass itself preserves each current chapter’s action set.'],'chapters':reports}
  (ROOT/'Data/ROUTE_EFFICIENCY_AUDIT.json').write_text(json.dumps(output,indent=2)+'\n')
  lines=['# Route efficiency review','',f'All {len(reports)} playable chapters reviewed; {len(orders)} chapters reordered.','',
  'Collect available nearby quests before leaving, complete compatible objectives on the same circuit, then combine hub returns. Prerequisite hand-ins remain before their follow-ups.','',
@@ -100,7 +100,7 @@ def main():
  lines+=['','## Limits','']+['- '+s for s in output['limits']]
  (ROOT/'Data/ROUTE_EFFICIENCY_AUDIT.md').write_text('\n'.join(lines)+'\n')
  # Plain readable Lua strings, preserving existing stable action identities.
- rows=['local _,F=...','-- Reviewed chapter orders; no actions or chapter ownership changes.','local orders={']
+ rows=['local _,F=...','-- Reviewed orders for the current authored chapter actions.','local orders={']
  rows += ['['+json.dumps(k)+']={'+','.join(json.dumps(s) for s in v)+'},' for k,v in orders.items()]
  rows += ['}','for id,order in pairs(orders) do',' local g=assert(F.GuideLibrary.guides[id]);local byID={}',' for _,s in ipairs(g.steps) do byID[s.id]=s end',' local steps={}',' for _,key in ipairs(order) do steps[#steps+1]=assert(byID[key],key);byID[key]=nil end',' assert(not next(byID),"Unscheduled action in "..id)',' g.steps=steps;g.revision=g.revision+1','end']
  (ROOT/'Guides/Alliance_RouteOrder.lua').write_text('\n'.join(rows)+'\n')

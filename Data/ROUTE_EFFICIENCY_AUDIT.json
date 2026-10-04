@@ -5,7 +5,7 @@
     "Hub and objective locations are approximate. No travel-time savings are claimed.",
     "Unknown geography and dependency chains retain their authored order; remaining serial work is not automatically a defect.",
     "Quests absent from installed QuestieDB are not reordered automatically. Zephras story stages still need stronger dependency evidence before further batching.",
-    "No objective changes chapter and no action IDs are removed."
+    "The Ashenvale 20-24 revision removes optional detours from its playable chapter and moves two local quest circuits into it; retained actions keep their IDs. The route-order pass itself preserves each current chapter\u2019s action set."
   ],
   "chapters": [
     {
@@ -787,6 +787,9 @@
         "gnome-respite-pickup",
         "gnome-respite-objectives",
         "gnome-respite-return",
+        "stonetalon-side-work:pickup:1093",
+        "stonetalon-side-work:objective:1093",
+        "stonetalon-side-work:turnin:1093",
         "pridewings-objectives",
         "pridewings-return",
         "stonetalon-peak-return",
@@ -843,6 +846,9 @@
         "gnome-respite-pickup",
         "gnome-respite-objectives",
         "gnome-respite-return",
+        "stonetalon-side-work:pickup:1093",
+        "stonetalon-side-work:objective:1093",
+        "stonetalon-side-work:turnin:1093",
         "pridewings-objectives",
         "pridewings-return",
         "stonetalon-peak-return",

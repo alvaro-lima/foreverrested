@@ -45,4 +45,4 @@ Collect available nearby quests before leaving, complete compatible objectives o
 - Hub and objective locations are approximate. No travel-time savings are claimed.
 - Unknown geography and dependency chains retain their authored order; remaining serial work is not automatically a defect.
 - Quests absent from installed QuestieDB are not reordered automatically. Zephras story stages still need stronger dependency evidence before further batching.
-- No objective changes chapter and no action IDs are removed.
+- The Ashenvale 20-24 revision removes optional detours from its playable chapter and moves two local quest circuits into it; retained actions keep their IDs. The route-order pass itself preserves each current chapter’s action set.
