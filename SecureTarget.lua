@@ -85,29 +85,57 @@ function S:Create()
             icon:SetTexCoord(left, left + .25, top, top + .25)
         end
         b:SetScript("PostClick",function(button,click)
-            if click=="LeftButton" and button.mob and F.Call(UnitName,"target")==button.mob
+            local matched=false
+            local name=F.Call(UnitName,"target")
+            for _,mob in ipairs(button.mobs or {}) do if name==mob then matched=true;break end end
+            if click=="LeftButton" and matched
                 and F.Call(UnitIsDeadOrGhost,"target")~=true and F.Call(UnitCanAttack,"player","target")==true then
                 self.toolTargetGUID=F.Call(UnitGUID,"target")
                 if F.UI.frame then F.UI:NavigationTick() end
             end
         end)
         b:SetScript("OnDragStart", dragStart); b:SetScript("OnDragStop", dragStop)
-        F.Tooltips:Attach(b, function(button)
-            if not GameTooltip then return end
-            GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
-            GameTooltip:SetText(button.mob or "No kill target", 1, .82, 0)
-            GameTooltip:AddLine("Marker: " .. button.markerName, 1, .82, 0)
-            if button.progress then GameTooltip:AddLine(button.progress, 1, 1, 1, true) end
-            GameTooltip:AddLine("Dead and friendly targets are rejected. Busy mobs cannot be filtered automatically.",1,1,1,true)
-            GameTooltip:AddLine(self.markerCommand and "Left-click to target and mark. Right-drag to move panel."
-                or "Left-click to target. Marking unavailable on this client.", 1, .82, 0, true)
-            if self.markerCommand then GameTooltip:AddLine("Marking follows your party / raid permissions.", 1, 1, 1, true) end
-            if F.Combat() then GameTooltip:AddLine("Targets remain fixed until combat ends.", 1, .82, 0, true) end
+        F.Tooltips:Attach(b,function(owner)
+            if not GameTooltip or not owner.mob then return end
+            GameTooltip:SetOwner(owner,"ANCHOR_RIGHT")
+            local grouped=owner.mobs and #owner.mobs>1
+            if grouped then GameTooltip:SetText("Target list",1,.82,0)
+            else GameTooltip:SetText(owner.mob,1,.35,.15) end
+            for i=grouped and 1 or 2,#(owner.mobs or {}) do GameTooltip:AddLine(owner.mobs[i],1,.35,.15) end
+            if owner.progress then
+                GameTooltip:AddLine(" ")
+                GameTooltip:AddLine(owner.progress,1,1,1,true)
+            end
             GameTooltip:Show()
-        end)
+        end,true)
         b:Hide(); self.buttons[i] = b
     end
     self.button = self.buttons[1]
+    local titleHover=CreateFrame("Frame",nil,panel)
+    titleHover:SetPoint("CENTER",title,"CENTER",0,0)
+    titleHover:SetSize(60,16);titleHover:EnableMouse(true)
+    titleHover:RegisterForDrag("LeftButton","RightButton")
+    titleHover:SetScript("OnDragStart",dragStart);titleHover:SetScript("OnDragStop",dragStop)
+    self.titleHover=titleHover
+    F.Tooltips:Attach(titleHover,function(owner)
+        if not GameTooltip then return end
+        GameTooltip:SetOwner(owner,"ANCHOR_RIGHT")
+        GameTooltip:SetText("Targets",1,.82,0)
+        for _,button in ipairs(self.buttons) do
+            if button.mob then
+                GameTooltip:AddLine(button.markerName..": "..button.mob,1,.35,.15)
+                for i=2,#(button.mobs or {}) do GameTooltip:AddLine(button.mobs[i],1,.35,.15) end
+                if button.progress then GameTooltip:AddLine(button.progress,1,1,1,true) end
+            end
+        end
+        GameTooltip:AddLine(" ")
+        GameTooltip:AddLine("Dead and friendly targets are rejected. Busy mobs cannot be filtered automatically.",.65,.65,.65,true)
+        GameTooltip:AddLine(self.markerCommand and "Left-click a marker to target and mark. Right-drag to move panel."
+            or "Left-click a marker to target. Marking unavailable on this client.",.25,1,.25,true)
+        if self.markerCommand then GameTooltip:AddLine("Marking follows your party / raid permissions.",.65,.65,.65,true) end
+        if F.Combat() then GameTooltip:AddLine("Targets remain fixed until combat ends.",1,.82,0,true) end
+        GameTooltip:Show()
+    end)
 end
 function S:MarkerCommand()
     if type(SetRaidTarget) ~= "function" then return end
@@ -117,12 +145,18 @@ function S:MarkerCommand()
     if type(alias) == "string" and alias:match("^/%S+$") then return alias end
     if SlashCmdList and (SlashCmdList.TARGET_MARKER or SlashCmdList.RAIDTARGET) then return "/tm" end
 end
-function S:Macro(mob, marker)
+function S:Macro(mob, marker, mobs)
     if not mob then return "" end
     -- Clear the previous target first: a failed name lookup must never mark an
     -- unrelated unit. Native conditions reject missing, friendly or dead units.
     -- The ! prefix makes repeated clicks retain the marker rather than toggle it.
-    local macro = "/cleartarget\n/targetexact " .. mob .. "\n/cleartarget [@target,dead][@target,noharm]"
+    local macro = "/cleartarget\n/targetexact " .. mob
+    -- Keep a living hostile match; try the next source when the previous
+    -- lookup found no target, a corpse, or a friendly unit.
+    for i=2,#(mobs or {}) do
+        macro = macro .. "\n/targetexact [@target,noexists][@target,dead][@target,noharm] " .. mobs[i]
+    end
+    macro = macro .. "\n/cleartarget [@target,dead][@target,noharm]"
     if self.markerCommand then macro = macro .. "\n" .. self.markerCommand .. " [@target,exists,harm,nodead] !" .. marker end
     return macro
 end
@@ -141,11 +175,22 @@ function S:Update(mob)
     self:UpdateTasks(mob and {{mob = mob}} or {})
 end
 function S:UpdateTasks(targets)
-    local clean, used = {}, {}
+    local clean, used, groups = {}, {}, {}
     for _, target in ipairs(targets or {}) do
-        local mob = sanitize(target.mob)
+        for _,name in ipairs(target.mobs or {target.mob}) do
+        local mob = sanitize(name)
         if mob and not used[mob] then
-            used[mob] = true; clean[#clean + 1] = {mob = mob, text = target.text}
+            used[mob] = true
+            local key=target.questID and target.objectiveIndex and target.questID..":"..target.objectiveIndex
+            local group=key and groups[key]
+            if group then
+                group.mobs[#group.mobs+1]=mob
+            else
+                group={mob=mob,mobs={mob},text=target.text,questID=target.questID,objectiveIndex=target.objectiveIndex}
+                clean[#clean+1]=group
+                if key then groups[key]=group end
+            end
+        end
         end
     end
     self.desiredTargets = clean; self.desired = clean[1] and clean[1].mob
@@ -156,8 +201,13 @@ function S:UpdateTasks(targets)
     for i, b in ipairs(self.buttons) do
         local target = clean[i]
         local mob = target and target.mob
-        if b.mob ~= mob then b:SetAttribute("macrotext", self:Macro(mob, b.marker)) end
-        b.mob, b.progress = mob, target and target.text
+        local macro=self:Macro(mob,b.marker,target and target.mobs)
+        if b.targetMacro ~= macro then
+            F.Tooltips:Cancel(b)
+            b:SetAttribute("macrotext",macro)
+            b.targetMacro=macro
+        end
+        b.mob, b.mobs, b.progress = mob, target and target.mobs, target and target.text
         b:SetShown(mob ~= nil)
     end
     self.current = clean[1] and clean[1].mob
@@ -171,7 +221,7 @@ function S:UpdateTasks(targets)
         local b=self.buttons[i]
         b:ClearAllPoints(); b:SetPoint("TOPLEFT",left+((i-1)%4)*36,-34-row*36)
     end
-    self.frame:SetShown(visible > 0)
+    self.frame:SetShown(visible > 0 and not F.db.targetHidden)
     self:UpdateSelection()
 end
 function S:UpdateSelection()

@@ -16,7 +16,7 @@ function UnitRace() return race,race end
 F.LoadDatabase(); F.UI:Create(); F.SecureTarget:Create(); F.Minimap:Create()
 local L,E=F.GuideLibrary,F.GuideEngine
 local ids={'alliance-duskwood-20-30','alliance-wetlands-20-30','alliance-ashenvale-20-30'}
-assert(#L:GuidesForBracket(3)==3)
+assert(#L:GuidesForBracket(3)==11)
 live={}; C_QuestLog.IsQuestFlaggedCompleted=function() return false end
 for _,id in ipairs(ids) do
  L:Select(id)
@@ -31,7 +31,7 @@ for _,id in ipairs(ids) do
     assert(data and data.side~=2,'required Alliance quest must have sourced facts')
     assert(not task.slot,'no live-log fixture bindings')
     local record=F.QuestPolicy:Record(task.questID)
-    if task.type=='pickup' and not step.recovery and not step.unlockChain then
+    if task.type=='pickup' and not task.optional and not step.recovery and not step.unlockChain then
      for _,prior in ipairs(record.prerequisites or {}) do
       assert(turnins[prior] or F.QuestPolicy:Satisfied(prior),'missing/late prerequisite '..prior..' for '..task.questID)
      end
@@ -87,9 +87,9 @@ L:Select(ids[1]);L:Select(ids[2])
 assert(F.UI:TaskPriority({questID=94505})=='Critical','completed water reward retains key marker')
 race='Gnome';assert(not F.QuestPolicy:UnlockApplies(F.QuestPolicy.foreverUnlocks['forever-shaman-water']))
 class='MAGE';race='NightElf';level=20
-assert(L:Recommended()==ids[3])
-race='Human';assert(L:Recommended()==ids[1])
-race='Dwarf';assert(L:Recommended()==ids[2])
+assert(L:Recommended()=='alliance-kalimdor-20-24')
+race='Human';assert(L:Recommended()=='alliance-eastern-20-22')
+race='Dwarf';assert(L:Recommended()=='alliance-eastern-20-22')
 -- Reaching 20 inserts the new class detour without needing a guide switch.
 class='SHAMAN'; level=19
 local fresh={id='level-up-fixture',title='Level-up route',faction='Alliance',minLevel=20,maxLevel=30,

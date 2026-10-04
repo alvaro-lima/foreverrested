@@ -15,6 +15,8 @@ Data/QuestCatalog.lua
 GuideLibrary.lua
 Guides/AllianceQuestData.lua
 Guides/Alliance_20_30_QuestData.lua
+Guides/Alliance_ObjectLocations.lua
+Guides/Alliance_HuntingLocations.lua
 Data/ClassicQuestPolicy.lua
 Data/ForeverUnlockFacts.lua
 Data/ForeverQuestPolicy.lua
@@ -23,8 +25,14 @@ Travel.lua
 Guides/Alliance_01_10.lua
 Guides/Alliance_10_20.lua
 Guides/Alliance_20_30.lua
+Guides/Alliance_20_30_Recovery.lua
+Guides/Alliance_20_30_Chapters.lua
 Guides/Zephras_10_14.lua
+Guides/Alliance_10_20_ActionIDs.lua
+Guides/Alliance_01_20_Sections.lua
+Guides/Alliance_RouteOrder.lua
 Guides/TargetData.lua
+Guides/Alliance_ActionLocations.lua
 QuestLog.lua
 GuideEngine.lua
 QuestPolicy.lua
@@ -34,6 +42,7 @@ StepPins.lua
 StepPins.xml
 Arrow.lua
 Tracker.lua
+ObjectiveQueue.lua
 GearRewards.lua
 UI.lua
 SecureTarget.lua

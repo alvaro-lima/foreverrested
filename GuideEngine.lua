@@ -32,6 +32,64 @@ function E:Applies(task)
     end
     return true
 end
+function E:QuestItemCount(itemID)
+    if not itemID then return end
+    -- Current clients expose bag counts through C_Item; retain legacy support.
+    -- Banked items do not satisfy a collection/assembly stage in the field.
+    local count=F.Call(C_Item and C_Item.GetItemCount,itemID,false,false)
+    if not F.Number(count) then count=F.Call(GetItemCount,itemID,false,false) end
+    return count
+end
+function E:ObjectiveLocation(id)
+    local locations=F.QuestObjectiveLocations and F.QuestObjectiveLocations[id]
+    if not locations then return end
+    for _,point in ipairs(locations) do
+        local count=point.resultItemID and self:QuestItemCount(point.resultItemID)
+        if F.Number(count) and count>0 then return point end
+    end
+    for _,point in ipairs(locations) do
+        local count=point.itemID and self:QuestItemCount(point.itemID)
+        if not point.itemID or not F.Number(count) or count<1 then return point end
+    end
+end
+-- Shared action evidence for tooltips, transport planning and authoring checks.
+-- A chapter zone or another phase's NPC never supplies a missing destination.
+function E:ActionLocations(task)
+    local role=({pickup='start',objective='requirement',turnin='end'})[task.type]
+    if not role then return {} end
+    local function valid(p)
+        return p and type(p.zone)=='string' and p.zone~=''
+            and (p.x==nil and p.y==nil or F.Number(p.x) and F.Number(p.y)
+                and p.x>=0 and p.x<=1 and p.y>=0 and p.y<=1)
+    end
+    if valid(task) then return {task} end
+    local id=self:Resolve(task)
+    local explicit=role=='requirement' and F.QuestObjectiveLocations and F.QuestObjectiveLocations[id]
+    if explicit then
+        for _,point in ipairs(explicit) do if not valid(point) then return {} end end
+        return explicit
+    end
+    local data=self:Metadata(id)
+    local quest=id and F.QuestLog.byID[id]
+    local locations={}
+    for _,point in ipairs(data and data.locations or {}) do
+        local objective=role=='requirement' and quest and point.objectiveIndex and quest.objectives and quest.objectives[point.objectiveIndex]
+        if not (objective and objective.finished) and valid(point) and (point.role==role or role=='requirement' and point.role=='sourcerequirement') then
+            locations[#locations+1]=point
+        end
+    end
+    return locations
+end
+function E:ActionLocation(task)
+    local locations=self:ActionLocations(task)
+    if task.type=='objective' and #locations>0 then
+        local current=self:ObjectiveLocation(self:Resolve(task))
+        if current then return current end
+    end
+    local role=({pickup='start',objective='requirement',turnin='end'})[task.type]
+    local point=F.Navigation and F.Navigation:ReferencePoint({locations=locations},role)
+    return point or locations[1]
+end
 function E:Current()
     F.db.step = math.max(1, math.min(#F.Guide.steps, F.db.step))
     local step = F.Guide.steps[F.db.step]
@@ -40,11 +98,27 @@ function E:Current()
 end
 function E:Done(step, id, q)
     if not self:Applies(step) then return true end
+    if step.unlockSpell and (F.Call(IsSpellKnown,step.unlockSpell)==true
+        or F.Call(IsPlayerSpell,step.unlockSpell)==true
+        or F.Call(C_SpellBook and C_SpellBook.IsSpellKnown,step.unlockSpell)==true) then return true end
     if step.flightPathStop and F.Travel:KnowsFlightPath(step.flightPathStop) then return true end
     if step.flightPathQuestID and F.QuestLog:TurnedIn(step.flightPathQuestID) then return true end
     -- The completed unlock proves its earlier stages were finished, even if
     -- the beta client no longer reports every replaced breadcrumb flag.
     if step.unlockTerminal and F.QuestPolicy:Satisfied(step.unlockTerminal) then return true end
+    if step.entryTravel then
+        if F.db.confirmedSteps and F.db.confirmedSteps[step.id] then return true end
+        if F.Call(UnitOnTaxi,'player')==true then return false end
+        if step.travelMode=='portal-ruttheran' or step.travelMode=='portal-darnassus'
+            or step.travelMode=='boat' then
+            return F.Travel:TransportArrived(step)
+        end
+        if F.Travel:TransportArrived(step) then return true end
+        local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
+        local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
+        local zone=F.Call(GetRealZoneText) or info and info.name
+        return zone==step.travelTo or zone==step.entryGoal
+    end
     if step.travelQuestID then
         if F.QuestLog:TurnedIn(step.travelQuestID) then return true end
         local quest=F.QuestLog.byID[step.travelQuestID]
@@ -52,10 +126,21 @@ function E:Done(step, id, q)
         -- Being in a return-route zone before doing the objective does not
         -- prove that the return journey has happened.
         if step.travelAction=='turnin' and not (quest and quest.complete) then return false end
+        if step.confirmOnNext and F.db.confirmedSteps and F.db.confirmedSteps[step.id] then return true end
         if F.Call(UnitOnTaxi,'player')==true then return false end
+        if step.travelMode=='portal-ruttheran' or step.travelMode=='portal-darnassus' then
+            return F.Travel:TransportArrived(step)
+        end
+        if F.Travel:TransportArrived(step) then return true end
         local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
         local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
         if info then
+            -- The following quest step owns the trip from landing to the NPC.
+            if info.name==step.travelTo and F.Travel:FlightLeg(step) then return true end
+            -- For a final land leg, entering the destination zone completes
+            -- travel. The next objective or turn-in owns the local walk.
+            -- Boats still require their evidenced arrival dock.
+            if step.travelFinal and step.travelMode~='boat' and info.name==step.travelTo then return true end
             for index=step.travelLeg,#step.travelZones do
                 if info.name==step.travelZones[index] then
                     if not step.travelFinal then return true end
@@ -121,6 +206,7 @@ end
 function E:StepState(index)
     local step = F.Guide.steps[index]
     if not step then return "waiting" end
+    if step.type=='travel' and F.db.skipped[index] then return 'skipped' end
     local id, q = self:Resolve(step)
     if self:Done(step, id, q) then return "complete" end
     if F.db.skipped[index] then return "skipped" end
@@ -164,7 +250,16 @@ function E:NextRelevantIndex()
 end
 function E:Targets()
     local targets, used = {}, {}
-    for _, task in ipairs(self:Tasks(nil, true)) do
+    local tasks=self:Tasks(nil,true)
+    -- Keep the next accepted hunt available while finishing a hand-in or
+    -- other noncombat step. Only inspect the current chapter's next action.
+    local nextIndex=self:NextRelevantIndex()
+    if nextIndex then
+        for _,task in ipairs(self:Tasks(F.Guide.steps[nextIndex],true)) do
+            if task.type=='objective' then tasks[#tasks+1]=task end
+        end
+    end
+    for _, task in ipairs(tasks) do
         local id, q = self:Resolve(task)
         if task.type == "objective" and q and not q.failed and not q.complete and not F.QuestLog:TurnedIn(id) then
             for index, objective in ipairs(q.objectives) do
@@ -179,7 +274,14 @@ function E:Targets()
                     end
                     if mob and not used[mob] then
                         used[mob] = true
-                        targets[#targets + 1] = {mob = mob, questID = id, text = objective.text or F.QuestLog:Progress(objective)}
+                        targets[#targets + 1] = {mob = mob, questID = id, objectiveIndex = index, text = objective.text or F.QuestLog:Progress(objective)}
+                    end
+                    local record=mob and self:TargetRecord(q)
+                    for _,source in ipairs(record and record.objectives or {}) do
+                        if source.index==index and source.mob and not used[source.mob] then
+                            used[source.mob]=true
+                            targets[#targets+1]={mob=source.mob,questID=id,objectiveIndex=index,text=objective.text or F.QuestLog:Progress(objective)}
+                        end
                     end
                 end
             end
@@ -236,17 +338,84 @@ function E:TargetRecord(q)
     end
     return record
 end
+function E:TargetLocation(q)
+    local record=self:TargetRecord(q)
+    if not record then return end
+    local locations={}
+    for _,p in ipairs(record.locations or (record.location and {record.location}) or {}) do
+        local copy={};for k,v in pairs(p) do copy[k]=v end
+        copy.role="hunting";locations[#locations+1]=copy
+    end
+    return F.Navigation:ReferencePoint({locations=locations},'hunting') or record.location
+end
+function E:SkipOptionalArrivals()
+    local map=F.Call(C_Map and C_Map.GetBestMapForUnit,'player')
+    local info=map and F.Call(C_Map and C_Map.GetMapInfo,map)
+    local zone=F.Call(GetRealZoneText) or info and info.name
+    if not zone then return end
+    local x,y=F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition,map,'player'))
+    for index,step in ipairs(F.Guide.steps) do
+        local area=step.optionalArrival
+        if (area or step.offerPrerequisitesAny) and step.optional and not step.critical then
+            local id=self:Resolve(step)
+            local manual=F.db.manualSkippedSteps and F.db.manualSkippedSteps[step.id]
+            local near=area and area.x and F.Number(x) and F.Number(y) and
+                (x-area.x)^2+(y-area.y)^2<=(area.radius or .10)^2
+            local known=area and (not area.x or F.Number(x) and F.Number(y) and (x~=0 or y~=0))
+            local arrivalSkip=area and known and zone==area.to and zone~=area.from and not near
+                and not F.QuestLog.byID[id] and not F.QuestPolicy:Key(step)
+            local unlocked=not step.offerPrerequisitesAny
+            for _,prior in ipairs(step.offerPrerequisitesAny or {}) do
+                if F.QuestLog:TurnedIn(prior) then unlocked=true;break end
+            end
+            local prerequisiteSkip=not unlocked and not F.QuestLog.byID[id]
+                and not F.QuestLog:TurnedIn(id)
+            if not manual then F.db.skipped[index]=arrivalSkip or prerequisiteSkip or nil end
+            step.arrivalSkipReason=prerequisiteSkip and 'Optional quest not yet offered: complete one of its prerequisite quests first.'
+                or arrivalSkip and 'Optional arrival detour bypassed: you are already beyond its approach and have not accepted this quest.' or nil
+        end
+    end
+end
 function E:AdvanceSafe()
+    self:SkipOptionalArrivals()
     -- Manual Back holds the selected step until Next/Skip, avoiding snap-forward.
     if self.manualHold then return end
-    for _ = 1, #F.Guide.steps do
+    local visited={}
+    for _ = 1, 1000 do
         local step, id, q = self:Current()
-        if F.db.step >= #F.Guide.steps or (not F.db.skipped[F.db.step] and not self:Done(step, id, q)) then break end
-        F.db.step = F.db.step + 1
+        -- Skipping a quest action dismisses the remaining actions for that quest.
+        if id and step.type~='travel' then
+            for _,other in ipairs(F.Guide.steps) do
+                if F.db.manualSkippedSteps and F.db.manualSkippedSteps[other.id] then
+                    for _,task in ipairs(other.tasks or {other}) do
+                        if task.type~='travel' and self:Resolve(task)==id then
+                            F.db.skipped[F.db.step]=true
+                            F.db.manualSkippedSteps[step.id]=true
+                        end
+                    end
+                end
+            end
+        end
+        if not F.db.skipped[F.db.step] and not self:Done(step,id,q) then break end
+        if F.db.step >= #F.Guide.steps then
+            if visited[F.db.guideID] then break end
+            visited[F.db.guideID]=true
+            if not F.GuideLibrary:Continue() then break end
+            self:CatchUpOnLoad()
+        else F.db.step=F.db.step+1 end
     end
 end
 function E:CatchUpOnLoad()
     if not self.catchUpPending then return end
+    if F.Guide.routeGroup then
+        if not F.Guide.faction then self.catchUpPending=nil;return end
+        local level=F.Call(UnitLevel,'player')
+        if not F.Number(level) or level<1 then return end
+        self.catchUpPending=nil
+        -- A chosen restart point must not hide unfinished class catch-up.
+        F.QuestPolicy:LoadCatchUp()
+        return
+    end
     -- An explicit From choice takes precedence over automatic level catch-up.
     if F.db.restartStepID then self.catchUpPending = nil; return end
     local level = F.Call(UnitLevel, "player")
@@ -313,6 +482,16 @@ function E:ResumeAuto()
     -- from the beginning so Auto can recover from browsing beyond live progress.
     self.manualHold = nil
     self.selectedStep = nil
+    if F.Travel then F.Travel.hearthCast=nil end
+    -- Recheck live progress instead of retaining old level/catch-up skips.
+    F.db.skipped = {}
+    for index,step in ipairs(F.Guide.steps) do
+        if F.db.manualSkippedSteps and F.db.manualSkippedSteps[step.id] then F.db.skipped[index]=true end
+    end
+    self.catchUpPending = F.Guide.routeGroup and F.Guide.faction and true or nil
+    -- Catch-up rebuilds the authored actions and drops dynamic entry travel.
+    -- Recreate that journey from the player's live location after reconciliation.
+    if F.Travel then F.Travel.entryPending = true end
     F.db.step = 1
     F.Refresh()
     F.Tracker:ShowCurrentAtTop()
@@ -338,6 +517,9 @@ function E:Move(delta, skip)
         F.db.manualSkippedSteps[step.id] = true
     end
     self.selectedStep = math.max(1, math.min(#F.Guide.steps, index + delta))
+    -- Skip resumes live progression; do not leave its immediate successor
+    -- selected when that action is already complete and AdvanceSafe passes it.
+    if skip then self.selectedStep = nil end
     if skip or delta > 0 and step.confirmOnNext then F.Refresh() else F.UI:Refresh() end
 end
 function E:ResetFrom(index)
@@ -354,13 +536,14 @@ function E:ResetFrom(index)
     for position, step in ipairs(F.Guide.steps) do
         F.db.skipped[position] = position < index and F.db.skipHistory[step.id] or nil
         if position >= index and F.db.confirmedSteps then F.db.confirmedSteps[step.id] = nil end
+        if position >= index and F.db.manualSkippedSteps then F.db.manualSkippedSteps[step.id] = nil end
     end
     F.db.restartStepID = F.Guide.steps[index].id
     self.catchUpPending = nil
     F.db.step = index
     self.selectedStep = nil
-    -- Keep the chosen starting point visible even if live quests are complete.
-    self.manualHold = true
+    -- Partial restarts hold their chosen row; a fresh start checks live progress.
+    self.manualHold = index ~= 1
     F.Refresh()
     F.Tracker:ShowCurrentAtTop()
 end
@@ -371,5 +554,6 @@ function E:Reset()
     F.db.skipHistory, F.db.restartStepID = {}, nil
     self.manualHold = nil
     self.selectedStep = nil
+    self.catchUpPending = nil
     F.Refresh()
 end

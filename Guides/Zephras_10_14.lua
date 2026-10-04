@@ -12,7 +12,7 @@ D:ClassStop(g,"entry-class","Finish your level-10 class unlock and training. Thi
 D:Note(g,"exit-at10","Exit review: level 10","Leave now if Alliance transport is available, your class milestone is done, and the remaining island tasks are long or contested. Select a mainland 10-20 guide from the minimap. Otherwise Next continues the island guide. Do not assume leaving early is possible until you check the dockmaster/story gate.")
 cycle("fillion-intro","Fillion's Mission",{99260})
 cycle("catching-wind","Catching Wind",{92840},{94896,94897,98512},"Batch accepted local hunts before returning. Do not start distant refugee or assassin detours simply because they are available.")
-cycle("vengeance","Avenged Tenfold",{92834},nil,"This is a follow-up to Catching Wind. Group or Skip if the named enemy is too difficult.")
+cycle("vengeance","Avenged Tenfold",{92834},nil,"Collect ten Al'Aketh Windstone Charms from the specified local enemies. Catching Wind's elemental data is interaction credit; do not treat its six data readings as six required kills.")
 cycle("service","In Service of Zephras",{92860})
 cycle("tower-intro","Tower Defense introduction",{93320})
 D:Group(g,"tower-pickup","Take the tower's two overlapping objectives","pickup",{92642,92645})

@@ -1,0 +1,123 @@
+# Hunting location audit
+
+Reviewed 33 playable chapters and 313 scheduled objective quests. 250 identified hunting objectives; 0 missing proven hunting locations after supplementation.
+
+Supplemented quests: 6, 7, 9, 11, 12, 13, 14, 15, 18, 20, 21, 22, 33, 38, 47, 52, 56, 57, 58, 60, 83, 86, 87, 89, 90, 91, 92, 93, 101, 102, 104, 122, 127, 133, 142, 150, 152, 153, 156, 170, 173, 177, 179, 181, 182, 183, 217, 218, 221, 222, 224, 226, 237, 245, 246, 257, 258, 263, 275, 276, 277, 279, 287, 289, 290, 294, 295, 296, 297, 303, 313, 315, 317, 319, 385, 412, 416, 417, 418, 432, 433, 455, 456, 457, 459, 464, 470, 484, 487, 488, 916, 918, 932, 955, 956, 958, 963, 966, 983, 985, 986, 1001, 1002, 1003, 1008, 1009, 1012, 1016, 1017, 1023, 1025, 1026, 1031, 1032, 1035, 1045, 1054, 1057, 1071, 1076, 1093, 1096, 1134, 1138, 2138, 2139, 2459, 2541, 4740, 5321, 87288, 92553, 92909, 92911, 94466, 94467, 95214, 95217, 96137, 96138, 98282, 98407.
+
+Spawn coordinates come from installed Forever QuestieDB or existing sourced quest metadata. Pins represent approximate hunting areas, not guaranteed current positions of moving mobs. Nearby object gathering, supplied quest items, vendor/crafted goods and delivery objectives are not treated as hunts.
+
+111 collection inputs are recorded separately for acquisition classification. This does not establish that every unknown collection item is noncombat; items with no proven mob source remain unverified.
+
+## Unverified acquisition inputs
+
+- Quest 38: Murloc Eye — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 64: Furlbrow's Pocket Watch — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92: Crisp Spider Meat — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 116: Keg of Thunderbrew — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 116: Cask of Merlot — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 116: Bottle of Moonshine — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 116: Skin of Sweet Rum — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 118: Verner's Note — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 125: Oslow's Toolbox — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 132: Wiley's Note — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 134: Abercrombie's Crate — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 135: Wiley's Note — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 141: Shaw's Report — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 151: Handful of Oats — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 174: Bronze Tube — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 223: Calor's Note — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 288: Flagon of Dwarven Honeymead — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 293: Cursed Eye of Paleth — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 299: Ados Fragment — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 299: Modr Fragment — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 299: Golm Fragment — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 299: Neru Fragment — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 307: Miners' Gear — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 417: Hildelve's Journal — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 465: Dwarven Tinder — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 469: Bundle of Crocolisk Skins — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 483: Raven Claw Talisman — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 483: Black Feather Quill — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 483: Sapphire of Sky — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 483: Rune of Nesting — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 489: Fel Cone — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 632: Deepfury's Orders — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 917: Webwood Egg — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 919: Timberling Sprout — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 921: Filled Crystal Phial — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 929: Filled Jade Phial — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 947: Scaber Stalk — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 947: Death Cap — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 950: Insane Scribbles — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 951: Mathystra Relic — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 982: Silver Dawning's Lockbox — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 982: Mist Veil's Lockbox — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 993: Enchanted Moonstalker Cloak — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1007: Ancient Statuette — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1010: Bathran's Hair — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1011: Bottle of Disease — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1016: Divined Scroll — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1026: Iron Shaft — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1027: Iron Pommel — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1028: Reconstructed Rod — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1033: Elune's Tear — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1034: Handful of Stardust — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 1073: Minor Mana Potion — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1073: Elixir of Minor Fortitude — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1074: NG-5 — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1077: Scroll of Messaging — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1092: Unidentified Ore — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1094: Sealed Envelope — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 1141: Darkshore Grouper — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2038: Bingles' Wrench — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2038: Bingles' Screwdriver — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2038: Bingles' Hammer — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2038: Bingles' Blastencapper — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2438: Emerald Dreamcatcher — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 2459: Tallonkai's Jewel — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 3361: Felix's Box — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 3361: Felix's Chest — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 3361: Felix's Bucket of Bolts — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 3524: Sea Creature Bones — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 3741: Hilary's Necklace — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 3904: Milly's Harvest — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 4681: Sea Turtle Remains — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 4722: Sea Turtle Remains — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 4723: Sea Creature Bones — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 4731: Strangely Marked Box — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 4732: Sea Turtle Remains — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 4733: Sea Creature Bones — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 4762: Cliffspring River Sample — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 4812: Moonwell Water Tube — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 5321: Horn of Awakening — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 5541: Rumbleshot's Ammo — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 5545: Bundle of Wood — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 86574: Stonetalon Supply Satchel — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 86585: Banner of Ironforge — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 86613: Excavation Tools — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 86614: Monogrammed Silver Hair Clip — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 86667: Jar of Snow — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92551: Stolen Shen'dar Supplies — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92644: Glowing Crystal — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92682: Ripe Stormapple — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92683: Flutterfly Dust — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92683: Flutterfly Swatter — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92747: Suspicious Industrial Supplies — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92749: Coarse Dynamite — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92840: Index Esoteria — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92910: Precessive Autocognition Assembly — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 92911: Copper Modulator — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 93160: Zephyrseed — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 93552: Windstone Cluster — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 94465: Torch of the Dormant Flame — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 94467: Torch of the Dormant Flame — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 94468: Torch of the Eternal Flame — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 94485: Lady's Tear Moss — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 94896: Abandoned Belongings — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 95217: Copper Bar — Provided, vendor/crafted, or widespread incidental loot; not a dedicated hunting objective
+- Quest 96137: Ira's Dagger — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 96138: Merrick's Bow — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 96139: Raven Hill Tome — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 98197: Khaz Modan Timber — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 98197: Khaz Modan Iron — No proven mob source; may be gathering, delivery, item use or incomplete source data
+- Quest 98461: Hollee's Note — No proven mob source; may be gathering, delivery, item use or incomplete source data

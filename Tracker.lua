@@ -48,13 +48,14 @@ function T:MatchesSearch(step, index, state, statusLabel)
         Critical = "key critical key/critical required",
         Gear = "gear equipment reward",
         Money = "money gold reward",
+        Optional = "optional",
     }
     for _, marker in ipairs(F.UI:StepMarkers(step, index)) do add(priorityTerms[marker.kind]) end
     local function taskText(task)
         if task.questID or task.slot then add("quest quests") end
         if task.optional then add("optional") end
         add(task.text); add(task.note); add(task.npc); add(task.mob)
-        add(F.UI:ActionTitle(task)); add(F.UI:ActionBody(task))
+        add(F.UI:ActionContact(task)); add(F.UI:ActionTitle(task)); add(F.UI:ActionBody(task))
         local id, quest = F.GuideEngine:Resolve(task)
         if id then add(tostring(id)) end
         local data = F.GuideEngine:Metadata(id)
@@ -175,6 +176,12 @@ function T:Create(parent)
                 Critical={"Key / Critical", "Required for guide progression or a quest chain. Catch-up keeps this step; Skip can bypass it manually."},
                 Gear={"Equipment reward", "This quest offers uncommon or better equipment. Check its level, class requirements and stats before choosing a reward."},
                 Money={"Money reward", "This quest offers a money reward."},
+                Optional={"Optional", "You can skip this step. Travel advice can be followed using any route you prefer."},
+                OptionalTurnin={"Optional turn-in", "Turn in this quest if you choose to do it. You can skip this step."},
+                OptionalObjective={"Optional objectives", "Complete this quest if you choose to do it. You can skip this step."},
+                OptionalTravel={"Optional travel", "Use any route you prefer. Arriving near the next quest action skips this travel advice."},
+                Objective={"Quest objectives", "Complete the gathering, combat or other objectives for this quest."},
+                Catchup={"Catch-up quest", "An unfinished essential quest or prerequisite. Complete this before continuing the regional route."},
                 pickup={"Accept quest", "Accept this quest from its quest giver."},
                 turnin={"Turn in quest", "Return to the quest giver to turn in this quest after completing its objectives."},
                 talk={"Talk", "Speak to this NPC."},
@@ -217,6 +224,8 @@ function T:Create(parent)
         end, true)
         row:SetScript("OnClick", function(r)
             if r.stepIndex then
+                local step=F.Guide.steps[r.stepIndex]
+                self.expandedStepID=self.expandedStepID~=step.id and step.id or nil
                 F.GuideEngine:SelectStep(r.stepIndex); return
             end
             if r.zone then self.collapsed[r.zone] = not self.collapsed[r.zone]; self:Refresh() end
@@ -230,43 +239,39 @@ function T:Create(parent)
             end
             if r.stepIndex then
                 local step = F.Guide.steps[r.stepIndex]
-                GameTooltip:SetOwner(r, "ANCHOR_RIGHT"); GameTooltip:SetText("Step " .. r.stepIndex, 1, .82, 0)
-                GameTooltip:AddLine(step.text, 1, 1, 1, true)
-                GameTooltip:AddLine("Click to view this step. From restarts the guide here.", .8, .8, .8, true)
                 local action = step.tasks and #step.tasks == 1 and step.tasks[1] or step
-                local actionHelp = {pickup="Yellow !: accept this quest from its quest giver.",
-                    turnin="Yellow ?: turn in this quest when its objectives are complete.",
-                    talk="Speech icon: talk to this NPC.", trainer="Speech icon: visit this trainer."}
-                if actionHelp[action.type] then GameTooltip:AddLine(actionHelp[action.type],1,1,1,true) end
-                local reason=step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[r.stepIndex]
-                for _,marker in ipairs(F.UI:StepMarkers(step,r.stepIndex)) do
-                    local label=({Critical='Key / Critical quest: '..(reason or 'required for guide progression or a quest chain.'),Gear='Uncommon or better equipment reward.',Money='Money reward.'})[marker.kind]
-                    GameTooltip:AddLine((marker.alongside and "Alongside: " or "")..label,236/255,187/255,49/255,true)
-                    if marker.kind == 'Critical' then
-                        GameTooltip:AddLine("Catch-up keeps this step. Use Skip to bypass it manually.",1,1,1,true)
+                local id,quest=F.GuideEngine:Resolve(action)
+                local metadata=id and F.GuideEngine:Metadata(id)
+                GameTooltip:SetOwner(r,"ANCHOR_RIGHT")
+                GameTooltip:ClearLines()
+                GameTooltip:SetText(quest and quest.title or metadata and metadata.title or step.text or "Guide step",1,.82,0)
+                local function labelStyle()
+                    local count=F.Call(GameTooltip.NumLines,GameTooltip)
+                    local name=F.Call(GameTooltip.GetName,GameTooltip)
+                    local left=name and count and _G[name.."TextLeft"..count]
+                    if left then
+                        local font,size=left:GetFont()
+                        if font then left:SetFont(font,size,"OUTLINE") end
                     end
                 end
-                local note=F.Travel:Note(step)
-                if note then GameTooltip:AddLine(note,1,1,.5,true) end
-                if step.classAdvice then GameTooltip:AddLine(F.GuideDraft:Advice(),1,1,.5,true) end
-                if step.type ~= "note" then
-                    for _, task in ipairs(F.GuideEngine:Tasks(step)) do
-                        GameTooltip:AddLine(F.UI:TaskText(task), 1, 1, 1, true)
-                    end
+                local function field(key,value)
+                    GameTooltip:AddDoubleLine(key..":",tostring(value or "Not specified"),1,.82,0,1,1,1)
+                    labelStyle()
                 end
-                local alongside = false
-                for _, task in ipairs(step.alongside or {}) do
-                    if F.GuideEngine:Applies(task) and F.GuideEngine:TaskState(task) ~= "complete" then
-                        if not alongside then
-                            GameTooltip:AddLine(" ")
-                            GameTooltip:AddLine("Alongside this step", 1, .82, 0)
-                            alongside = true
-                        end
-                        GameTooltip:AddLine(F.UI:TaskText(task), 1, 1, 1, true)
-                        local body = F.UI:ActionBody(task)
-                        if body ~= "" then GameTooltip:AddLine(body, 1, 1, 1, true) end
-                    end
+                field("Step",r.stepIndex)
+                field("Location",F.UI:StepLocation(step):gsub("^Location: ",""))
+                field("Status",r.statusLabel or F.GuideEngine:StepState(r.stepIndex))
+                if step.recovery then
+                    local reason=step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[r.stepIndex]
+                    GameTooltip:AddLine("Catch-up:",1,.82,0);labelStyle()
+                    GameTooltip:AddLine(reason or "Unfinished quest needed for this route.",1,1,1,true)
                 end
+                if self.expandedStepID==step.id then
+                GameTooltip:AddLine("Description:",1,.82,0);labelStyle()
+                local description=F.Travel:Note(step) or step.text or metadata and metadata.title or ""
+                GameTooltip:AddLine(description,1,1,1,true)
+                end
+                F.Tooltips:QuestHint('Click to view this step and its details. Use From to restart here.')
                 GameTooltip:Show(); return
             end
             if not r.quest then
@@ -274,12 +279,12 @@ function T:Create(parent)
                 GameTooltip:AddLine(r.helpText or "Scroll to browse your quests.", 1, 1, 1, true)
                 GameTooltip:Show(); return
             end
-            GameTooltip:SetOwner(r, "ANCHOR_RIGHT"); GameTooltip:SetText(r.quest.title, 1, .82, 0)
+            F.Tooltips:QuestHeader(r,r.quest.title)
             for _, o in ipairs(r.quest.objectives) do
-                GameTooltip:AddLine(o.text or F.QuestLog:Progress(o), o.finished and .2 or 1, o.finished and 1 or .82, o.finished and .2 or 0, true)
+                F.Tooltips:QuestObjective(o.text or F.QuestLog:Progress(o),o.finished)
             end
             GameTooltip:Show()
-        end)
+        end, true)
         self.rows[i] = row
     end
 end
@@ -309,38 +314,36 @@ function T:Refresh()
             end
         end
         local color = index == viewedStep and "|cffffec80" or "|cffbfb59a"
-        local label=done and "Done" or state=="skipped" and "Skipped" or state=="failed" and "Failed" or index==F.db.step and "Current" or index==nextIndex and "Next" or (state=="ongoing" or state=="ready") and "In progress" or "Not started"
+        local label=done and "Done" or state=="skipped" and "Skipped" or state=="failed" and "Failed" or index==F.db.step and "Current" or index==nextIndex and "Next" or state=="ongoing" and "In progress" or "Not started"
         local heading = color..index.."|r"
         local text = F.UI:ActionTitle(step,iconSize)
         local markers=''
         for _,marker in ipairs(F.UI:StepMarkers(step,index)) do
-            markers=markers..F.UI:PriorityIcon(marker.kind,iconSize)
+            if marker.kind~='Optional' then markers=markers..F.UI:PriorityIcon(marker.kind,iconSize) end
         end
         if markers~='' then text=text..' '..markers end
         if index ~= viewedStep then text = color .. text .. "|r" end
         if index==F.db.step or index==viewedStep then
+            local primary=step.tasks and #step.tasks==1 and step.tasks[1] or step
+            local contact=F.UI:ActionContact(primary)
+            if contact~='' then text=contact..'\n  '..text end
             for _,task in ipairs(F.GuideEngine:Tasks(step)) do
                 if step.tasks and #step.tasks>1 then
+                    local contact=F.UI:ActionContact(task)
+                    if contact~='' then text=text..'\n  '..contact end
                     text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..F.UI:TaskMarkerIcons(task,iconSize)
                 end
                 local body=F.UI:ActionBody(task)
-                if body~="" then text=text.."\n  "..body end
+                if body~="" then text=text.."\n  "..body:gsub('\n','\n  ') end
             end
             local note=F.Travel:Note(step)
-            if note then text=text.."\n|cffffff80"..note.."|r" end
+            local action=step.tasks and #step.tasks==1 and step.tasks[1] or step
+            local questAction=action.type=='pickup' or action.type=='objective' or action.type=='turnin'
+            if note and not questAction and self.expandedStepID==step.id then text=text.."\n|cffffff80"..note.."|r" end
             if step.classAdvice then text=text.."\n|cffffff80"..F.GuideDraft:Advice().."|r" end
-            local alongside=0
-            for _,task in ipairs(step.alongside or {}) do
-                if F.GuideEngine:Applies(task) and F.GuideEngine:TaskState(task)~="complete" then
-                    alongside=alongside+1
-                    if alongside == 1 then text=text.."\n\n|cffffd100Alongside this step:|r" end
-                    text=text.."\n  "..F.UI:ActionTitle(task,iconSize)..F.UI:TaskMarkerIcons(task,iconSize)
-                    local body=F.UI:ActionBody(task)
-                    if body~="" then text=text.."\n    "..body end
-                end
-            end
         end
         if self:MatchesSearch(step, index, state, label) then
+            text=F.UI:UniqueText(text)
             entries[#entries + 1] = {stepIndex = index, heading = heading, text = text, statusLabel = label}
         end
     end
@@ -428,8 +431,11 @@ function T:Render()
         row.text:SetText(entry and entry.heading or "")
         local face, _, flags = F.Call(row.text.GetFont, row.text)
         local number = entry and entry.stepIndex
+        local numberOffset=number and number>=10 and number<=19 and -.5 or 0
+        row.text:ClearAllPoints();row.text:SetPoint("CENTER",row.stepBadge,"CENTER",numberOffset,0)
         local size = (F.db.fontSize or 12) * (number and number >= 100 and .85 or 1)
         if face then row.text:SetFont(face, size, flags or "") end
+        row.text:SetWordWrap(false)
         row.body:SetText(entry and entry.text or "")
         row.status:SetTexture(entry and "Interface\\AddOns\\ForeverRested\\Media\\StepBadge.tga" or nil)
         local tint=entry and self.statusColors[entry.statusLabel]
@@ -451,8 +457,8 @@ function T:Render()
         row.helpText = entry and entry.text
         local selected = entry~=nil and entry.stepIndex==viewedStep
         row.stepGlow:SetShown(selected)
-        row.text:SetShadowColor(selected and 1 or 0, selected and .68 or 0, 0, selected and .85 or 1)
-        row.text:SetShadowOffset(selected and 0 or 1, selected and 0 or -1)
+        row.text:SetShadowColor(0,0,0,0)
+        row.text:SetShadowOffset(0,0)
         row.background:SetShown(entry~=nil)
         if selected then
             row.background:SetColorTexture(.65, .46, .12, .28)

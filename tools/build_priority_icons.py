@@ -1,13 +1,49 @@
 """Build small, transparent WoW TGA markers and a review preview (Pillow)."""
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
 root = Path(__file__).resolve().parents[1]
 media = root / 'Media'
 icons = {}
-for name in ('Critical', 'Gear', 'Money'):
+for name in ('Critical', 'Optional', 'OptionalTurnin', 'OptionalObjective', 'OptionalTravel', 'Objective', 'Gear', 'Money', 'Catchup'):
     im = Image.new('RGBA', (256, 256)); d = ImageDraw.Draw(im)
-    if name == 'Critical':
+    if name == 'OptionalTurnin':
+        # Native-sized compact hook, traced in a 10-by-17 coordinate grid.
+        # Keep its narrow silhouette and softened crown rather than expanding
+        # a generic question mark to fill the whole inline texture.
+        mask = Image.new('L', (256,256))
+        md = ImageDraw.Draw(mask)
+        points = [(3,0),(8,0),(9.5,1),(10,2.5),(9,6),
+                  (6.5,8.5),(5.5,10),(5,12),(2,12),
+                  (2,9.5),(3.5,7.5),(6,5),(6.5,3.5),
+                  (3.5,3.5),(3,5),(0,5),(0,2.5),(1,1)]
+        md.polygon([(64+x*12.8,19+y*12.8) for x,y in points], fill=255)
+        md.ellipse((86,198,129,237), fill=255)
+        outline = ImageChops.subtract(mask, mask.filter(ImageFilter.MinFilter(21)))
+        im = Image.new('RGBA', (256,256), '#ecbb31')
+        im.putalpha(outline)
+    elif name == 'OptionalObjective':
+        source = Image.open(media / 'PriorityObjective-source.png').convert('RGBA')
+        source = source.crop(source.getbbox())
+        source.thumbnail((208,208))
+        im.alpha_composite(source, ((256-source.width)//2, (256-source.height)//2))
+        mask = im.getchannel('A').point(lambda value: 255 if value > 100 else 0)
+        outline = ImageChops.subtract(mask, mask.filter(ImageFilter.MinFilter(15)))
+        im = Image.new('RGBA', (256,256), '#ecbb31')
+        im.putalpha(outline)
+    elif name == 'Catchup':
+        source = Image.open(media / 'PriorityCatchup-source.png').convert('RGBA')
+        source = source.crop(source.getbbox())
+        im = Image.new('RGBA', (max(source.size)+48,)*2)
+        im.alpha_composite(source, ((im.width-source.width)//2, (im.height-source.height)//2))
+    elif name == 'Objective':
+        im = Image.open(media / 'PriorityObjective-source.png').convert('RGBA')
+    elif name == 'OptionalTravel':
+        d.ellipse((24,24,232,232), outline='#ecbb31', width=18)
+        d.ellipse((98,98,158,158), fill='#ecbb31')
+    elif name == 'Optional':
+        im = Image.open(media / 'PriorityOptional-source.png').convert('RGBA')
+    elif name == 'Critical':
         d.polygon([(10,16),(246,16),(128,242)], fill='#ecbb31', outline='#381f09', width=10)
         d.rounded_rectangle((112,50,144,129), radius=6, fill='#381f09')
         d.ellipse((112,149,144,175), fill='#381f09')
@@ -58,9 +94,9 @@ for name in ('Critical', 'Gear', 'Money'):
     icon = im.resize((texture_size,texture_size), Image.Resampling.LANCZOS)
     icon.save(media / ('Priority'+name+'.tga'), compression=None)
     icons[name] = icon
-preview = Image.new('RGBA', (320,112), '#211b26')
+preview = Image.new('RGBA', (320,len(icons)*36), '#211b26')
 draw = ImageDraw.Draw(preview)
-labels = {'Critical': 'Key quest', 'Gear': 'Quest with gear reward', 'Money': 'Quest with money reward'}
+labels = {'Critical': 'Key quest', 'Optional': 'Optional accept', 'OptionalTurnin': 'Optional turn-in', 'OptionalObjective': 'Optional objectives', 'OptionalTravel': 'Optional travel', 'Objective': 'Quest objectives', 'Gear': 'Quest with gear reward', 'Money': 'Quest with money reward', 'Catchup': 'Catch-up quest'}
 for i,(name,icon) in enumerate(icons.items()):
     label=labels[name]
     draw.text((12,i*36+12), label, fill='white')

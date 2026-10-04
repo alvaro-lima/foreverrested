@@ -1,21 +1,43 @@
 local _, F = ...
 local D = F.GuideDraft
 -- Independently authored regional circuits; quest facts are sourced separately.
+local function pickup(g,key,label,ids,note)
+    local needed={}
+    for _,id in ipairs(ids) do
+        local seen=false
+        for _,step in ipairs(g.steps) do
+            for _,task in ipairs(step.tasks or {step}) do
+                if task.questID==id and task.type=='pickup' then seen=true end
+            end
+        end
+        if not seen then needed[#needed+1]=id end
+    end
+    if #needed>0 then D:Group(g,key,label,'pickup',needed,nil,note) end
+end
 local function cycle(g, key, label, ids, note)
-    D:Group(g,key.."-pickup",label..": accept","pickup",ids,nil,note)
+    pickup(g,key.."-pickup",label..": accept",ids,note)
     D:Group(g,key.."-objectives",label..": objectives","objective",ids,nil,note)
     D:Group(g,key.."-return",label..": turn in","turnin",ids,nil,note)
 end
 local function delivery(g, key, label, id)
-    D:Group(g,key.."-pickup",label..": accept","pickup",{id})
+    pickup(g,key.."-pickup",label..": accept",{id})
     D:Group(g,key.."-return",label..": deliver","turnin",{id})
 end
-local function optional(g,key,label,ids,note)
-    D:Note(g,key,label,note.." These quests are optional. Next continues the main route.")
-    local step=g.steps[#g.steps]; step.alongside={}
+local function optional(g,key,label,ids,note,arrival)
     for _,id in ipairs(ids) do
         for _,kind in ipairs({"pickup","objective","turnin"}) do
-            step.alongside[#step.alongside+1]=D:Task(kind,id,true)
+            local task=D:Task(kind,id,true)
+            task.activeOnly=nil
+            task.id=key..':'..kind..':'..id
+            task.legacyGroupID=key
+            task.text=({pickup='Accept ',objective='Complete ',turnin='Turn in '})[kind]..F.AllianceQuestData[id].title
+            task.note=note
+            task.optionalArrival=arrival
+            -- Installed Forever QuestieDB: Trek (990) follows either Escape
+            -- branch (994/995); Supplies (976) follows Tower stage 973.
+            if id==990 then task.offerPrerequisitesAny={994,995} end
+            if id==976 then task.offerPrerequisitesAny={973} end
+            g.steps[#g.steps+1]=task
         end
     end
 end
@@ -46,6 +68,7 @@ cycle(g,"rot-blossoms","Raven Hill: collect rot blossoms",{156},"Pull undead ind
 delivery(g,"juice-delivery","Deliver the zombie juice to Abercrombie",159)
 cycle(g,"ghoulish-effigy","Raven Hill: gather the effigy components",{133})
 cycle(g,"night-watch-second","Continue the Night Watch patrol",{57})
+D:Group(g,"darkshire-wildlife-objectives","Collect the wolf cooking ingredients","objective",{90})
 D:Group(g,"darkshire-wildlife-return","Return the wolf cooking work","turnin",{90})
 cycle(g,"stars-lens","Prepare the first Look to the Stars lens",{174},"This stage requires a Bronze Tube. Check a vendor, engineer or your bags; use Skip if obtaining it would mean a long detour.")
 delivery(g,"stars-mary","Ask Blind Mary about the lens",175)
@@ -69,14 +92,17 @@ delivery(g,"translation-mayor","Return the translation to the mayor",252)
 D:Checkpoint(g,"duskwood-level28",28,"The last patrol and ogre encounters are harder. Complete accepted tasks or optional circuits before attempting them.")
 cycle(g,"night-watch-final","Finish the last Night Watch patrol",{58})
 cycle(g,"stars-ogres","Ogre mound: recover the final star-gazing item",{181},"Check the camp before committing; retreat from multiple pulls and use Skip if needed.")
+D:Group(g,"totem-objectives","Collect the Totem of Infliction materials","objective",{101})
 D:Group(g,"totem-return","Return the completed Totem of Infliction collection","turnin",{101})
 optional(g,"duskwood-optional-final","Optional harder quests and beta discoveries",{222,223,253,96139,96137,96138},"Continue the worgen chain if suitable. Bride of the Embalmer is group content. Follow offered Valor-family discoveries only when available; dropped-item starts and beta prerequisites are not assumed.")
 D:Finish(g,"duskwood","At 30, choose your next regional route when available. You can supplement this circuit with Wetlands or Ashenvale; 30-40 guides are not installed.")
 
 g=D:New("alliance-wetlands-20-30","Wetlands 20-30","Wetlands",{"Dwarf","Gnome","High Order Skyborne"},20,30)
 entry(g,"Enter through Dun Algaz from Loch Modan, or use an available boat to Menethil Harbor. Take the safe road to the harbor.")
-optional(g,"algaz-entry","Optional Dun Algaz approach",{468,455},"If arriving from Loch Modan, report to Mountaineer Rockgar and clear the offered Algaz Gauntlet work while crossing. Boat arrivals can bypass this detour.")
-D:Group(g,"menethil-first","Menethil: coastal claws, crocolisks and regional introductions","pickup",{279,484,463,305,470})
+optional(g,"algaz-entry","Optional Dun Algaz approach",{468,455},"If arriving from Loch Modan, report to Mountaineer Rockgar and clear the offered Algaz Gauntlet work while crossing. Boat arrivals can bypass this detour.",{from='Loch Modan',to='Wetlands',x=.535,y=.70,radius=.10})
+-- Sweep from the southern coast through Halloran and the northern bridge,
+-- then Sida and the inn. Collect everything before leaving the harbor.
+D:Group(g,"menethil-first","Menethil: collect quests in one harbor circuit","pickup",{279,484,305,470,463})
 cycle(g,"coastal-first","Menethil coast: claws and young crocolisk skins",{279,484},"Keep accepted ooze collection active while crossing the marsh later; do not farm the rare bag drop here.")
 delivery(g,"greenwarden-intro","Find Rethiel the Greenwarden",463)
 cycle(g,"greenwarden-paws","Greenwarden: clear nearby gnolls",{276})
@@ -85,11 +111,13 @@ delivery(g,"excavation-find","Reach Whelgar's excavation team",305)
 D:Group(g,"excavation-first-pickup","Excavation: first raptor hunt and relic collection","pickup",{294,299})
 cycle(g,"ormer-first","Excavation outskirts: first Ormer hunt",{294},"Gather excavation relics while travelling between the raptor areas. Check the higher-level enemies before entering the central pit.")
 delivery(g,"excavation-report","Report the excavation team's location to Menethil",306)
-optional(g,"menethil-beta","Optional harbor deliveries and beta work",{469,98197,98282,98461},"Combine Daily Delivery and offered beta work with the marsh circuit. Unrequited Love is useful only if already accepted in Darkshore.")
+optional(g,"menethil-beta","Optional harbor deliveries and beta work",{469,98461},"Combine Daily Delivery and offered beta work with the marsh circuit. Unrequited Love is useful only if already accepted in Darkshore.")
 D:Checkpoint(g,"wetlands-level24",24,"Finish the coastal and first raptor circuits before deeper excavation and shipwreck work.")
 cycle(g,"ormer-second","Excavation: second raptor hunt",{295})
+D:Group(g,"relics-objectives","Collect the excavation relics","objective",{299})
 D:Group(g,"relics-return","Return the completed excavation relics","turnin",{299})
 cycle(g,"greenwarden-blisters","Marsh circuit: clear the fen creepers",{275})
+D:Group(g,"ooze-objectives","Collect the ooze bag while crossing the marsh","objective",{470},nil,"Collect alongside other marsh objectives. Skip if repeated ooze farming is poor value.")
 D:Group(g,"ooze-return","Return the ooze bag when it drops","turnin",{470},nil,"The bag can take time to drop. Use Skip if repeated ooze farming is poor value; this collection is not a class unlock.")
 cycle(g,"statuette-first","Coastal hovels: inspect the damaged crate",{281})
 cycle(g,"statuette-second","Continue the coastal goods search",{284})
@@ -109,7 +137,7 @@ D:Finish(g,"wetlands","At 30, choose your next regional route when available. Du
 
 g=D:New("alliance-ashenvale-20-30","Ashenvale / Stonetalon 20-30","Ashenvale",{"NightElf","High Order Skyborne"},20,30)
 entry(g,"Enter Ashenvale from Darkshore or your available transport route. Register Astranaar's flight point. Avoid Horde settlements.")
-optional(g,"ashenvale-arrival","Optional Darkshore arrival deliveries",{990,976},"Hand in Trek to Ashenvale or Supplies to Auberdine if you already have them. Their preceding Darkshore chains are not required entry work for this guide.")
+optional(g,"ashenvale-arrival","Optional Darkshore arrival deliveries",{990,976},"Trek follows Escape Through Force or Escape Through Stealth. Supplies to Auberdine follows The Tower of Althalaxx (quest 973): accept it from Feero Ironhand, protect him along the road, then turn it in to Delgren at Maestra's Post. Skip either optional branch until its prerequisite is done.",{from='Darkshore',to='Ashenvale',x=.346,y=.488,radius=.10})
 D:Group(g,"astranaar-first","Astranaar: coastal work and Raene's introduction","pickup",{1008,991,1054})
 cycle(g,"bathran","Northern Ashenvale: Bathran's Hair",{1010})
 delivery(g,"orendil-cure","Bring Orendil's cure to Astranaar",1020)
@@ -117,23 +145,31 @@ cycle(g,"elune-tear","Northern lake: retrieve Elune's Tear",{1033})
 cycle(g,"stardust","Southern ruins: collect stardust",{1034})
 delivery(g,"raene-teronis","Find Teronis for Raene's investigation",991)
 cycle(g,"raene-return","Return Teronis' findings to Raene",{1023})
-cycle(g,"zoram-strand","Western coast: clear the Zoram Strand",{1008})
-cycle(g,"ancient-statuette","Western coast: retrieve Talen's statuette",{1007})
-cycle(g,"ruuzel","Western coast: finish Talen's follow-up",{1009},"Check Ruuzel and nearby naga before pulling; this follow-up is more demanding than the first coastal collection.")
+-- Take Talen's available work before hunting; stay on the coast until both
+-- local stages are finished, then batch the return to Astranaar.
+pickup(g,"ancient-statuette-pickup","Western coast: accept Talen's statuette search",{1007})
+D:Group(g,"ancient-statuette-objectives","Western coast: retrieve Talen's statuette","objective",{1007})
+D:Group(g,"ancient-statuette-return","Talen: return the statuette to unlock Ruuzel","turnin",{1007})
+pickup(g,"ruuzel-pickup","Talen: accept the unlocked Ruuzel hunt",{1009})
+D:Group(g,"ruuzel-objectives","Western coast: finish Talen's follow-up","objective",{1009},nil,"Check Ruuzel and nearby naga before pulling; this follow-up is more demanding than the first coastal collection.")
+D:Group(g,"zoram-strand-objectives","Western coast: finish collecting Wrathtail heads","objective",{1008},nil,"Collect the remaining heads on this coastal circuit before returning to Astranaar.")
+D:Group(g,"ruuzel-return","Talen: turn in the finished coastal hunt","turnin",{1009})
+D:Group(g,"zoram-strand-return","Astranaar: deliver the finished Zoram Strand work","turnin",{1008})
 D:Group(g,"stonetalon-intro-pickup","Astranaar: take Stonetalon introductions","pickup",{1070,1056,1134})
 delivery(g,"stonetalon-guard","Report to Kaela Shadowspear",1070)
 delivery(g,"stonetalon-gaxim","Report to Gaxim Rustfizzle",1085)
 cycle(g,"gnome-respite","Windshear area: help Gaxim",{1071})
 cycle(g,"pridewings","Stonetalon: collect pridewing venom sacs",{1134})
 delivery(g,"stonetalon-peak","Reach the Stonetalon Peak contact",1056)
+D:Checkpoint(g,"ashenvale-before-foulweald",23,"If below 23, gain XP from suitable local normal enemies before the Foulweald circuit. Optional city quests are not required.")
+cycle(g,"aggressive-defense","Astranaar surroundings: reduce the furbolg threat",{1025})
+delivery(g,"raene-shaeldryn","Visit Shael'dryn for Raene",1024)
+cycle(g,"elemental-bracers","Eastern Ashenvale: collect elemental bracers",{1016})
 optional(g,"stonetalon-city-detours","Optional Gaxim city-delivery chains",{1072,1073,1074,1075,1076,1077},"These branches visit Ironforge, Stormwind and Westfall. Combine them with class training if offered; follow each quest's prerequisites rather than making every delivery a mandatory trip.")
 optional(g,"stonetalon-side-work","Optional Windshear and Charred Vale work",{1093,1094,1095,1096,1090,1092,1057,86574},"Take suitable local quests actually offered. Gerenzo's Orders includes an escort; Further Instructions visits the Barrens. Check enemy levels before Charred Vale or Gerenzo fights, and avoid Horde towns.")
 D:ClassStop(g,"ashenvale-train24","Train useful abilities in Darnassus or your class city, then return to Astranaar. Combine city travel with accepted delivery branches.")
 D:Checkpoint(g,"ashenvale-level24",24,"Complete accepted coast and Stonetalon work before the eastern furbolg and elemental circuits.")
-delivery(g,"raene-shaeldryn","Visit Shael'dryn for Raene",1024)
-cycle(g,"aggressive-defense","Astranaar surroundings: reduce the furbolg threat",{1025})
 cycle(g,"culling-threat","Northern furbolg camp: cull the threat",{1054},"Check the named target's level and nearby adds before committing; Skip an unsafe camp.")
-cycle(g,"elemental-bracers","Eastern Ashenvale: collect elemental bracers",{1016})
 cycle(g,"mage-summoner","Eastern Ashenvale: stop the summoner",{1017},"Pull carefully and check the quest's current target. Do not assume the consumable reward is a permanent class unlock.")
 D:Checkpoint(g,"ashenvale-level27",27,"The later Raene chain and eastern camps are harder. Add useful unfinished Duskwood or Wetlands work if you need more XP.")
 cycle(g,"raene-first-components","Shael'dryn: first cleansing components",{1026})
@@ -148,4 +184,5 @@ delivery(g,"kayneth-intro","Report to Kayneth Stillwind",4581)
 cycle(g,"forsaken-disease","Eastern forests: investigate Forsaken diseases",{1011})
 cycle(g,"fallen-sky-lake","Fallen Sky Lake: recover the requested item",{1035},"Check the lake enemies and safe exit before entering. This follows the earlier Pelturas chain.")
 optional(g,"ashenvale-final-detours","Optional higher-level eastern camps",{1022,1012,1021,1031,1032},"Howling Vale, the insane druids and satyr branches are harder. Only take suitable offered quests; several targets are above this bracket and may require a group. These are not required to finish the regional circuit.")
+g.revision=2
 D:Finish(g,"ashenvale","At 30, choose your next regional route when available. Finish useful accepted branches first; 30-40 guides are not installed.")

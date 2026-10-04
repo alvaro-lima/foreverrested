@@ -21,6 +21,14 @@ function M:Create()
         self.bracketIndex = math.min(#F.GuideLibrary.brackets, self.bracketIndex + 1); self:RefreshGuides()
     end)
     F.Tooltips:Text(following, "Next level bracket", "Browse guides for the next ten levels.")
+    self.recommendButton=F.UI:Button(menu,'Recommend Guide',282,'TOPLEFT',12,-68,function()
+        F.Travel:ObserveFlightPaths()
+        local id,reason=F.GuideLibrary:Recommended()
+        if not id then F.Print(reason);return end
+        F.GuideLibrary:Select(id,true);menu:Hide()
+        if not F.Combat() then F.UI.frame:Show();F.db.hidden=false end
+    end)
+    F.Tooltips:Text(self.recommendButton,'Recommend Guide','Load a section for your level, location, race route and accepted quests. Missing class unlocks and prerequisites appear first.',true)
     self.guideButtons = {}
     for index, id in ipairs(F.GuideLibrary.order) do
         local guideID = id
@@ -32,13 +40,13 @@ function M:Create()
     end
     self.guideNotice = F.UI:Text(menu, "GameFontHighlightSmall", "TOPLEFT", 12, -139, 282)
     self:RefreshGuides()
-    F.UI:Button(menu, "Show / Hide", 92, "BOTTOMLEFT", 12, 40, function() F.UI:Toggle(); menu:Hide() end)
+    F.UI:Button(menu, "Show / Hide", 92, "BOTTOMLEFT", 12, 40, function() F.UI:Toggle(true); menu:Hide() end)
     self.lockButton = F.UI:Button(menu, "Lock", 84, "BOTTOMLEFT", 110, 40, function() F.UI:TogglePositionLock() end)
     self:RefreshLockButton()
-    F.UI:Button(menu, "Close", 92, "BOTTOMLEFT", 200, 40, function() menu:Hide() end)
+    F.UI:Button(menu, "Close", 92, "BOTTOMLEFT", 200, 12, function() menu:Hide() end)
     F.UI:Button(menu, "Options", 92, "BOTTOMLEFT", 12, 12, function() F.UI:ToggleOptions(); menu:Hide() end)
     F.UI:Button(menu, "Refresh", 84, "BOTTOMLEFT", 110, 12, function() F.Refresh(); menu:Hide(); F.Print("Live quest data refreshed. /fg data exports this build's observations.") end)
-    F.UI:Button(menu, "Data", 92, "BOTTOMLEFT", 200, 12, function() F.QuestData:ShowExport(); menu:Hide() end)
+    F.UI:Button(menu, "Data", 92, "BOTTOMLEFT", 200, 40, function() F.QuestData:ShowExport(); menu:Hide() end)
     menu:Hide()
     if not Minimap then return end
     local b = CreateFrame("Button", "ForeverRestedMinimapButton", Minimap)
@@ -65,7 +73,7 @@ function M:Create()
     end
     position()
     b:SetScript("OnClick", function(_, button)
-        if button == "RightButton" then self:ToggleMenu() else F.UI:Toggle() end
+        if button == "RightButton" then self:ToggleMenu() else F.UI:Toggle(true) end
     end)
     F.Tooltips:Attach(b, function()
         if not GameTooltip then return end
@@ -98,13 +106,15 @@ function M:RefreshGuides()
     local ids = F.GuideLibrary:GuidesForBracket(self.bracketIndex)
     for index, id in ipairs(ids) do
         local button = self.guideButtons[id]
-        button:ClearAllPoints(); button:SetPoint("TOPLEFT", self.menu, "TOPLEFT", 12, -70 - (index - 1) * 27)
+        button:ClearAllPoints(); button:SetPoint("TOPLEFT", self.menu, "TOPLEFT", 12, -103 - (index - 1) * 27)
         button:SetText((id == F.db.guideID and "* " or "") .. F.GuideLibrary.guides[id].title)
+        F.Tooltips:Text(button,F.GuideLibrary.guides[id].title,
+            'Load this guide. Missing essential quests appear first; saved progress is retained.',true)
         button:Show()
     end
-    self.menu:SetHeight(266 + math.max(0, #ids - 2) * 27)
+    self.menu:SetHeight(329 + math.max(0, #ids - 2) * 27)
     self.guideNotice:ClearAllPoints()
-    self.guideNotice:SetPoint("TOPLEFT", self.menu, "TOPLEFT", 12, -139 - math.max(0, #ids - 2) * 27)
+    self.guideNotice:SetPoint("TOPLEFT", self.menu, "TOPLEFT", 12, -172 - math.max(0, #ids - 2) * 27)
     self.guideNotice:SetText(#ids > 0 and "Alliance 1-30 guides. Class quests adapt to your character; Zephras has an optional 10-14 extension."
         or "No route available yet for this level bracket.")
 end

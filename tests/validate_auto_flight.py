@@ -13,6 +13,7 @@ local step={id='flight-test',type='travel',travelQuestID=94500,
  travelAction='objective',travelFrom='Darkshore',travelTo='Ashenvale'}
 F.Guide={steps={step}};F.db.step=1;F.db.skipped={}
 F.db.knownFlightPaths={Astranaar=true}
+local realDone=F.GuideEngine.Done
 F.GuideEngine.Done=function() return false end
 local nodes={{name='Auberdine, Darkshore',state='CURRENT'},
  {name='Astranaar, Ashenvale',state='REACHABLE'}}
@@ -85,7 +86,7 @@ assert(F.Travel:Note(step):find('Continue through Dun Algaz',1,true))
 assert(not F.Travel:AutoFlightStep(),'walking route does not auto-fly')
 px,py=.095,.596
 assert(F.Travel:FlightLeg(step)=='Menethil Harbor','near harbor keeps flight option')
-assert(F.Travel:Note(step):find('fly to Thelsamar',1,true))
+assert(F.Travel:Note(step):lower():find('fly to thelsamar',1,true))
 C_Map.GetPlayerMapPosition=function() return nil end
 assert(not F.Travel:WalkingExit(step),'unknown position never invents a walking shortcut')
 -- General rule: any guide with a reviewed direct road and readable positions.
@@ -113,6 +114,64 @@ local shared={locations={{role='start',zone='Durotar',x=.389,y=.582},
 F.AllianceZoneMaps['Loch Modan']=1432
 assert(F.Travel:ReferenceLocation(shared,'start').zone=='Loch Modan',
  'shared brazier must use the Alliance copy when constructing routes')
+local flight={id='in-flight',type='travel',confirmOnNext=true,travelQuestID=94500,travelAction='objective',travelFrom='Westfall',travelTo='Loch Modan',
+ travelFinal=true,travelLeg=1,travelZones={'Loch Modan'},travelDestination={name='Norric Lochthane',zone='Loch Modan'}}
+local nextFlight={id='second-flight',type='travel',confirmOnNext=true,travelQuestID=94500,
+ travelAction='objective',travelFrom='Loch Modan',travelTo='Wetlands',travelLeg=1,travelZones={'Wetlands'}}
+F.Guide={steps={flight,nextFlight}};F.db.step=1
+F.db.knownFlightPaths['Sentinel Hill']=true
+F.db.knownFlightPaths['Menethil Harbor']=true
+F.db.confirmedSteps={};F.QuestLog.byID={}
+F.GuideEngine.Done=realDone
+UnitOnTaxi=function() return true end
+assert(F.Travel:Note(flight)=='Fly to Thelsamar.')
+local oldRefresh=F.UI.Refresh
+F.UI.Refresh=function() end
+F.Travel.onTaxi=false
+F.Travel:Tick();F.Travel:Tick()
+assert(F.db.confirmedSteps[flight.id] and F.db.step==2,'boarding advances the active flight step')
+assert(not F.db.confirmedSteps[nextFlight.id],'same flight cannot complete the next leg')
+UnitOnTaxi=function() return false end
+F.Travel:Tick()
+assert(F.GuideEngine:Done(flight),'boarded flight remains complete after landing')
+F.db.confirmedSteps={};F.db.step=1
+C_Map.GetMapInfo=function() return {name='Loch Modan'} end
+C_Map.GetPlayerMapPosition=function() return CreateVector2D(.4,.4) end
+assert(F.GuideEngine:Done(flight),'landing completes flight without boarding confirmation or reaching the NPC')
+F.Travel:Tick()
+assert(F.db.step==2,'missed boarding still advances after landing')
+F.db.step=1
+C_Map.GetMapInfo=function() return {name='Westfall'} end
+assert(not F.GuideEngine:Done(flight),'departure zone does not complete flight')
+flight.travelAction='turnin'
+C_Map.GetMapInfo=function() return {name='Loch Modan'} end
+assert(not F.GuideEngine:Done(flight),'arrival cannot bypass unfinished quest objectives')
+F.QuestLog.byID[94500]={complete=true}
+assert(F.GuideEngine:Done(flight),'ready return flight completes at landing')
+local pin=F.StepPins:Create(UIParent)
+pin.entry={index=1,task=flight}
+F.StepPins:Style(pin)
+assert(pin.icon.texturePath:find('StatusDone.tga',1,true),'completed flight pin uses done status')
+C_Map.GetMapInfo=function() return {name='Westfall'} end
+F.StepPins:Style(pin)
+assert(pin.icon.texturePath:find('MapStepBadge-thick.tga',1,true),'active travel pin retains step progress')
+local travel1={id='optional-road',type='travel',optional=true}
+local travel2={id='optional-boat',type='travel',optional=true}
+local goal={id='next-npc',type='turnin',questID=999888,zone='Loch Modan',x=.4,y=.4}
+F.Guide={steps={travel1,travel2,goal}};F.db.step=1;F.db.skipped={}
+C_QuestLog.GetNextWaypoint=nil
+C_Map.GetMapInfo=function() return {name='Loch Modan'} end
+C_Map.GetPlayerMapPosition=function() return CreateVector2D(.8,.8) end
+assert(not F.Travel:SkipTravelNearNext(),'distant target must not skip travel')
+C_Map.GetPlayerMapPosition=function() return CreateVector2D(.4,.4) end
+UnitOnTaxi=function() return true end
+assert(not F.Travel:SkipTravelNearNext(),'flying over target must not skip travel')
+UnitOnTaxi=function() return false end
+assert(F.Travel:SkipTravelNearNext(),'any arrival near next NPC bypasses travel')
+assert(F.db.skipped[1] and F.db.skipped[2] and F.db.step==3,'all intervening travel steps are skipped')
+assert(F.GuideEngine:StepState(1)=='skipped','bypassed travel keeps skipped status')
+assert(not F.db.skipped[3],'quest action must remain unskipped')
+F.UI.Refresh=oldRefresh
 F.Guide.faction='Alliance'
 assert(F.Navigation:ReferencePoint(shared,'start').zone=='Loch Modan',
  'quest navigation must agree with route construction')

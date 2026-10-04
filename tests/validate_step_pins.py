@@ -24,7 +24,7 @@ F.db.step=index;F.Refresh()
 assert(g.steps[index].questID==170 and g.steps[index+1].questID==233)
 local alongside=false
 for _,task in ipairs(E:Tasks(nil,true)) do if task.questID==233 then alongside=task.optional end end
-assert(alongside,'nearby quest must remain nonblocking alongside work')
+assert(not alongside,'separate quest actions must not be repeated as optional alongside work')
 F.db.completed[170]=true;F.Refresh();assert(F.db.step==index+1,'progress advances one quest action at a time')
 -- Owned pins use the native canvas, and never change user waypoints/tracking.
 local mapID=1426

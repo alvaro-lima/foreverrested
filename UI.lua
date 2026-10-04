@@ -20,7 +20,7 @@ U.buttonHelp = {
     Auto = "Return to the first unfinished, unskipped step using your live quest progress.",
     Lock = "Lock the guide window and navigation arrow in place. Prevents dragging and window resizing.",
     Unlock = "Unlock the guide window and navigation arrow so you can drag them and resize the window.",
-    ["Show / Hide"] = "Show or hide the quest window. The arrow and targets remain independent.",
+    ["Show / Hide"] = "Show or hide the quest and target windows together.",
     Options = "Open addon settings, including font size.",
     ["-"] = "Decrease addon text size by one. This setting is saved for this character.",
     ["+"] = "Increase addon text size by one. This setting is saved for this character.",
@@ -169,6 +169,10 @@ function U:Create()
         self:Button(f, "Next", 80, "BOTTOMLEFT", 216, 10, function() F.GuideEngine:Move(1) end),
         self:Button(f, "Skip", 80, "BOTTOMLEFT", 302, 10, function() F.GuideEngine:Move(1, true) end),
         self:Button(f, "Auto", 80, "BOTTOMLEFT", 388, 10, function() F.GuideEngine:ResumeAuto() end),
+        self:Button(f, "Objectives", 84, "BOTTOMLEFT", 474, 10, function()
+            F.db.objectivesHidden=not F.db.objectivesHidden
+            F.ObjectiveQueue:Refresh()
+        end),
     }
     local debug = self:Panel(UIParent, 400, 145)
     debug:SetPoint("TOPLEFT", f, "BOTTOMLEFT", 0, -4)
@@ -225,12 +229,12 @@ function U:Layout(width, height)
     if not F.Tracker.frame then return end
     -- Use the minimum-window button widths at every size.
     -- Keep the footer left aligned with small, fixed gaps.
-    local buttonWidth = (400 - 16 - 28 - 4 * 6 - 28) / 5
+    local buttonWidth = (width - 16 - 28 - 5 * 6 - 28 - 84) / 5
     local previousWidth = buttonWidth + 28
     local gap = 6
     local buttonX = 16
     for index, button in ipairs(self.footerButtons or {}) do
-        local size = index == 2 and previousWidth or buttonWidth
+        local size = index == 6 and 84 or index == 2 and previousWidth or buttonWidth
         button:ClearAllPoints(); button:SetPoint("BOTTOMLEFT", self.frame, "BOTTOMLEFT", buttonX, 10)
         button:SetWidth(size)
         buttonX = buttonX + size + gap
@@ -271,12 +275,12 @@ function U:Layout(width, height)
     self.headerTitle:SetPoint("TOP", self.header, "TOP", titleCenter - headerWidth / 2, 0)
     self.headerTitle:SetSize(titleWidth, titleHeight)
     self.headerTitle:SetJustifyV("MIDDLE")
-    local searchTop = fontSize + 14
+    local searchTop = fontSize + 10
     self.searchBox:ClearAllPoints(); self.searchBox:SetPoint("TOPLEFT", F.Tracker.frame, "TOPLEFT", 16, -searchTop)
     self.searchBox:SetSize(width - 100, 30)
     self.searchHint:SetWidth(width - 108)
     self.searchClear:ClearAllPoints(); self.searchClear:SetPoint("TOPRIGHT", F.Tracker.frame, "TOPRIGHT", -8, -searchTop - 4)
-    F.Tracker.contentTop = searchTop + 36
+    F.Tracker.contentTop = searchTop + 40
     local trackerTop = 10
     F.Tracker.frame:ClearAllPoints(); F.Tracker.frame:SetPoint("TOPLEFT", 8, -trackerTop)
     -- Search sits below the column headings; rows end above the bottom buttons.
@@ -308,7 +312,7 @@ function U:Layout(width, height)
         row.stepBadge:ClearAllPoints(); row.stepBadge:SetPoint("LEFT", row, "LEFT", 10 + (stepWidth - badgeSize) / 2, 0)
         row.stepBadge:SetSize(badgeSize, badgeSize)
         row.stepGlow:SetSize(badgeSize * 1.65, badgeSize * 1.65)
-        row.text:SetSize(badgeSize, badgeSize)
+        row.text:SetSize(badgeSize+8,badgeSize);row.text:SetWordWrap(false)
         row.text:SetSpacing(0)
         row.text:ClearAllPoints(); row.text:SetPoint("CENTER",row.stepBadge,"CENTER",0,0)
         row.body:ClearAllPoints(); row.body:SetPoint("TOPLEFT", questX, -10)
@@ -389,12 +393,35 @@ function U:ToggleOptions()
     self.mapStepLimitLabel:SetText("Map step limit: " .. F.db.mapStepLimit)
     self.options:SetShown(not self.options:IsShown())
 end
-function U:Toggle()
+function U:Toggle(allPanels)
     local visible = not self.frame:IsShown()
+    if allPanels then visible = F.db.targetHidden == true end
     if visible and F.Combat() then F.Print("The guide window cannot be opened during combat."); return end
     self.frame:SetShown(visible); F.db.hidden = not visible; self:Debug()
+    if allPanels then F.db.targetHidden = not visible end
+    F.SecureTarget:UpdateTasks(F.SecureTarget.desiredTargets or {})
     F.Arrow:Update()
     if F.StepPins then F.StepPins:Update() end
+end
+-- Compare visible lines, ignoring presentation and action-prefix punctuation.
+-- Keep distinct instructions intact; do not suppress partial/fuzzy matches.
+function U:UniqueText(text, seen)
+    seen=seen or {}
+    local lines={}
+    for line in (text or ''):gmatch('[^\n]+') do
+        local key=line:gsub('|T.-|t',''):gsub('|A.-|a',''):gsub('|H.-|h',''):gsub('|h','')
+            :gsub('|c%x%x%x%x%x%x%x%x',''):gsub('|r',''):lower()
+            :gsub('^%s+',''):gsub('%s+$',''):gsub('%s+',' ')
+            :gsub('^(accept):%s*','%1 '):gsub('^(turn in):%s*','%1 ')
+            :gsub('^(objective):%s*','%1 '):gsub('[%.!]+$','')
+        key=key:gsub('^travel:%s*',''):gsub('^note:%s*',''):gsub('^trainer:%s*',''):gsub('^level:%s*','')
+        local status=key=='not started' or key=='in progress' or key=='completed' or key=='done' or key=='ready to turn in' or key=='failed' or key=='skipped'
+        if key=='' or status or not seen[key] then
+            lines[#lines+1]=line
+            if key~='' then seen[key]=true end
+        end
+    end
+    return table.concat(lines,'\n')
 end
 function U:TaskText(task)
     local id, q = F.GuideEngine:Resolve(task)
@@ -407,6 +434,13 @@ function U:TaskText(task)
     local color = done and "|cff40ff40" or state == "failed" and "|cffff4444" or "|cffffd100"
     local text = self:StateIcon(state) .. color .. prefix .. ": " .. title .. "|r"
     text = text .. "\n  " .. color .. self.stateLabels[state] .. "|r"
+    if task.levelRecovery and not done then
+        local level=F.Call(UnitLevel,'player')
+        local xp,maximum=F.Call(UnitXP,'player'),F.Call(UnitXPMax,'player')
+        if F.Number(level) and F.Number(xp) and F.Number(maximum) and maximum>xp then
+            text=text..'\n  Level '..level..': '..(maximum-xp)..' XP to next level (live)'
+        end
+    end
     if metadata and not done and (task.type == "pickup" or task.type == "turnin") then
         local observed = F.QuestData:Get(id)
         local rewardXP = observed and observed.rewardXPObserved
@@ -433,20 +467,39 @@ function U:TaskText(task)
     return text
 end
 -- Native gossip icons also used by the installed RXPGuides client addon.
-function U:ActionIcon(kind, size)
+function U:ActionIcon(kind, size, optional)
+    if optional and kind=='pickup' then return self:PriorityIcon('Optional',size) end
+    if optional and kind=='turnin' then return self:PriorityIcon('OptionalTurnin',size) end
     local icon=({pickup="AvailableQuestIcon",turnin="ActiveQuestIcon",talk="GossipGossipIcon",trainer="GossipGossipIcon"})[kind]
     size = size or F.db.fontSize or 12
     return icon and ("|Hforeverrestedicon:"..kind.."|h|TInterface\\GossipFrame\\"..icon..":"..size..":"..size.."|t|h ") or ""
 end
 function U:ActionTitle(task, iconSize)
+    local optional=task.optional or task.tasks and #task.tasks==1 and task.tasks[1].optional
+    local action=task.tasks and #task.tasks==1 and task.tasks[1] or task
+    local marker=action.type=='travel' and 'OptionalTravel' or 'Optional'
+    local questAction=action.type=='pickup' or action.type=='turnin' or action.type=='objective'
+    return ((task.recovery or action.recovery) and self:PriorityIcon('Catchup',iconSize) or '')..
+        (optional and not questAction and self:PriorityIcon(marker,iconSize) or '')..
+        (action.type=='objective' and self:PriorityIcon(optional and 'OptionalObjective' or 'Objective',iconSize) or '')..self:ActionTitleText(task,iconSize,optional)
+end
+function U:ActionTitleText(task, iconSize, optional)
     if task.tasks and #task.tasks==1 then task=task.tasks[1] end
+    if task.entryTravel then return F.Travel:EntryTitle(task) end
+    if task.type=='travel' and task.travelMode=='hearth' then return F.Travel:Note(task) end
+    if task.travelMode=='teleport-moonglade' then return 'Teleport to Moonglade.' end
+    if task.travelMode=='portal-ruttheran' then return "Portal to Rut'theran Village." end
+    if task.travelMode=='portal-darnassus' then return 'Portal to Darnassus.' end
+    if task.travelMode=='hearth' then return F.Travel:EntryTitle(task) end
     local id,q=F.GuideEngine:Resolve(task)
     local data=F.GuideEngine:Metadata(id)
     local fixture=task.slot and F.Guide.quests[task.slot]
     local title=q and q.title or data and data.title or fixture and fixture.title or task.text or "Guide note"
-    if task.type=="pickup" then return self:ActionIcon("pickup",iconSize).."Accept "..title end
-    if task.type=="turnin" then return self:ActionIcon("turnin",iconSize).."Turn in "..title end
+    if task.type=="pickup" then return self:ActionIcon("pickup",iconSize,optional).."Accept "..title end
+    if task.type=="turnin" then return self:ActionIcon("turnin",iconSize,optional).."Turn in "..title end
     if task.type=="objective" and q then
+        local point=F.GuideEngine:ObjectiveLocation(id)
+        if point and point.actionTitle and not q.complete then return point.actionTitle end
         local pending={}
         for index,o in ipairs(q.objectives) do
             if (not task.objective or task.objective==index) and not o.finished then pending[#pending+1]={o=o,index=index} end
@@ -473,6 +526,7 @@ end
 function U:TaskMarkers(task)
     local result = {}
     if task.critical or F.QuestPolicy and F.QuestPolicy:Key(task) then result[#result+1] = 'Critical' end
+    if task.optional then result[#result+1] = 'Optional' end
     local id=F.GuideEngine:Resolve(task)
     local gear = F.GearRewards:QuestGear(id)
     for _,questID in ipairs(task.gearQuestIDs or {}) do
@@ -488,10 +542,13 @@ function U:TaskPriority(task)
 end
 function U:TaskMarkerIcons(task, size)
     local icons = {}
-    for _,kind in ipairs(self:TaskMarkers(task)) do icons[#icons+1] = self:PriorityIcon(kind,size) end
+    for _,kind in ipairs(self:TaskMarkers(task)) do
+        if kind~='Optional' then icons[#icons+1] = self:PriorityIcon(kind,size) end
+    end
     return #icons > 0 and (' '..table.concat(icons)) or ''
 end
 function U:StepPriority(step,index)
+    if step.type=='travel' and step.optional then return end
     if step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index] then return 'Critical' end
     local priority=self:TaskPriority(step)
     for _,task in ipairs(F.GuideEngine:Tasks(step)) do
@@ -506,7 +563,8 @@ function U:StepMarkers(step,index)
     local function add(kind, alongside)
         if not seen[kind] then seen[kind] = {kind=kind,alongside=alongside} end
     end
-    if step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index] then add('Critical') end
+    if not (step.type=='travel' and step.optional) and
+        (step.criticalReason or F.GuideEngine.catchUpReasons and F.GuideEngine.catchUpReasons[index]) then add('Critical') end
     for _,kind in ipairs(self:TaskMarkers(step)) do add(kind) end
     for _,task in ipairs(F.GuideEngine:Tasks(step)) do
         for _,kind in ipairs(self:TaskMarkers(task)) do add(kind) end
@@ -519,10 +577,69 @@ function U:StepMarkers(step,index)
             for _,kind in ipairs(self:TaskMarkers(task)) do add(kind,true) end
         end
     end
-    for _,kind in ipairs({'Critical','Gear','Money'}) do
+    for _,kind in ipairs({'Critical','Optional','Gear','Money'}) do
         if seen[kind] then result[#result+1] = seen[kind] end
     end
     return result
+end
+function U:StepLocation(step)
+    local locations,seen={},{}
+    local questAction=false
+    local function add(point)
+        if not point then return end
+        local info=point.mapID and F.Call(C_Map and C_Map.GetMapInfo,point.mapID)
+        local zone=point.zone or info and info.name
+        if not zone or zone=='' then return end
+        local label=zone
+        if F.Number(point.x) and F.Number(point.y) and point.x>=0 and point.x<=1 and point.y>=0 and point.y<=1 then
+            label=label..string.format(' (%.1f, %.1f)',point.x*100,point.y*100)
+        end
+        if not seen[label] then locations[#locations+1]=label;seen[label]=true end
+    end
+    for _,task in ipairs(F.GuideEngine:Tasks(step)) do
+        local id,q=F.GuideEngine:Resolve(task)
+        if id and (task.type=='pickup' or task.type=='objective' or task.type=='turnin') then questAction=true end
+        local data=F.GuideEngine:Metadata(id)
+        local point
+        if task.type=='travel' then
+            if task.travelMode=='druid-flight' then
+                local map,x,y=F.Navigation:TravelWaypoint(task)
+                point={zone='Moonglade',mapID=map,x=x,y=y}
+            else
+                point=task.travelDestination or {zone=task.travelTo or task.entryGoal}
+            end
+        elseif task.zone or task.mapID then
+            point=task
+        else
+            point=F.GuideEngine:ActionLocation(task)
+            if not point and task.type=='objective' then point=id and F.Travel:QuestArea(id) end
+        end
+        add(point)
+    end
+    if #locations==0 then add(step.travelDestination or {zone=step.travelTo or step.zone,mapID=step.mapID,x=step.x,y=step.y}) end
+    -- A regional guide can include class detours elsewhere. Its own zone is
+    -- not evidence for an unlocated quest objective.
+    if #locations==0 and not questAction then add({zone=F.Guide and F.Guide.zone}) end
+    return 'Location: '..(#locations>0 and table.concat(locations,'; ') or 'Not specified in guide data')
+end
+function U:ActionContact(task)
+    if task.type=='travel' and task.travelMode=='druid-flight' then
+        return self:ActionIcon('talk').."Talk to |cff40ff40Silva Fil'naveth|r for the druid flight to Rut'theran Village."
+    end
+    if task.type~='pickup' and task.type~='turnin' then return '' end
+    local id=F.GuideEngine:Resolve(task)
+    local data=F.GuideEngine:Metadata(id)
+    for _,point in ipairs(data and data.locations or {}) do
+        if point.role==(task.type=='pickup' and 'start' or 'end') and point.name then
+            if point.acquisition=='item-drop' then
+                return 'Loot |cffffffff'..(point.item or 'the quest-starting item')..'|r from |cffff8040'..point.name..'|r; use it to accept the quest.'
+            elseif point.acquisition=='object-start' then
+                return self:ActionIcon('talk')..'Interact with |cff40ff40'..point.name..'|r to start the quest.'
+            end
+            return self:ActionIcon('talk')..'Talk to |cff40ff40'..point.name..'|r'
+        end
+    end
+    return ''
 end
 function U:ActionBody(task)
     local id,q=F.GuideEngine:Resolve(task)
@@ -536,18 +653,13 @@ function U:ActionBody(task)
                 lines[#lines+1]="Use "..name.." in your bags to start this quest."
             end
         end
-        for _,point in ipairs(data and data.locations or {}) do
-            if point.role==(task.type=="pickup" and "start" or "end") and point.name then
-                lines[#lines+1]=self:ActionIcon("talk").."Talk to |cff40ff40"..point.name.."|r";break
-            end
-        end
         if task.type=="turnin" and q and not q.complete then lines[#lines+1]="|cffffd100Finish the remaining objectives first.|r" end
     elseif task.type=="objective" then
         if q then
             lines[#lines+1]="|cffffd100"..q.title.."|r"
             for index,o in ipairs(q.objectives) do
                 if not task.objective or task.objective==index then
-                    lines[#lines+1]=self:StateIcon(o.finished and "complete" or "ongoing")..(o.finished and "|cff40ff40" or "|cffffffff")..(o.text or F.QuestLog:Progress(o)).."|r"
+                    lines[#lines+1]='  • '..(o.finished and "|cff40ff40" or "|cffffffff")..(o.text or F.QuestLog:Progress(o)).."|r"
                 end
             end
         else lines[#lines+1]="Accept this quest before completing its objectives." end
@@ -572,6 +684,7 @@ function U:Refresh()
     self:Layout(self.frame:GetWidth(), self.frame:GetHeight())
     F.SecureTarget:UpdateTasks(F.GuideEngine:Targets())
     self:NavigationTick()
+    F.ObjectiveQueue:Refresh()
 end
 function U:NavigationTick()
     F.Navigation:Update(); F.Arrow:Update()

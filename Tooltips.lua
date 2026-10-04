@@ -1,6 +1,18 @@
 local _, F = ...
-local T = {delay = 3, owners = {}}
+local T = {delay = 2, owners = {}}
 F.Tooltips = T
+function T:QuestHeader(owner,title,step,anchor)
+    GameTooltip:SetOwner(owner,anchor or 'ANCHOR_RIGHT')
+    GameTooltip:SetText(title or 'Quest',1,.82,0)
+    if step then GameTooltip:AddLine('Step '..step,.72,.68,.58,true) end
+end
+function T:QuestHint(text)
+    GameTooltip:AddLine(' ')
+    GameTooltip:AddLine(text,.65,.65,.65,true)
+end
+function T:QuestObjective(text,finished)
+    GameTooltip:AddLine('• '..text,finished and .35 or .9,finished and .85 or .85,finished and .35 or .72,true)
+end
 T.driver = CreateFrame("Frame")
 T.driver:Hide()
 function T:Cancel(owner)
@@ -8,13 +20,13 @@ function T:Cancel(owner)
         self.pending = nil; self.driver:Hide()
     end
     if self.shownOwner and (not owner or self.shownOwner == owner) then
-        if GameTooltip then GameTooltip:Hide() end
         self.shownOwner = nil
+        if GameTooltip then GameTooltip:Hide() end
     end
 end
 function T:Attach(frame, render, immediate)
+    if frame.foreverTooltip~=true then self.owners[#self.owners + 1] = frame end
     frame.foreverTooltip = true
-    self.owners[#self.owners + 1] = frame
     frame:SetScript("OnEnter", function(owner)
         self:Cancel()
         if immediate then
@@ -26,7 +38,10 @@ function T:Attach(frame, render, immediate)
         self.driver:Show()
     end)
     frame:SetScript("OnLeave", function(owner) self:Cancel(owner) end)
-    if frame.HookScript then frame:HookScript("OnHide", function(owner) self:Cancel(owner) end) end
+    if frame.HookScript and frame.foreverTooltipHideHook~=true then
+        frame.foreverTooltipHideHook=true
+        frame:HookScript("OnHide", function(owner) self:Cancel(owner) end)
+    end
 end
 function T:Text(frame, title, body, immediate)
     -- Keep immediate behavior when a button's help text is replaced later.

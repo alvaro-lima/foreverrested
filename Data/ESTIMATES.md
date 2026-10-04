@@ -4,6 +4,12 @@ Run `python tools/estimate_routes.py --input Data/estimate-example.json` for a M
 
 For each cluster, total XP is turn-in rewards plus XP from required kills. Total time includes supplied pickup/objective/turn-in travel, combat, finding mobs/looting/recovery, and NPC interaction. XP per minute is total XP divided by total minutes. Exploration and unrelated kills are currently excluded.
 
+Quests and travel legs marked `optional: true` are excluded from baseline XP,
+kills and time, including overlapping optional objectives. Their quest IDs are
+reported as `excludedOptionalQuestIDs`. Missing optional reward/drop data does
+not invalidate the required-work estimate. Optional work must never support a
+chapter's advertised exit level.
+
 ## Inputs
 
 - Player profile: class, current level, client buildKey, movement speed in yards/second, and per-mob combat/overhead times and net XP per kill. Profiles can include group mode and playstyle context. Supply a different profile for different classes, levels, equipment, groups, or bonuses; the tool does not invent scaling formulas.

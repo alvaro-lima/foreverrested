@@ -24,6 +24,9 @@ function P:Eligible(id, task)
     return F.GuideEngine:Applies(eligibility)
 end
 function P:UnlockApplies(unlock)
+    if unlock.spellID and (F.Call(IsSpellKnown,unlock.spellID)==true
+        or F.Call(IsPlayerSpell,unlock.spellID)==true
+        or F.Call(C_SpellBook and C_SpellBook.IsSpellKnown,unlock.spellID)==true) then return false end
     local _,class=F.Call(UnitClass,'player')
     local _,race=F.Call(UnitRace,'player')
     local level=F.Call(UnitLevel,'player')
@@ -36,6 +39,9 @@ function P:UnlockApplies(unlock)
     return unlock.races==0 or bit and math.floor(unlock.races/bit)%2==1
 end
 function P:Satisfied(id)
+    local spell=self:Record(id).unlockSpell
+    if spell and (F.Call(IsSpellKnown,spell)==true or F.Call(IsPlayerSpell,spell)==true
+        or F.Call(C_SpellBook and C_SpellBook.IsSpellKnown,spell)==true) then return true end
     if F.QuestLog:TurnedIn(id) then return true end
     for _,alternate in ipairs(self:Record(id).exclusiveTo or {}) do
         if F.QuestLog:TurnedIn(alternate) then return true end
@@ -56,6 +62,12 @@ end
 function P:EnsureUnlockSteps(guide)
     if guide.status == 'test' or not guide.faction then return end
     local steps = guide.authoredSteps or guide.steps
+    -- Catch-up additions are pending work, not a second completed quest history.
+    for index=#steps,1,-1 do
+        local step=steps[index]
+        if step.id and step.id:find('class-unlock:',1,true)==1
+            and F.GuideEngine:Done(step,F.GuideEngine:Resolve(step)) then table.remove(steps,index) end
+    end
     local existing, seen, visiting, additionsSteps = {}, {}, {}, {}
     for _, step in ipairs(steps) do
         for _, task in ipairs(step.tasks or {step}) do
@@ -73,6 +85,7 @@ function P:EnsureUnlockSteps(guide)
     end
     local function add(id, reason, terminal)
         if not id or seen[id] or visiting[id] then return end
+        if self:Satisfied(id) then return end
         if not self:Eligible(id) then return end
         local record = self:Record(id)
         local facts = F.GuideEngine:Metadata(id)
@@ -83,13 +96,15 @@ function P:EnsureUnlockSteps(guide)
         visiting[id], seen[id] = nil, true
         for _, kind in ipairs({'pickup','objective','turnin'}) do
             local task = existing[id..':'..kind]
-            if task then task.critical, task.criticalReason, task.unlockChain, task.unlockTerminal = true, reason, true, terminal
+            if task then task.critical, task.criticalReason, task.unlockChain, task.unlockTerminal = true, reason, true, terminal;task.unlockSpell=record.unlockSpell
             else
                 task = {id='class-unlock:'..id..':'..kind, type=kind, questID=id,
                     critical=true, criticalReason=reason, unlockChain=true,
                     text=facts.title, classes=record.classes, requiredRaces=record.requiredRaces,
-                    minLevel=record.minLevel, note=facts.routeNote, unlockTerminal=terminal}
-                additionsSteps[#additionsSteps+1] = task
+                    minLevel=record.minLevel, note=facts.routeNote, unlockTerminal=terminal,unlockSpell=record.unlockSpell}
+                if not F.GuideEngine:Done(task,F.GuideEngine:Resolve(task)) then
+                    additionsSteps[#additionsSteps+1] = task
+                end
                 existing[id..':'..kind] = task
             end
         end
@@ -159,6 +174,7 @@ function P:ProtectedSteps(boundary)
     end
     requireQuest=function(id,reason,force)
         if not id or self:Satisfied(id) then return end
+        if self.catchupSkippedQuests and self.catchupSkippedQuests[id] then return end
         -- A prerequisite still ahead in the retained route will be handled in
         -- authored order. Recover only bypassed/missing ancestors, or unlocks.
         if not force and positions[id] and positions[id]>=boundary then return end
@@ -240,7 +256,7 @@ function P:ProtectedSteps(boundary)
     self.requiredQuests,self.requiredOrder,self.activeParents=quests,order,activeParents
     return protected
 end
-function P:InsertRecovery(boundary,protected)
+function P:InsertRecovery(boundary,protected,linked)
     if F.Guide.status=='test' then return boundary,protected end
     local prefix,reasons,skipped={},{},{}
     local authoredUnlocks = {}
@@ -257,7 +273,9 @@ function P:InsertRecovery(boundary,protected)
     for _,id in ipairs(self.requiredOrder or {}) do
         local record=self:Record(id)
         for _,kind in ipairs(self.activeParents[id] and {'pickup'} or {'pickup','objective','turnin'}) do
-            if not authoredUnlocks[id..":"..kind] then
+            local q=F.QuestLog.byID[id]
+            local needed=not linked or not (kind=='pickup' and q or kind=='objective' and q and q.complete)
+            if needed and (linked or not authoredUnlocks[id..":"..kind]) then
             prefix[#prefix+1]={id='catchup:'..id..':'..kind,type=kind,questID=id,
                 critical=true,criticalReason=self.requiredQuests[id],recovery=true,
                 text=(kind=='objective' and 'Complete ' or '')..((F.GuideEngine:Metadata(id) or record).title or ('Quest '..id))}
@@ -268,10 +286,54 @@ function P:InsertRecovery(boundary,protected)
     local count=#prefix
     if count==0 then return boundary,protected end
     for index,step in ipairs(F.Guide.steps) do
+        local action=step.tasks and #step.tasks==1 and step.tasks[1] or step
+        local replaced=linked and self.requiredQuests[action.questID] and
+            (action.type=='pickup' or action.type=='objective' or action.type=='turnin')
+        if not replaced and not (linked and step.travelQuestID and self.requiredQuests[step.travelQuestID]) then
         prefix[#prefix+1]=step
-        reasons[count+index]=protected[index]
-        if F.db.skipped[index] then skipped[count+index]=true end
+        reasons[#prefix]=protected[index]
+        if F.db.skipped[index] then skipped[#prefix]=true end
+        end
     end
     F.Guide.steps,F.db.skipped=prefix,skipped
     return boundary+count,reasons
+end
+function P:LoadCatchUp()
+    local current=F.Guide.steps[F.db.step]
+    local currentID=current and current.id
+    self:PrepareGuide()
+    self.catchupSkippedQuests={}
+    for _,guideID in ipairs(F.GuideLibrary.order) do
+        local guide=F.GuideLibrary.guides[guideID]
+        local saved=guide==F.Guide and F.db or F.db.guides[guideID]
+        if not guide.retired and guide.routeGroup==F.Guide.routeGroup and saved then
+            for _,step in ipairs(guide.authoredSteps or guide.steps) do
+                if saved.manualSkippedSteps and (saved.manualSkippedSteps[step.id] or saved.manualSkippedSteps[step.legacyGroupID]) then
+                    for _,task in ipairs(step.tasks or {step}) do
+                        if task.questID and task.type~='travel' then self.catchupSkippedQuests[task.questID]=true end
+                    end
+                end
+            end
+        end
+    end
+    local protected=self:ProtectedSteps(1)
+    self.catchupSkippedQuests=nil
+    local _,reasons=self:InsertRecovery(1,protected,true)
+    local skipped,byID={},{}
+    for index,step in ipairs(F.Guide.steps) do
+        if F.db.skipped[index] then skipped[step.id]=true end
+        byID[step.id]=reasons[index]
+    end
+    F.Travel:EnsureSteps(F.Guide,true)
+    F.db.skipped={};F.GuideEngine.catchUpReasons={}
+    local firstRecovery,position
+    for index,step in ipairs(F.Guide.steps) do
+        F.GuideEngine.catchUpReasons[index]=byID[step.id]
+        if skipped[step.id] or F.db.manualSkippedSteps[step.id] then F.db.skipped[index]=true end
+        if step.recovery and not firstRecovery and not F.db.manualSkippedSteps[step.id] then firstRecovery=index end
+        if step.id==currentID then position=index end
+    end
+    -- Begin the prefix including its travel advice, or keep the saved route position.
+    F.db.step=firstRecovery and 1 or position or 1
+    F.GuideEngine.manualHold,F.GuideEngine.selectedStep=nil,nil
 end

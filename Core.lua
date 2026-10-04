@@ -49,5 +49,11 @@ function F.Refresh()
         end
     end
     F.GuideEngine:AdvanceSafe()
+    if F.Travel then
+        F.Travel:ObserveObjectiveStage()
+        F.Travel:EnsureEntry()
+        F.Travel:EnsureTurninTravel()
+        F.Travel:EnsureLocalFlightPath()
+    end
     if F.UI.frame then F.UI:Refresh() end
 end

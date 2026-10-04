@@ -1,0 +1,1312 @@
+{
+  "chaptersReviewed": 33,
+  "optionalXPExcluded": true,
+  "classXPExcluded": true,
+  "limits": [
+    "Listed XP is reference data, not a verified level-adjusted reward.",
+    "These bands include explicit required combat recovery; quests alone do not guarantee the exit level.",
+    "Live level/XP governs recovery completion. Optional work may reduce recovery, but is never assumed.",
+    "Zephras 10+ continuation deliberately allows early departure."
+  ],
+  "chapters": [
+    {
+      "guideID": "alliance-eastern-20-22",
+      "title": "20-22 Wetlands: Coast and Greenwarden",
+      "requiredTurninIDs": [
+        276,
+        279,
+        463,
+        484
+      ],
+      "excludedOptionalTurninIDs": [
+        455,
+        468,
+        98197,
+        98282
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 5580,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:menethil-first:pickup:305",
+          "targetLevel": 21,
+          "zone": "Wetlands",
+          "x": 0.6033,
+          "y": 0.7376999999999999,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-eastern-20-22",
+          "targetLevel": 22,
+          "zone": "Wetlands",
+          "x": 0.6033,
+          "y": 0.7376999999999999,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-22-24",
+      "title": "22-24 Duskwood: road and introductions",
+      "requiredTurninIDs": [
+        5,
+        56,
+        93,
+        148,
+        149,
+        154,
+        157,
+        158,
+        163,
+        164,
+        165,
+        226,
+        240,
+        245
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        91,
+        115,
+        150
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 11310,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-22-24",
+          "targetLevel": 24,
+          "zone": "Duskwood",
+          "x": 0.7815000000000001,
+          "y": 0.7564,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-24-25",
+      "title": "24-25 Wetlands: gnolls and excavation",
+      "requiredTurninIDs": [
+        277,
+        294,
+        305,
+        306
+      ],
+      "excludedOptionalTurninIDs": [
+        469,
+        98461
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 5255,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-24-25",
+          "targetLevel": 25,
+          "zone": "Wetlands",
+          "x": 0.354,
+          "y": 0.2755,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-25-26",
+      "title": "25-26 Duskwood: Raven Hill investigations",
+      "requiredTurninIDs": [
+        57,
+        90,
+        95,
+        133,
+        156,
+        159,
+        230,
+        262,
+        265,
+        266,
+        268,
+        453
+      ],
+      "excludedOptionalTurninIDs": [
+        174,
+        175,
+        177
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 12110,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-25-26",
+          "targetLevel": 26,
+          "zone": "Duskwood",
+          "x": 0.1624,
+          "y": 0.42810000000000004,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-26-27",
+      "title": "26-27 Wetlands: relics and coastal goods",
+      "requiredTurninIDs": [
+        275,
+        281,
+        284,
+        285,
+        286,
+        288,
+        295,
+        299
+      ],
+      "excludedOptionalTurninIDs": [
+        470
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 10790,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-26-27",
+          "targetLevel": 27,
+          "zone": "Wetlands",
+          "x": 0.2738,
+          "y": 0.3712,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-27-28",
+      "title": "27-28 Duskwood: worgen and the hermit",
+      "requiredTurninIDs": [
+        134,
+        160,
+        173,
+        221,
+        251,
+        252,
+        401
+      ],
+      "excludedOptionalTurninIDs": [],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 7050,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-27-28",
+          "targetLevel": 28,
+          "zone": "Duskwood",
+          "x": 0.6544,
+          "y": 0.6781,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "title": "28-29 Wetlands: shipwrecks and final raptors",
+      "requiredTurninIDs": [
+        289,
+        290,
+        292,
+        296
+      ],
+      "excludedOptionalTurninIDs": [
+        293,
+        303,
+        464,
+        465,
+        472,
+        473,
+        474,
+        631,
+        632,
+        633,
+        634
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 7100,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-28-29",
+          "targetLevel": 29,
+          "zone": "Wetlands",
+          "x": 0.1542,
+          "y": 0.23370000000000002,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "title": "29-30 Duskwood: final patrols",
+      "requiredTurninIDs": [
+        58,
+        101,
+        222,
+        223
+      ],
+      "excludedOptionalTurninIDs": [
+        181,
+        253,
+        96137,
+        96138,
+        96139
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 10050,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-eastern-29-30",
+          "targetLevel": 30,
+          "zone": "Duskwood",
+          "x": 0.2291,
+          "y": 0.2822,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "title": "20-24 Ashenvale / Stonetalon: introductions",
+      "requiredTurninIDs": [
+        991,
+        1007,
+        1008,
+        1009,
+        1010,
+        1016,
+        1020,
+        1023,
+        1024,
+        1025,
+        1033,
+        1034,
+        1056,
+        1070,
+        1071,
+        1085,
+        1134
+      ],
+      "excludedOptionalTurninIDs": [
+        976,
+        990
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 23885,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "ashenvale-before-foulweald",
+          "targetLevel": 23,
+          "zone": "Ashenvale",
+          "x": 0.0662,
+          "y": 0.1617,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-kalimdor-20-24",
+          "targetLevel": 24,
+          "zone": "Ashenvale",
+          "x": 0.5696,
+          "y": 0.6473,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-kalimdor-24-27",
+      "title": "24-27 Ashenvale: eastern camps",
+      "requiredTurninIDs": [
+        1017,
+        1054
+      ],
+      "excludedOptionalTurninIDs": [],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 4550,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-kalimdor-24-27",
+          "targetLevel": 27,
+          "zone": "Ashenvale",
+          "x": 0.5468999999999999,
+          "y": 0.6191,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-kalimdor-27-30",
+      "title": "27-30 Ashenvale: cleansing and lake circuits",
+      "requiredTurninIDs": [
+        1011,
+        1026,
+        1027,
+        1028,
+        1029,
+        1030,
+        1035,
+        1045,
+        1046,
+        1055,
+        4581
+      ],
+      "excludedOptionalTurninIDs": [
+        1012,
+        1021,
+        1022,
+        1031,
+        1032
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 19850,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-kalimdor-27-30",
+          "targetLevel": 30,
+          "zone": "Ashenvale",
+          "x": 0.682,
+          "y": 0.6916,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-coldridge-01-05",
+      "title": "1-5 Coldridge Valley",
+      "requiredTurninIDs": [
+        170,
+        179,
+        182,
+        183,
+        218,
+        233,
+        234,
+        3361
+      ],
+      "excludedOptionalTurninIDs": [
+        3364,
+        3365
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 2125,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:felix-pickup",
+          "targetLevel": 3,
+          "zone": "Dun Morogh",
+          "x": 0.3,
+          "y": 0.742,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-coldridge-01-05",
+          "targetLevel": 5,
+          "zone": "Dun Morogh",
+          "x": 0.27399999999999997,
+          "y": 0.8079999999999999,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-dun-morogh-05-10",
+      "title": "5-8 Dun Morogh: Kharanos circuits",
+      "requiredTurninIDs": [
+        282,
+        313,
+        315,
+        317,
+        318,
+        319,
+        320,
+        400,
+        412,
+        420
+      ],
+      "excludedOptionalTurninIDs": [
+        287,
+        2160,
+        5541,
+        98321,
+        98326
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 5280,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:kharanos-west-pickup",
+          "targetLevel": 7,
+          "zone": "Dun Morogh",
+          "x": 0.48,
+          "y": 0.49200000000000005,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-dun-morogh-05-10",
+          "targetLevel": 8,
+          "zone": "Dun Morogh",
+          "x": 0.406,
+          "y": 0.47200000000000003,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-dun-morogh-east-08-10",
+      "title": "8-10 Dun Morogh: quarry and eastern road",
+      "requiredTurninIDs": [
+        432,
+        433,
+        95212
+      ],
+      "excludedOptionalTurninIDs": [
+        314,
+        417,
+        419,
+        95213,
+        95214,
+        95217
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 1880,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-dun-morogh-east-08-10",
+          "targetLevel": 10,
+          "zone": "Dun Morogh",
+          "x": 0.708,
+          "y": 0.56,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-northshire-01-05",
+      "title": "1-5 Northshire",
+      "requiredTurninIDs": [
+        7,
+        15,
+        18,
+        21,
+        33,
+        783
+      ],
+      "excludedOptionalTurninIDs": [
+        6,
+        3903,
+        3904
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 1435,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:northshire-final-pickup:pickup:18",
+          "targetLevel": 2,
+          "zone": "Elwynn Forest",
+          "x": 0.47600000000000003,
+          "y": 0.36,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-northshire-01-05",
+          "targetLevel": 5,
+          "zone": "Elwynn Forest",
+          "x": 0.484,
+          "y": 0.292,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-elwynn-05-10",
+      "title": "5-10 Elwynn Forest",
+      "requiredTurninIDs": [
+        11,
+        35,
+        37,
+        39,
+        40,
+        45,
+        47,
+        52,
+        54,
+        60,
+        62,
+        71,
+        76,
+        83,
+        84,
+        85,
+        86,
+        87,
+        239,
+        5545
+      ],
+      "excludedOptionalTurninIDs": [
+        46,
+        176,
+        2158,
+        3905
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 9835,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:jasperlode-pickup:pickup:40",
+          "targetLevel": 7,
+          "zone": "Elwynn Forest",
+          "x": 0.414,
+          "y": 0.78,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-elwynn-05-10",
+          "targetLevel": 10,
+          "zone": "Elwynn Forest",
+          "x": 0.264,
+          "y": 0.866,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-shadowglen-01-05",
+      "title": "1-5 Shadowglen",
+      "requiredTurninIDs": [
+        456,
+        457,
+        458,
+        459,
+        916,
+        917,
+        920,
+        921
+      ],
+      "excludedOptionalTurninIDs": [
+        4495
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 2005,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:webwood-pickup:pickup:916",
+          "targetLevel": 3,
+          "zone": "Teldrassil",
+          "x": 0.564,
+          "y": 0.456,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-shadowglen-01-05",
+          "targetLevel": 5,
+          "zone": "Teldrassil",
+          "x": 0.5660000000000001,
+          "y": 0.31,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-teldrassil-05-10",
+      "title": "5-10 Teldrassil",
+      "requiredTurninIDs": [
+        475,
+        476,
+        483,
+        487,
+        488,
+        489,
+        918,
+        919,
+        928,
+        929,
+        997,
+        2438,
+        2459,
+        2541,
+        2561
+      ],
+      "excludedOptionalTurninIDs": [
+        490,
+        932,
+        2159,
+        2499,
+        87288
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 8610,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-teldrassil-05-10",
+          "targetLevel": 10,
+          "zone": "Teldrassil",
+          "x": 0.6859999999999999,
+          "y": 0.528,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-grove-01-05",
+      "title": "1-5 Zephras: Thendal Grove",
+      "requiredTurninIDs": [
+        92460,
+        92461,
+        92462,
+        92463,
+        92464,
+        92465,
+        92469,
+        92470,
+        92471
+      ],
+      "excludedOptionalTurninIDs": [
+        92473,
+        92474,
+        92544,
+        92597,
+        93552,
+        94414
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 1510,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:grove-next:pickup:92463",
+          "targetLevel": 2,
+          "zone": "Zephras Isle",
+          "x": 0.452,
+          "y": 0.252,
+          "required": true
+        },
+        {
+          "stepID": "xp-before:rorian-return-pickup",
+          "targetLevel": 3,
+          "zone": "Zephras Isle",
+          "x": 0.469,
+          "y": 0.209,
+          "required": true
+        },
+        {
+          "stepID": "xp-before:aetheen-pickup",
+          "targetLevel": 4,
+          "zone": "Zephras Isle",
+          "x": 0.469,
+          "y": 0.209,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-zephras-grove-01-05",
+          "targetLevel": 5,
+          "zone": "Zephras Isle",
+          "x": 0.358,
+          "y": 0.23199999999999998,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-village-05-08",
+      "title": "5-8 Zephras: village and highlands",
+      "requiredTurninIDs": [
+        92472,
+        92515,
+        92517,
+        92553,
+        92701,
+        93461,
+        94413
+      ],
+      "excludedOptionalTurninIDs": [
+        92516,
+        92528,
+        92529,
+        92550,
+        92551,
+        92596,
+        93036,
+        93319,
+        96638
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 2400,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:valanaar-intro-pickup",
+          "targetLevel": 6,
+          "zone": "Zephras Isle",
+          "x": 0.504,
+          "y": 0.33399999999999996,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-zephras-village-05-08",
+          "targetLevel": 8,
+          "zone": "Zephras Isle",
+          "x": 0.504,
+          "y": 0.33399999999999996,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "title": "8-10 Zephras: Windfield and scholar",
+      "requiredTurninIDs": [
+        92679,
+        92682,
+        92683,
+        92684,
+        92685,
+        92693,
+        92699,
+        92703,
+        92727,
+        92849,
+        92850
+      ],
+      "excludedOptionalTurninIDs": [
+        92698,
+        93949
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 5885,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-zephras-west-08-10",
+          "targetLevel": 10,
+          "zone": "Zephras Isle",
+          "x": 0.466,
+          "y": 0.8059999999999999,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-westfall-10-15",
+      "title": "10-12 Westfall: farms and first militia",
+      "requiredTurninIDs": [
+        9,
+        12,
+        22,
+        36,
+        38,
+        102,
+        151,
+        153
+      ],
+      "excludedOptionalTurninIDs": [
+        64,
+        184,
+        92909,
+        92910,
+        92911,
+        98021
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 7480,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-combat:north-loop:objective:9",
+          "targetLevel": 12,
+          "zone": "Westfall",
+          "x": 0.46,
+          "y": 0.268,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-westfall-10-15",
+          "targetLevel": 12,
+          "zone": "Westfall",
+          "x": 0.46,
+          "y": 0.268,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "title": "12-15 Westfall: militia and Defias",
+      "requiredTurninIDs": [
+        13,
+        14,
+        65,
+        132,
+        135,
+        141,
+        142,
+        155
+      ],
+      "excludedOptionalTurninIDs": [
+        104,
+        152,
+        92747,
+        92749
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 8680,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-combat:moonbrook-loop",
+          "targetLevel": 15,
+          "zone": "Westfall",
+          "x": 0.428,
+          "y": 0.682,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-westfall-militia-12-15",
+          "targetLevel": 15,
+          "zone": "Westfall",
+          "x": 0.428,
+          "y": 0.682,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-redridge-human-15-20",
+      "title": "15-20 Redridge (Westfall arrival)",
+      "requiredTurninIDs": [
+        89,
+        92,
+        118,
+        119,
+        122,
+        125,
+        127,
+        244,
+        246,
+        3741
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        116,
+        98407
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 10340,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-westfall-10-20:pickup:127",
+          "targetLevel": 16,
+          "zone": "Redridge Mountains",
+          "x": 0.16399999999999998,
+          "y": 0.49,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-redridge-human-15-20",
+          "targetLevel": 20,
+          "zone": "Redridge Mountains",
+          "x": 0.491,
+          "y": 0.743,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "title": "10-13 Loch Modan: western shore",
+      "requiredTurninIDs": [
+        224,
+        237,
+        263,
+        307,
+        416,
+        418,
+        1339
+      ],
+      "excludedOptionalTurninIDs": [
+        86585,
+        86667
+      ],
+      "excludedClassTurninIDs": [
+        94449,
+        94465,
+        94466,
+        94467,
+        94468
+      ],
+      "listedRequiredQuestXP": 6660,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-combat:south-second-objectives",
+          "targetLevel": 11,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72,
+          "required": true
+        },
+        {
+          "stepID": "xp-combat:south-third-objectives",
+          "targetLevel": 12,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-loch-west-10-13",
+          "targetLevel": 13,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "title": "13-15 Loch Modan: excavation and lodge",
+      "requiredTurninIDs": [
+        297,
+        385,
+        2038
+      ],
+      "excludedOptionalTurninIDs": [
+        217,
+        257,
+        258,
+        271,
+        309,
+        436,
+        531,
+        1338,
+        86613,
+        86614,
+        86758
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 3450,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-loch-east-13-15",
+          "targetLevel": 15,
+          "zone": "Loch Modan",
+          "x": 0.622,
+          "y": 0.456,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-redridge-dwarf-15-20",
+      "title": "15-20 Redridge (Loch Modan arrival)",
+      "requiredTurninIDs": [
+        89,
+        92,
+        118,
+        119,
+        122,
+        125,
+        127,
+        244,
+        246,
+        3741
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        116,
+        98407
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 10340,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-loch-modan-10-20:pickup:127",
+          "targetLevel": 16,
+          "zone": "Redridge Mountains",
+          "x": 0.16399999999999998,
+          "y": 0.49,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-redridge-dwarf-15-20",
+          "targetLevel": 20,
+          "zone": "Redridge Mountains",
+          "x": 0.491,
+          "y": 0.743,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "title": "10-13 Darkshore: coast and ruins",
+      "requiredTurninIDs": [
+        953,
+        954,
+        955,
+        956,
+        957,
+        958,
+        963,
+        983,
+        984,
+        985,
+        2118,
+        2138,
+        3524,
+        4681,
+        4722,
+        4761
+      ],
+      "excludedOptionalTurninIDs": [],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 12790,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-darkshore-10-20:pickup:3524",
+          "targetLevel": 11,
+          "zone": "Darkshore",
+          "x": 0.358,
+          "y": 0.474,
+          "required": true
+        },
+        {
+          "stepID": "xp-combat:optional:alliance-darkshore-10-20:objective:963",
+          "targetLevel": 13,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.564,
+          "required": true
+        },
+        {
+          "stepID": "xp-exit:alliance-darkshore-10-13",
+          "targetLevel": 13,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.564,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "title": "13-17 Darkshore: northern circuits",
+      "requiredTurninIDs": [
+        944,
+        947,
+        948,
+        949,
+        950,
+        1001,
+        1002,
+        4723,
+        4762,
+        4811,
+        4812,
+        4813
+      ],
+      "excludedOptionalTurninIDs": [
+        952,
+        982,
+        98025,
+        98042
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 10055,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-darkshore-13-17",
+          "targetLevel": 17,
+          "zone": "Darkshore",
+          "x": 0.526,
+          "y": 0.254,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "title": "17-20 Darkshore: ruins and final work",
+      "requiredTurninIDs": [
+        951,
+        965,
+        966,
+        1003,
+        1138,
+        4731,
+        4732,
+        4733
+      ],
+      "excludedOptionalTurninIDs": [
+        986,
+        993,
+        2139,
+        4740,
+        5321
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 8570,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-darkshore-17-20",
+          "targetLevel": 20,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.8140000000000001,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "title": "10+ Zephras: service and wind",
+      "requiredTurninIDs": [
+        92834,
+        92840,
+        92860,
+        99260
+      ],
+      "excludedOptionalTurninIDs": [
+        94896,
+        94897,
+        98512
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 2070,
+      "missingRewardIDs": [],
+      "recoverySteps": [],
+      "flexibleExit": true,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "title": "10+ Zephras: tower and village",
+      "requiredTurninIDs": [
+        92640,
+        92642,
+        92643,
+        92644,
+        92645,
+        92880,
+        92881,
+        92947,
+        93065,
+        93089,
+        93320,
+        93835,
+        93958,
+        94369,
+        94568
+      ],
+      "excludedOptionalTurninIDs": [
+        93159,
+        94484
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 7180,
+      "missingRewardIDs": [],
+      "recoverySteps": [],
+      "flexibleExit": true,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-zephras-exit-12-14",
+      "title": "10+ Zephras: optional work and exit",
+      "requiredTurninIDs": [],
+      "excludedOptionalTurninIDs": [
+        93160,
+        93172,
+        94485,
+        94486,
+        94487
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 0,
+      "missingRewardIDs": [],
+      "recoverySteps": [],
+      "flexibleExit": true,
+      "questOnlyExitLevelVerified": false
+    }
+  ]
+}

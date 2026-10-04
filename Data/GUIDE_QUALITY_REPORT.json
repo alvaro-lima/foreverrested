@@ -1,0 +1,90 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "check": "tools/audit_action_locations.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: 1129 actions; 0 missing action locations"
+    },
+    {
+      "check": "tests/validate_action_location_rules.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: action-specific locations and complete aquatic quest phase coverage"
+    },
+    {
+      "check": "tests/validate_online_action_locations.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: online evidence, acquired quest starts, remaining ingredients and unsupported quest exclusion"
+    },
+    {
+      "check": "tests/validate_aquatic_catchup.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: Skyborne Aquatic Form catch-up, deduplication and learned-form detection"
+    },
+    {
+      "check": "tests/validate_class_return_journey.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: aquatic delivery, real regional pickup, portal/boat instructions, arrival, reload and acceptance"
+    },
+    {
+      "check": "tests/validate_turnin_travel.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: live completion travel, departure arrow, no duplicate/dismissed trips, holds and known paths"
+    },
+    {
+      "check": "tests/validate_entry_travel.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: entry destination, hearth readiness, flight fallback, roads, arrival, saved progress and binding changes"
+    },
+    {
+      "check": "tests/validate_druid_travel.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: druid shortcut, learned spell/cooldown, faction, direct transport priority and safe navigation"
+    },
+    {
+      "check": "tests/validate_chapters.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: short routes, prerequisite ordering, handoffs and chapter objective ownership\n20-22 Wetlands: Coast and Greenwarden\t27\n22-24 Duskwood: road and introductions\t47\n24-25 Wetlands: gnolls and excavation\t17\n25-26 Duskwood: Raven Hill investigations\t37\n26-27 Wetlands: relics and coastal goods\t26\n27-28 Duskwood: worgen and the hermit\t20\n28-29 Wetlands: shipwrecks and final raptors\t44\n29-30 Duskwood: final patrols\t28"
+    },
+    {
+      "check": "tests/validate_linked_catchup.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: level recommendations, catch-up order, live stages, reloads, unlock deduplication and skips"
+    },
+    {
+      "check": "tests/validate_objective_queue.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: objective queue, live completion, skips, unskips and rendering"
+    },
+    {
+      "check": "tests/validate_object_gathering.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: gathering map pin, arrow and objective zone without native markers"
+    },
+    {
+      "check": "tests/validate_multiple_hunting_areas.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: multiple hunting areas, unique pins, nearest navigation and generic quest support"
+    },
+    {
+      "check": "tests/validate_xp_progression.py",
+      "passed": false,
+      "exitCode": 1,
+      "output": "PASS: 33 chapters; required-only rewards, explicit recovery and flexible exits\nTraceback (most recent call last):\n  File \"<local-wow-install>/_classic_beta_\\Interface\\AddOns\\ForeverRested\\tests\\validate_xp_progression.py\", line 10, in <module>\n    ns['lua'].execute(r'''\n  File \"lupa/lua51.pyx\", line 466, in lupa.lua51.LuaRuntime.execute\n  File \"lupa/lua51.pyx\", line 1897, in lupa.lua51.run_lua\n  File \"lupa/lua51.pyx\", line 1911, in lupa.lua51.call_lua\n  File \"lupa/lua51.pyx\", line 1938, in lupa.lua51.execute_lua_call\n  File \"lupa/lua51.pyx\", line 1819, in lupa.lua51.raise_lua_error\nlupa.lua51.LuaError: [string \"<python>\"]:13: assertion failed!\nstack traceback:\n\t[string \"<python>\"]:13: in main chunk\n\t[C]: in function 'assert'"
+    }
+  ],
+  "limits": "Mock checks do not establish live client behavior or measured travel time."
+}

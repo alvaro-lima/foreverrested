@@ -9,6 +9,13 @@ function F.LoadDatabase()
     d.bindings = type(d.bindings) == "table" and d.bindings or {}
     d.skipped = type(d.skipped) == "table" and d.skipped or {}
     d.knownFlightPaths = type(d.knownFlightPaths) == "table" and d.knownFlightPaths or {}
+    -- Older builds treated the global taxi-node map as character discovery,
+    -- polluting this cache with flight paths the character never learned.
+    if d.flightKnowledgeVersion ~= 2 then
+        d.knownFlightPaths = {}
+        d.observedFlightConnections = {}
+        d.flightKnowledgeVersion = 2
+    end
     d.flightPathLocations = type(d.flightPathLocations) == "table" and d.flightPathLocations or {}
     d.fontSize = F.Number(d.fontSize) and math.max(11, math.min(20, math.floor(d.fontSize))) or 12
     if not d.fontDefault12 then

@@ -19,7 +19,9 @@ frame:SetScript("OnEvent", function(_, event, ...)
             "QUEST_TURNED_IN", "QUEST_REMOVED", "QUEST_POI_UPDATE", "ZONE_CHANGED_NEW_AREA", "PLAYER_REGEN_ENABLED", "PLAYER_LOGOUT", "PLAYER_TARGET_CHANGED",
             "QUEST_DETAIL", "QUEST_COMPLETE", "QUEST_PROGRESS", "GOSSIP_SHOW", "QUEST_GREETING", "PLAYER_LEVEL_UP",
             "GET_ITEM_INFO_RECEIVED", "PLAYER_EQUIPMENT_CHANGED", "SKILL_LINES_CHANGED",
-            "TAXIMAP_OPENED", "TAXIMAP_CLOSED", "TAXI_NODE_STATUS_CHANGED", "NEW_TAXI_PATH"}
+            "TAXIMAP_OPENED", "TAXIMAP_CLOSED", "TAXI_NODE_STATUS_CHANGED", "NEW_TAXI_PATH",
+            "HEARTHSTONE_BOUND", "BAG_UPDATE_DELAYED", "SPELL_UPDATE_COOLDOWN", "PLAYER_XP_UPDATE",
+            "UNIT_SPELLCAST_START", "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED"}
         for _, name in ipairs(events) do
             if not C_EventUtils or not C_EventUtils.IsEventValid or F.Call(C_EventUtils.IsEventValid, name) then
                 F.Call(frame.RegisterEvent, frame, name)
@@ -33,6 +35,13 @@ frame:SetScript("OnEvent", function(_, event, ...)
         if F.db and F.UI.frame then F.SecureTarget:UpdateTasks(F.SecureTarget.desiredTargets); dirty = true end
     end
     if not F.db then return end
+    if event=='UNIT_SPELLCAST_START' or event=='UNIT_SPELLCAST_FAILED'
+        or event=='UNIT_SPELLCAST_INTERRUPTED' then
+        local unit,_,spellID=...
+        F.Travel:HearthCast(event,unit,spellID)
+        return
+    end
+    if event=='HEARTHSTONE_BOUND' then F.Travel:RememberHearth() end
     if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" then
         F.Travel:PositionChanged()
     end

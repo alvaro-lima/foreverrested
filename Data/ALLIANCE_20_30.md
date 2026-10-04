@@ -1,16 +1,45 @@
-# Alliance 20–30 guides
+# Alliance 20â€“30 regional visits
 
-Use `/reload`, then `/fg guides` and choose **Levels 20–30**.
+Use `/reload`, then `/fg guides` and choose **Levels 20â€“30**.
 
-| Guide | Circuit |
-| --- | --- |
-| Duskwood / Redridge | Optional Lakeshire cleanup, Darkshire, western road wildlife, Raven Hill deliveries, Night Watch, worgen and ogres |
-| Wetlands | Dun Algaz or boat arrival, Menethil coast, Greenwarden, Whelgar's excavation, coastal hovels and shipwrecks |
-| Ashenvale / Stonetalon | Astranaar, northern cure chain, Zoram Strand, Stonetalon introductions and local work, eastern Ashenvale and Raene's Cleansing |
+The eastern route alternates short visits:
 
-These are independently authored regional circuits using sourced quest identities, rewards and approximate representative locations. They have not been walked or timed in the Forever beta. Level checkpoints check readiness; the routes do not guarantee enough quest XP to reach 30 without additional accepted quests, optional work or suitable nearby mobs. All guides remain selectable regardless of starting race.
+| Planning band | Visit | Authored steps |
+| --- | --- | --- |
+| 20â€“22 | Wetlands coast and Greenwarden | 25 |
+| 22â€“24 | Duskwood road and introductions | 46 |
+| 24â€“25 | Wetlands gnolls and excavation | 16 |
+| 25â€“26 | Duskwood Raven Hill investigations | 36 |
+| 26â€“27 | Wetlands relics and coastal goods | 25 |
+| 27â€“28 | Duskwood worgen and hermit | 19 |
+| 28â€“29 | Wetlands shipwrecks and final raptors | 43 |
+| 29â€“30 | Duskwood final patrols | 27 |
 
-Group quests, escorts, long city-delivery branches and higher-level camps are optional notes with alongside tasks. Next confirms the note and continues. Check an offered quest's preceding turn-in and your level before using Skip for unavailable or dangerous work. Live objective counts and client waypoints take priority.
+Ashenvale / Stonetalon is a separate linked alternative: 20â€“24 introductions,
+24â€“27 eastern camps, and 27â€“30 cleansing / lake circuits.
+
+Completing or skipping the last action automatically loads the next visit.
+Manual browsing holds progression. Accepted objectives remain in the objective
+queue across visits in the same route, with their section name shown when needed.
+Explicit quest skips persist across handoffs. Automatic level catch-up is disabled
+for these visits so an approximate level band cannot discard their quest chains.
+
+The broad regional guides and provisional 20â€“25 / 25â€“30 chapters are retired from
+the chooser. Retired regional definitions remain as internal circuit sources and
+for progress migration. Existing positions migrate using stable quest action IDs;
+missing positions recheck from the recommended visit. Saved skip choices survive.
+
+Spoils of War and Alchemical Hazards have explicit optional actions in the first
+Wetlands visit using sourced Forever identities, level requirements and locations.
+Dropped-item, group and uncertain branches remain optional; no quest availability
+is assumed from a level band alone. No third-party route instructions are bundled.
+
+**Level bands remain provisional.** Prerequisite ordering, progression and handoffs
+are tested, but these routes have not been field-tested or given a complete live XP
+budget. There are no mandatory grind-to-level gates. Completing every visit is not
+proof that the character reached 30; finish useful accepted work or select the
+other regional route if under-level. Class detours and travel add character-specific
+rows to the counts above.
 
 ## Class unlocks
 
@@ -22,7 +51,7 @@ For the blue waterskin, follow the road to Menethil Harbor, take the Auberdine b
 
 At level 20, Dwarf Shamans gain the sourced Alliance **Call of Water** chain:
 
-`94495 → 94497 → 94499 → 94500 → 94501 → 94502 → 94503 → 94505`
+`94495 Ã¢â€ â€™ 94497 Ã¢â€ â€™ 94499 Ã¢â€ â€™ 94500 Ã¢â€ â€™ 94501 Ã¢â€ â€™ 94502 Ã¢â€ â€™ 94503 Ã¢â€ â€™ 94505`
 
 It starts with Norric Lochthane in Loch Modan, visits Hervdana Saegrund in the Wetlands, collects water in Redridge and Ashenvale, returns to Loch Modan, visits Stendel's Pond in Westfall and returns for the Water Totem. Do not leave the Westfall shrine before speaking to the manifestation. Shared NPC map data inherits Horde locations for that spirit; those coordinates are omitted rather than used for Alliance navigation. Native quest waypoints can still direct that stage.
 
@@ -38,4 +67,16 @@ Sources: [Duskwood quest inventory](https://www.wowhead.com/forever/quests/easte
 python tools/build_20_30_reference.py --cache "$env:TEMP\ForeverRested-2030Research"
 ```
 
-Add `--use-cache` for an offline rebuild. A failed fetch aborts before rewriting the loaded supplement. Rebuild the Classic policy with the documented pinned sources after adding quest IDs; its compiler also includes the 20–30 supplement.
+Add `--use-cache` for an offline rebuild. A failed fetch aborts before rewriting the loaded supplement. Rebuild the Classic policy with the documented pinned sources after adding quest IDs; its compiler also includes the 20Ã¢â‚¬â€œ30 supplement.
+
+Optional quest branches use numbered Accept, Objective and Turn-in actions, not
+Alongside bundles. Skipping a quest action skips its remaining actions and removes
+its objectives from the queue. Advice remains in the action tooltip.
+
+## Required XP progression correction
+
+The introductory Ashenvale/Stonetalon chapter now includes Super Reaper 6000 as required local work and Aggressive Defense before optional city detours. Aggressive Defense keeps its stable action IDs and is removed from the next chapter; a level-23 safety check precedes its circuit. Required listed quest rewards increase from 19,155 to 22,755 XP, excluding optional and class-specific work. This does not guarantee the full level-24 requirement.
+
+Mainland chapter bands describe quest circuits plus **Required XP recovery**, with actual level and live XP governing completion. Level-24 Ashenvale recovery uses Foulweald Warriors (23-24); earlier recovery retains Wrathtail Myrmidons (20-21). Final Ashenvale recovery uses Ghostpaw Alphas (27-28) instead of lower-level furbolgs. Optional XP is never assumed.
+
+The all-chapter review is in [XP_PROGRESSION_AUDIT.md](XP_PROGRESSION_AUDIT.md). Recovery is explicitly skippable; skipping bypasses the intended level gate. Zephras 10+ retains its flexible exit. This correction supersedes earlier prose above stating that there are no mandatory grind-to-level gates.

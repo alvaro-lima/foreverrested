@@ -4,7 +4,7 @@ F.StepPins = P
 function P:PinsHidden()
     return F.db.hidden or F.db.hideWorldPins
 end
-P.stateIcons = {ongoing = "InProgress", notready = "InProgress", ready = "InProgress",
+P.stateIcons = {ongoing = "InProgress", notready = "NotStarted", ready = "NotStarted",
     complete = "Done", waiting = "NotStarted", skipped = "Skipped", failed = "Failed"}
 function P:CreateMapToggle()
     local map = WorldMapFrame
@@ -59,6 +59,10 @@ function P:ShouldShow(index,task)
         and (not task or F.GuideEngine:TaskState(task) ~= "complete")
 end
 function P:TaskKey(task)
+    if task and task.huntingLocation then
+        local p=task.huntingLocation
+        return tostring(task.questID)..':'..task.type..':'..p.zone..':'..p.x..':'..p.y
+    end
     if not task then return end
     local id = F.GuideEngine:Resolve(task)
     if id then return id..":"..(task.type or "note")..":"..(task.objective or "all") end
@@ -113,14 +117,15 @@ function P:Create(parent)
                 local tint = F.Number(level) and level > 0 and F.Call(GetQuestDifficultyColor,level)
                 local r,g,b = tint and tint.r or .2,tint and tint.g or 1,tint and tint.b or .2
                 if F.Number(level) and level > 0 then title = "["..level.."] "..title end
-                if first then GameTooltip:SetText(title,r,g,b); first = false
-                else GameTooltip:AddLine(" "); GameTooltip:AddLine(title,r,g,b,true) end
+                if first then F.Tooltips:QuestHeader(pin,title,number); first = false
+                else GameTooltip:AddLine(" "); GameTooltip:AddLine(title,1,.82,0,true) end
+                local contact=F.UI:ActionContact(action)
+                if contact~='' then GameTooltip:AddLine(contact,.9,.85,.72,true) end
                 if q and #q.objectives > 0 then
                     for objectiveIndex, objective in ipairs(q.objectives) do
                         if not action.objective or action.objective == objectiveIndex then
                             local text = objective.text or F.QuestLog:Progress(objective)
-                            local shade = objective.finished and .6 or 1
-                            GameTooltip:AddLine("- "..text,shade,shade,shade,true)
+                            F.Tooltips:QuestObjective(text,objective.finished)
                         end
                     end
                 else
@@ -132,8 +137,8 @@ function P:Create(parent)
             end
         end
         if first then GameTooltip:SetText(step.text or "Guide step",1,.82,0) end
-        GameTooltip:AddLine(" ")
-        GameTooltip:AddLine("Forever Rested - Step "..number,.55,.55,.55)
+        GameTooltip:AddLine(F.UI:StepLocation(task or step),.72,.68,.58,true)
+        F.Tooltips:QuestHint("Click to view this step.")
         if not pin.entry and F.MapAreas:Spec() then GameTooltip:AddLine("Blue areas: objective regions supplied by the game",.4,.75,1,true) end
         if pin.edge then GameTooltip:AddLine("Outside minimap view: direction marker",1,1,1,true) end
         GameTooltip:Show()
@@ -146,11 +151,21 @@ function P:Style(pin)
     local state = F.GuideEngine:StepState(number)
     -- An alongside destination has its own quest progress within the numbered step.
     local task = pin.entry and pin.entry.task or F.Navigation.waypointTask
-    if state ~= "skipped" and task then
+    local step=F.Guide.steps[number]
+    local primary=task==step
+    for _,action in ipairs(step and step.tasks or {}) do
+        if action==task then primary=true end
+    end
+    if state ~= "skipped" and state ~= "complete" and task and not primary then
         state = F.GuideEngine:TaskState(task)
     end
+    local action=task or step and step.tasks and #step.tasks==1 and step.tasks[1] or step
+    if action and action.type=='turnin' and state~='complete' and state~='skipped' and state~='failed' then
+        state='waiting'
+    end
     pin.icon:SetTexture("Interface\\AddOns\\ForeverRested\\Media\\Status" .. (self.stateIcons[state] or "NotStarted") .. ".tga")
-    if state == "ongoing" or state == "notready" or state == "ready" then
+    local destination=number==self:DestinationStep() and state~='complete' and state~='skipped' and state~='failed'
+    if destination or state == "ongoing" then
         pin.icon:SetTexture("Interface\\AddOns\\ForeverRested\\Media\\MapStepBadge-thick.tga")
         pin.icon:SetVertexColor(1,1,1)
         pin.icon:Show()
@@ -200,18 +215,25 @@ function P:RotateMini(facing)
     pin:ClearAllPoints(); pin:SetPoint("CENTER",Minimap,"CENTER",x/scale,y/scale)
 end
 function P:TaskLocation(task)
+    if task.huntingLocation then
+        local p=task.huntingLocation
+        return F.Navigation:ResolveAreaMap(p),p.x,p.y
+    end
     local id,q = F.GuideEngine:Resolve(task)
     local location
-    if task.travelQuestID then return F.Navigation:TravelWaypoint(task) end
+    if task.type=='travel' or task.travelQuestID or task.entryTravel then return F.Navigation:TravelWaypoint(task) end
     if task.type == "objective" and q then
         local record = F.GuideEngine:TargetRecord(q)
-        location = record and record.location
+        location = F.GuideEngine:ObjectiveLocation(id) or F.GuideEngine:TargetLocation(q) or F.GuideEngine:ActionLocation(task)
+        if not location then
+            local map,x,y=F.Navigation:ClientWaypoint(task,id)
+            if F.Number(map) and F.Number(x) and F.Number(y) then return map,x,y end
+        end
     end
     if not location and id then
         local data = F.GuideEngine:Metadata(id)
         if data then
-            local role = task.type == "pickup" and "start" or task.type == "turnin" and "end" or "requirement"
-            location = F.Navigation:ReferencePoint(data,role)
+            location = F.GuideEngine:ActionLocation(task)
         end
     end
     location = location or task.type=='objective' and id and F.Travel:QuestArea(id) or task
@@ -220,6 +242,39 @@ function P:TaskLocation(task)
         and location.x>=0 and location.x<=1 and location.y>=0 and location.y<=1 then
         return map,location.x,location.y
     end
+end
+function P:HuntingTasks(step)
+    local tasks={}
+    for _,task in ipairs(F.GuideEngine:Tasks(step,true)) do
+        local id,q=F.GuideEngine:Resolve(task)
+        local record=task.type=='objective' and F.GuideEngine:TargetRecord(q)
+        local data=id and F.GuideEngine:Metadata(id)
+        local candidates={}
+        if record and record.locations then
+            for _,p in ipairs(record.locations) do candidates[#candidates+1]=p end
+        elseif task.type=='objective' then
+            for _,p in ipairs(data and data.locations or {}) do
+                if p.entityType==1 and (p.role=='requirement' or p.role=='sourcerequirement') then candidates[#candidates+1]=p end
+            end
+        end
+        local areas={}
+        for _,p in ipairs(candidates) do
+            if p.zone and F.Number(p.x) and F.Number(p.y) then
+                local duplicate=false
+                for _,a in ipairs(areas) do
+                    if a.zone==p.zone and (a.x-p.x)^2+(a.y-p.y)^2<.0009 then duplicate=true end
+                end
+                if not duplicate then areas[#areas+1]=p end
+            end
+        end
+        if #areas>1 then
+            for _,p in ipairs(areas) do
+                local copy={};for k,v in pairs(task) do copy[k]=v end
+                copy.huntingLocation=p;tasks[#tasks+1]=copy
+            end
+        else tasks[#tasks+1]=task end
+    end
+    return tasks
 end
 function P:RotateAreaMini(facing)
     if self:PinsHidden() then
@@ -245,6 +300,24 @@ function P:RotateAreaMini(facing)
             pin:SetShown(visible and F.Call(Minimap.IsShown,Minimap)==true)
         else pin:Hide() end
     end
+end
+function P:MapPosition(sourceMap,x,y,viewedMap)
+    if not viewedMap or not sourceMap or not F.Number(x) or not F.Number(y) then return end
+    if sourceMap==viewedMap then return x,y end
+    if not CreateVector2D or not C_Map or not C_Map.GetWorldPosFromMapPos
+        or not C_Map.GetMapPosFromWorldPos then return end
+    local instance,world=F.Call(C_Map.GetWorldPosFromMapPos,sourceMap,CreateVector2D(x,y))
+    if instance==nil or not world then return end
+    local projected=F.Call(C_Map.GetMapPosFromWorldPos,viewedMap,world)
+    local px,py=F.XY(projected)
+    if not F.Number(px) or not F.Number(py) or px<0 or px>1 or py<0 or py>1 then return end
+    -- Verify the inverse transform. A similarly named map on another layer
+    -- must not display a plausible but unrelated projected pin.
+    local checkInstance,checkWorld=F.Call(C_Map.GetWorldPosFromMapPos,viewedMap,CreateVector2D(px,py))
+    local wx,wy=F.XY(world);local cx,cy=F.XY(checkWorld)
+    if checkInstance~=instance or not F.Number(wx) or not F.Number(wy)
+        or not F.Number(cx) or not F.Number(cy) or (wx-cx)^2+(wy-cy)^2>100^2 then return end
+    return px,py
 end
 function P:UpdateAreaPins()
     local map = WorldMapFrame
@@ -273,11 +346,15 @@ function P:UpdateAreaPins()
     end
     for index,step in ipairs(F.Guide.steps) do
         local visible = allowed[index] and self:ShouldShow(index)
-        for actionIndex,task in ipairs(F.GuideEngine:Tasks(step,true)) do
+        for actionIndex,task in ipairs(self:HuntingTasks(step)) do
             local taskKey = self:TaskKey(task)
             if visible and task~=F.Navigation.waypointTask and not (taskKey and seen[taskKey])
                 and F.GuideEngine:TaskState(task)~="complete" then
                 local zone,x,y = self:TaskLocation(task)
+                local active=F.Navigation.waypointTask
+                if task.huntingLocation and active and F.GuideEngine:Resolve(active)==F.GuideEngine:Resolve(task)
+                    and zone==F.Navigation.targetMap and F.Number(F.Navigation.tx) and F.Number(F.Navigation.ty)
+                    and (x-F.Navigation.tx)^2+(y-F.Navigation.ty)^2<.000225 then zone=nil end
                 if zone and taskKey then seen[taskKey] = true end
                 local key = index..":"..actionIndex
                 local entry = {index=index,task=task,key=key}
@@ -289,17 +366,18 @@ function P:UpdateAreaPins()
                     entry.offsetX = overlap * 22
                     positions[#positions+1] = {zone=zone,x=x,y=y}
                 end
-                if zone and zone==viewedMap and map.AcquirePin then
+                local mapX,mapY=self:MapPosition(zone,x,y,viewedMap)
+                if mapX and map.AcquirePin then
                     keepWorld[key] = true
                     local pin = self.areaWorld[key]
                     if not pin then
-                        F.Call(map.AcquirePin,map,"ForeverRestedMapPinTemplate",x,y,entry)
+                        F.Call(map.AcquirePin,map,"ForeverRestedMapPinTemplate",mapX,mapY,entry)
                         pin = self.areaWorld[key]
                     end
                     if pin then
                         pin.entry, pin.marker.entry = entry,entry
                         pin.marker:ClearAllPoints();pin.marker:SetPoint("CENTER",pin,"CENTER",entry.offsetX,0)
-                        pin:SetPosition(x,y);self:Style(pin.marker);pin.marker:Show();pin:Show()
+                        pin:SetPosition(mapX,mapY);self:Style(pin.marker);pin.marker:Show();pin:Show()
                     end
                 end
                 if not self:PinsHidden() and zone and zone==playerMap and Minimap and playerInstance and F.Number(px) and F.Number(py) then
@@ -355,9 +433,9 @@ function ForeverRestedMapPinMixin:OnReleased()
 end
 function P:UpdateWorld()
     local n,map=F.Navigation,WorldMapFrame
-    local valid=map and F.Call(map.IsShown,map) and F.Call(map.GetMapID,map)==n.targetMap
-        and n.targetMap and F.Number(n.tx) and F.Number(n.ty)
-        and self:ShouldShow(self:DestinationStep(),n.waypointTask)
+    local viewedMap=map and F.Call(map.IsShown,map) and F.Call(map.GetMapID,map)
+    local mapX,mapY=self:MapPosition(n.targetMap,n.tx,n.ty,viewedMap)
+    local valid=mapX and mapY and self:ShouldShow(self:DestinationStep(),n.waypointTask)
         and not self:PinsHidden()
     if not valid then
         F.MapAreas:Hide()
@@ -367,13 +445,13 @@ function P:UpdateWorld()
     end
     if not map.AcquirePin or self.worldFailed then return end
     if not self.nativeWorld then
-        local ok=pcall(map.AcquirePin,map,"ForeverRestedMapPinTemplate",n.tx,n.ty)
+        local ok=pcall(map.AcquirePin,map,"ForeverRestedMapPinTemplate",mapX,mapY)
         if not ok or not self.nativeWorld then
             self.worldFailed=true
             F.Print("World map marker disabled after a pin initialization failure; minimap remains available.")
         end
     else
-        self.nativeWorld:SetPosition(n.tx,n.ty)
+        self.nativeWorld:SetPosition(mapX,mapY)
         self.nativeWorld:Show()
         self:Style(self.world);self.world:Show()
         F.MapAreas:Update(self.nativeWorld)

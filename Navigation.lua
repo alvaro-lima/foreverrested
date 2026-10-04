@@ -18,6 +18,20 @@ function N:ClientWaypoint(task,id)
     if cached then return unpack(cached) end
 end
 function N:TravelWaypoint(step)
+    -- The client has no evidenced portal-entrance coordinate for these legs.
+    if step.travelMode=='portal-ruttheran' or step.travelMode=='portal-darnassus' then return end
+    -- A spell is the next action; a ground arrow to Moonglade would be misleading.
+    if step.travelMode=='teleport-moonglade' then return end
+    if step.travelMode=='druid-flight' then
+        -- NPC 11800, installed Forever QuestieDB area 493: 44.15, 45.23.
+        local point={zone='Moonglade',x=.4415,y=.4523,name="Silva Fil'naveth"}
+        local map=self:ResolveAreaMap(point)
+        if map then return map,point.x,point.y,'Druid flight master (approx.)',point.name end
+        return
+    end
+    if step.travelMode=='boat' and F.Travel.boatBoardedStepID==step.id then return end
+    if step.travelMode~='boat' and (step.entryTravel or step.travelMode=='hearth')
+        and F.Travel:ReadyHearth(step.entryGoal or step.travelTo) then return end
     local exit=F.Travel:WalkingExit(step)
     if exit then return exit.mapID,exit.x,exit.y,'Road exit (approx.)',exit.name end
     local flight=F.Travel:DepartureFlight(step)
@@ -50,32 +64,38 @@ function N:Waypoint()
     for _, step in ipairs(F.GuideEngine:Tasks(nil, true)) do
         local id, q = F.GuideEngine:Resolve(step)
         if held or not F.GuideEngine:Done(step, id, q) then
-            if step.travelQuestID then
+            if step.type=='travel' or step.travelQuestID or step.entryTravel then
                 local map,x,y,source,label=self:TravelWaypoint(step)
+                if not map and (step.travelMode=='teleport-moonglade' or step.travelMode=='druid-flight'
+                    or step.travelMode=='portal-ruttheran' or step.travelMode=='portal-darnassus'
+                    or step.travelMode=='boat' and F.Travel.boatBoardedStepID==step.id) then return end
                 if map then
                     self.source,self.label,self.waypointTask=source,label,step
                     return map,x,y
                 end
             end
             if id and (held or not F.QuestLog:TurnedIn(id)) then
-                local map, x, y = self:ClientWaypoint(step,id)
-                if valid(map, x, y) then self.source, self.waypointTask = "Client waypoint", step; return map, x, y end
+                local map, x, y
                 if step.type == "objective" and q then
-                    local record = F.GuideEngine:TargetRecord(q)
-                    local location = record and record.location
+                    local location = F.GuideEngine:ObjectiveLocation(id) or F.GuideEngine:TargetLocation(q)
+                    if not location then
+                        location = F.GuideEngine:ActionLocation(step)
+                    end
                     if location then
                         map = self:ResolveAreaMap(location)
                         if valid(map, location.x, location.y) then
-                            self.source, self.label = "Hunting area (approx.)", location.label
+                            self.source, self.label = F.QuestObjectiveLocations and F.QuestObjectiveLocations[id] and "Objective area (approx.)" or "Hunting area (approx.)", location.label or location.name
                             self.waypointTask = step
                             return map, location.x, location.y
                         end
                     end
                 end
+                map, x, y = self:ClientWaypoint(step,id)
+                if valid(map, x, y) then self.source, self.waypointTask = "Client waypoint", step; return map, x, y end
                 local metadata = F.GuideEngine:Metadata(id)
                 if metadata and (held or step.type == "pickup" or q) then
                     local role = step.type == "pickup" and "start" or step.type == "turnin" and "end" or "requirement"
-                    local point = self:ReferencePoint(metadata, role)
+                    local point = F.GuideEngine:ActionLocation(step)
                     if point then
                         map = self:ResolveAreaMap(point)
                         if valid(map, point.x, point.y) then
@@ -117,14 +137,32 @@ function N:ReferencePoint(metadata, role)
     local map = F.Call(C_Map and C_Map.GetBestMapForUnit, "player")
     local info = F.Call(C_Map and C_Map.GetMapInfo, map)
     local px, py = F.XY(F.Call(C_Map and C_Map.GetPlayerMapPosition, map, "player"))
-    if info and F.Number(px) and F.Number(py) then
-        table.sort(candidates, function(a, b)
-            local ad = a.zone == info.name and (a.x-px)^2 + (a.y-py)^2 or math.huge
-            local bd = b.zone == info.name and (b.x-px)^2 + (b.y-py)^2 or math.huge
-            return ad < bd
-        end)
+    local instance, player
+    if valid(map,px,py) and CreateVector2D then
+        instance, player = F.Call(C_Map and C_Map.GetWorldPosFromMapPos,map,CreateVector2D(px,py))
     end
-    return candidates[1]
+    local wx, wy = F.XY(player)
+    local best, bestRank, bestDistance
+    for _, point in ipairs(candidates) do
+        local targetMap = self:ResolveAreaMap(point)
+        if valid(targetMap,point.x,point.y) then
+            local rank, distance = 2, math.huge
+            if instance and F.Number(wx) and F.Number(wy) and CreateVector2D then
+                local targetInstance, target = F.Call(C_Map and C_Map.GetWorldPosFromMapPos,targetMap,CreateVector2D(point.x,point.y))
+                local tx, ty = F.XY(target)
+                if instance == targetInstance and F.Number(tx) and F.Number(ty) then
+                    rank, distance = 0, (tx-wx)^2 + (ty-wy)^2
+                end
+            end
+            if rank > 0 and info and point.zone == info.name and F.Number(px) and F.Number(py) then
+                rank, distance = 1, (point.x-px)^2 + (point.y-py)^2
+            end
+            if not best or rank < bestRank or rank == bestRank and distance < bestDistance then
+                best, bestRank, bestDistance = point, rank, distance
+            end
+        end
+    end
+    return best
 end
 function N:ResolveAreaMap(location)
     -- Validate the data's map against this client; don't apply zone percentages
@@ -133,6 +171,11 @@ function N:ResolveAreaMap(location)
     local requested = location.mapID or known[location.zone]
     local info = requested and F.Call(C_Map and C_Map.GetMapInfo, requested)
     if info and info.name == location.zone then return requested end
+    -- The open zone map can be available while the player map is temporarily
+    -- absent (for example during a teleport or taxi transition).
+    local viewed=F.Call(WorldMapFrame and WorldMapFrame.GetMapID,WorldMapFrame)
+    local viewedInfo=viewed and F.Call(C_Map and C_Map.GetMapInfo,viewed)
+    if viewedInfo and viewedInfo.name==location.zone then return viewed end
     local map = F.Call(C_Map and C_Map.GetBestMapForUnit, "player")
     for _ = 1, 5 do
         info = F.Call(C_Map and C_Map.GetMapInfo, map)

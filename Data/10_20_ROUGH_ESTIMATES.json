@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "optionalXPExcluded": true,
+  "kind": "rough-fixed-entry-level-estimates",
+  "assumptions": [
+    "No optional or incidental kills, rested XP, exploration or class detours.",
+    "Mob XP is evaluated at chapter entry level, not simulated through every level-up.",
+    "Mob-only collection estimates choose the best published local normal-mob rate; one item per successful drop is assumed. Available object-loot alternatives assume no baseline kills.",
+    "Concurrent required objectives sharing an authored group and NPC count kills once. Published-rate expected drops from all shared planned kills reduce remaining collection kills; this does not guarantee those drops.",
+    "Published drop samples and Classic XP modifiers are estimates, not verified current-build budgets."
+  ],
+  "chapters": [
+    {
+      "guideID": "alliance-westfall-10-15",
+      "title": "10-12 Westfall: farms and first militia",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 7480,
+      "knownCombatGroups": [
+        {
+          "npcID": 504,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        },
+        {
+          "npcID": 95,
+          "kills": 24,
+          "approxXPPerKillRange": [
+            100,
+            105
+          ]
+        },
+        {
+          "npcID": 114,
+          "kills": 20,
+          "approxXPPerKillRange": [
+            114,
+            114
+          ]
+        },
+        {
+          "npcID": 1065,
+          "kills": 17,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        },
+        {
+          "npcID": 199,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        },
+        {
+          "npcID": 126,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        },
+        {
+          "npcID": 454,
+          "kills": 26,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        12455,
+        12885
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 151, Handful of Oats: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        19935,
+        20365
+      ]
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "title": "12-15 Westfall: militia and Defias",
+      "assumedPlayerLevel": 12,
+      "listedRequiredRewardXP": 8680,
+      "knownCombatGroups": [
+        {
+          "npcID": 589,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            116,
+            121
+          ]
+        },
+        {
+          "npcID": 590,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            110,
+            116
+          ]
+        },
+        {
+          "npcID": 122,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            126,
+            126
+          ]
+        },
+        {
+          "npcID": 121,
+          "kills": 5,
+          "approxXPPerKillRange": [
+            121,
+            126
+          ]
+        },
+        {
+          "npcID": 449,
+          "kills": 5,
+          "approxXPPerKillRange": [
+            126,
+            126
+          ]
+        },
+        {
+          "npcID": 550,
+          "kills": 2,
+          "approxXPPerKillRange": [
+            116,
+            121
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        6747,
+        6947
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 132, Wiley's Note: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 135, Wiley's Note: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 141, Shaw's Report: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 142, A Mysterious Message: drop sample below 100 kills"
+      ],
+      "roughTotalXPRange": [
+        15427,
+        15627
+      ]
+    },
+    {
+      "guideID": "alliance-redridge-human-15-20",
+      "title": "15-20 Redridge (Westfall arrival)",
+      "assumedPlayerLevel": 15,
+      "listedRequiredRewardXP": 10340,
+      "knownCombatGroups": [
+        {
+          "npcID": 423,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            120,
+            126
+          ]
+        },
+        {
+          "npcID": 424,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        },
+        {
+          "npcID": 547,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        },
+        {
+          "npcID": 428,
+          "kills": 16,
+          "approxXPPerKillRange": [
+            138,
+            144
+          ]
+        },
+        {
+          "npcID": 442,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            120,
+            126
+          ]
+        },
+        {
+          "npcID": 426,
+          "kills": 23,
+          "approxXPPerKillRange": [
+            132,
+            138
+          ]
+        },
+        {
+          "npcID": 441,
+          "kills": 13,
+          "approxXPPerKillRange": [
+            132,
+            138
+          ]
+        },
+        {
+          "npcID": 1083,
+          "kills": 33,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        16764,
+        17550
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 118, Verner's Note: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 125, Oslow's Toolbox: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 3741, Hilary's Necklace: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 92, Tough Condor Meat: collection mobs exceed entry level by more than two"
+      ],
+      "roughTotalXPRange": [
+        27104,
+        27890
+      ]
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "title": "10-13 Loch Modan: western shore",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 6660,
+      "knownCombatGroups": [
+        {
+          "npcID": 1161,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            100,
+            105
+          ]
+        },
+        {
+          "npcID": 1162,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            100,
+            105
+          ]
+        },
+        {
+          "npcID": 1163,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            109,
+            114
+          ]
+        },
+        {
+          "npcID": 1166,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            109,
+            114
+          ]
+        },
+        {
+          "npcID": 1197,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            114,
+            114
+          ]
+        },
+        {
+          "npcID": 1164,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            114,
+            114
+          ]
+        },
+        {
+          "npcID": 1190,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        },
+        {
+          "npcID": 1186,
+          "kills": 9,
+          "approxXPPerKillRange": [
+            100,
+            105
+          ]
+        },
+        {
+          "npcID": 1195,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        },
+        {
+          "npcID": 1173,
+          "kills": 25,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        11635,
+        12105
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 307, Miners' Gear: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        18295,
+        18765
+      ]
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "title": "13-15 Loch Modan: excavation and lodge",
+      "assumedPlayerLevel": 13,
+      "listedRequiredRewardXP": 3450,
+      "knownCombatGroups": [
+        {
+          "npcID": 1165,
+          "kills": 18,
+          "approxXPPerKillRange": [
+            132,
+            132
+          ]
+        },
+        {
+          "npcID": 1693,
+          "kills": 28,
+          "approxXPPerKillRange": [
+            116,
+            121
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        5624,
+        5764
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 2038, Bingles' Blastencapper: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 2038, Bingles' Hammer: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 2038, Bingles' Screwdriver: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 2038, Bingles' Wrench: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 297, Carved Stone Idol: collection mobs exceed entry level by more than two"
+      ],
+      "roughTotalXPRange": [
+        9074,
+        9214
+      ]
+    },
+    {
+      "guideID": "alliance-redridge-dwarf-15-20",
+      "title": "15-20 Redridge (Loch Modan arrival)",
+      "assumedPlayerLevel": 15,
+      "listedRequiredRewardXP": 10340,
+      "knownCombatGroups": [
+        {
+          "npcID": 423,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            120,
+            126
+          ]
+        },
+        {
+          "npcID": 424,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        },
+        {
+          "npcID": 547,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        },
+        {
+          "npcID": 428,
+          "kills": 16,
+          "approxXPPerKillRange": [
+            138,
+            144
+          ]
+        },
+        {
+          "npcID": 442,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            120,
+            126
+          ]
+        },
+        {
+          "npcID": 426,
+          "kills": 23,
+          "approxXPPerKillRange": [
+            132,
+            138
+          ]
+        },
+        {
+          "npcID": 441,
+          "kills": 13,
+          "approxXPPerKillRange": [
+            132,
+            138
+          ]
+        },
+        {
+          "npcID": 1083,
+          "kills": 33,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        16764,
+        17550
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 118, Verner's Note: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 125, Oslow's Toolbox: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 3741, Hilary's Necklace: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 92, Tough Condor Meat: collection mobs exceed entry level by more than two"
+      ],
+      "roughTotalXPRange": [
+        27104,
+        27890
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "title": "10-13 Darkshore: coast and ruins",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 12790,
+      "knownCombatGroups": [
+        {
+          "npcID": 2167,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        },
+        {
+          "npcID": 2324,
+          "kills": 5,
+          "approxXPPerKillRange": [
+            109,
+            114
+          ]
+        },
+        {
+          "npcID": 2164,
+          "kills": 20,
+          "approxXPPerKillRange": [
+            109,
+            114
+          ]
+        },
+        {
+          "npcID": 2231,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            81,
+            95
+          ]
+        },
+        {
+          "npcID": 2190,
+          "kills": 20,
+          "approxXPPerKillRange": [
+            100,
+            105
+          ]
+        },
+        {
+          "npcID": 2212,
+          "kills": 3,
+          "approxXPPerKillRange": [
+            105,
+            109
+          ]
+        },
+        {
+          "npcID": 2176,
+          "kills": 18,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        },
+        {
+          "npcID": 3667,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            114,
+            114
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        8919,
+        9488
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 3524, Sea Creature Bones: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4681, Sea Turtle Remains: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4722, Sea Turtle Remains: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 956, Ancient Moonstone Seal: drop sample below 100 kills",
+        "Quest 963, Anaya's Pendant: collection mobs exceed entry level by more than two",
+        "Quest 963, Anaya's Pendant: drop sample below 100 kills"
+      ],
+      "roughTotalXPRange": [
+        21709,
+        22278
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "title": "13-17 Darkshore: northern circuits",
+      "assumedPlayerLevel": 13,
+      "listedRequiredRewardXP": 10055,
+      "knownCombatGroups": [
+        {
+          "npcID": 2185,
+          "kills": 9,
+          "approxXPPerKillRange": [
+            96,
+            116
+          ]
+        },
+        {
+          "npcID": 2069,
+          "kills": 22,
+          "approxXPPerKillRange": [
+            116,
+            121
+          ]
+        },
+        {
+          "npcID": 2165,
+          "kills": 14,
+          "approxXPPerKillRange": [
+            126,
+            132
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        5180,
+        5554
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 1003, Grizzled Scalp: collection mobs exceed entry level by more than two",
+        "Quest 4723, Sea Creature Bones: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4762, Cliffspring River Sample: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4812, Moonwell Water Tube: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 947, Death Cap: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 947, Scaber Stalk: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 950, Insane Scribbles: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        15235,
+        15609
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "title": "17-20 Darkshore: ruins and final work",
+      "assumedPlayerLevel": 17,
+      "listedRequiredRewardXP": 8570,
+      "knownCombatGroups": [
+        {
+          "npcID": 2336,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            116,
+            130
+          ]
+        },
+        {
+          "npcID": 2233,
+          "kills": 16,
+          "approxXPPerKillRange": [
+            136,
+            150
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        3104,
+        3440
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 4731, Strangely Marked Box: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4732, Sea Turtle Remains: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 4733, Sea Creature Bones: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 951, Mathystra Relic: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 966, Worn Parchment: drop sample below 100 kills"
+      ],
+      "roughTotalXPRange": [
+        11674,
+        12010
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "title": "10+ Zephras: service and wind",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 2070,
+      "knownCombatGroups": [
+        {
+          "npcID": 253195,
+          "kills": 30,
+          "approxXPPerKillRange": [
+            68,
+            81
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        2040,
+        2430
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 92840, Index Esoteria: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        4110,
+        4500
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "title": "10+ Zephras: tower and village",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 7180,
+      "knownCombatGroups": [
+        {
+          "npcID": 254596,
+          "kills": 4,
+          "approxXPPerKillRange": [
+            81,
+            95
+          ]
+        },
+        {
+          "npcID": 270201,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            68,
+            95
+          ]
+        },
+        {
+          "npcID": 252666,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            95,
+            95
+          ]
+        },
+        {
+          "npcID": 252762,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            95,
+            100
+          ]
+        },
+        {
+          "npcID": 252763,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            95,
+            95
+          ]
+        },
+        {
+          "npcID": 252765,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            95,
+            95
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        2958,
+        3265
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 92644, Glowing Crystal: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        10138,
+        10445
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-exit-12-14",
+      "title": "10+ Zephras: optional work and exit",
+      "assumedPlayerLevel": 10,
+      "listedRequiredRewardXP": 0,
+      "knownCombatGroups": [],
+      "knownCombatXPRange": [
+        0,
+        0
+      ],
+      "missing": [],
+      "warnings": [],
+      "roughTotalXPRange": [
+        0,
+        0
+      ]
+    }
+  ]
+}

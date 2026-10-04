@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "optionalXPExcluded": true,
+  "classXPExcluded": true,
+  "chapters": [
+    {
+      "guideID": "alliance-westfall-10-15",
+      "title": "10-12 Westfall: farms and first militia",
+      "requiredTurninIDs": [
+        9,
+        12,
+        22,
+        36,
+        38,
+        102,
+        151,
+        153
+      ],
+      "excludedOptionalTurninIDs": [
+        64,
+        184,
+        92909,
+        92910,
+        92911,
+        98021
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 7480,
+      "roughTotalXPRange": [
+        19935,
+        20365
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-combat:north-loop:objective:9",
+          "targetLevel": 12,
+          "zone": "Westfall",
+          "x": 0.46,
+          "y": 0.268
+        },
+        {
+          "stepID": "xp-exit:alliance-westfall-10-15",
+          "targetLevel": 12,
+          "zone": "Westfall",
+          "x": 0.46,
+          "y": 0.268
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "title": "12-15 Westfall: militia and Defias",
+      "requiredTurninIDs": [
+        13,
+        14,
+        65,
+        132,
+        135,
+        141,
+        142,
+        155
+      ],
+      "excludedOptionalTurninIDs": [
+        104,
+        152,
+        92747,
+        92749
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 8680,
+      "roughTotalXPRange": [
+        15427,
+        15627
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-combat:moonbrook-loop",
+          "targetLevel": 15,
+          "zone": "Westfall",
+          "x": 0.428,
+          "y": 0.682
+        },
+        {
+          "stepID": "xp-exit:alliance-westfall-militia-12-15",
+          "targetLevel": 15,
+          "zone": "Westfall",
+          "x": 0.428,
+          "y": 0.682
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-redridge-human-15-20",
+      "title": "15-20 Redridge (Westfall arrival)",
+      "requiredTurninIDs": [
+        89,
+        92,
+        118,
+        119,
+        122,
+        125,
+        127,
+        244,
+        246,
+        3741
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        116,
+        98407
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 10340,
+      "roughTotalXPRange": [
+        27104,
+        27890
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-westfall-10-20:pickup:127",
+          "targetLevel": 16,
+          "zone": "Redridge Mountains",
+          "x": 0.16399999999999998,
+          "y": 0.49
+        },
+        {
+          "stepID": "xp-exit:alliance-redridge-human-15-20",
+          "targetLevel": 20,
+          "zone": "Redridge Mountains",
+          "x": 0.491,
+          "y": 0.743
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "title": "10-13 Loch Modan: western shore",
+      "requiredTurninIDs": [
+        224,
+        237,
+        263,
+        307,
+        416,
+        418,
+        1339
+      ],
+      "excludedOptionalTurninIDs": [
+        912,
+        86585,
+        86667
+      ],
+      "excludedClassQuestIDs": [
+        94449,
+        94465,
+        94466,
+        94467,
+        94468
+      ],
+      "listedRequiredQuestXP": 6660,
+      "roughTotalXPRange": [
+        18295,
+        18765
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-combat:south-second-objectives",
+          "targetLevel": 11,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72
+        },
+        {
+          "stepID": "xp-combat:south-third-objectives",
+          "targetLevel": 12,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72
+        },
+        {
+          "stepID": "xp-exit:alliance-loch-west-10-13",
+          "targetLevel": 13,
+          "zone": "Loch Modan",
+          "x": 0.35200000000000004,
+          "y": 0.72
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "title": "13-15 Loch Modan: excavation and lodge",
+      "requiredTurninIDs": [
+        297,
+        385,
+        2038
+      ],
+      "excludedOptionalTurninIDs": [
+        217,
+        257,
+        258,
+        271,
+        309,
+        436,
+        531,
+        1338,
+        86613,
+        86614,
+        86758
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 3450,
+      "roughTotalXPRange": [
+        9074,
+        9214
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-loch-east-13-15",
+          "targetLevel": 15,
+          "zone": "Loch Modan",
+          "x": 0.622,
+          "y": 0.456
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-redridge-dwarf-15-20",
+      "title": "15-20 Redridge (Loch Modan arrival)",
+      "requiredTurninIDs": [
+        89,
+        92,
+        118,
+        119,
+        122,
+        125,
+        127,
+        244,
+        246,
+        3741
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        116,
+        98407
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 10340,
+      "roughTotalXPRange": [
+        27104,
+        27890
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-loch-modan-10-20:pickup:127",
+          "targetLevel": 16,
+          "zone": "Redridge Mountains",
+          "x": 0.16399999999999998,
+          "y": 0.49
+        },
+        {
+          "stepID": "xp-exit:alliance-redridge-dwarf-15-20",
+          "targetLevel": 20,
+          "zone": "Redridge Mountains",
+          "x": 0.491,
+          "y": 0.743
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "title": "10-13 Darkshore: coast and ruins",
+      "requiredTurninIDs": [
+        953,
+        954,
+        955,
+        956,
+        957,
+        958,
+        963,
+        983,
+        984,
+        985,
+        2118,
+        2138,
+        3524,
+        4681,
+        4722,
+        4761
+      ],
+      "excludedOptionalTurninIDs": [],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 12790,
+      "roughTotalXPRange": [
+        21709,
+        22278
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:optional:alliance-darkshore-10-20:pickup:3524",
+          "targetLevel": 11,
+          "zone": "Darkshore",
+          "x": 0.358,
+          "y": 0.474
+        },
+        {
+          "stepID": "xp-combat:optional:alliance-darkshore-10-20:objective:963",
+          "targetLevel": 13,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.564
+        },
+        {
+          "stepID": "xp-exit:alliance-darkshore-10-13",
+          "targetLevel": 13,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.564
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "title": "13-17 Darkshore: northern circuits",
+      "requiredTurninIDs": [
+        944,
+        947,
+        948,
+        949,
+        950,
+        1001,
+        1002,
+        4723,
+        4762,
+        4811,
+        4812,
+        4813
+      ],
+      "excludedOptionalTurninIDs": [
+        952,
+        982,
+        98025,
+        98042
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 10055,
+      "roughTotalXPRange": [
+        15235,
+        15609
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-darkshore-13-17",
+          "targetLevel": 17,
+          "zone": "Darkshore",
+          "x": 0.526,
+          "y": 0.254
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "title": "17-20 Darkshore: ruins and final work",
+      "requiredTurninIDs": [
+        951,
+        965,
+        966,
+        1003,
+        1138,
+        4731,
+        4732,
+        4733
+      ],
+      "excludedOptionalTurninIDs": [
+        986,
+        993,
+        2139,
+        4740,
+        5321
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 8570,
+      "roughTotalXPRange": [
+        11674,
+        12010
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-darkshore-17-20",
+          "targetLevel": 20,
+          "zone": "Darkshore",
+          "x": 0.392,
+          "y": 0.8140000000000001
+        }
+      ],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "title": "10+ Zephras: service and wind",
+      "requiredTurninIDs": [
+        92834,
+        92840,
+        92860,
+        99260
+      ],
+      "excludedOptionalTurninIDs": [
+        94896,
+        94897,
+        98512
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 2070,
+      "roughTotalXPRange": [
+        4110,
+        4500
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "title": "10+ Zephras: tower and village",
+      "requiredTurninIDs": [
+        92640,
+        92642,
+        92643,
+        92644,
+        92645,
+        92880,
+        92881,
+        92947,
+        93065,
+        93089,
+        93320,
+        93835,
+        93958,
+        94369,
+        94568
+      ],
+      "excludedOptionalTurninIDs": [
+        93159,
+        94484
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 7180,
+      "roughTotalXPRange": [
+        10138,
+        10445
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-exit-12-14",
+      "title": "10+ Zephras: optional work and exit",
+      "requiredTurninIDs": [],
+      "excludedOptionalTurninIDs": [
+        93160,
+        93172,
+        94485,
+        94486,
+        94487
+      ],
+      "excludedClassQuestIDs": [],
+      "listedRequiredQuestXP": 0,
+      "roughTotalXPRange": [
+        0,
+        0
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [],
+      "verifiedTotalExpectedXP": null,
+      "limits": [
+        "Current-build mob XP modifiers and level-adjusted quest rewards are unverified.",
+        "Published loot frequencies are not conditional on having the quest.",
+        "Scripted, exploration and incidental combat XP is not assumed."
+      ]
+    }
+  ]
+}

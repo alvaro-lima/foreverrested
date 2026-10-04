@@ -25,7 +25,8 @@ C_QuestLog={
 files = ['Core.lua','GuideLibrary.lua','Guides/AllianceQuestData.lua','Guides/Alliance_20_30_QuestData.lua','Data/ClassicQuestPolicy.lua',
          'Data/ForeverUnlockFacts.lua','Data/ForeverQuestPolicy.lua',
          'GuideDraft.lua','Travel.lua','tests/fixtures/GnomeDwarf_01_10.lua','Guides/Alliance_01_10.lua',
-         'Guides/Alliance_10_20.lua','Guides/Alliance_20_30.lua','Guides/Zephras_10_14.lua','QuestLog.lua',
+         'Guides/Alliance_10_20.lua','Guides/Alliance_20_30.lua','Guides/Alliance_20_30_Chapters.lua',
+         'Guides/Zephras_10_14.lua','Guides/Alliance_01_20_Sections.lua','QuestLog.lua',
          'GuideEngine.lua','QuestPolicy.lua','AutoQuest.lua','Database.lua']
 for name in files:
     lua.execute("assert(loadstring(...))('ForeverRested', F)", (root/name).read_text(encoding='utf-8'))
@@ -162,12 +163,15 @@ P.foreverUnlocks={}; P.forever={}
 profile={class='HUNTER',race='Dwarf',level=15}; history={}
 fixture({{id='route',type='note'},{id='exit',type='note'}})
 local skippedID=currentID()
+local skippedQuest=F.Guide.steps[F.db.step].questID
 E.selectedStep=nil; E:Move(1,true)
 assert(F.db.manualSkippedSteps[skippedID] and F.db.skipped[position(skippedID)])
 F.GuideLibrary:SaveCurrent(); F.GuideLibrary:Select('fixture')
 assert(E:StepState(position(skippedID))=='skipped')
 for i,s in ipairs(F.Guide.steps) do
- if s.recovery and s.id~=skippedID then assert(not F.db.skipped[i],'critical actions cannot be auto-skipped') end
+ if s.recovery and s.id~=skippedID and s.questID~=skippedQuest then
+  assert(not F.db.skipped[i],'unrelated critical quests cannot be auto-skipped')
+ end
 end
 E:ResetFrom(position(skippedID))
 assert(F.db.manualSkippedSteps[skippedID] and not F.db.skipped[position(skippedID)],

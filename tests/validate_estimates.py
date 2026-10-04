@@ -19,6 +19,16 @@ assert shared["expected"]["seconds"] == 720
 assert shared["expected"]["totalXP"] == 2400
 assert shared["expected"]["xpPerMinute"] == 200
 assert isolated["expected"]["xpPerMinute"] == 60
+optional = copy.deepcopy(example['clusters'][1])
+baseline = estimator.estimate(optional, example['profile'])
+optional['quests'].append({'questID': 999999, 'optional': True,
+                           'reward': {'playerLevel': example['profile']['level'], 'xp': 999999},
+                           'objectives': [{'kind': 'kill', 'mob': 'example-mob', 'remaining': 999999}]})
+optional['travel'].append({'id': 'optional-detour', 'optional': True, 'seconds': 999999})
+checked = estimator.estimate(optional, example['profile'])
+for key in ('questXP', 'killXP', 'totalXP', 'expectedKills', 'seconds', 'missing'):
+    assert checked[key] == baseline[key], 'Optional work changed baseline ' + key
+assert checked['excludedOptionalQuestIDs'] == [999999]
 assert shared["slow"]["expectedKills"] == {"example-mob": 18}
 assert shared["slow"]["seconds"] == 1212
 assert shared["expected"]["notes"]

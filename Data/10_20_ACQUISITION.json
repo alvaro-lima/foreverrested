@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed-quest-instruction-facts",
+  "quests": {
+    "3524": {
+      "itemID": 12242,
+      "acquisition": "quest-object-loot",
+      "reviewNote": "Bones are recovered from the beached corpse south of Auberdine.",
+      "source": "https://www.wowhead.com/forever/quest=3524",
+      "sha256": "15683dc6f3d816f77dcae56c6fe0ff7723d5051d5f8546bdfadb21a83d0375b8"
+    },
+    "4681": {
+      "itemID": 12289,
+      "acquisition": "quest-object-loot",
+      "reviewNote": "Remains are recovered from the skeletal turtle underwater west of Auberdine.",
+      "source": "https://www.wowhead.com/forever/quest=4681",
+      "sha256": "8b99f22d13af0aa86ecf156d387ffe90f220a12687f54ce7438805595ac6f126"
+    },
+    "4762": {
+      "itemID": 12349,
+      "acquisition": "item-use",
+      "reviewNote": "The supplied sampling tube is used at the river waterfall pool.",
+      "source": "https://www.wowhead.com/forever/quest=4762",
+      "sha256": "c6c9c0f1313c092132f6234b7edd8b150d7f44bcd38508a2fa39098a1f2f0651"
+    },
+    "4812": {
+      "itemID": 14339,
+      "acquisition": "item-use",
+      "reviewNote": "The supplied water tube is filled at the Auberdine moonwell.",
+      "source": "https://www.wowhead.com/forever/quest=4812",
+      "sha256": "2581f99d6e71e3e0b0fcb8cfb45f187bf1740e7bfbb765169e8d08481b71f15f"
+    }
+  }
+}

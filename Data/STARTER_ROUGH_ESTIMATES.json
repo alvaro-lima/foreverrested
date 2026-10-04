@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "optionalXPExcluded": true,
+  "kind": "rough-fixed-entry-level-estimates",
+  "assumptions": [
+    "No optional or incidental kills, rested XP, exploration or class detours.",
+    "Mob XP is evaluated at chapter entry level, not simulated through every level-up.",
+    "Mob-only collection estimates choose the best published local normal-mob rate; one item per successful drop is assumed. Available object-loot alternatives assume no baseline kills.",
+    "Concurrent required objectives sharing an authored group and NPC use the maximum kill count once.",
+    "Published drop samples and Classic XP modifiers are estimates, not verified current-build budgets."
+  ],
+  "chapters": [
+    {
+      "guideID": "alliance-coldridge-01-05",
+      "title": "1-5 Coldridge Valley",
+      "assumedPlayerLevel": 1,
+      "listedRequiredRewardXP": 2125,
+      "knownCombatGroups": [
+        {
+          "npcID": 704,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            52,
+            52
+          ]
+        },
+        {
+          "npcID": 707,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            50,
+            52
+          ]
+        },
+        {
+          "npcID": 724,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            52,
+            52
+          ]
+        },
+        {
+          "npcID": 708,
+          "kills": 12,
+          "approxXPPerKillRange": [
+            55,
+            55
+          ]
+        },
+        {
+          "npcID": 706,
+          "kills": 14,
+          "approxXPPerKillRange": [
+            55,
+            57
+          ]
+        },
+        {
+          "npcID": 808,
+          "kills": 2,
+          "approxXPPerKillRange": [
+            60,
+            60
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        2682,
+        2722
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 179, Tough Wolf Meat: drop sample below 100 kills",
+        "Quest 218, Grelin Whitebeard's Journal: drop sample below 100 kills",
+        "Quest 3361, Felix's Box: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 3361, Felix's Bucket of Bolts: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 3361, Felix's Chest: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        4807,
+        4847
+      ]
+    },
+    {
+      "guideID": "alliance-dun-morogh-05-10",
+      "title": "5-8 Dun Morogh: Kharanos circuits",
+      "assumedPlayerLevel": 5,
+      "listedRequiredRewardXP": 5280,
+      "knownCombatGroups": [
+        {
+          "npcID": 1689,
+          "kills": 11,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        },
+        {
+          "npcID": 1128,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 1134,
+          "kills": 14,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 1196,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            77,
+            80
+          ]
+        },
+        {
+          "npcID": 1127,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            77,
+            80
+          ]
+        },
+        {
+          "npcID": 1201,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            77,
+            80
+          ]
+        },
+        {
+          "npcID": 1211,
+          "kills": 21,
+          "approxXPPerKillRange": [
+            80,
+            84
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        5838,
+        6076
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 315, Shimmerweed: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 412, Restabilization Cog: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        11118,
+        11356
+      ]
+    },
+    {
+      "guideID": "alliance-dun-morogh-east-08-10",
+      "title": "8-10 Dun Morogh: quarry and eastern road",
+      "assumedPlayerLevel": 8,
+      "listedRequiredRewardXP": 1880,
+      "knownCombatGroups": [
+        {
+          "npcID": 1115,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            85,
+            89
+          ]
+        },
+        {
+          "npcID": 1117,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            89,
+            94
+          ]
+        },
+        {
+          "npcID": 260157,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            89,
+            94
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        2735,
+        2884
+      ],
+      "missing": [],
+      "warnings": [],
+      "roughTotalXPRange": [
+        4615,
+        4764
+      ]
+    },
+    {
+      "guideID": "alliance-northshire-01-05",
+      "title": "1-5 Northshire",
+      "assumedPlayerLevel": 1,
+      "listedRequiredRewardXP": 1435,
+      "knownCombatGroups": [
+        {
+          "npcID": 6,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            50,
+            52
+          ]
+        },
+        {
+          "npcID": 299,
+          "kills": 12,
+          "approxXPPerKillRange": [
+            50,
+            50
+          ]
+        },
+        {
+          "npcID": 257,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            55,
+            55
+          ]
+        },
+        {
+          "npcID": 80,
+          "kills": 12,
+          "approxXPPerKillRange": [
+            55,
+            57
+          ]
+        },
+        {
+          "npcID": 38,
+          "kills": 26,
+          "approxXPPerKillRange": [
+            55,
+            57
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        3740,
+        3836
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 18, Red Burlap Bandana: drop sample below 100 kills",
+        "Quest 33, Tough Wolf Meat: drop sample below 100 kills"
+      ],
+      "roughTotalXPRange": [
+        5175,
+        5271
+      ]
+    },
+    {
+      "guideID": "alliance-elwynn-05-10",
+      "title": "5-10 Elwynn Forest",
+      "assumedPlayerLevel": 5,
+      "listedRequiredRewardXP": 9835,
+      "knownCombatGroups": [
+        {
+          "npcID": 119,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        },
+        {
+          "npcID": 475,
+          "kills": 30,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 327,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            80,
+            80
+          ]
+        },
+        {
+          "npcID": 118,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        },
+        {
+          "npcID": 822,
+          "kills": 5,
+          "approxXPPerKillRange": [
+            80,
+            84
+          ]
+        },
+        {
+          "npcID": 474,
+          "kills": 18,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        },
+        {
+          "npcID": 478,
+          "kills": 22,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        7116,
+        7256
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 5545, Bundle of Wood: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 87, Bernice's Necklace: drop sample below 100 kills"
+      ],
+      "roughTotalXPRange": [
+        16951,
+        17091
+      ]
+    },
+    {
+      "guideID": "alliance-shadowglen-01-05",
+      "title": "1-5 Shadowglen",
+      "assumedPlayerLevel": 1,
+      "listedRequiredRewardXP": 2005,
+      "knownCombatGroups": [
+        {
+          "npcID": 2031,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            50,
+            50
+          ]
+        },
+        {
+          "npcID": 1984,
+          "kills": 4,
+          "approxXPPerKillRange": [
+            50,
+            52
+          ]
+        },
+        {
+          "npcID": 1988,
+          "kills": 11,
+          "approxXPPerKillRange": [
+            52,
+            55
+          ]
+        },
+        {
+          "npcID": 2032,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            52,
+            52
+          ]
+        },
+        {
+          "npcID": 1985,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            52,
+            55
+          ]
+        },
+        {
+          "npcID": 1986,
+          "kills": 29,
+          "approxXPPerKillRange": [
+            55,
+            57
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        3445,
+        3565
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 917, Webwood Egg: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 921, Filled Crystal Phial: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        5450,
+        5570
+      ]
+    },
+    {
+      "guideID": "alliance-teldrassil-05-10",
+      "title": "5-10 Teldrassil",
+      "assumedPlayerLevel": 5,
+      "listedRequiredRewardXP": 8610,
+      "knownCombatGroups": [
+        {
+          "npcID": 2042,
+          "kills": 14,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 1995,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 1998,
+          "kills": 14,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 7235,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            74,
+            77
+          ]
+        },
+        {
+          "npcID": 7234,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            80,
+            80
+          ]
+        },
+        {
+          "npcID": 2022,
+          "kills": 15,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 2152,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            74,
+            77
+          ]
+        },
+        {
+          "npcID": 2009,
+          "kills": 18,
+          "approxXPPerKillRange": [
+            77,
+            80
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        6138,
+        6443
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 2438, Emerald Dreamcatcher: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 2459, Gnarlpine Necklace: drop sample below 100 kills",
+        "Quest 2459, Tallonkai's Jewel: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 2541, Shaman Voodoo Charm: drop sample below 100 kills",
+        "Quest 483, Black Feather Quill: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 483, Raven Claw Talisman: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 483, Rune of Nesting: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 483, Sapphire of Sky: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 489, Fel Cone: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 919, Timberling Sprout: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 929, Filled Jade Phial: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        14748,
+        15053
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-grove-01-05",
+      "title": "1-5 Zephras: Thendal Grove",
+      "assumedPlayerLevel": 1,
+      "listedRequiredRewardXP": 1510,
+      "knownCombatGroups": [
+        {
+          "npcID": 250873,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            50,
+            50
+          ]
+        },
+        {
+          "npcID": 251169,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            50,
+            50
+          ]
+        },
+        {
+          "npcID": 251404,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            55,
+            55
+          ]
+        },
+        {
+          "npcID": 251160,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            52,
+            55
+          ]
+        },
+        {
+          "npcID": 251143,
+          "kills": 6,
+          "approxXPPerKillRange": [
+            52,
+            55
+          ]
+        },
+        {
+          "npcID": 250937,
+          "kills": 8,
+          "approxXPPerKillRange": [
+            57,
+            57
+          ]
+        },
+        {
+          "npcID": 251115,
+          "kills": 2,
+          "approxXPPerKillRange": [
+            60,
+            60
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        2107,
+        2146
+      ],
+      "missing": [],
+      "warnings": [],
+      "roughTotalXPRange": [
+        3617,
+        3656
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-village-05-08",
+      "title": "5-8 Zephras: village and highlands",
+      "assumedPlayerLevel": 5,
+      "listedRequiredRewardXP": 2400,
+      "knownCombatGroups": [
+        {
+          "npcID": 251245,
+          "kills": 23,
+          "approxXPPerKillRange": [
+            70,
+            74
+          ]
+        },
+        {
+          "npcID": 258443,
+          "kills": 7,
+          "approxXPPerKillRange": [
+            84,
+            84
+          ]
+        },
+        {
+          "npcID": 251918,
+          "kills": 10,
+          "approxXPPerKillRange": [
+            77,
+            77
+          ]
+        },
+        {
+          "npcID": 255534,
+          "kills": 1,
+          "approxXPPerKillRange": [
+            77,
+            77
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        3045,
+        3137
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 92553, Strider Meat: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        5445,
+        5537
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "title": "8-10 Zephras: Windfield and scholar",
+      "assumedPlayerLevel": 8,
+      "listedRequiredRewardXP": 5885,
+      "knownCombatGroups": [
+        {
+          "npcID": 252802,
+          "kills": 5,
+          "approxXPPerKillRange": [
+            85,
+            89
+          ]
+        },
+        {
+          "npcID": 251707,
+          "kills": 27,
+          "approxXPPerKillRange": [
+            85,
+            89
+          ]
+        },
+        {
+          "npcID": 252820,
+          "kills": 20,
+          "approxXPPerKillRange": [
+            85,
+            89
+          ]
+        }
+      ],
+      "knownCombatXPRange": [
+        4420,
+        4628
+      ],
+      "missing": [],
+      "warnings": [
+        "Quest 92682, Ripe Stormapple: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 92683, Flutterfly Dust: object loot or non-combat acquisition exists; no baseline kills assumed",
+        "Quest 92683, Flutterfly Swatter: object loot or non-combat acquisition exists; no baseline kills assumed"
+      ],
+      "roughTotalXPRange": [
+        10305,
+        10513
+      ]
+    }
+  ]
+}

@@ -2,16 +2,16 @@
 
 Use `/reload`, then the minimap book or `/fg guides`. Browse **Levels 10–20**:
 
-| Guide | Main circuit |
+| Route | Linked sections (authored step counts) |
 | --- | --- |
-| Westfall / Redridge 10–20 | northern farms → militia/Moonbrook → optional coastal work → Lakeshire hunts/lake/bridge |
-| Loch Modan / Redridge 10–20 | south-gate trogg chain → Thelsamar wildlife → northern mine → eastern excavation/lodge → Lakeshire |
-| Darkshore 10–20 | Auberdine/Bashal'Aran → Ameth'Aran → northern river/cave/crystal → Onu/glaive → Mathystra |
-| Zephras 10–14 / Exit Choice | optional wind/tower/cult story → exit review → optional battle and hermit/refugee circuit |
+| Westfall / Redridge | 10–12 farms/first militia (45) → 12–15 militia/Defias (38) → 15–20 Redridge (40) |
+| Loch Modan / Redridge | 10–13 western shore (49) → 13–15 excavation/lodge (40) → 15–20 Redridge (40) |
+| Darkshore | 10–13 coast/ruins (54) → 13–17 northern circuits (48) → 17–20 final work (35) |
+| Zephras continuation | 10+ service/wind (23) → 10+ tower/village (52) → 10+ optional work/exit (17) → Westfall |
 
-Grouped objectives and batched hand-ins reduce repeated journeys. Beta additions, difficult named mobs, coastal diversions and dungeon work are optional where practical. The Defias investigation and lodge challenges can also be skipped if their travel/waiting cost is poor. Class training stops are manual city visits; the addon does not assume every regional hub has every class trainer.
+The addon automatically opens the next section when the current one is finished. The mainland routes then link into the [20–30 regional visits](ALLIANCE_20_30.md). Accepted objectives persist across linked sections in the Objectives panel. Optional collection/objective/delivery actions have their own rows and can be skipped. Class training stops are manual city visits; the addon does not assume every regional hub has every class trainer. Counts exclude runtime class-unlock and travel actions.
 
-Level checkpoints are readiness checks, not evidence that the preceding quests yield exactly that level. Finish useful nearby active quests when short of XP; use Skip to bypass an unwanted checkpoint or branch. Entering at 12–14 is supported through completed-quest reconciliation and manual Skip; the engine does not silently discard unaccepted quests based solely on your level. Full beta prerequisites and in-game timings still need acceptance.
+The [10–20 audit](10_20_AUDIT.md) refreshed all 147 authored quests from Forever pages and reviewed 159 NPC/item pages. Optional and class-specific XP are excluded from the baseline. Level bands still do not establish that quests alone fill them: the nine mainland sections now use sourced local recovery steps before level gaps and at their handoffs. These check actual level and display live XP; use Skip to bypass an unwanted branch. Zephras remains an optional 10+ continuation, with no forced grind to 12 or 14. Entering at 12–14 is supported through completed-quest reconciliation and manual Skip; the engine does not silently discard unaccepted quests based solely on your level. Full beta prerequisites and in-game timings still need acceptance.
 
 ## Zephras: leave at 10, 12 or 14?
 
@@ -41,10 +41,10 @@ python tools/compare_zephras.py
 
 ## Sources and refresh
 
-The reference now contains 554 selected records. 90 use zone-list summaries because individual pages were unavailable during this build: those records explicitly lack locations and reward stats. Native quest waypoints and live counts remain usable; the addon does not fabricate fallback coordinates. Summary records show sourced listed XP, not build-verified XP.
+The reference now contains 558 selected records. Some records outside the reviewed 1–20 chapters still use zone-list summaries because individual pages were unavailable during the original build; those records explicitly lack locations and reward stats. Native quest waypoints and live counts remain usable; the addon does not fabricate fallback coordinates. Summary records show sourced listed XP, not build-verified XP.
 
 Use the refresh workflow in [ALLIANCE_GUIDES.md](ALLIANCE_GUIDES.md). `-UseCache` rebuilds available cached pages and summaries without network requests. A normal refresh tries individual pages and stops on a failed fetch, leaving the loaded reference unchanged. Newly available individual pages replace summaries on a later rebuild. Route ordering remains authored separately.
 
 Sources: public Forever [Westfall](https://www.wowhead.com/forever/quests/eastern-kingdoms/westfall), [Loch Modan](https://www.wowhead.com/forever/quests/eastern-kingdoms/loch-modan), [Darkshore](https://www.wowhead.com/forever/quests/kalimdor/darkshore), [Redridge](https://www.wowhead.com/forever/quests/eastern-kingdoms/redridge-mountains), [Zephras](https://www.wowhead.com/forever/zone=16593/zephras-isle) lists and individual cached quest/item records. Chain ordering was cross-checked against QuestieDB's raw quest fields and authored Forever corrections at `cac1eff815923f896d082764d023cf812454a023`; no QuestieDB payload or runtime dependency was bundled.
 
-Automated checks cover Lua 5.1 loading, IDs, faction/class filtering, level/manual checkpoints, per-guide saves, live objective changes, native navigation with missing reference coordinates, combat safeguards and estimate arithmetic. They do not establish a fastest route or in-game availability. The 20–30 guides remain unbuilt.
+Automated checks cover Lua 5.1 loading, section action coverage, stable IDs, saved-progress migration, automatic handoffs, objective carry-over, live progress and navigation. They do not establish a fastest route, an XP guarantee or in-game availability. The 20–30 regional visits are installed and linked.

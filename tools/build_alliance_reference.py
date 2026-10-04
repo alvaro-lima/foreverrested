@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import html
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +52,31 @@ def extract(quest_id, text, class_index):
     scaling = decode_after(text, "WH.Wow.Quest.setupScalingRewards(")
     if scaling:
         record["xpScaling"] = scaling.get("xp")
+    # Objective counts must come from the quest's objective table, never comments
+    # or a search excerpt. NPC rows can be interactions rather than kills.
+    objective_section = text.split('<h1 ', 1)[-1].split('<h2', 1)[0]
+    objective_section = re.split(r'Provided items?\s*:', objective_section, maxsplit=1, flags=re.I)[0]
+    objectives = []
+    for row in re.finditer(r'<tr\b([^>]*)>(.*?)</tr>', objective_section, re.S):
+        attrs, body = row.groups()
+        quantity = re.search(r'data-icon-list-quantity="(\d+)"', attrs)
+        entity = re.search(r'href="/forever/(npc|item|object)=(\d+)[^"]*"[^>]*>(.*?)</a>', body, re.S)
+        if not quantity:
+            continue
+        if not entity:
+            cell = re.search(r'<td[^>]*>(.*?)</td>', body, re.S)
+            label = cell.group(1).split('<span class="icon-list-quantity-wrapper"', 1)[0] if cell else ''
+            label = html.unescape(re.sub('<[^>]+>', '', label)).strip()
+            if label:
+                objectives.append({'kind': 'event', 'action': 'interact', 'count': int(quantity.group(1)), 'name': label})
+            continue
+        kind, identity, label = entity.groups()
+        plain = html.unescape(re.sub('<[^>]+>', '', body))
+        action = 'kill' if kind == 'npc' and re.search(r'\b(slain|destroyed)\b', plain) else 'collect' if kind == 'item' else 'interact'
+        objectives.append({'kind': kind, 'action': action, 'id': int(identity),
+                           'count': int(quantity.group(1)), 'name': html.unescape(re.sub('<[^>]+>', '', label))})
+    record['objectives'] = objectives
+    record['objectiveCountSource'] = 'quest-objective-table'
     mapper = decode_after(text, "new Mapper(") or {}
     for area, value in mapper.get("objectives", {}).items():
         for floor in value.get("levels", []):

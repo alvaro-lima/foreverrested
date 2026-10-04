@@ -25,7 +25,7 @@ for _,pair in ipairs({{'Wetlands','Darkshore'}, {'Darkshore','Wetlands'},
  {'Teldrassil','Darkshore'}, {'Darnassus','Darkshore'},
  {'Darkshore','Teldrassil'}, {'Darkshore','Darnassus'}}) do
  local dock=F.Travel:DepartureDock({travelFrom=pair[1],travelTo=pair[2]})
- assert(dock and dock.x>0 and dock.y>0 and dock.name:find('dock'),'boat edge must target a dock')
+ assert(dock and dock.x>0 and dock.y>0 and (dock.name:find('dock') or dock.name:find('boarding area')),'boat edge must target a boarding point')
 end
 assert(F.Travel.docks.Darkshore.Wetlands.y~=F.Travel.docks.Darkshore.Teldrassil.y,
  'Auberdine boat destinations must use different docks')
@@ -37,7 +37,7 @@ assert(current().travelQuestID==94500 and current().travelAction=='objective')
 assert(current().text:find('Darkshore',1,true) and current().note:find('Menethil',1,true))
 local map,x,y=F.Navigation:Waypoint()
 assert(map and x==0.047 and y==0.570,'boat travel points toward Menethil boat dock')
-assert(F.UI:StepPriority(current(),F.db.step)=='Critical')
+assert(current().optional and not F.UI:StepPriority(current(),F.db.step),'travel advice is optional, not critical')
 local boardingStep=current()
 local oldPosition,oldWorld=C_Map.GetPlayerMapPosition,C_Map.GetWorldPosFromMapPos
 local worldX,moving,swimming=100,0,false
@@ -99,29 +99,10 @@ F.Navigation:Update()
 assert(F.Navigation.angle~=nil,'navigation recovers after boat loading without client quest waypoint')
 C_Map.GetMapInfo=oldInfo
 zone='Ashenvale'; E:ResumeAuto()
-assert(current().travelQuestID==94500,'entering the zone alone does not prove arrival at Astranaar')
-local arrivalStep=current()
-C_Map.GetPlayerMapPosition=function() return {x=.386,y=.488} end
-E:ResetFrom(F.db.step)
-F.Navigation:Update();F.Arrow:Update()
-assert(F.Navigation.waypointTask==arrivalStep and F.Navigation.targetMap==1440,
- 'From preserves the destination of the travel restart point')
-assert(F.Arrow.frame:IsShown(),'From must keep the travel arrow visible')
-C_Map.GetPlayerMapPosition=function() return nil end
-F.Travel:Tick()
-assert(current()==arrivalStep,'missing player position cannot confirm arrival')
-C_Map.GetPlayerMapPosition=function() return {x=.386,y=.488} end
-F.Travel:Tick()
-assert(current()==arrivalStep,'outside the travel arrival area must not advance')
-C_Map.GetPlayerMapPosition=function() return {x=.346,y=.488} end
-F.Navigation:Update();F.Arrow:Update()
-assert(F.Navigation.distance==0 and F.Arrow.frame:IsShown(),'reproduce zero yards after From')
-F.Travel:Tick()
-assert(not E.manualHold,'reaching the destination releases the From travel hold')
-assert(current().flightPathTravel and current().text:find('Astranaar',1,true))
-E:Move(1); E:ResumeAuto()
-assert(current().questID==94500 and current().type=='objective','wider arrival area advances to water collection without a quest event')
-C_Map.GetPlayerMapPosition=oldPosition
+assert(current().flightPathTravel,'zone arrival leaves the optional local flight-path stop')
+F.db.knownFlightPaths.Astranaar=true;E:ResumeAuto()
+assert(current().questID==94500 and current().type=='objective',
+ 'after the local flight-path stop, the objective owns movement')
 filled=true;live[1].isComplete=true;objectives[94500][1].finished=true
 E:ResumeAuto()
 assert(current().travelQuestID==94500 and current().travelAction=='turnin')
@@ -131,15 +112,16 @@ assert(current().flightPathTravel)
 E:Move(1);E:ResumeAuto()
 map,x,y=F.Navigation:Waypoint()
 assert(map and x==0.327 and y==0.437,'return boat travel points toward Auberdine boat dock')
-zone='Wetlands';E:ResumeAuto()
-assert(current().travelQuestID==94500,'final NPC arrival requires confirmation or proximity')
-E:Move(1); E:ResumeAuto()
+zone='Wetlands';C_Map.GetPlayerMapPosition=function() return CreateVector2D(.047,.570) end;E:ResumeAuto()
+assert(current().questID==94500 and current().type=='turnin',
+ 'entering the destination zone passes local movement to the turn-in')
+E:ResumeAuto()
 assert(current().questID==94500 and current().type=='turnin','return arrival advances to NPC turn-in')
 F.db.completed[94500]=true;live={};F.Refresh()
 for _,step in ipairs(F.Guide.steps) do
  if step.travelQuestID==94500 then
   assert(E:Done(step),'completed quest bypasses old travel')
-  assert(F.UI:StepPriority(step,1)=='Critical','completed travel keeps key marker')
+  assert(not F.UI:StepPriority(step,1),'completed travel remains optional advice')
  end
 end
 -- A different key quest uses the same generator; ordinary quests stay unchanged.
@@ -154,6 +136,11 @@ local guide={faction='Alliance',questData=data,steps={
  {id='ordinary',type='turnin',questID=999102},
 }}
 F.Guide=guide; F.Travel:EnsureSteps(guide)
+for _,step in ipairs(guide.steps) do
+ if step.type=='travel' then
+  assert(step.optional and not step.critical and not step.criticalReason,'travel is optional advice')
+ end
+end
 local generic={id='generic-return',travelQuestID=999101,travelAction='turnin',travelFinal=true,
  travelFrom='Loch Modan',travelTo='Ironforge',travelDestination={zone='Ironforge',x=.4,y=.6}}
 local oldMapInfo=C_Map.GetMapInfo
@@ -187,7 +174,8 @@ C_TaxiMap={GetTaxiNodesForMap=function() return {
  {name='Horde fixture',faction=1,isUndiscovered=false},
 } end}
 F.Travel:ObserveFlightPaths()
-assert(E:Done(fp),'discovered path automatically completes collection')
+assert(not E:Done(fp),'global taxi map visibility cannot prove character discovery')
+assert(not F.Travel:KnowsFlightPath('Thelsamar'),'visible global node is not learned-path evidence')
 assert(not F.Travel:KnowsFlightPath('Astranaar'),'undiscovered is not learned')
 assert(not F.Travel:KnowsFlightPath('Auberdine'),'missing discovery field is not evidence')
 assert(not F.Travel:KnowsFlightPath('Horde fixture'),'ignore opposing faction nodes')
@@ -198,13 +186,14 @@ TaxiNodeGetType=function(i) return ({'CURRENT','REACHABLE','DISTANT'})[i] end
 F.Travel:ObserveFlightPaths(true)
 assert(F.Travel:KnowsFlightPath('Auberdine') and F.Travel:KnowsFlightPath('Astranaar'))
 assert(not F.Travel:KnowsFlightPath('Menethil Harbor'),'unreachable does not prove discovery')
+assert(not E:Done(fp),'unvisited Thelsamar remains unknown after checking another flight master')
 NumTaxiNodes,TaxiNodeName,TaxiNodeGetType=nil,nil,nil
 F.LoadDatabase()
-assert(F.Travel:KnowsFlightPath('Thelsamar'),'flight knowledge survives database reload')
+assert(F.Travel:KnowsFlightPath('Auberdine'),'character-observed flight knowledge survives database reload')
 local flightStep={travelQuestID=999101,travelFrom='Ashenvale',travelTo='Darkshore',
  travelFinal=true,travelAction='turnin',travelLeg=1,travelZones={'Darkshore'},
  travelDestination={name='Auberdine harbor',zone='Darkshore',x=.327,y=.437},note='Walk the road'}
-assert(F.Travel:Note(flightStep):find('fly to Auberdine',1,true),'known paths replace road advice')
+assert(F.Travel:Note(flightStep):lower():find('fly to auberdine',1,true),'known paths replace road advice')
 F.db.knownFlightPaths.Auberdine=nil
 assert(F.Travel:Note(flightStep)=='Walk the road','unknown destination retains road fallback')
 F.db.knownFlightPaths.Auberdine=true
@@ -218,6 +207,7 @@ assert(fm==1414 and fx==.45 and fy==.6,'flight arrow targets departure flight ma
 zone='Darkshore'
 assert(not F.Travel:DepartureFlight(flightStep),'arrival never points back to departure')
 F.db.knownFlightPaths.Ironforge=true
+F.db.knownFlightPaths.Thelsamar=true
 local direct=F.Travel:Route('Ironforge','Loch Modan')
 assert(#direct==1 and direct[1].zone=='Loch Modan','known flight bypasses intermediate road zones')
 F.QuestLog.byID[999101]={complete=true}
@@ -233,7 +223,7 @@ F.db.knownFlightPaths={Astranaar=true}
 F.Travel:EnsureSteps(itinerary)
 assert(#itinerary.steps==3,'boat then flight needs no separate collection rows')
 assert(itinerary.steps[1].note:find('boat',1,true),'Wetlands still requires boat')
-assert(F.Travel:Note(itinerary.steps[2]):find('fly to Astranaar',1,true))
+assert(F.Travel:Note(itinerary.steps[2]):lower():find('fly to astranaar',1,true))
 assert(F.Travel:Note(itinerary.steps[2]):find('learn its flight path',1,true),
  'learn departure path as part of boarding the flight')
 F.db.knownFlightPaths={Auberdine=true}

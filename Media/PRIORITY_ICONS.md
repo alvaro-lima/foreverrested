@@ -7,7 +7,11 @@ the quest Accept / Turn-in icon and scales with the guide font setting.
   Catch-up preserves it; manual Skip is allowed.
 - Gold full armor silhouette with dark brown edges: equipment reward.
 - Gold and copper coin stacks in front of a taller silver stack: money reward.
-- Non-key actions have no generic optional marker.
+- Optional quest actions use one hollow yellow action icon: exclamation mark
+  for accept, flexed arm for objectives, question mark for turn-in.
+  This replaces the separate optional marker plus filled action icon.
+- Yellow circle with a centered dot before the action title: optional travel.
+- Gold flexed arm before the action title: quest objectives.
 
 Set `optionalBenefit="money"` on an authored action to specify money as its
 purpose; positive `rewardMoney` also selects coins. Gear uses `GearRewards.lua`:
@@ -20,3 +24,6 @@ whose rewards should be evaluated; a `gear` label alone never forces an icon.
 Unknown rewards have no marker. Key, gear and money markers are independent:
 all applicable markers appear together, ordered key, gear, money.
 Markers follow the action title, including collapsed side actions.
+# Catch-up marker
+
+`PriorityCatchup.tga` is the yellow running figure used before catch-up quest titles. Its approved transparent source is `PriorityCatchup-source.png`; `tools/build_priority_icons.py` crops and pads the source before producing the 32-pixel TGA. The marker identifies recovered quest actions, while the critical marker and tooltip explain their purpose.

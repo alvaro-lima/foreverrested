@@ -27,11 +27,17 @@ def estimate(cluster, profile, mode="expected"):
     missing, notes = [], []
     mobs = profile.get("mobs", {})
     groups, quests, legs = {}, set(), {}
+    excluded_optional = []
     reward_xp, kill_xp, travel, combat, overhead, interaction = 0, 0, 0, 0, 0, 0
     level = numeric(profile.get("level"), "profile.level", positive=True, integer=True)
     for quest in cluster.get("quests", []):
         quest_id = quest["questID"]
         numeric(quest_id, "questID", positive=True, integer=True)
+        if type(quest.get('optional', False)) is not bool:
+            raise ValueError('quest.optional must be boolean')
+        if quest.get('optional'):
+            excluded_optional.append(quest_id)
+            continue
         if quest_id in quests:
             raise ValueError(f"Duplicate quest {quest_id} within cluster")
         quests.add(quest_id)
@@ -91,6 +97,10 @@ def estimate(cluster, profile, mode="expected"):
         if "xpPerKill" in model:
             kill_xp += kills * numeric(model["xpPerKill"], "xpPerKill")
     for leg in cluster.get("travel", []):
+        if type(leg.get('optional', False)) is not bool:
+            raise ValueError('travel.optional must be boolean')
+        if leg.get('optional'):
+            continue
         key = leg.get("id")
         if not isinstance(key, str) or not key:
             raise ValueError("Travel legs need stable IDs")
@@ -125,6 +135,7 @@ def estimate(cluster, profile, mode="expected"):
     complete = not missing and total_seconds > 0
     return {"scenario": mode, "complete": complete, "missing": missing,
             "notes": sorted(set(notes)), "expectedKills": kills_by_mob,
+            "excludedOptionalQuestIDs": sorted(set(excluded_optional)),
             "questXP": reward_xp, "killXP": kill_xp, "totalXP": total_xp if not missing else None,
             "seconds": total_seconds if not missing else None,
             "breakdownSeconds": {"travel": travel, "combat": combat, "findLootRecovery": overhead, "interaction": interaction},

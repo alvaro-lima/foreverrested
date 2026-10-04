@@ -17,7 +17,7 @@ function L:GuidesForBracket(index)
     if not bracket then return result end
     for _, id in ipairs(self.order) do
         local guide = self.guides[id]
-        if guide.minLevel == bracket.min and guide.maxLevel == bracket.max then
+        if not guide.retired and guide.minLevel >= bracket.min and guide.minLevel < bracket.max and guide.maxLevel <= bracket.max then
             result[#result + 1] = id
         end
     end
@@ -41,15 +41,9 @@ function L:Register(guide)
                     local action = ({pickup="Accept",objective="Complete",turnin="Turn in"})[task.type] or task.type
                     step.text = action .. ": " .. (data and data.title or task.text or "Quest")
                     step.clusterText = group.text
-                    for _, other in ipairs(group.tasks) do
-                        if other ~= task then
-                            local side = {}
-                            for key,value in pairs(other) do side[key] = value end
-                            side.optional = true
-                            side.activeOnly = side.type ~= "pickup" or nil
-                            step.alongside[#step.alongside+1] = side
-                        end
-                    end
+                    -- Other required actions already have their own numbered
+                    -- rows. Repeating them as optional side work obscures which
+                    -- action the completion badge describes.
                     for _,side in ipairs(group.alongside or {}) do step.alongside[#step.alongside+1] = side end
                     actions[#actions+1] = step
                 end
@@ -72,7 +66,7 @@ function L:SaveCurrent()
         if guide.steps[index] then skippedIDs[guide.steps[index].id] = true end
     end
     local current = guide.steps[F.db.step]
-    local saved = {step = F.db.step, stepID = current and current.id, revision = guide.revision,
+    local saved = {step = F.db.step, stepID = current and (current.resumeStepID or current.id), revision = guide.revision,
         bindings = F.db.bindings, skipped = F.db.skipped, skippedIDs = skippedIDs, confirmedSteps = F.db.confirmedSteps,
         manualSkippedSteps = F.db.manualSkippedSteps, skipHistory = F.db.skipHistory, restartStepID = F.db.restartStepID}
     F.db.guides[F.db.guideID] = saved
@@ -126,36 +120,98 @@ function L:ApplyState(guide, saved)
     end
     F.db.stepID, F.db.guideRevision, F.db.skippedIDs = guide.steps[F.db.step].id, guide.revision, nil
     F.GuideEngine.catchUpPending = true
+    if F.Travel then F.Travel.entryPending=true end
 end
 function L:Recommended()
     local level = F.Call(UnitLevel, "player") or 1
     local map = F.Call(C_Map and C_Map.GetBestMapForUnit, "player")
     local info = F.Call(C_Map and C_Map.GetMapInfo, map)
-    if info then
-        local candidate
-        for _, id in ipairs(self.order) do
-            local guide = self.guides[id]
-            if guide.status == "draft" and guide.zone == info.name and level >= guide.minLevel and level <= guide.maxLevel
-                and (not candidate or guide.minLevel > self.guides[candidate].minLevel) then candidate = id end
+    local _, race, raceID = F.Call(UnitRace, "player")
+    if raceID==4 then race='NightElf' end
+    if level>=30 then return nil,'No guide is available for your level yet.' end
+    local starts={Human='alliance-northshire-01-05',Dwarf='alliance-coldridge-01-05',Gnome='alliance-coldridge-01-05',
+        NightElf='alliance-shadowglen-01-05',Skyborne='alliance-zephras-grove-01-05'}
+    local preferred,walk={},starts[race]
+    local _,class=F.Call(UnitClass,'player')
+    if not walk and class=='DRUID' then walk=starts.NightElf end
+    while walk and self.guides[walk] and not preferred[walk] do
+        preferred[walk]=true;walk=self.guides[walk].nextGuideID
+    end
+    local candidate,best,bestActive
+    local zone=F.Call(GetRealZoneText) or info and info.name
+    local continent=F.Travel and F.Travel:Continent(zone)
+    for _,id in ipairs(self.order) do
+        local g=self.guides[id]
+        if not g.retired and g.status=='draft' and g.sourceGuideID then
+            local distance=level<g.minLevel and g.minLevel-level or level>=g.maxLevel and level-g.maxLevel+1 or 0
+            local score=-distance*100+(preferred[id] and 30 or 0)
+            local routeContinent=g.routeGroup and g.routeGroup:match('^(%a+)%-')
+            if continent and routeContinent and routeContinent~=continent then score=score-60 end
+            local nearby=info and info.name==g.zone
+            if nearby then score=score+40 end
+            local active,seen=0,{}
+            for _,step in ipairs(g.steps) do
+                for _,task in ipairs(step.tasks or {step}) do
+                    local questID=task.questID
+                    if questID and not seen[questID] and F.GuideEngine:Applies(task) then
+                        seen[questID]=true
+                        if F.QuestLog.byID[questID] then active=active+1 end
+                    end
+                end
+            end
+            score=score+math.min(active,4)*12
+            if level<g.minLevel then score=score-50 end
+            if not best or score>best then candidate,best,bestActive=id,score,active end
         end
-        if candidate then return candidate end
     end
-    local _, race = F.Call(UnitRace, "player")
-    if level >= 20 then
-        return ({Human="alliance-duskwood-20-30", Dwarf="alliance-wetlands-20-30", Gnome="alliance-wetlands-20-30",
-            NightElf="alliance-ashenvale-20-30", Skyborne="alliance-duskwood-20-30"})[race]
+    if candidate then
+        local g=self.guides[candidate]
+        return candidate,'Suggested for level '..level..(info and info.name==g.zone and '; you are nearby' or '')..
+            (bestActive>0 and '; '..bestActive..' accepted quest'..(bestActive==1 and '' or 's')..' here' or '')..
+            '. Missing essential quests are loaded first.'
     end
-    if level >= 10 then
-        return ({Human="alliance-westfall-10-20", Dwarf="alliance-loch-modan-10-20", Gnome="alliance-loch-modan-10-20",
-            NightElf="alliance-darkshore-10-20", Skyborne="alliance-zephras-10-14"})[race]
-    end
-    return ({Human="alliance-elwynn-01-10", Dwarf="alliance-dun-morogh-01-10", Gnome="alliance-dun-morogh-01-10",
-        NightElf="alliance-teldrassil-01-10", Skyborne="alliance-zephras-01-10"})[race]
+    return nil,'No suitable guide is available.'
 end
 function L:Initialize()
     F.db.guides = type(F.db.guides) == "table" and F.db.guides or {}
+    local old=self.guides[F.db.guideID]
+    if old and old.retired then
+        local stepID=F.db.stepID or old.steps[F.db.step] and old.steps[F.db.step].id
+        local skippedIDs={}
+        for index in pairs(F.db.skipped or {}) do
+            if old.steps[index] then skippedIDs[old.steps[index].id]=true end
+        end
+        local migration={stepID=stepID,revision=F.db.guideRevision,skippedIDs=F.db.skippedIDs or skippedIDs,
+            confirmedSteps=F.db.confirmedSteps,manualSkippedSteps=F.db.manualSkippedSteps,
+            skipHistory=F.db.skipHistory,bindings=F.db.bindings}
+        F.db.guides[old.id]=migration
+        local replacement
+        for _,id in ipairs(self.order) do
+            local guide=self.guides[id]
+            if guide.sourceGuideID==old.id and not guide.retired then
+                for _,step in ipairs(guide.steps) do
+                    if step.id==stepID or step.legacyGroupID==stepID then replacement=id;break end
+                end
+            end
+            if replacement then break end
+        end
+        F.db.guideID=replacement or self:Recommended()
+        for _,id in ipairs(self.order) do
+            local guide=self.guides[id]
+            if guide.sourceGuideID==old.id and not F.db.guides[id] then
+                F.db.guides[id]={step=1,skippedIDs=migration.skippedIDs,
+                    confirmedSteps=migration.confirmedSteps,manualSkippedSteps=migration.manualSkippedSteps,
+                    skipHistory=migration.skipHistory}
+            end
+        end
+        local saved=F.db.guides[F.db.guideID] or {}
+        saved.stepID=replacement and stepID or nil
+        self:ApplyState(self.guides[F.db.guideID],saved)
+        F.db.guideRevision=nil
+        F.Print('Regional guides updated; continuing in '..self.guides[F.db.guideID].title..'.')
+    end
     if not self.guides[F.db.guideID] then
-        F.db.guideID = self:Recommended() or "alliance-dun-morogh-01-10"
+        F.db.guideID = self:Recommended() or "alliance-coldridge-01-05"
         F.db.step, F.db.skipped, F.db.bindings = 1, {}, {}
         F.db.stepID, F.db.guideRevision, F.db.skippedIDs, F.db.confirmedSteps = nil, nil, nil, {}
     end
@@ -164,12 +220,46 @@ function L:Initialize()
         bindings = F.db.bindings, skipped = F.db.skipped, skippedIDs = F.db.skippedIDs, confirmedSteps = F.db.confirmedSteps,
         manualSkippedSteps = F.db.manualSkippedSteps, skipHistory = F.db.skipHistory, restartStepID = F.db.restartStepID})
 end
-function L:Select(id)
+function L:Continue()
+    local id=F.Guide.nextGuideID
+    if not id or not self.guides[id] then return false end
+    self:SaveCurrent()
+    F.db.guideID=id;F.Guide=self.guides[id]
+    self:ApplyState(F.Guide,F.db.guides[id] or {step=1})
+    -- A skipped quest stays skipped when its later actions occur in another visit.
+    local skippedQuests={}
+    for _,guideID in ipairs(self.order) do
+        local guide=self.guides[guideID]
+        local saved=F.db.guides[guideID]
+        if guide.routeGroup==F.Guide.routeGroup and saved then
+            for _,step in ipairs(guide.steps) do
+                if saved.manualSkippedSteps and saved.manualSkippedSteps[step.id] then
+                    for _,task in ipairs(step.tasks or {step}) do
+                        if task.questID and task.type~='travel' then skippedQuests[task.questID]=true end
+                    end
+                end
+            end
+        end
+    end
+    for index,step in ipairs(F.Guide.steps) do
+        for _,task in ipairs(step.tasks or {step}) do
+            if task.questID and skippedQuests[task.questID] then
+                F.db.skipped[index]=true
+                F.db.manualSkippedSteps[step.id]=true
+            end
+        end
+    end
+    F.GuideEngine.manualHold,F.GuideEngine.selectedStep=nil,nil
+    F.Tracker.offset=0
+    return true
+end
+function L:Select(id, recommended)
     if not self.guides[id] then return end
     self:SaveCurrent()
     local saved = F.db.guides[id] or {step = 1, bindings = {}, skipped = {}}
     F.db.guideID = id; F.Guide = self.guides[id]
     self:ApplyState(F.Guide, saved)
+    if recommended then F.db.restartStepID=nil end
     F.GuideEngine.manualHold = nil
     F.GuideEngine.selectedStep = nil
     F.Tracker.offset = 0

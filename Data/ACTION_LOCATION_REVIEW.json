@@ -1,0 +1,568 @@
+{
+  "missing": [
+    {
+      "guideID": "alliance-eastern-20-22",
+      "stepID": "algaz-entry:objective:468",
+      "questID": 468,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-20-22",
+      "stepID": "forever-wetlands:98197:objective",
+      "questID": 98197,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-24-25",
+      "stepID": "menethil-beta:objective:469",
+      "questID": 469,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-24-25",
+      "stepID": "menethil-beta:objective:98461",
+      "questID": 98461,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-25-26",
+      "stepID": "sven-revenge-objectives",
+      "questID": 95,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-26-27",
+      "stepID": "statuette-first-objectives",
+      "questID": 281,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-26-27",
+      "stepID": "statuette-second-objectives",
+      "questID": 284,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-26-27",
+      "stepID": "statuette-third-objectives",
+      "questID": 285,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-26-27",
+      "stepID": "third-fleet-objectives",
+      "questID": 288,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-27-28",
+      "stepID": "translation-wait-objectives",
+      "questID": 401,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "eye-city:objective:293",
+      "questID": 293,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:473",
+      "questID": 473,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:465",
+      "questID": 465,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:472",
+      "questID": 472,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:631",
+      "questID": 631,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:632",
+      "questID": 632,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-28-29",
+      "stepID": "dragonmaw:objective:634",
+      "questID": 634,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "stepID": "duskwood-optional-final:objective:223",
+      "questID": 223,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "stepID": "duskwood-optional-final:objective:96139",
+      "questID": 96139,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "stepID": "duskwood-optional-final:pickup:96137",
+      "questID": 96137,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "stepID": "duskwood-optional-final:pickup:96138",
+      "questID": 96138,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-eastern-29-30",
+      "stepID": "duskwood-optional-final:turnin:96138",
+      "questID": 96138,
+      "action": "turnin"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "ashenvale-arrival:objective:990",
+      "questID": 990,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "ashenvale-arrival:objective:976",
+      "questID": 976,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-city-detours:objective:1072",
+      "questID": 1072,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-city-detours:objective:1074",
+      "questID": 1074,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-city-detours:objective:1075",
+      "questID": 1075,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-city-detours:objective:1077",
+      "questID": 1077,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-side-work:objective:1094",
+      "questID": 1094,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-side-work:objective:1095",
+      "questID": 1095,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-side-work:objective:1090",
+      "questID": 1090,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-20-24",
+      "stepID": "stonetalon-side-work:objective:1092",
+      "questID": 1092,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-27-30",
+      "stepID": "raene-shrine-objectives",
+      "questID": 1028,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-kalimdor-27-30",
+      "stepID": "ashenvale-final-detours:objective:1021",
+      "questID": 1021,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-coldridge-01-05",
+      "stepID": "cave-loop:objective:3361",
+      "questID": 3361,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-dun-morogh-05-10",
+      "stepID": "optional:alliance-dun-morogh-01-10:objective:5541",
+      "questID": 5541,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-elwynn-05-10",
+      "stepID": "fargodeep-loop:objective:62",
+      "questID": 62,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-elwynn-05-10",
+      "stepID": "jasperlode-explore",
+      "questID": 76,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-shadowglen-01-05",
+      "stepID": "optional:alliance-teldrassil-01-10:objective:4495",
+      "questID": 4495,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-teldrassil-05-10",
+      "stepID": "optional:alliance-teldrassil-01-10:objective:2561",
+      "questID": 2561,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-grove-01-05",
+      "stepID": "optional:alliance-zephras-01-10:objective:92597",
+      "questID": 92597,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-grove-01-05",
+      "stepID": "optional:alliance-zephras-01-10:objective:93552",
+      "questID": 93552,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "stepID": "optional:alliance-zephras-01-10:objective:92698",
+      "questID": 92698,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "stepID": "windfield-loop:objective:92683",
+      "questID": 92683,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "stepID": "optional:alliance-zephras-01-10:objective:93949",
+      "questID": 93949,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-10-15",
+      "stepID": "optional:alliance-westfall-10-20:pickup:184",
+      "questID": 184,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-westfall-10-15",
+      "stepID": "optional:alliance-westfall-10-20:pickup:92910",
+      "questID": 92910,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-westfall-10-15",
+      "stepID": "optional:alliance-westfall-10-20:objective:92910",
+      "questID": 92910,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "optional:alliance-westfall-10-20:objective:92747",
+      "questID": 92747,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "optional:alliance-westfall-10-20:objective:92749",
+      "questID": 92749,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "defias-redridge-objectives",
+      "questID": 65,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "defias-sentinel-objectives",
+      "questID": 132,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "defias-stormwind-objectives",
+      "questID": 135,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "defias-report-objectives",
+      "questID": 141,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-westfall-militia-12-15",
+      "stepID": "defias-traitor-objectives",
+      "questID": 155,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-redridge-human-15-20",
+      "stepID": "westfall-redridge-shoes-objectives",
+      "questID": 118,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-redridge-human-15-20",
+      "stepID": "optional:alliance-westfall-10-20:objective:116",
+      "questID": 116,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "stepID": "optional:alliance-loch-modan-10-20:pickup:912",
+      "questID": 912,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:912",
+      "questID": 912,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "stepID": "optional:alliance-loch-modan-10-20:turnin:912",
+      "questID": 912,
+      "action": "turnin"
+    },
+    {
+      "guideID": "alliance-loch-west-10-13",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:86667",
+      "questID": 86667,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "stepID": "optional:alliance-loch-modan-10-20:pickup:86613",
+      "questID": 86613,
+      "action": "pickup"
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:86613",
+      "questID": 86613,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:86614",
+      "questID": 86614,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-loch-east-13-15",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:309",
+      "questID": 309,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-redridge-dwarf-15-20",
+      "stepID": "loch-redridge-shoes-objectives",
+      "questID": 118,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-redridge-dwarf-15-20",
+      "stepID": "optional:alliance-loch-modan-10-20:objective:116",
+      "questID": 116,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "stepID": "optional:alliance-darkshore-10-20:objective:1141",
+      "questID": 1141,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "stepID": "scout-threat:objective:984",
+      "questID": 984,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "stepID": "scout-threat:objective:2118",
+      "questID": 2118,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-10-13",
+      "stepID": "south-beached-remains",
+      "questID": 4722,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "north-beached-remains",
+      "questID": 4723,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "north-cave-crystal:objective:4811",
+      "questID": 4811,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "crystal-fragments-objectives",
+      "questID": 4813,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "south-loop:objective:944",
+      "questID": 944,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "twilight-camp-objectives",
+      "questID": 949,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-13-17",
+      "stepID": "onu-return-objectives",
+      "questID": 950,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "stepID": "far-south-beached-remains:objective:4731",
+      "questID": 4731,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "stepID": "far-south-beached-remains:objective:4732",
+      "questID": 4732,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "stepID": "far-south-beached-remains:objective:4733",
+      "questID": 4733,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-darkshore-17-20",
+      "stepID": "optional:alliance-darkshore-10-20:objective:993",
+      "questID": 993,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "stepID": "fillion-intro-objectives",
+      "questID": 99260,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "stepID": "optional:alliance-zephras-10-14:objective:94896",
+      "questID": 94896,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-10-14-route",
+      "stepID": "service-objectives",
+      "questID": 92860,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "tower-intro-objectives",
+      "questID": 93320,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "valanaar-return-objectives",
+      "questID": 92880,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "elder-request-objectives",
+      "questID": 92881,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "unfortunate-news-objectives",
+      "questID": 92644,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "inner-sanctum-objectives",
+      "questID": 93958,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "lorthuna-objectives",
+      "questID": 93835,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "next-objectives",
+      "questID": 93089,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-tower-12-14",
+      "stepID": "optional:alliance-zephras-10-14:objective:94484",
+      "questID": 94484,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-exit-12-14",
+      "stepID": "optional:alliance-zephras-10-14:objective:93160",
+      "questID": 93160,
+      "action": "objective"
+    },
+    {
+      "guideID": "alliance-zephras-exit-12-14",
+      "stepID": "optional:alliance-zephras-10-14:objective:94485",
+      "questID": 94485,
+      "action": "objective"
+    }
+  ]
+}

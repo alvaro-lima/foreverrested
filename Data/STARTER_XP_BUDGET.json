@@ -1,0 +1,871 @@
+{
+  "schemaVersion": 1,
+  "optionalXPExcluded": true,
+  "chapters": [
+    {
+      "guideID": "alliance-coldridge-01-05",
+      "title": "1-5 Coldridge Valley",
+      "requiredTurninIDs": [
+        170,
+        179,
+        182,
+        183,
+        218,
+        233,
+        234,
+        3361
+      ],
+      "excludedOptionalTurninIDs": [
+        3364,
+        3365
+      ],
+      "listedRequiredQuestXP": 2125,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 707,
+          "count": 6,
+          "name": "Rockjaw Trogg",
+          "questID": 170,
+          "source": "https://www.wowhead.com/forever/quest=170",
+          "approxSoloNormalXPAtEntry": [
+            50,
+            52
+          ],
+          "baselineMobLevels": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 724,
+          "count": 6,
+          "name": "Burly Rockjaw Trogg",
+          "questID": 170,
+          "source": "https://www.wowhead.com/forever/quest=170",
+          "approxSoloNormalXPAtEntry": [
+            52,
+            52
+          ],
+          "baselineMobLevels": [
+            2,
+            2
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 708,
+          "count": 12,
+          "name": "Small Crag Boar",
+          "questID": 183,
+          "source": "https://www.wowhead.com/forever/quest=183",
+          "approxSoloNormalXPAtEntry": [
+            55,
+            55
+          ],
+          "baselineMobLevels": [
+            3,
+            3
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 706,
+          "count": 14,
+          "name": "Frostmane Troll Whelp",
+          "questID": 182,
+          "source": "https://www.wowhead.com/forever/quest=182",
+          "approxSoloNormalXPAtEntry": [
+            55,
+            57
+          ],
+          "baselineMobLevels": [
+            3,
+            4
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:felix-pickup",
+          "targetLevel": 3,
+          "text": "Reach level 3: Rockjaw Trogg"
+        },
+        {
+          "stepID": "xp-exit:alliance-coldridge-01-05",
+          "targetLevel": 5,
+          "text": "Reach level 5: Frostmane Troll Whelps outside the southern cave"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-dun-morogh-05-10",
+      "title": "5-8 Dun Morogh: Kharanos circuits",
+      "requiredTurninIDs": [
+        282,
+        313,
+        315,
+        317,
+        318,
+        319,
+        320,
+        400,
+        412,
+        420
+      ],
+      "excludedOptionalTurninIDs": [
+        287,
+        2160,
+        5541,
+        98321,
+        98326
+      ],
+      "listedRequiredQuestXP": 5280,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1196,
+          "count": 6,
+          "name": "Ice Claw Bear",
+          "questID": 319,
+          "source": "https://www.wowhead.com/forever/quest=319",
+          "approxSoloNormalXPAtEntry": [
+            77,
+            80
+          ],
+          "baselineMobLevels": [
+            7,
+            8
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1127,
+          "count": 8,
+          "name": "Elder Crag Boar",
+          "questID": 319,
+          "source": "https://www.wowhead.com/forever/quest=319",
+          "approxSoloNormalXPAtEntry": [
+            77,
+            80
+          ],
+          "baselineMobLevels": [
+            7,
+            8
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1201,
+          "count": 8,
+          "name": "Snow Leopard",
+          "questID": 319,
+          "source": "https://www.wowhead.com/forever/quest=319",
+          "approxSoloNormalXPAtEntry": [
+            77,
+            80
+          ],
+          "baselineMobLevels": [
+            7,
+            8
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:kharanos-west-pickup",
+          "targetLevel": 7,
+          "text": "Reach level 7: Crag Boar"
+        },
+        {
+          "stepID": "xp-exit:alliance-dun-morogh-05-10",
+          "targetLevel": 8,
+          "text": "Reach level 8: Ice Claw Bears and Elder Crag Boars on the western circuit"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-dun-morogh-east-08-10",
+      "title": "8-10 Dun Morogh: quarry and eastern road",
+      "requiredTurninIDs": [
+        432,
+        433,
+        95212
+      ],
+      "excludedOptionalTurninIDs": [
+        314,
+        417,
+        419,
+        95213,
+        95214,
+        95217
+      ],
+      "listedRequiredQuestXP": 1880,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1115,
+          "count": 6,
+          "name": "Rockjaw Skullthumper",
+          "questID": 432,
+          "source": "https://www.wowhead.com/forever/quest=432",
+          "approxSoloNormalXPAtEntry": [
+            85,
+            89
+          ],
+          "baselineMobLevels": [
+            8,
+            9
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1117,
+          "count": 10,
+          "name": "Rockjaw Bonesnapper",
+          "questID": 433,
+          "source": "https://www.wowhead.com/forever/quest=433",
+          "approxSoloNormalXPAtEntry": [
+            89,
+            94
+          ],
+          "baselineMobLevels": [
+            9,
+            10
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-dun-morogh-east-08-10",
+          "targetLevel": 10,
+          "text": "Reach level 10: Rockjaw Skullthumpers around Gol'Bolar Quarry"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-northshire-01-05",
+      "title": "1-5 Northshire",
+      "requiredTurninIDs": [
+        7,
+        15,
+        18,
+        21,
+        33,
+        783
+      ],
+      "excludedOptionalTurninIDs": [
+        6,
+        3903,
+        3904
+      ],
+      "listedRequiredQuestXP": 1435,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 6,
+          "count": 10,
+          "name": "Kobold Vermin",
+          "questID": 7,
+          "source": "https://www.wowhead.com/forever/quest=7",
+          "approxSoloNormalXPAtEntry": [
+            50,
+            52
+          ],
+          "baselineMobLevels": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 257,
+          "count": 10,
+          "name": "Kobold Worker",
+          "questID": 15,
+          "source": "https://www.wowhead.com/forever/quest=15",
+          "approxSoloNormalXPAtEntry": [
+            55,
+            55
+          ],
+          "baselineMobLevels": [
+            3,
+            3
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 80,
+          "count": 12,
+          "name": "Kobold Laborer",
+          "questID": 21,
+          "source": "https://www.wowhead.com/forever/quest=21",
+          "approxSoloNormalXPAtEntry": [
+            55,
+            57
+          ],
+          "baselineMobLevels": [
+            3,
+            4
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:northshire-final-pickup:pickup:18",
+          "targetLevel": 2,
+          "text": "Reach level 2: Kobold Worker"
+        },
+        {
+          "stepID": "xp-exit:alliance-northshire-01-05",
+          "targetLevel": 5,
+          "text": "Reach level 5: Kobold Laborers at Echo Ridge"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-elwynn-05-10",
+      "title": "5-10 Elwynn Forest",
+      "requiredTurninIDs": [
+        11,
+        35,
+        37,
+        39,
+        40,
+        45,
+        47,
+        52,
+        54,
+        60,
+        62,
+        71,
+        76,
+        83,
+        84,
+        85,
+        86,
+        87,
+        239,
+        5545
+      ],
+      "excludedOptionalTurninIDs": [
+        46,
+        176,
+        2158,
+        3905
+      ],
+      "listedRequiredQuestXP": 9835,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 118,
+          "count": 8,
+          "name": "Prowler",
+          "questID": 52,
+          "source": "https://www.wowhead.com/forever/quest=52",
+          "approxSoloNormalXPAtEntry": [
+            84,
+            84
+          ],
+          "baselineMobLevels": [
+            9,
+            10
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 822,
+          "count": 5,
+          "name": "Young Forest Bear",
+          "questID": 52,
+          "source": "https://www.wowhead.com/forever/quest=52",
+          "approxSoloNormalXPAtEntry": [
+            80,
+            84
+          ],
+          "baselineMobLevels": [
+            8,
+            9
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:jasperlode-pickup:pickup:40",
+          "targetLevel": 7,
+          "text": "Reach level 7: Goldtooth"
+        },
+        {
+          "stepID": "xp-exit:alliance-elwynn-05-10",
+          "targetLevel": 10,
+          "text": "Reach level 10: Riverpaw Runts and Outrunners near Westbrook"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-shadowglen-01-05",
+      "title": "1-5 Shadowglen",
+      "requiredTurninIDs": [
+        456,
+        457,
+        458,
+        459,
+        916,
+        917,
+        920,
+        921
+      ],
+      "excludedOptionalTurninIDs": [
+        4495
+      ],
+      "listedRequiredQuestXP": 2005,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 2031,
+          "count": 7,
+          "name": "Young Nightsaber",
+          "questID": 456,
+          "source": "https://www.wowhead.com/forever/quest=456",
+          "approxSoloNormalXPAtEntry": [
+            50,
+            50
+          ],
+          "baselineMobLevels": [
+            1,
+            1
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1984,
+          "count": 4,
+          "name": "Young Thistle Boar",
+          "questID": 456,
+          "source": "https://www.wowhead.com/forever/quest=456",
+          "approxSoloNormalXPAtEntry": [
+            50,
+            52
+          ],
+          "baselineMobLevels": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 2032,
+          "count": 7,
+          "name": "Mangy Nightsaber",
+          "questID": 457,
+          "source": "https://www.wowhead.com/forever/quest=457",
+          "approxSoloNormalXPAtEntry": [
+            52,
+            52
+          ],
+          "baselineMobLevels": [
+            2,
+            2
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 1985,
+          "count": 7,
+          "name": "Thistle Boar",
+          "questID": 457,
+          "source": "https://www.wowhead.com/forever/quest=457",
+          "approxSoloNormalXPAtEntry": [
+            52,
+            55
+          ],
+          "baselineMobLevels": [
+            2,
+            3
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:webwood-pickup:pickup:916",
+          "targetLevel": 3,
+          "text": "Reach level 3: Grell"
+        },
+        {
+          "stepID": "xp-exit:alliance-shadowglen-01-05",
+          "targetLevel": 5,
+          "text": "Reach level 5: Webwood Spiders outside the cave"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-teldrassil-05-10",
+      "title": "5-10 Teldrassil",
+      "requiredTurninIDs": [
+        475,
+        476,
+        483,
+        487,
+        488,
+        489,
+        918,
+        919,
+        928,
+        929,
+        997,
+        2438,
+        2459,
+        2541,
+        2561
+      ],
+      "excludedOptionalTurninIDs": [
+        490,
+        932,
+        2159,
+        2499,
+        87288
+      ],
+      "listedRequiredQuestXP": 8610,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 7235,
+          "count": 7,
+          "name": "Gnarlpine Mystic",
+          "questID": 2459,
+          "source": "https://www.wowhead.com/forever/quest=2459",
+          "approxSoloNormalXPAtEntry": [
+            74,
+            77
+          ],
+          "baselineMobLevels": [
+            6,
+            7
+          ]
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 2152,
+          "count": 6,
+          "name": "Gnarlpine Ambusher",
+          "questID": 487,
+          "source": "https://www.wowhead.com/forever/quest=487",
+          "approxSoloNormalXPAtEntry": [
+            74,
+            77
+          ],
+          "baselineMobLevels": [
+            6,
+            7
+          ]
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-teldrassil-05-10",
+          "targetLevel": 10,
+          "text": "Reach level 10: Gnarlpine Mystics near Starbreeze Village"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-grove-01-05",
+      "title": "1-5 Zephras: Thendal Grove",
+      "requiredTurninIDs": [
+        92460,
+        92461,
+        92462,
+        92463,
+        92464,
+        92465,
+        92469,
+        92470,
+        92471
+      ],
+      "excludedOptionalTurninIDs": [
+        92473,
+        92474,
+        92544,
+        92597,
+        93552,
+        94414
+      ],
+      "listedRequiredQuestXP": 1510,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 250873,
+          "count": 8,
+          "name": "Juvenile Vuldren",
+          "questID": 92461,
+          "source": "https://www.wowhead.com/forever/quest=92461",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 251169,
+          "count": 8,
+          "name": "Pesky Cirrusfly",
+          "questID": 92462,
+          "source": "https://www.wowhead.com/forever/quest=92462",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 251404,
+          "count": 1,
+          "name": "Cirrusfly Queen",
+          "questID": 92463,
+          "source": "https://www.wowhead.com/forever/quest=92463",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 251160,
+          "count": 7,
+          "name": "Al'Aketh Convert",
+          "questID": 92465,
+          "source": "https://www.wowhead.com/forever/quest=92465",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 251143,
+          "count": 6,
+          "name": "Roiling Winds destroyed",
+          "questID": 92465,
+          "source": "https://www.wowhead.com/forever/quest=92465",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 250937,
+          "count": 8,
+          "name": "Ursera Scavenger",
+          "questID": 92470,
+          "source": "https://www.wowhead.com/forever/quest=92470",
+          "approxSoloNormalXPAtEntry": null
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:grove-next:pickup:92463",
+          "targetLevel": 2,
+          "text": "Reach level 2: Pesky Cirrusfly"
+        },
+        {
+          "stepID": "xp-before:rorian-return-pickup",
+          "targetLevel": 3,
+          "text": "Reach level 3: Roiling Winds"
+        },
+        {
+          "stepID": "xp-before:aetheen-pickup",
+          "targetLevel": 4,
+          "text": "Reach level 4: Roiling Winds"
+        },
+        {
+          "stepID": "xp-exit:alliance-zephras-grove-01-05",
+          "targetLevel": 5,
+          "text": "Reach level 5: Ursera Scavengers west of Thendal Grove"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-village-05-08",
+      "title": "5-8 Zephras: village and highlands",
+      "requiredTurninIDs": [
+        92472,
+        92515,
+        92517,
+        92553,
+        92701,
+        93461,
+        94413
+      ],
+      "excludedOptionalTurninIDs": [
+        92516,
+        92528,
+        92529,
+        92550,
+        92551,
+        92596,
+        93036,
+        93319,
+        96638
+      ],
+      "listedRequiredQuestXP": 2400,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 251918,
+          "count": 10,
+          "name": "Highlands Bandit",
+          "questID": 92517,
+          "source": "https://www.wowhead.com/forever/quest=92517",
+          "approxSoloNormalXPAtEntry": null
+        },
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 255534,
+          "count": 1,
+          "name": "\"Badwind\" Bennic",
+          "questID": 92517,
+          "source": "https://www.wowhead.com/forever/quest=92517",
+          "approxSoloNormalXPAtEntry": null
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-before:valanaar-intro-pickup",
+          "targetLevel": 6,
+          "text": "Reach level 6: Highlands Bandit"
+        },
+        {
+          "stepID": "xp-exit:alliance-zephras-village-05-08",
+          "targetLevel": 8,
+          "text": "Reach level 8: Highlands Bandits near the village"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    },
+    {
+      "guideID": "alliance-zephras-west-08-10",
+      "title": "8-10 Zephras: Windfield and scholar",
+      "requiredTurninIDs": [
+        92679,
+        92682,
+        92683,
+        92684,
+        92685,
+        92693,
+        92699,
+        92703,
+        92727,
+        92849,
+        92850
+      ],
+      "excludedOptionalTurninIDs": [
+        92698,
+        93949
+      ],
+      "listedRequiredQuestXP": 5885,
+      "directKillObjectives": [
+        {
+          "kind": "npc",
+          "action": "kill",
+          "id": 252802,
+          "count": 5,
+          "name": "Hungry Bandit",
+          "questID": 92682,
+          "source": "https://www.wowhead.com/forever/quest=92682",
+          "approxSoloNormalXPAtEntry": null
+        }
+      ],
+      "requiredPrerequisiteGaps": [],
+      "levelRecoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-zephras-west-08-10",
+          "targetLevel": 10,
+          "text": "Reach level 10: Hungry Bandits on the Windfield circuit"
+        }
+      ],
+      "totalExpectedXP": null,
+      "missing": [
+        "current-build Forever mob XP modifiers",
+        "verified conditional collection drop rates",
+        "level-adjusted quest rewards"
+      ]
+    }
+  ]
+}
