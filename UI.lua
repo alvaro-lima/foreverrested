@@ -93,12 +93,12 @@ end
 function U:Create()
     local size = F.db.windowSize
     local width = type(size) == "table" and F.Number(size.width) and math.max(400, math.min(900, size.width)) or 400
-    local height = type(size) == "table" and F.Number(size.height) and math.max(520, math.min(1000, size.height)) or 742
+    local height = type(size) == "table" and F.Number(size.height) and math.max(260, math.min(1000, size.height)) or 742
     local f = self:Panel(UIParent, width, height, "outer")
     self.frame = f; f:SetClampedToScreen(true); f:SetMovable(not F.db.positionsLocked); f:EnableMouse(true)
     f:SetResizable(true)
-    if f.SetResizeBounds then f:SetResizeBounds(400, 520, 900, 1000)
-    elseif f.SetMinResize then f:SetMinResize(400, 520); if f.SetMaxResize then f:SetMaxResize(900, 1000) end end
+    if f.SetResizeBounds then f:SetResizeBounds(400, 260, 900, 1000)
+    elseif f.SetMinResize then f:SetMinResize(400, 260); if f.SetMaxResize then f:SetMaxResize(900, 1000) end end
     local p = F.db.position
     if type(p) == "table" and F.Number(p.x) and F.Number(p.y) then
         f:SetPoint("CENTER", UIParent, "CENTER", p.x, p.y)
@@ -255,9 +255,9 @@ function U:Layout(width, height)
     local titleWidth = guideWidth + 8
     local minimumWidth = math.max(400, math.ceil(guideLeft + titleWidth + rightSpace))
     local maximumWidth = math.max(900, minimumWidth)
-    if self.frame.SetResizeBounds then self.frame:SetResizeBounds(minimumWidth, 520, maximumWidth, 1000)
+    if self.frame.SetResizeBounds then self.frame:SetResizeBounds(minimumWidth, 260, maximumWidth, 1000)
     elseif self.frame.SetMinResize then
-        self.frame:SetMinResize(minimumWidth, 520)
+        self.frame:SetMinResize(minimumWidth, 260)
         if self.frame.SetMaxResize then self.frame:SetMaxResize(maximumWidth, 1000) end
     end
     if width < minimumWidth then
