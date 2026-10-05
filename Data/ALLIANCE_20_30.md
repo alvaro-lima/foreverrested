@@ -1,5 +1,7 @@
 # Alliance 20â€“30 regional visits
 
+Current Kalimdor-start sequence (2026-10-05): 20–23 Ashenvale/Stonetalon, 23–24 Wetlands, 24–25 Redridge/Duskwood, 25–27 Duskwood/Ashenvale, and 27–30 Ashenvale. See [20_30_ROUTE_REDESIGN.md](20_30_ROUTE_REDESIGN.md) for current XP evidence and migration. The older three-chapter Ashenvale sequence described below is retained as historical context.
+
 Use `/reload`, then `/fg guides` and choose **Levels 20â€“30**.
 
 The eastern route alternates short visits:

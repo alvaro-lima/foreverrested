@@ -16,7 +16,7 @@ function UnitRace() return race,race end
 F.LoadDatabase(); F.UI:Create(); F.SecureTarget:Create(); F.Minimap:Create()
 local L,E=F.GuideLibrary,F.GuideEngine
 local ids={'alliance-duskwood-20-30','alliance-wetlands-20-30','alliance-ashenvale-20-30'}
-assert(#L:GuidesForBracket(3)==11)
+assert(#L:GuidesForBracket(3)==13)
 live={}; C_QuestLog.IsQuestFlaggedCompleted=function() return false end
 for _,id in ipairs(ids) do
  L:Select(id)
@@ -92,6 +92,7 @@ race='Human';assert(L:Recommended()=='alliance-eastern-20-22')
 race='Dwarf';assert(L:Recommended()=='alliance-eastern-20-22')
 -- Reaching 20 inserts the new class detour without needing a guide switch.
 class='SHAMAN'; level=19
+F.db.completed={}
 local fresh={id='level-up-fixture',title='Level-up route',faction='Alliance',minLevel=20,maxLevel=30,
  revision=1,quests={},steps={{id='start',type='note',confirmOnNext=true},{id='finish',type='note',confirmOnNext=true}}}
 L:Register(fresh); L:Select(fresh.id)

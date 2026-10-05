@@ -29,12 +29,12 @@ def cbor(data):
     return result
 
 class InstalledDB:
-    def __init__(self,path):
+    def __init__(self,path,expected_flavor='Forever'):
         self.path=Path(path)
         raw=self.path.read_bytes()
         self.sha256=hashlib.sha256(raw).hexdigest()
         self.meta=dict(re.findall(r'^## ([^:]+):\s*(.*?)\r?$',raw.decode('utf-8-sig'),re.M))
-        if self.meta.get('X-Flavor')!='Forever' or self.meta.get('X-Mode')!='baked':raise ValueError('Expected installed baked Forever database')
+        if self.meta.get('X-Flavor')!=expected_flavor or self.meta.get('X-Mode')!='baked':raise ValueError(f'Expected installed baked {expected_flavor} database')
     def stored(self,key):
         value=self.meta.get(key)
         if value and re.fullmatch(r'~\d+~',value):value=''.join(self.meta[f'{key}-{i}'] for i in range(1,int(value[1:-1])+1))

@@ -30,7 +30,7 @@ def guides(min_level=1, max_level=10):
     result = []
     for _, identity in lua.globals().F.GuideLibrary.order.items():
         g = lua.globals().F.GuideLibrary.guides[identity]
-        if g.sourceGuideID and min_level <= g.minLevel < max_level:
+        if g.sourceGuideID and not g.retired and min_level <= g.minLevel < max_level:
             copy = {key: convert(g[key]) for key in
                     ('id', 'title', 'zone', 'minLevel', 'maxLevel', 'sourceGuideID', 'nextGuideID', 'steps')}
             for step in copy['steps']:

@@ -19,8 +19,17 @@ CHECKS=[
     'tests/validate_objective_queue.py',
     'tests/validate_object_gathering.py',
     'tests/validate_multiple_hunting_areas.py',
+    'tests/validate_questie_npc_locations.py',
     'tests/validate_xp_progression.py',
 ]
+
+def public_output(value):
+    """Keep local checkout and home-directory names out of committed reports."""
+    for path,label in sorted(((ROOT,'<repo>'),(Path.home(),'<home>')),
+                             key=lambda item: len(str(item[0])),reverse=True):
+        value=value.replace(str(path),label)
+        value=value.replace(str(path).replace('\\','/'),label)
+    return value
 
 def main():
     results=[]
@@ -29,7 +38,7 @@ def main():
                            capture_output=True,text=True)
         passed=run.returncode==0
         results.append(dict(check=script,passed=passed,exitCode=run.returncode,
-                            output=(run.stdout+run.stderr).strip()))
+                            output=public_output((run.stdout+run.stderr).strip())))
         print(f"{'PASS' if passed else 'FAIL'} {script}",flush=True)
         if not passed: print(results[-1]['output'],flush=True)
     report=dict(passed=all(r['passed'] for r in results),checks=results,

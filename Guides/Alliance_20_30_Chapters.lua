@@ -33,7 +33,8 @@ local function auditProgression(g)
   steps[#steps+1]=s
  end
  steps[#steps+1]=recovery(g,'xp-exit:'..g.id,g.maxLevel)
- g.steps=steps;g.revision=(g.id=='alliance-kalimdor-20-24' or g.id=='alliance-kalimdor-24-27') and 7 or 6
+ g.steps=steps;g.revision=g.id=='alliance-kalimdor-20-24' and 8
+  or g.id=='alliance-kalimdor-24-27' and 7 or 6
 end
 -- Short visits built from our own sourced quest circuits, never third-party routes.
 local function append(g,source,startKey,endKey)
@@ -66,8 +67,10 @@ local specs={
  {'eastern-27-28','27-28 Duskwood: worgen and the hermit',dusk,'duskwood-train26','duskwood-level28',27,28,'Duskwood'},
  {'eastern-28-29','28-29 Wetlands: shipwrecks and final raptors',wet,'cursed-crew-objectives','wetlands-train28',28,29,'Wetlands'},
  {'eastern-29-30','29-30 Duskwood: final patrols',dusk,'night-watch-final-pickup','duskwood-level30',29,30,'Duskwood'},
- {'kalimdor-20-24','20-24 Ashenvale / Stonetalon: introductions',ash,'ashenvale-arrival','ashenvale-train24',20,24,'Ashenvale'},
- {'kalimdor-24-27','24-27 Ashenvale: eastern camps',ash,'culling-threat-objectives','ashenvale-level27',24,27,'Ashenvale'},
+ {'kalimdor-20-24','20-23 Ashenvale / Stonetalon: introductions',ash,'ashenvale-arrival','ashenvale-train24',20,23,'Ashenvale'},
+ {'kalimdor-23-24','23-24 Wetlands: harbor and excavation',wet,'menethil-first','wetlands-level24',23,24,'Wetlands'},
+ {'kalimdor-24-25','24-25 Redridge / Duskwood: road and introductions',dusk,'redridge-cleanup','darkshire-second-pickup',24,25,'Duskwood'},
+ {'kalimdor-25-27-rebuild','25-27 Duskwood / Ashenvale: investigations and camps',dusk,'darkshire-second-pickup','duskwood-level28',25,27,'Duskwood'},
  {'kalimdor-27-30','27-30 Ashenvale: cleansing and lake circuits',ash,'raene-first-components-pickup','ashenvale-level30',27,30,'Ashenvale'},
 }
 for i,spec in ipairs(specs) do
@@ -76,6 +79,11 @@ for i,spec in ipairs(specs) do
     g.routeGroup=i<=8 and 'eastern-20-30' or 'kalimdor-20-30'
     g.description='Quest circuits plus required combat recovery; quest XP alone does not fill the stated level band. Optional loot, group and equipment-dependent branches are bonus XP.'
     append(g,spec[3],spec[4],spec[5])
+    if spec[1]=='kalimdor-25-27-rebuild' then
+        append(g,ash,'culling-threat-objectives','ashenvale-level27')
+        -- The retired Ashenvale middle chapter can migrate by these stable action IDs.
+        g.sourceGuideID='alliance-kalimdor-24-27'
+    end
     if i==9 then
         local circuit,remaining={},{}
         for _,step in ipairs(g.steps) do
@@ -102,13 +110,17 @@ for i,spec in ipairs(specs) do
             end
         end
     end
-    if i~=8 and i~=11 then g.nextGuideID='alliance-'..specs[i+1][1] end
-    if i==8 or i==11 then
+    if i~=8 and i~=#specs then g.nextGuideID='alliance-'..specs[i+1][1] end
+    if i==8 or i==#specs then
         D:Note(g,'route-finish:'..g.routeGroup,'Regional route finished','Check your actual level. Finish accepted objectives or select the other regional route for unfinished quests if below 30. Group quests remain optional.')
     end
     auditProgression(g)
     L:Register(g)
 end
+local legacy=D:New('alliance-kalimdor-24-27','24-27 Ashenvale: eastern camps','Ashenvale',{},24,27)
+legacy.actionSteps=true;legacy.routeGroup='kalimdor-20-30';legacy.sourceGuideID=ash
+append(legacy,ash,'culling-threat-objectives','ashenvale-level27')
+auditProgression(legacy);L:Register(legacy);legacy.retired=true
 -- Retired circuits remain readable for migration but are absent from the chooser.
 for _,id in ipairs({wet,dusk,ash,'alliance-eastern-20-25','alliance-eastern-25-30'}) do
     if L.guides[id] then L.guides[id].retired=true end

@@ -1,0 +1,243 @@
+{
+  "anniversaryQuestieSHA256": "05e12494036802866497211a909f82829c1400faafb282eca29eccabd6ee73b7",
+  "entries": [
+    {
+      "questID": 20,
+      "role": "sourcerequirement",
+      "npcID": 214519,
+      "areaID": 44,
+      "oldXY": [
+        0.778,
+        0.862
+      ],
+      "newXY": [
+        0.778,
+        0.862
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 90,
+      "role": "sourcerequirement",
+      "npcID": 221168,
+      "areaID": 10,
+      "oldXY": [
+        0.456,
+        0.594
+      ],
+      "newXY": [
+        0.456,
+        0.594
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 93,
+      "role": "sourcerequirement",
+      "npcID": 221169,
+      "areaID": 10,
+      "oldXY": [
+        0.466,
+        0.5539999999999999
+      ],
+      "newXY": [
+        0.466,
+        0.554
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 115,
+      "role": "sourcerequirement",
+      "npcID": 214519,
+      "areaID": 44,
+      "oldXY": [
+        0.778,
+        0.862
+      ],
+      "newXY": [
+        0.778,
+        0.862
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 317,
+      "role": "sourcerequirement",
+      "npcID": 208638,
+      "areaID": 1,
+      "oldXY": [
+        0.292,
+        0.38799999999999996
+      ],
+      "newXY": [
+        0.292,
+        0.388
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 1689,
+      "role": "requirement",
+      "npcID": 5676,
+      "areaID": 1519,
+      "oldXY": [
+        0.252,
+        0.774
+      ],
+      "newXY": [
+        0.2509,
+        0.7745
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 1689,
+      "role": "requirement",
+      "npcID": 5676,
+      "areaID": 1497,
+      "oldXY": [
+        0.866,
+        0.27
+      ],
+      "newXY": [
+        0.8662,
+        0.2705
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 1689,
+      "role": "requirement",
+      "npcID": 5676,
+      "areaID": 1637,
+      "oldXY": [
+        0.494,
+        0.5
+      ],
+      "newXY": [
+        0.4943,
+        0.5004
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 86574,
+      "role": "sourcerequirement",
+      "npcID": 216854,
+      "areaID": 400,
+      "oldXY": [
+        0.532,
+        0.41
+      ],
+      "newXY": [
+        0.532,
+        0.41
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "role": "sourcerequirement",
+      "npcID": 223340,
+      "areaID": 17,
+      "oldXY": [
+        0.56,
+        0.248
+      ],
+      "newXY": [
+        0.56,
+        0.248
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "areaID": 17,
+      "oldXY": [
+        0.502,
+        0.8059999999999999
+      ],
+      "newXY": [
+        0.502,
+        0.806
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "role": "sourcerequirement",
+      "npcID": 223340,
+      "areaID": 40,
+      "oldXY": [
+        0.322,
+        0.802
+      ],
+      "newXY": [
+        0.322,
+        0.802
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "areaID": 44,
+      "oldXY": [
+        0.298,
+        0.3
+      ],
+      "newXY": [
+        0.298,
+        0.3
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "areaID": 331,
+      "oldXY": [
+        0.772,
+        0.732
+      ],
+      "newXY": [
+        0.772,
+        0.732
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    }
+  ]
+}

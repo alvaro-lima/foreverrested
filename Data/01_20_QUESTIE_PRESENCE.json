@@ -1,5 +1,5 @@
 {
-  "source": "<local-wow-install>/_classic_beta_\\Interface\\AddOns\\QuestieDB\\QuestieDB_Forever.toc",
+  "source": "QuestieDB/QuestieDB_Forever.toc (installed beta addon)",
   "sha256": "5210155d5ed9992c0661d781b344a80dcd0e10771a71a74a16a11a871cbcb9ab",
   "chapters": 22,
   "questCount": 289,

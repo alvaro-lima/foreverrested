@@ -1,11 +1,11 @@
 {
-  "passed": false,
+  "passed": true,
   "checks": [
     {
       "check": "tools/audit_action_locations.py",
       "passed": true,
       "exitCode": 0,
-      "output": "PASS: 1129 actions; 0 missing action locations"
+      "output": "PASS: 1271 actions; 0 missing action locations"
     },
     {
       "check": "tests/validate_action_location_rules.py",
@@ -80,10 +80,16 @@
       "output": "PASS: multiple hunting areas, unique pins, nearest navigation and generic quest support"
     },
     {
+      "check": "tests/validate_questie_npc_locations.py",
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: 3163 NPC pins match Questie; 14 have labeled Classic fallback evidence"
+    },
+    {
       "check": "tests/validate_xp_progression.py",
-      "passed": false,
-      "exitCode": 1,
-      "output": "PASS: 33 chapters; required-only rewards, explicit recovery and flexible exits\nTraceback (most recent call last):\n  File \"<local-wow-install>/_classic_beta_\\Interface\\AddOns\\ForeverRested\\tests\\validate_xp_progression.py\", line 10, in <module>\n    ns['lua'].execute(r'''\n  File \"lupa/lua51.pyx\", line 466, in lupa.lua51.LuaRuntime.execute\n  File \"lupa/lua51.pyx\", line 1897, in lupa.lua51.run_lua\n  File \"lupa/lua51.pyx\", line 1911, in lupa.lua51.call_lua\n  File \"lupa/lua51.pyx\", line 1938, in lupa.lua51.execute_lua_call\n  File \"lupa/lua51.pyx\", line 1819, in lupa.lua51.raise_lua_error\nlupa.lua51.LuaError: [string \"<python>\"]:13: assertion failed!\nstack traceback:\n\t[string \"<python>\"]:13: in main chunk\n\t[C]: in function 'assert'"
+      "passed": true,
+      "exitCode": 0,
+      "output": "PASS: 35 chapters; required-only rewards, explicit recovery and flexible exits\nPASS: required local work, single chapter ownership, live XP shortfall and suitable exit recovery"
     }
   ],
   "limits": "Mock checks do not establish live client behavior or measured travel time."

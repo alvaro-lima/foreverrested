@@ -1,5 +1,5 @@
 {
-  "chaptersReviewed": 33,
+  "chaptersReviewed": 35,
   "optionalXPExcluded": true,
   "classXPExcluded": true,
   "limits": [
@@ -289,7 +289,7 @@
     },
     {
       "guideID": "alliance-kalimdor-20-24",
-      "title": "20-24 Ashenvale / Stonetalon: introductions",
+      "title": "20-23 Ashenvale / Stonetalon: introductions",
       "requiredTurninIDs": [
         991,
         1007,
@@ -322,13 +322,13 @@
           "stepID": "ashenvale-before-foulweald",
           "targetLevel": 23,
           "zone": "Ashenvale",
-          "x": 0.0662,
-          "y": 0.1617,
+          "x": 0.5696,
+          "y": 0.6473,
           "required": true
         },
         {
           "stepID": "xp-exit:alliance-kalimdor-20-24",
-          "targetLevel": 24,
+          "targetLevel": 23,
           "zone": "Ashenvale",
           "x": 0.5696,
           "y": 0.6473,
@@ -339,19 +339,116 @@
       "questOnlyExitLevelVerified": false
     },
     {
-      "guideID": "alliance-kalimdor-24-27",
-      "title": "24-27 Ashenvale: eastern camps",
+      "guideID": "alliance-kalimdor-23-24",
+      "title": "23-24 Wetlands: harbor and excavation",
       "requiredTurninIDs": [
-        1017,
-        1054
+        276,
+        277,
+        279,
+        294,
+        305,
+        306,
+        463,
+        484
       ],
-      "excludedOptionalTurninIDs": [],
+      "excludedOptionalTurninIDs": [
+        469,
+        98461
+      ],
       "excludedClassTurninIDs": [],
-      "listedRequiredQuestXP": 4550,
+      "listedRequiredQuestXP": 10835,
       "missingRewardIDs": [],
       "recoverySteps": [
         {
-          "stepID": "xp-exit:alliance-kalimdor-24-27",
+          "stepID": "xp-exit:alliance-kalimdor-23-24",
+          "targetLevel": 24,
+          "zone": "Wetlands",
+          "x": 0.354,
+          "y": 0.2755,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-kalimdor-24-25",
+      "title": "24-25 Redridge / Duskwood: road and introductions",
+      "requiredTurninIDs": [
+        5,
+        56,
+        93,
+        148,
+        149,
+        154,
+        157,
+        158,
+        163,
+        164,
+        165,
+        226,
+        240,
+        245
+      ],
+      "excludedOptionalTurninIDs": [
+        20,
+        91,
+        115,
+        150
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 11310,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-kalimdor-24-25",
+          "targetLevel": 25,
+          "zone": "Duskwood",
+          "x": 0.7815000000000001,
+          "y": 0.7564,
+          "required": true
+        }
+      ],
+      "flexibleExit": false,
+      "questOnlyExitLevelVerified": false
+    },
+    {
+      "guideID": "alliance-kalimdor-25-27-rebuild",
+      "title": "25-27 Duskwood / Ashenvale: investigations and camps",
+      "requiredTurninIDs": [
+        57,
+        90,
+        95,
+        133,
+        134,
+        156,
+        159,
+        160,
+        173,
+        221,
+        230,
+        251,
+        252,
+        262,
+        265,
+        266,
+        268,
+        401,
+        453,
+        1017,
+        1054
+      ],
+      "excludedOptionalTurninIDs": [
+        174,
+        175,
+        177
+      ],
+      "excludedClassTurninIDs": [],
+      "listedRequiredQuestXP": 23710,
+      "missingRewardIDs": [],
+      "recoverySteps": [
+        {
+          "stepID": "xp-exit:alliance-kalimdor-25-27-rebuild",
           "targetLevel": 27,
           "zone": "Ashenvale",
           "x": 0.5468999999999999,

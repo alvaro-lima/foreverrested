@@ -1,0 +1,723 @@
+{
+  "questieSHA256": "5210155d5ed9992c0661d781b344a80dcd0e10771a71a74a16a11a871cbcb9ab",
+  "corrections": [
+    {
+      "questID": 38,
+      "role": "sourcerequirement",
+      "npcID": 520,
+      "areaID": 40,
+      "x": 0.324,
+      "y": 0.83
+    },
+    {
+      "questID": 86,
+      "role": "sourcerequirement",
+      "npcID": 524,
+      "areaID": 12,
+      "x": 0.41100000000000003,
+      "y": 0.664
+    },
+    {
+      "questID": 91,
+      "role": "sourcerequirement",
+      "npcID": 432,
+      "areaID": 44,
+      "x": 0.818,
+      "y": 0.41
+    },
+    {
+      "questID": 135,
+      "role": "end",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 135,
+      "role": "requirement",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 141,
+      "role": "start",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 152,
+      "role": "requirement",
+      "npcID": 126,
+      "areaID": 12,
+      "x": 0.136,
+      "y": 0.716
+    },
+    {
+      "questID": 176,
+      "role": "sourcerequirement",
+      "npcID": 448,
+      "areaID": 12,
+      "x": 0.273,
+      "y": 0.868
+    },
+    {
+      "questID": 293,
+      "role": "end",
+      "npcID": 1284,
+      "areaID": 1519,
+      "x": 0.396,
+      "y": 0.27399999999999997
+    },
+    {
+      "questID": 293,
+      "role": "requirement",
+      "npcID": 1284,
+      "areaID": 1519,
+      "x": 0.396,
+      "y": 0.27399999999999997
+    },
+    {
+      "questID": 303,
+      "role": "requirement",
+      "npcID": 1052,
+      "areaID": 45,
+      "x": 0.456,
+      "y": 0.9279999999999999
+    },
+    {
+      "questID": 416,
+      "role": "sourcerequirement",
+      "npcID": 1173,
+      "areaID": 38,
+      "x": 0.28600000000000003,
+      "y": 0.451
+    },
+    {
+      "questID": 418,
+      "role": "sourcerequirement",
+      "npcID": 1189,
+      "areaID": 38,
+      "x": 0.38,
+      "y": 0.63
+    },
+    {
+      "questID": 976,
+      "role": "start",
+      "npcID": 4484,
+      "areaID": 148,
+      "x": 0.436,
+      "y": 0.9440000000000001
+    },
+    {
+      "questID": 976,
+      "role": "requirement",
+      "npcID": 4484,
+      "areaID": 148,
+      "x": 0.436,
+      "y": 0.9440000000000001
+    },
+    {
+      "questID": 1008,
+      "role": "sourcerequirement",
+      "npcID": 3944,
+      "areaID": 331,
+      "x": 0.096,
+      "y": 0.276
+    },
+    {
+      "questID": 1338,
+      "role": "end",
+      "npcID": 5413,
+      "areaID": 1519,
+      "x": 0.58,
+      "y": 0.168
+    },
+    {
+      "questID": 5321,
+      "role": "start",
+      "npcID": 11218,
+      "areaID": 331,
+      "x": 0.268,
+      "y": 0.368
+    },
+    {
+      "questID": 5321,
+      "role": "requirement",
+      "npcID": 11218,
+      "areaID": 331,
+      "x": 0.268,
+      "y": 0.368
+    },
+    {
+      "questID": 92749,
+      "role": "start",
+      "npcID": 11026,
+      "areaID": 1519,
+      "x": 0.546,
+      "y": 0.08
+    },
+    {
+      "questID": 92749,
+      "role": "end",
+      "npcID": 11026,
+      "areaID": 1519,
+      "x": 0.546,
+      "y": 0.08
+    },
+    {
+      "questID": 92749,
+      "role": "requirement",
+      "npcID": 8719,
+      "areaID": 1519,
+      "x": 0.534,
+      "y": 0.594
+    },
+    {
+      "questID": 92749,
+      "role": "requirement",
+      "npcID": 8719,
+      "areaID": 1519,
+      "x": 0.534,
+      "y": 0.604
+    },
+    {
+      "questID": 92749,
+      "role": "requirement",
+      "npcID": 8719,
+      "areaID": 1519,
+      "x": 0.536,
+      "y": 0.594
+    },
+    {
+      "questID": 92749,
+      "role": "requirement",
+      "npcID": 8719,
+      "areaID": 1519,
+      "x": 0.536,
+      "y": 0.604
+    },
+    {
+      "questID": 98021,
+      "role": "start",
+      "npcID": 1748,
+      "areaID": 1519,
+      "x": 0.78,
+      "y": 0.18
+    },
+    {
+      "questID": 120,
+      "role": "end",
+      "npcID": 466,
+      "areaID": 1519,
+      "x": 0.638,
+      "y": 0.754
+    },
+    {
+      "questID": 121,
+      "role": "start",
+      "npcID": 466,
+      "areaID": 1519,
+      "x": 0.638,
+      "y": 0.754
+    },
+    {
+      "questID": 1075,
+      "role": "end",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1075,
+      "role": "requirement",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1076,
+      "role": "start",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1076,
+      "role": "end",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1077,
+      "role": "start",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1078,
+      "role": "start",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1078,
+      "role": "end",
+      "npcID": 4078,
+      "areaID": 1519,
+      "x": 0.43,
+      "y": 0.802
+    },
+    {
+      "questID": 1084,
+      "role": "sourcerequirement",
+      "npcID": 4029,
+      "areaID": 406,
+      "x": 0.374,
+      "y": 0.6779999999999999
+    },
+    {
+      "questID": 1638,
+      "role": "start",
+      "npcID": 5480,
+      "areaID": 1519,
+      "x": 0.7859999999999999,
+      "y": 0.456
+    },
+    {
+      "questID": 1638,
+      "role": "end",
+      "npcID": 6089,
+      "areaID": 1519,
+      "x": 0.74,
+      "y": 0.37200000000000005
+    },
+    {
+      "questID": 1639,
+      "role": "start",
+      "npcID": 6089,
+      "areaID": 1519,
+      "x": 0.74,
+      "y": 0.37200000000000005
+    },
+    {
+      "questID": 1639,
+      "role": "end",
+      "npcID": 6090,
+      "areaID": 1519,
+      "x": 0.738,
+      "y": 0.366
+    },
+    {
+      "questID": 1640,
+      "role": "start",
+      "npcID": 6090,
+      "areaID": 1519,
+      "x": 0.738,
+      "y": 0.366
+    },
+    {
+      "questID": 1640,
+      "role": "end",
+      "npcID": 6090,
+      "areaID": 1519,
+      "x": 0.738,
+      "y": 0.366
+    },
+    {
+      "questID": 1665,
+      "role": "start",
+      "npcID": 6090,
+      "areaID": 1519,
+      "x": 0.738,
+      "y": 0.366
+    },
+    {
+      "questID": 1665,
+      "role": "end",
+      "npcID": 6089,
+      "areaID": 1519,
+      "x": 0.74,
+      "y": 0.37200000000000005
+    },
+    {
+      "questID": 1666,
+      "role": "start",
+      "npcID": 6089,
+      "areaID": 1519,
+      "x": 0.74,
+      "y": 0.37200000000000005
+    },
+    {
+      "questID": 1685,
+      "role": "end",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1688,
+      "role": "start",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1688,
+      "role": "end",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1689,
+      "role": "start",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1689,
+      "role": "end",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1715,
+      "role": "end",
+      "npcID": 6122,
+      "areaID": 1519,
+      "x": 0.254,
+      "y": 0.784
+    },
+    {
+      "questID": 1860,
+      "role": "end",
+      "npcID": 5497,
+      "areaID": 1519,
+      "x": 0.386,
+      "y": 0.794
+    },
+    {
+      "questID": 1861,
+      "role": "start",
+      "npcID": 5497,
+      "areaID": 1519,
+      "x": 0.386,
+      "y": 0.794
+    },
+    {
+      "questID": 1861,
+      "role": "end",
+      "npcID": 5497,
+      "areaID": 1519,
+      "x": 0.386,
+      "y": 0.794
+    },
+    {
+      "questID": 2205,
+      "role": "end",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 2206,
+      "role": "start",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 2206,
+      "role": "end",
+      "npcID": 332,
+      "areaID": 1519,
+      "x": 0.758,
+      "y": 0.598
+    },
+    {
+      "questID": 5631,
+      "role": "start",
+      "npcID": 376
+    },
+    {
+      "questID": 5631,
+      "role": "start",
+      "npcID": 376,
+      "oldNPCID": 5489,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.268
+    },
+    {
+      "questID": 5631,
+      "role": "start",
+      "npcID": 5489,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.268
+    },
+    {
+      "questID": 5632,
+      "role": "end",
+      "npcID": 11401
+    },
+    {
+      "questID": 5632,
+      "role": "start",
+      "npcID": 11397,
+      "areaID": 1519,
+      "x": 0.20800000000000002,
+      "y": 0.502
+    },
+    {
+      "questID": 5633,
+      "role": "start",
+      "npcID": 11406
+    },
+    {
+      "questID": 5633,
+      "role": "start",
+      "npcID": 11406,
+      "oldNPCID": 5142,
+      "areaID": 1537,
+      "x": 0.24600000000000002,
+      "y": 0.092
+    },
+    {
+      "questID": 5634,
+      "role": "start",
+      "npcID": 376
+    },
+    {
+      "questID": 5634,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5635,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5636,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5637,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5638,
+      "role": "start",
+      "npcID": 11397,
+      "areaID": 1519,
+      "x": 0.20800000000000002,
+      "y": 0.502
+    },
+    {
+      "questID": 5638,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5639,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5640,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 5924,
+      "role": "start",
+      "npcID": 5505,
+      "areaID": 1519,
+      "x": 0.214,
+      "y": 0.514
+    },
+    {
+      "questID": 6072,
+      "role": "start",
+      "npcID": 3596
+    },
+    {
+      "questID": 6073,
+      "role": "start",
+      "npcID": 5515,
+      "areaID": 1519,
+      "x": 0.616,
+      "y": 0.154
+    },
+    {
+      "questID": 6076,
+      "role": "start",
+      "npcID": 5515,
+      "areaID": 1519,
+      "x": 0.616,
+      "y": 0.154
+    },
+    {
+      "questID": 6261,
+      "role": "start",
+      "npcID": 1323,
+      "areaID": 1519,
+      "x": 0.742,
+      "y": 0.474
+    },
+    {
+      "questID": 6261,
+      "role": "end",
+      "npcID": 352,
+      "areaID": 1519,
+      "x": 0.662,
+      "y": 0.624
+    },
+    {
+      "questID": 6281,
+      "role": "end",
+      "npcID": 1323,
+      "areaID": 1519,
+      "x": 0.742,
+      "y": 0.474
+    },
+    {
+      "questID": 6285,
+      "role": "start",
+      "npcID": 352,
+      "areaID": 1519,
+      "x": 0.662,
+      "y": 0.624
+    },
+    {
+      "questID": 6392,
+      "role": "start",
+      "npcID": 1573
+    },
+    {
+      "questID": 6392,
+      "role": "end",
+      "npcID": 1681
+    },
+    {
+      "questID": 94374,
+      "role": "end",
+      "npcID": 5891,
+      "areaID": 1,
+      "x": 0.248,
+      "y": 0.618
+    },
+    {
+      "questID": 94375,
+      "role": "start",
+      "npcID": 5891,
+      "areaID": 1,
+      "x": 0.248,
+      "y": 0.618
+    },
+    {
+      "questID": 94773,
+      "role": "start",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 94773,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 94774,
+      "role": "end",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 94821,
+      "role": "start",
+      "npcID": 376,
+      "areaID": 1519,
+      "x": 0.38799999999999996,
+      "y": 0.264
+    },
+    {
+      "questID": 94912,
+      "role": "end",
+      "npcID": 5504,
+      "areaID": 1519,
+      "x": 0.21,
+      "y": 0.5539999999999999
+    },
+    {
+      "questID": 94914,
+      "role": "start",
+      "npcID": 5504,
+      "areaID": 1519,
+      "x": 0.21,
+      "y": 0.5539999999999999
+    },
+    {
+      "questID": 5631,
+      "role": "start",
+      "npcID": 376,
+      "oldNPCID": 5489,
+      "areaID": 1519,
+      "x": 0.495,
+      "y": 0.4521
+    }
+  ]
+}

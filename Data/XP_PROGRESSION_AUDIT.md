@@ -1,6 +1,6 @@
 # Required-only XP progression review
 
-All 33 playable chapters reviewed. Optional and class-specific turn-ins contribute zero to the general baseline.
+All 35 playable chapters reviewed. Optional and class-specific turn-ins contribute zero to the general baseline.
 
 Level bands describe quest circuits plus explicit required combat recovery. They are not quest-only XP promises. Recovery uses actual level and displays live XP remaining; skipping recovery bypasses the intended level gate.
 
@@ -14,8 +14,10 @@ Level bands describe quest circuits plus explicit required combat recovery. They
 | 27-28 Duskwood: worgen and the hermit | 7,050 | 1 |
 | 28-29 Wetlands: shipwrecks and final raptors | 7,100 | 1 |
 | 29-30 Duskwood: final patrols | 10,050 | 1 |
-| 20-24 Ashenvale / Stonetalon: introductions | 25,535 | 2 |
-| 24-27 Ashenvale: eastern camps | 4,550 | 1 |
+| 20-23 Ashenvale / Stonetalon: introductions | 25,535 | 2 |
+| 23-24 Wetlands: harbor and excavation | 10,835 | 1 |
+| 24-25 Redridge / Duskwood: road and introductions | 11,310 | 1 |
+| 25-27 Duskwood / Ashenvale: investigations and camps | 23,710 | 1 |
 | 27-30 Ashenvale: cleansing and lake circuits | 19,850 | 1 |
 | 1-5 Coldridge Valley | 2,125 | 2 |
 | 5-8 Dun Morogh: Kharanos circuits | 5,280 | 2 |
@@ -40,11 +42,11 @@ Level bands describe quest circuits plus explicit required combat recovery. They
 | 10+ Zephras: tower and village | 7,180 | Flexible exit |
 | 10+ Zephras: optional work and exit | 0 | Flexible exit |
 
-## Ashenvale correction
+## Ashenvale and eastern-continent handoff
 
-Super Reaper 6000 is required local work beside the Gaxim circuit. Aggressive Defense is scheduled in the introductory chapter after a level-23 safety check, with the same action IDs and no duplicate objectives in the next chapter.
-Level-24 recovery uses Foulweald Warriors (23–24); earlier recovery retains Wrathtail Myrmidons (20–21). Final Ashenvale recovery uses Ghostpaw Alphas (27–28) instead of level-24–25 furbolgs. City deliveries, escorts and higher-level detours remain optional.
-The introductory chapter now includes the nearby Raene delivery and Elemental Bracers circuit, bringing its required listed reward XP to 25,535. The long city, Barrens, escort and high-level optional detours are no longer scheduled at its exit. This still leaves substantial XP recovery; the listed reward total cannot establish an exit level at 24.
+The 20–23 Ashenvale/Stonetalon chapter retains its local quests and existing action IDs, including Super Reaper 6000, Aggressive Defense, the Raene delivery, and Elemental Bracers. Its exit now checks level 23 against nearby Foulweald Warriors (23–24).
+The route then uses 23–24 Wetlands harbor work, 24–25 Redridge/Duskwood, and 25–27 Duskwood investigations before returning to the Ashenvale camps and the 27–30 cleansing circuit. The old 24–27 Ashenvale chapter remains retired for saved-progress migration. Class training and optional side trips do not support required XP.
+The later Ashenvale recovery uses Ghostpaw Alphas (27–28). All listed reward totals remain build-unverified, and live XP plus transport availability decide actual handoff timing.
 
 ## Limits
 

@@ -1,0 +1,6241 @@
+{
+  "questieSHA256": "5210155d5ed9992c0661d781b344a80dcd0e10771a71a74a16a11a871cbcb9ab",
+  "radius": 0.06,
+  "counts": {
+    "quests": 711,
+    "questsAbsentFromQuestie": 222,
+    "npcLocations": 3576,
+    "checkedSpawns": 3163,
+    "classicFallbackPins": 14
+  },
+  "limits": [
+    "Questie NPC spawn points are approximate; a coordinate within six map-percent units is accepted.",
+    "NPC and quest records absent from the installed beta database cannot be verified against Questie.",
+    "A spawn match does not prove that an NPC currently offers a quest in the live client."
+  ],
+  "issues": [
+    {
+      "questID": 20,
+      "questTitle": "Blackrock Menace",
+      "role": "sourcerequirement",
+      "npcID": 214519,
+      "recordedName": "Incinerator Gar'im",
+      "questieName": null,
+      "areaID": 44,
+      "recordedXY": [
+        0.778,
+        0.862
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 46,
+      "questTitle": "Bounty on Murlocs",
+      "role": "sourcerequirement",
+      "npcID": 248278,
+      "recordedName": "Croaky",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.764,
+        0.86
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 46,
+      "questTitle": "Bounty on Murlocs",
+      "role": "sourcerequirement",
+      "npcID": 276180,
+      "recordedName": "Elder Finseer",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.7859999999999999,
+        0.562
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 47,
+      "questTitle": "Gold Dust Exchange",
+      "role": "sourcerequirement",
+      "npcID": 248464,
+      "recordedName": "Nimsy",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41600000000000004,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 60,
+      "questTitle": "Kobold Candles",
+      "role": "sourcerequirement",
+      "npcID": 248464,
+      "recordedName": "Nimsy",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41600000000000004,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 90,
+      "questTitle": "Seasoned Wolf Kabobs",
+      "role": "sourcerequirement",
+      "npcID": 221168,
+      "recordedName": "Dire Wolf Alpha",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.456,
+        0.594
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 92,
+      "questTitle": "Redridge Goulash",
+      "role": "sourcerequirement",
+      "npcID": 271898,
+      "recordedName": "Greater Tarantula",
+      "questieName": null,
+      "areaID": 44,
+      "recordedXY": [
+        0.493,
+        0.38799999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93,
+      "questTitle": "Dusky Crab Cakes",
+      "role": "sourcerequirement",
+      "npcID": 221169,
+      "recordedName": "Black Widow Broodmother",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.466,
+        0.554
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 115,
+      "questTitle": "Shadow Magic",
+      "role": "sourcerequirement",
+      "npcID": 214519,
+      "recordedName": "Incinerator Gar'im",
+      "questieName": null,
+      "areaID": 44,
+      "recordedXY": [
+        0.778,
+        0.862
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 278,
+      "questTitle": "A Dark Threat Looms",
+      "role": "sourcerequirement",
+      "npcID": 270693,
+      "recordedName": "Daggerfang",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.628,
+        0.514
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 313,
+      "questTitle": "The Grizzled Den",
+      "role": "sourcerequirement",
+      "npcID": 271486,
+      "recordedName": "Wendigo Shaman",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.418,
+        0.491
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 313,
+      "questTitle": "The Grizzled Den",
+      "role": "sourcerequirement",
+      "npcID": 271530,
+      "recordedName": "Elder Wendigo",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.426,
+        0.502
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 317,
+      "questTitle": "Stocking Jetsteam",
+      "role": "sourcerequirement",
+      "npcID": 208638,
+      "recordedName": "Fyodi",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.292,
+        0.388
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 385,
+      "questTitle": "Crocolisk Hunting",
+      "role": "sourcerequirement",
+      "npcID": 270693,
+      "recordedName": "Daggerfang",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.628,
+        0.514
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 464,
+      "questTitle": "War Banners",
+      "role": "sourcerequirement",
+      "npcID": 271346,
+      "recordedName": "Dragonmaw Infiltrator",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.72,
+        0.486
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 464,
+      "questTitle": "War Banners",
+      "role": "sourcerequirement",
+      "npcID": 271348,
+      "recordedName": "Dragonmaw Soulbinder",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.7120000000000001,
+        0.47
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 464,
+      "questTitle": "War Banners",
+      "role": "sourcerequirement",
+      "npcID": 271351,
+      "recordedName": "Dragonmaw Reclaimer",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.586,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 1689,
+      "questTitle": "The Binding",
+      "role": "requirement",
+      "npcID": 5676,
+      "recordedName": "Summoned Voidwalker",
+      "questieName": "Summoned Voidwalker",
+      "areaID": 1519,
+      "recordedXY": [
+        0.2509,
+        0.7745
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "kind": "classic-fallback",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 1689,
+      "questTitle": "The Binding",
+      "role": "requirement",
+      "npcID": 5676,
+      "recordedName": "Summoned Voidwalker",
+      "questieName": "Summoned Voidwalker",
+      "areaID": 1497,
+      "recordedXY": [
+        0.8662,
+        0.2705
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "kind": "classic-fallback",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 1689,
+      "questTitle": "The Binding",
+      "role": "requirement",
+      "npcID": 5676,
+      "recordedName": "Summoned Voidwalker",
+      "questieName": "Summoned Voidwalker",
+      "areaID": 1637,
+      "recordedXY": [
+        0.4943,
+        0.5004
+      ],
+      "source": "installed Anniversary QuestieDB Classic Era faction correction",
+      "kind": "classic-fallback",
+      "evidenceKind": "classic-era-faction-correction",
+      "sourceSHA256": "aaa4ece4d10a3cc956c776c83d605bdc1a7784b65320e8e182b808e0c46c3819"
+    },
+    {
+      "questID": 86574,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 268925,
+      "recordedName": "Night Elf Courier",
+      "questieName": null,
+      "areaID": 406,
+      "recordedXY": [
+        0.486,
+        0.39799999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 86574,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 216854,
+      "recordedName": "Freewind Post Wyvern",
+      "questieName": null,
+      "areaID": 400,
+      "recordedXY": [
+        0.532,
+        0.41
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 86585,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 269153,
+      "recordedName": "Mountaineer Ylva",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.318,
+        0.8640000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 86585,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 269185,
+      "recordedName": "Headsplitter",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.315,
+        0.856
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 86667,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 49808,
+      "recordedName": "Grenhild Darktalon",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.364,
+        0.48200000000000004
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 86667,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258043,
+      "recordedName": "Norric Lochthane",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.418,
+        0.19
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 86758,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 270693,
+      "recordedName": "Daggerfang",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.628,
+        0.514
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92460,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251362,
+      "recordedName": "Ailee Farheart",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.428,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92460,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92461,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92461,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92461,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 250873,
+      "recordedName": "Juvenile Vuldren",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43200000000000005,
+        0.256
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92462,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251368,
+      "recordedName": "Elatrell Featherlight",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.434,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92462,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251368,
+      "recordedName": "Elatrell Featherlight",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.434,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92462,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251169,
+      "recordedName": "Pesky Cirrusfly",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.452,
+        0.252
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92463,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251368,
+      "recordedName": "Elatrell Featherlight",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.434,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92463,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251368,
+      "recordedName": "Elatrell Featherlight",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.434,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92463,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251404,
+      "recordedName": "Cirrusfly Queen",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47600000000000003,
+        0.289
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92464,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92464,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 249363,
+      "recordedName": "Yala Windwatcher",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47200000000000003,
+        0.218
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92465,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 249363,
+      "recordedName": "Yala Windwatcher",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47200000000000003,
+        0.218
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92465,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 249363,
+      "recordedName": "Yala Windwatcher",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47200000000000003,
+        0.218
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92465,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251143,
+      "recordedName": "Roiling Winds",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.469,
+        0.209
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92465,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251160,
+      "recordedName": "Al'Aketh Convert",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.46799999999999997,
+        0.187
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92469,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 249363,
+      "recordedName": "Yala Windwatcher",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47200000000000003,
+        0.218
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92469,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92470,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251366,
+      "recordedName": "Aetheen of the Gales",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.426,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92470,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251366,
+      "recordedName": "Aetheen of the Gales",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.426,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92470,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 250937,
+      "recordedName": "Ursera Scavenger",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.358,
+        0.23199999999999998
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92470,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251115,
+      "recordedName": "Urs'anah",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.35600000000000004,
+        0.26
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92471,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92471,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251366,
+      "recordedName": "Aetheen of the Gales",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.426,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92472,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251366,
+      "recordedName": "Aetheen of the Gales",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.426,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92472,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92473,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257551,
+      "recordedName": "Valreaa Valewind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.25
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92473,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257551,
+      "recordedName": "Valreaa Valewind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.25
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92473,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 250926,
+      "recordedName": "Scrawny Ursera",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.37,
+        0.24600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92474,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 263113,
+      "recordedName": "Myriaal Mistwake",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.436,
+        0.24
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92474,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92479,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 248415,
+      "recordedName": "Tordrin Sternblade",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.512,
+        0.408
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92481,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92481,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251379,
+      "recordedName": "Dorii Brightwhisper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.41600000000000004,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92482,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92482,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251376,
+      "recordedName": "Tai'ree Farsight",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92483,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92483,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251389,
+      "recordedName": "Akeri Duskblade",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.436,
+        0.242
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92485,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92485,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251373,
+      "recordedName": "Xyton Silverwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.41600000000000004,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92515,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251993,
+      "recordedName": "Indari Sunseam",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.446,
+        0.444
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92515,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251993,
+      "recordedName": "Indari Sunseam",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.446,
+        0.444
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92515,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251245,
+      "recordedName": "Prideclaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.426
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92516,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251906,
+      "recordedName": "Teeri Wellwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.444,
+        0.45
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92516,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251906,
+      "recordedName": "Teeri Wellwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.444,
+        0.45
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92516,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251261,
+      "recordedName": "Hippogryph Matriarch",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.349,
+        0.52
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92516,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251284,
+      "recordedName": "Hippogryph Protector",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.35,
+        0.518
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92516,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251291,
+      "recordedName": "Hippogryph Youth",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.37799999999999995,
+        0.51
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92517,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92517,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92517,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251918,
+      "recordedName": "Highlands Bandit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.504,
+        0.33399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92517,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 255534,
+      "recordedName": "\"Badwind\" Bennic",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.507,
+        0.34
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92528,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257065,
+      "recordedName": "Missionary Jasaan",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.46799999999999997,
+        0.562
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92528,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92529,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251904,
+      "recordedName": "Sania Silverstream",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.44799999999999995,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92529,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257065,
+      "recordedName": "Missionary Jasaan",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.46799999999999997,
+        0.562
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92532,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251361,
+      "recordedName": "Rorian the Dayseeker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.42,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92532,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251964,
+      "recordedName": "Blademaster Ren",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.436,
+        0.242
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92544,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252095,
+      "recordedName": "Hanaa Nightwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.382,
+        0.302
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92544,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252095,
+      "recordedName": "Hanaa Nightwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.382,
+        0.302
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92544,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251145,
+      "recordedName": "Al'Aketh Brute",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.37799999999999995,
+        0.32799999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92544,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251448,
+      "recordedName": "Al'Aketh Neophyte",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.371,
+        0.327
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92544,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 256935,
+      "recordedName": "Malduko Cloudcrush",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.36200000000000004,
+        0.33299999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92550,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92550,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92550,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251662,
+      "recordedName": "Living Lightning",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.488,
+        0.542
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92550,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252068,
+      "recordedName": "Al'Aketh Stormcaller",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.479,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92550,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251966,
+      "recordedName": "Commander Cyclas",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.503,
+        0.569
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92551,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252172,
+      "recordedName": "Danarii Bellowveil",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.452,
+        0.452
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92551,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252172,
+      "recordedName": "Danarii Bellowveil",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.452,
+        0.452
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251905,
+      "recordedName": "Zerril Softbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43799999999999994,
+        0.43799999999999994
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251905,
+      "recordedName": "Zerril Softbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43799999999999994,
+        0.43799999999999994
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 250927,
+      "recordedName": "Shadowgale Ursera",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.618,
+        0.373
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 250928,
+      "recordedName": "Highlands Ursera",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.501,
+        0.583
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 250936,
+      "recordedName": "Den'dralass",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.601,
+        0.335
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251261,
+      "recordedName": "Hippogryph Matriarch",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.349,
+        0.52
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251284,
+      "recordedName": "Hippogryph Protector",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.35,
+        0.518
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251291,
+      "recordedName": "Hippogryph Youth",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.37799999999999995,
+        0.51
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251661,
+      "recordedName": "Galestrider",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.444,
+        0.43
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 258443,
+      "recordedName": "Ur'endra",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.654
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 259388,
+      "recordedName": "Mystmane",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.595,
+        0.371
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 271707,
+      "recordedName": "Juvenile Cloudrunner",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.8079999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 271710,
+      "recordedName": "Cloudrunner Matriarch",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.46799999999999997,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92553,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 271712,
+      "recordedName": "Cloudrunner",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.39,
+        0.5379999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92596,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92596,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92596,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92597,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251371,
+      "recordedName": "Falorne Fallwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43200000000000005,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92597,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251371,
+      "recordedName": "Falorne Fallwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43200000000000005,
+        0.248
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92640,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92640,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92640,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251968,
+      "recordedName": "Ayessa Dawnsinger",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.59,
+        0.7959999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92640,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92640,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92642,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92642,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92642,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 254596,
+      "recordedName": "Al'Aketh Healer",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.65,
+        0.667
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92642,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 270201,
+      "recordedName": "Al'Aketh Brawler",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.652,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92643,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92643,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253372,
+      "recordedName": "Dead Cultist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.56,
+        0.588
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92643,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253372,
+      "recordedName": "Dead Cultist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.56,
+        0.588
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92644,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253372,
+      "recordedName": "Dead Cultist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.56,
+        0.588
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92644,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92644,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92644",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92645,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92645,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92645,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252666,
+      "recordedName": "Commander Belguilos",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6559999999999999,
+        0.654
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92679,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252448,
+      "recordedName": "Alvarion Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.62,
+        0.732
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92679,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92679,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252448,
+      "recordedName": "Alvarion Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.62,
+        0.732
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92679,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92682,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92682,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92682,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252802,
+      "recordedName": "Hungry Bandit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.8059999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92683,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92683,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92684,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92684,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92684,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251707,
+      "recordedName": "Ornery Galestrider",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6459999999999999,
+        0.672
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92685,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92685,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92685,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 252820,
+      "recordedName": "Bandit Highwayman",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.518,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92693,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92693,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92693,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92693,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252863,
+      "recordedName": "Ferauu the Bludgeon",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.47600000000000003,
+        0.78
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92698,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 250929,
+      "recordedName": "Malfunctioning Cyclone Construct",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.48,
+        0.778
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92698,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92698,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92698",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92699,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92699,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92701,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92701,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92703,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252800,
+      "recordedName": "Aamelia Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.466,
+        0.818
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92703,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252448,
+      "recordedName": "Alvarion Windfield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.62,
+        0.732
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92727,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253204,
+      "recordedName": "Dondallion Whisperwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92742,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92742,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92744,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92744,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92745,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92745,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92747,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92747,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253092,
+      "recordedName": "Alba Fairmoon",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.524,
+        0.53
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92834,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92834,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92834,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 253195,
+      "recordedName": "Al'Aketh Preacher",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6409999999999999,
+        0.659
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92834,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 253511,
+      "recordedName": "Al'Aketh Pillager",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.644,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92834,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 270201,
+      "recordedName": "Al'Aketh Brawler",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.652,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92840,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92840,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92840,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253306,
+      "recordedName": "Index Esoteria",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.48,
+        0.69
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92849,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253284,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.52,
+        0.6940000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92849,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253002,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.506,
+        0.654
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92849,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253281,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.52,
+        0.6940000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92850,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253284,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.52,
+        0.6940000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92850,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253204,
+      "recordedName": "Dondallion Whisperwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92850,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253285,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92850,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 253283,
+      "recordedName": "Shriekling Matriarch",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.52,
+        0.6579999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92860,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92860,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92860,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92860",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92880,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92880,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92880,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92880",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92881,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92881,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92881,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92881",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92909,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92909,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92909,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 276061,
+      "recordedName": "Decrepit Harvester",
+      "questieName": null,
+      "areaID": 85,
+      "recordedXY": [
+        0.532,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92910,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92910,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": "https://www.wowhead.com/forever/quest=92910",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92911,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92911,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253395,
+      "recordedName": "Ozwin Ironsprocket",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.516,
+        0.322
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92911,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 276061,
+      "recordedName": "Decrepit Harvester",
+      "questieName": null,
+      "areaID": 85,
+      "recordedXY": [
+        0.532,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253844,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.612,
+        0.71
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253576,
+      "recordedName": "Hyusaa Quickbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.638,
+        0.504
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252762,
+      "recordedName": "Al'Aketh Guardian",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.629,
+        0.491
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252763,
+      "recordedName": "Al'Aketh Spiritcaller",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.648,
+        0.474
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252765,
+      "recordedName": "Al'Aketh Blademaster",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.632,
+        0.479
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 92947,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253576,
+      "recordedName": "Hyusaa Quickbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.638,
+        0.504
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93036,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93036,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251904,
+      "recordedName": "Sania Silverstream",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.44799999999999995,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93065,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93065,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253844,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.612,
+        0.71
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93065,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253844,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.612,
+        0.71
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93089,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93089,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93089,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=93089",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93159,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93159,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93159,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93160,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93160,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93172,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93172,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251684,
+      "recordedName": "Strange Hermit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.39
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93172,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251676,
+      "recordedName": "Wind Hollow",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.59,
+        0.34299999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93319,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251906,
+      "recordedName": "Teeri Wellwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.444,
+        0.45
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93319,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251906,
+      "recordedName": "Teeri Wellwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.444,
+        0.45
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93319,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 251918,
+      "recordedName": "Highlands Bandit",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.504,
+        0.33399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93319,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 255534,
+      "recordedName": "\"Badwind\" Bennic",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.507,
+        0.34
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93320,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93320,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93320,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252378,
+      "recordedName": "Yorana Windyreed",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.696,
+        0.67
+      ],
+      "source": "https://www.wowhead.com/forever/quest=93320",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93461,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93461,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93461,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93461,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 254089,
+      "recordedName": "Coriella Calmbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43,
+        0.43200000000000005
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93552,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251363,
+      "recordedName": "Dalia the Collector",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43200000000000005,
+        0.24
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93552,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251363,
+      "recordedName": "Dalia the Collector",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43200000000000005,
+        0.24
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93791,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252373,
+      "recordedName": "Anathamaas Aetherwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6579999999999999,
+        0.804
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93791,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 256507,
+      "recordedName": "Belann Windwood",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.628,
+        0.774
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93791,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 256507,
+      "recordedName": "Belann Windwood",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.628,
+        0.774
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93797,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 256507,
+      "recordedName": "Belann Windwood",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.628,
+        0.774
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93797,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 256507,
+      "recordedName": "Belann Windwood",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.628,
+        0.774
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93835,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253590,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.652,
+        0.504
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93835,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93926,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93926,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252155,
+      "recordedName": "Peacekeeper Vaaniel",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.62
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93926,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252155,
+      "recordedName": "Peacekeeper Vaaniel",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.62
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93927,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252155,
+      "recordedName": "Peacekeeper Vaaniel",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.424,
+        0.62
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93927,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251523,
+      "recordedName": "Constable Aonda",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.456,
+        0.45399999999999996
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93927,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 256966,
+      "recordedName": "Skypriest Aanders",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.41,
+        0.643
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252383,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.5920000000000001,
+        0.7609999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.594,
+        0.743
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.731
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.598,
+        0.752
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.598,
+        0.755
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.606,
+        0.733
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.608,
+        0.74
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.61,
+        0.765
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.617,
+        0.743
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.62,
+        0.7509999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.621,
+        0.7290000000000001
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.623,
+        0.76
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.626,
+        0.743
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.627,
+        0.746
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.63,
+        0.773
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.632,
+        0.758
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.635,
+        0.759
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.636,
+        0.7809999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93949,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 251727,
+      "recordedName": "Skyhopper",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.642,
+        0.797
+      ],
+      "source": "https://www.wowhead.com/forever/npc=251727",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93951,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251991,
+      "recordedName": "Taleen Shimmerthread",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.44799999999999995,
+        0.442
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93951,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251991,
+      "recordedName": "Taleen Shimmerthread",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.44799999999999995,
+        0.442
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93958,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253576,
+      "recordedName": "Hyusaa Quickbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.638,
+        0.504
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93958,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 253590,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.652,
+        0.504
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 93958,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 253590,
+      "recordedName": "Valennia Stormfist",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.652,
+        0.504
+      ],
+      "source": "https://www.wowhead.com/forever/quest=93958",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94003,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252377,
+      "recordedName": "Seena Skybreaker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.598,
+        0.728
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94003,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252377,
+      "recordedName": "Seena Skybreaker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.598,
+        0.728
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94003,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 257196,
+      "recordedName": "Zaal Stormshield",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.5660000000000001,
+        0.503
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94006,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252359,
+      "recordedName": "Lotheluum Starbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.64,
+        0.75
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94006,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 255853,
+      "recordedName": "Urs'endris",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.698,
+        0.616
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94007,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 254084,
+      "recordedName": "Elayaa Easewind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.452,
+        0.442
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94007,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94013,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94013,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94050,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94050,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 254411,
+      "recordedName": "Quel'dora Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94369,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94369,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94369,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94373,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94373,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94374,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94375,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94413,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94413,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251903,
+      "recordedName": "Rathiril Sunlance",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.45,
+        0.46399999999999997
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94413,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 257532,
+      "recordedName": "Windshaper Novice Seer",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.38799999999999996,
+        0.47600000000000003
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94414,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257554,
+      "recordedName": "Halaan Hawk-Eye",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43799999999999994,
+        0.24
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94414,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257554,
+      "recordedName": "Halaan Hawk-Eye",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.43799999999999994,
+        0.24
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94449,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258098,
+      "recordedName": "Eldrun Stormbreaker",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.474,
+        0.136
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94449,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258113,
+      "recordedName": "Ingrid Dunwald",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.474,
+        0.52
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94449,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257597,
+      "recordedName": "Bruegs Kindleborn",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.8759999999999999,
+        0.436
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94465,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257597,
+      "recordedName": "Bruegs Kindleborn",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.8759999999999999,
+        0.436
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94465,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257808,
+      "recordedName": "Braldir Ashmantle",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.32,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94466,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257808,
+      "recordedName": "Braldir Ashmantle",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.32,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94466,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257808,
+      "recordedName": "Braldir Ashmantle",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.32,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94467,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257808,
+      "recordedName": "Braldir Ashmantle",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.32,
+        0.66
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94468,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257597,
+      "recordedName": "Bruegs Kindleborn",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.8759999999999999,
+        0.436
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94472,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94472,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94484,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252359,
+      "recordedName": "Lotheluum Starbreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.64,
+        0.75
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94484,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94484,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": "https://www.wowhead.com/forever/quest=94484",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94485,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94485,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94486,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94486,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94486,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 256092,
+      "recordedName": "Shadowgale Shriekling",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.623,
+        0.386
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94487,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94487,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257944,
+      "recordedName": "Elegael Thornpaw",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.616,
+        0.392
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94487,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 252664,
+      "recordedName": "Al'Aketh Stormchaser",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.62,
+        0.35700000000000004
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94487,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 252665,
+      "recordedName": "Al'Aketh Footsoldier",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.631,
+        0.364
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94495,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258043,
+      "recordedName": "Norric Lochthane",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.418,
+        0.19
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94495,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94497,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94497,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94499,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94499,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94500,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94500,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94501,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258203,
+      "recordedName": "Hervdana Saegrund",
+      "questieName": null,
+      "areaID": 11,
+      "recordedXY": [
+        0.6559999999999999,
+        0.764
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94501,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258043,
+      "recordedName": "Norric Lochthane",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.418,
+        0.19
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94502,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258043,
+      "recordedName": "Norric Lochthane",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.418,
+        0.19
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94505,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258043,
+      "recordedName": "Norric Lochthane",
+      "questieName": null,
+      "areaID": 38,
+      "recordedXY": [
+        0.418,
+        0.19
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94568,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94568,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252476,
+      "recordedName": "Talaanis Shadowsong",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94568,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 264712,
+      "recordedName": "High Priestess Lorthuna",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7659999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94638,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 255853,
+      "recordedName": "Urs'endris",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.698,
+        0.616
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94638,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 255853,
+      "recordedName": "Urs'endris",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.698,
+        0.616
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94638,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 258443,
+      "recordedName": "Ur'endra",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.54,
+        0.654
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94792,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94792,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94793,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94793,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258930,
+      "recordedName": "Isaac Chan",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.418,
+        0.664
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94817,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258785,
+      "recordedName": "High Priestess Mims",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.248,
+        0.1
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94817,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258785,
+      "recordedName": "High Priestess Mims",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.248,
+        0.1
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94821,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258785,
+      "recordedName": "High Priestess Mims",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.248,
+        0.1
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94822,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258785,
+      "recordedName": "High Priestess Mims",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.248,
+        0.1
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94824,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 258785,
+      "recordedName": "High Priestess Mims",
+      "questieName": null,
+      "areaID": 1537,
+      "recordedXY": [
+        0.248,
+        0.1
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94863,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94863,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94864,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94864,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 251507,
+      "recordedName": "Josephine Carson",
+      "questieName": null,
+      "areaID": 12,
+      "recordedXY": [
+        0.41200000000000003,
+        0.662
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94896,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 259012,
+      "recordedName": "Ealaane Nimbuswalker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6579999999999999,
+        0.7440000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94896,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 259012,
+      "recordedName": "Ealaane Nimbuswalker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6579999999999999,
+        0.7440000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94897,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 259012,
+      "recordedName": "Ealaane Nimbuswalker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6579999999999999,
+        0.7440000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94897,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 259012,
+      "recordedName": "Ealaane Nimbuswalker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6579999999999999,
+        0.7440000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94897,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 259013,
+      "recordedName": "Resaan Nimbuswalker",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.57,
+        0.294
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94912,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 270459,
+      "recordedName": "Alfina Nightgaze",
+      "questieName": null,
+      "areaID": 36,
+      "recordedXY": [
+        0.11800000000000001,
+        0.5660000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94946,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94946,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 259084,
+      "recordedName": "Denaaris Stargale",
+      "questieName": null,
+      "areaID": 36,
+      "recordedXY": [
+        0.124,
+        0.562
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94978,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94978,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94979,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 94979,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252389,
+      "recordedName": "Quel'ana Quickgale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.596,
+        0.726
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 95212,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 260157,
+      "recordedName": "Elder Snow Leopard",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.722,
+        0.5920000000000001
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223340,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 17,
+      "recordedXY": [
+        0.56,
+        0.248
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 17,
+      "recordedXY": [
+        0.502,
+        0.806
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223340,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 40,
+      "recordedXY": [
+        0.322,
+        0.802
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223340,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 130,
+      "recordedXY": [
+        0.38799999999999996,
+        0.23399999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 44,
+      "recordedXY": [
+        0.298,
+        0.3
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 95217,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 223542,
+      "recordedName": "Fel Interloper",
+      "questieName": null,
+      "areaID": 331,
+      "recordedXY": [
+        0.772,
+        0.732
+      ],
+      "source": "installed Anniversary QuestieDB SoD NPC baseline",
+      "kind": "classic-fallback",
+      "evidenceKind": "sod-npc-baseline",
+      "sourceSHA256": "9d0566c8dd7e4723584ac9389648bf978247d78593360f59362a00b0be3e629f"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.154,
+        0.61
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.16,
+        0.628
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.16399999999999998,
+        0.608
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.19,
+        0.626
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.192,
+        0.62
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.302,
+        0.606
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.306,
+        0.606
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.42200000000000004,
+        0.6679999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.424,
+        0.7120000000000001
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.426,
+        0.665
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.43,
+        0.664
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.43,
+        0.7
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.43,
+        0.706
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.436,
+        0.672
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.626,
+        0.6579999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.628,
+        0.654
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.752,
+        0.228
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.758,
+        0.23199999999999998
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96138,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 272273,
+      "recordedName": "Lost Watcher",
+      "questieName": null,
+      "areaID": 10,
+      "recordedXY": [
+        0.76,
+        0.218
+      ],
+      "source": "https://www.wowhead.com/forever/npc=272273",
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96243,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 258113,
+      "recordedName": "Ingrid Dunwald",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.474,
+        0.52
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96243,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96638,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 251366,
+      "recordedName": "Aetheen of the Gales",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.426,
+        0.23600000000000002
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 96638,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 263664,
+      "recordedName": "Raan Wildwind",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.41600000000000004,
+        0.44799999999999995
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98025,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 270196,
+      "recordedName": "Jai'vhanel",
+      "questieName": null,
+      "areaID": 148,
+      "recordedXY": [
+        0.452,
+        0.584
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98319,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 271546,
+      "recordedName": "Mountaineer Gretchen",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.44,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98319,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 271546,
+      "recordedName": "Mountaineer Gretchen",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.44,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98322,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 271546,
+      "recordedName": "Mountaineer Gretchen",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.44,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98323,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 271546,
+      "recordedName": "Mountaineer Gretchen",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.44,
+        0.57
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98326,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 271587,
+      "recordedName": "Frosthowl",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.396,
+        0.486
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98459,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 254078,
+      "recordedName": "Tom \"Half-fish\" Wilson",
+      "questieName": null,
+      "areaID": 267,
+      "recordedXY": [
+        0.512,
+        0.664
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98512,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 273017,
+      "recordedName": "Fendaal Windstone",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.568,
+        0.61
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98512,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 273017,
+      "recordedName": "Fendaal Windstone",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.568,
+        0.61
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98512,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 254626,
+      "recordedName": "Al'Aketh Assassin",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.5579999999999999,
+        0.593
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 98581,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 257446,
+      "recordedName": "Teo Hammerstorm",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.287,
+        0.6609999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 99160,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 276003,
+      "recordedName": "Minor Ice Elemental",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.5720000000000001,
+        0.452
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 99161,
+      "questTitle": null,
+      "role": "sourcerequirement",
+      "npcID": 276009,
+      "recordedName": "Avala",
+      "questieName": null,
+      "areaID": 1,
+      "recordedXY": [
+        0.5820000000000001,
+        0.42
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 99260,
+      "questTitle": null,
+      "role": "start",
+      "npcID": 253285,
+      "recordedName": "Fillion Flamebreeze",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.662,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 99260,
+      "questTitle": null,
+      "role": "end",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": null,
+      "kind": "npc-absent-from-questie"
+    },
+    {
+      "questID": 99260,
+      "questTitle": null,
+      "role": "requirement",
+      "npcID": 252475,
+      "recordedName": "Elaadrin Evengale",
+      "questieName": null,
+      "areaID": 16593,
+      "recordedXY": [
+        0.6659999999999999,
+        0.7979999999999999
+      ],
+      "source": "https://www.wowhead.com/forever/quest=99260",
+      "kind": "npc-absent-from-questie"
+    }
+  ]
+}

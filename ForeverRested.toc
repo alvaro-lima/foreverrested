@@ -33,6 +33,8 @@ Guides/Alliance_01_20_Sections.lua
 Guides/Alliance_RouteOrder.lua
 Guides/TargetData.lua
 Guides/Alliance_ActionLocations.lua
+Guides/Alliance_QuestieNPCCorrections.lua
+Guides/Alliance_ClassicNPCFallback.lua
 QuestLog.lua
 GuideEngine.lua
 QuestPolicy.lua

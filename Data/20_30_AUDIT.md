@@ -1,6 +1,6 @@
 # Levels 20–30 audit
 
-Checked 11 playable chapters and 138 distinct current Forever quest pages. Required prerequisite gaps: 0.
+Checked 13 playable chapters and 125 distinct current Forever quest pages. Required prerequisite gaps: 0.
 
 ## Changes
 
@@ -23,8 +23,10 @@ Checked 11 playable chapters and 138 distinct current Forever quest pages. Requi
 | 27-28 Duskwood: worgen and the hermit | 7,050 | Unknown | 1 |
 | 28-29 Wetlands: shipwrecks and final raptors | 7,100 | 11087–11393 | 0 |
 | 29-30 Duskwood: final patrols | 10,050 | 20118–21259 | 0 |
-| 20-24 Ashenvale / Stonetalon: introductions | 22,755 | Unknown | 4 |
-| 24-27 Ashenvale: eastern camps | 7,330 | Unknown | 2 |
+| 20-23 Ashenvale / Stonetalon: introductions | 25,535 | Unknown | 5 |
+| 23-24 Wetlands: harbor and excavation | 10,835 | 24939–26182 | 0 |
+| 24-25 Redridge / Duskwood: road and introductions | 11,310 | 19239–20136 | 0 |
+| 25-27 Duskwood / Ashenvale: investigations and camps | 23,710 | Unknown | 3 |
 | 27-30 Ashenvale: cleansing and lake circuits | 19,850 | Unknown | 3 |
 
 These routes can require substantial additional combat. The recovery checks make this explicit; quest work alone is not guaranteed to fill each bracket.
@@ -55,17 +57,19 @@ Installed QuestieDB 1.0.4, baked Forever flavor, build 365537a340473291f5af3b7a5
 
 - Quest 134, Abercrombie's Crate: object sources require acquisition verification; incidental containers do not prove zero combat
 
-### 20-24 Ashenvale / Stonetalon: introductions
+### 20-23 Ashenvale / Stonetalon: introductions
 
 - Quest 1007, Ancient Statuette: object sources require acquisition verification; incidental containers do not prove zero combat
 - Quest 1010, Bathran's Hair: object sources require acquisition verification; incidental containers do not prove zero combat
+- Quest 1016, Divined Scroll: usable local drop/acquisition evidence
 - Quest 1033, Elune's Tear: object sources require acquisition verification; incidental containers do not prove zero combat
 - Quest 1034, Handful of Stardust: object sources require acquisition verification; incidental containers do not prove zero combat
 
-### 24-27 Ashenvale: eastern camps
+### 25-27 Duskwood / Ashenvale: investigations and camps
 
-- Quest 1016, Divined Scroll: usable local drop/acquisition evidence
 - Quest 1017, Sarilus Foulborne's Head: usable local drop/acquisition evidence
+- Quest 1054, Dal Bloodclaw's Skull: usable local drop/acquisition evidence
+- Quest 134, Abercrombie's Crate: object sources require acquisition verification; incidental containers do not prove zero combat
 
 ### 27-30 Ashenvale: cleansing and lake circuits
 

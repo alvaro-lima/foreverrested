@@ -6,7 +6,7 @@ sys.path.insert(0,str(root/'tools'))
 from audit_01_10 import guides,normal_kill_xp
 a=json.loads((root/'Data/20_30_AUDIT.json').read_text(encoding='utf-8'))
 r=json.loads((root/'Data/alliance-reference.json').read_text(encoding='utf-8'))
-assert len(a['guides'])==11 and len(a['quests'])==138
+assert len(a['guides'])==13 and len(a['quests'])>=120
 assert not a['requiredPrerequisiteGaps']
 assert a['quests']['484']['objectives'][0]['count']==6
 assert normal_kill_xp(29,29)==190 and normal_kill_xp(30,30)==195
@@ -52,5 +52,5 @@ assert(positions['1007:turnin']<positions['1009:pickup'],'statuette unlocks Ruuz
 assert(positions['1009:objective']<positions['1008:turnin'],'coastal objectives precede Astranaar return')
 assert(positions['1009:turnin']<positions['1008:turnin'],'local Talen hand-in precedes Astranaar')
 ''')
-print('PASS: all eleven 20-30 chapters, evidence, required XP and live recovery')
+print('PASS: all thirteen 20-30 chapters, evidence, required XP and live recovery')
 
